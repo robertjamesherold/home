@@ -21,7 +21,7 @@ const list = [{
     return (
         <footer className='w-screen bg-blue-100/25 py-8'>
             <Column className='gap-4'>
-                <Section>
+                <Section fullWidth>
                     <Grid className='gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 shrink-0'>
                         {list.map((group, groupIndex) => (
                             <Column className='w-full'>
@@ -42,8 +42,8 @@ const list = [{
                         ))}
                     </Grid>
                 </Section>
-                <Hr />
-                <Section>
+                <Hr fullWidth />
+                <Section fullWidth>
                     <Row className='w-min sm:ml-0 flex-wrap sm:flex-nowrap gap-4'>
                         <Row className='w-min gap-4'>
                             <MetaBadge/>
@@ -55,8 +55,8 @@ const list = [{
                         </Row>
                     </Row>
                 </Section>
-                <Hr />
-                <Section>
+                <Hr fullWidth/>
+                <Section fullWidth>
                     {width <= 768 ? 
                     <Column className='gap-2'>
                         <Row className='w-full'>

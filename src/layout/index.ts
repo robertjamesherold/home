@@ -1,8 +1,9 @@
 import { Column } from './column'
 import { Footer } from './footer'
 import { Grid } from './grid'
-import { Row } from './row'
 import { Hr } from './divider'
+import { Main } from './main'
+import { Row } from './row'
 import { Section } from './section'
 
 export {    
@@ -10,6 +11,7 @@ export {
     Footer, 
     Grid,
     Hr,
+    Main,
     Row,
     Section
 }

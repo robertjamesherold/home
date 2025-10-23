@@ -1,10 +1,14 @@
-import { Footer } from './layout'
+import { Footer} from './layout'
 import './App.css'
+import { Homepage } from './pages'
 
 function App() {
 
   return (
+  <>
+    <Homepage />
     <Footer/>
+    </>
   )
 }
 

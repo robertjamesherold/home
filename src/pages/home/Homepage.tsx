@@ -1,0 +1,90 @@
+import Slider, { type SliderCard } from "../../components/Slider/Slider"
+import { Main, Section } from "../../layout"
+import VillaOlivetoImage from "../../assets/images/VillaOlivetoImage"
+import ProjectPreview from './components/project-preview/ProjectPreview'
+
+const sliderCards: SliderCard[] = [
+  {
+    id: "01",
+    eyebrow: "Experience",
+    title: "Eleganz zwischen Olivenhainen",
+    text: "Entdecke eine Villa, die moderne Architektur mit toskanischer Gelassenheit verbindet und Platz für großzügige Begegnungen bietet.",
+    image:
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1600&q=80",
+    ctaLabel: "Villa entdecken",
+    ctaHref: "#villa-oliveto",
+  },
+  {
+    id: "02",
+    eyebrow: "Highlights",
+    title: "Lichtdurchflutete Räume",
+    text: "Bodentiefe Fenster, warme Naturmaterialien und klare Linien schaffen ein Ambiente, das zum Verweilen einlädt.",
+    image:
+      "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1600&q=80",
+    ctaLabel: "Architektur erleben",
+    ctaHref: "#architektur",
+  },
+  {
+    id: "03",
+    eyebrow: "Außenbereich",
+    title: "Infinity Pool mit Aussicht",
+    text: "Der Pool schmiegt sich an die Hanglage und eröffnet freie Sicht auf das Val di Chiana – perfekt für Sonnenuntergänge.",
+    image:
+      "https://images.unsplash.com/photo-1472220625704-91e1462799b2?auto=format&fit=crop&w=1600&q=80",
+    ctaLabel: "Panorama sehen",
+    ctaHref: "#ausblick",
+  },
+  {
+    id: "04",
+    eyebrow: "Kulinarik",
+    title: "Slow Food unter freiem Himmel",
+    text: "Die überdachte Terrasse mit Outdoor-Küche wird zum Mittelpunkt langer Abende mit Freunden und Familie.",
+    image:
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80",
+    ctaLabel: "Terrasse entdecken",
+    ctaHref: "#kulinarik",
+  },
+]
+
+const Homepage: React.FC = () => {
+  return (
+    <Main>
+      <Section fullWidth padding className="p-0">
+        <Slider
+          slides={sliderCards}
+          autoPlayInterval={7000}
+          cardHeight="min(90vh, 760px)"
+          className="text-left"
+        />
+      </Section>
+
+   <ProjectPreview />
+
+      {/* <Section fullWidth className="bg-slate-50 py-16" id="ausblick">
+        <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:px-12 lg:px-16">
+          <div className="overflow-hidden rounded-3xl shadow-2xl md:order-2" id="kulinarik">
+            <VillaOlivetoImage map={3} className="h-full w-full" />
+          </div>
+          <div className="flex flex-col gap-6 md:order-1">
+            <span className="text-xs font-semibold uppercase tracking-[0.4em] text-slate-400">
+              Panorama &amp; Genuss
+            </span>
+            <h3 className="text-3xl font-semibold text-slate-900 md:text-4xl">
+              Grenzenloser Blick, kulinarische Freiheit
+            </h3>
+            <p className="text-base leading-relaxed text-slate-600 md:text-lg">
+              Der Infinity Pool legt sich wie ein rahmenloses Spiegelbild über die Hügellandschaft – hier werden
+              goldene Sonnenuntergänge zur täglichen Routine.
+            </p>
+            <p className="text-base leading-relaxed text-slate-600 md:text-lg">
+              Direkt daneben lädt die überdachte Freiluft-Küche mit großzügigem Esstisch zu langen Abenden ein.
+              Slow Food, lokale Weine und leises Zikadenrauschen – mehr braucht es nicht.
+            </p>
+          </div>
+        </div>
+      </Section> */}
+    </Main>
+  )
+}
+
+export default Homepage
