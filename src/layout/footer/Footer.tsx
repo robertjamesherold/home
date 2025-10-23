@@ -1,6 +1,7 @@
 import { MetaBadge } from '../../assets/badges'
 import { SocialIcon } from '../../assets/icons'
 import { Section, Row, Column, Grid, Hr } from '../'
+import { useWindowSize } from '../../hooks/useWindowSize'
 
 const Footer:React.FC = () => {
 
@@ -15,6 +16,7 @@ const list = [{
     list: ['Kontakt aufnehmen', 'E-Mail schreiben', 'Verfügbarkeit' ]
     }]
 
+    const {width} = useWindowSize()
 
     return (
         <footer className='w-screen bg-blue-100/25 py-8'>
@@ -55,6 +57,7 @@ const list = [{
                 </Section>
                 <Hr />
                 <Section>
+                    {width <= 768 ? 
                     <Column className='gap-2'>
                         <Row className='w-full'>
                             <p>© 2025 Robert James Herold. Entwickelt mit React.</p>
@@ -72,8 +75,25 @@ const list = [{
                             </nav>
                         </Row>
                     </Column>
+                : <Row className='gap-2'>
+                        <Row className='w-full'>
+                            <p>© 2025 Robert James Herold. Entwickelt mit React.</p>
+                        </Row>
+                        <Row className='w-fit'>
+                            <nav>
+                                <ul className='flex flex-row gap-4'>
+                                    <li>
+                                        <a className='cursor-pointer hover:underline'>Datenschutz</a>
+                                    </li>
+                                    <li>
+                                        <a className='cursor-pointer hover:underline'>Impressum</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </Row>
+                    </Row>}
                 </Section>
-            </Column>
+            </Column> 
         </footer>
     )
 }
