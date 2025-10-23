@@ -1,5 +1,5 @@
 import './App.css'
-import MetaBadge from './assets/badges/MetaBadge/MetaBadge'
+import MetaBadge from './assets/badges/MetaBadge'
 import { SocialIcon } from './assets/icons/SocialIcon'
 
 function App() {
