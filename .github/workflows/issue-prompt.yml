@@ -1,45 +1,55 @@
-steps:
-  - name: Create Weather App Issue
-    uses: peter-evans/create-issue@v4
-    with:
-      title: "API-Integration: Weather App Section"
-      body: |
-        Integrate a public weather API (e.g. OpenWeatherMap) to display current weather data for a selected location.
+name: Create Homepage Issues
 
-        **Tasks:**
-        - Set up API key and environment variables
-        - Create reusable API service for weather data
-        - Display weather info in a styled homepage widget
+on:
+  workflow_dispatch:
 
-        **Priority:** Medium
-      labels: enhancement, homepage
+jobs:
+  create_issues:
+    name: Generate project issues
+    runs-on: ubuntu-latest
 
-  - name: Create Movie Database Issue
-    uses: peter-evans/create-issue@v4
-    with:
-      title: "API-Integration: Movie Database Showcase"
-      body: |
-        Connect to a movie database API (e.g. TMDB) and display featured or trending movies on the homepage.
+    steps:
+      - name: Create Weather App Issue
+        uses: peter-evans/create-issue@v4
+        with:
+          title: "API-Integration: Weather App Section"
+          body: |
+            Integrate a public weather API (e.g. OpenWeatherMap) to display current weather data for a selected location.
 
-        **Tasks:**
-        - Fetch and cache API data
-        - Build a movie card component
-        - Add pagination or 'Load more' feature
+            **Tasks:**
+            - Set up API key and environment variables
+            - Create reusable API service for weather data
+            - Display weather info in a styled homepage widget
 
-        **Priority:** Medium
-      labels: feature, homepage
+            **Priority:** Medium
+          labels: enhancement, homepage
 
-  - name: Create Contact Form Issue
-    uses: peter-evans/create-issue@v4
-    with:
-      title: "Contact Form with Backend Connection"
-      body: |
-        Add a functional contact form that sends user messages to a backend endpoint or email service (e.g. Formspree, custom API).
+      - name: Create Movie Database Issue
+        uses: peter-evans/create-issue@v4
+        with:
+          title: "API-Integration: Movie Database Showcase"
+          body: |
+            Connect to a movie database API (e.g. TMDB) and display featured or trending movies on the homepage.
 
-        **Tasks:**
-        - Create form UI with validation
-        - Connect to backend or third-party form service
-        - Add success/error handling
+            **Tasks:**
+            - Fetch and cache API data
+            - Build a movie card component
+            - Add pagination or 'Load more' feature
 
-        **Priority:** High
-      labels: feature, contact
+            **Priority:** Medium
+          labels: feature, homepage
+
+      - name: Create Contact Form Issue
+        uses: peter-evans/create-issue@v4
+        with:
+          title: "Contact Form with Backend Connection"
+          body: |
+            Add a functional contact form that sends user messages to a backend endpoint or email service (e.g. Formspree, custom API).
+
+            **Tasks:**
+            - Create form UI with validation
+            - Connect to backend or third-party form service
+            - Add success/error handling
+
+            **Priority:** High
+          labels: feature, contact
