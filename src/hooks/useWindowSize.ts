@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 export const useWindowSize = () => {
-  // Hilfsfunktion: liest die aktuelle Größe des Body-Elements
   const getWindowSize = () => {
     return {
       width: window?.innerWidth || 0,
@@ -9,7 +8,6 @@ export const useWindowSize = () => {
     };
   };
 
-  // Lazy Init → wird nur im Browser ausgeführt
   const [windowSize, setWindowSize] = useState(() =>
     typeof window !== "undefined" ? getWindowSize() : { width: 0, height: 0 }
   );
@@ -23,19 +21,16 @@ export const useWindowSize = () => {
       );
     };
 
-    // Initial synchronisieren
     handleResize();
 
-    // Eventlistener registrieren
     window.addEventListener("resize", handleResize);
     window.addEventListener("orientationchange", handleResize);
 
-    // Cleanup bei Unmount
     return () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("orientationchange", handleResize);
     };
   }, []);
 
-  return windowSize; // { width: number, height: number }
+  return windowSize; // { width, height}
 };

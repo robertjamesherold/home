@@ -7,7 +7,7 @@ type SectionProps = {
 } & React.HTMLAttributes<HTMLElement>
 
 const Section:React.FC<SectionProps> = ({fullWidth=false, padding=false, children, className, id, ...rest}:SectionProps) => {
-    const widthClass = fullWidth ? 'w-screen' : 'w-full max-w-[120rem]';
+    const widthClass = fullWidth ? 'w-screen' : 'w-full max-w-480';
     const marginClass = fullWidth ? '' : 'mx-auto';
     const paddingClass = padding ? 'p-0' : 'px-4 md:px-6 xl:px-8 py-2';
 

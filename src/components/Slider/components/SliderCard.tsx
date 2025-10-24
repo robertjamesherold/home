@@ -1,6 +1,7 @@
 import type { SliderCard } from "../types"
 
-export function SliderCardComponent({ slide, renderContent }: { slide: SliderCard; renderContent?: (s: SliderCard) => React.ReactNode }) {
+const SliderCardComponent = ( { slide, renderContent }: { slide: SliderCard; renderContent?: ( s: SliderCard ) => React.ReactNode } ) =>
+{
   const Default = (
     <div className="flex max-w-xl flex-col gap-5 sm:gap-6">
       {slide.eyebrow && <span className="text-[0.7rem] font-semibold uppercase tracking-[0.4em] text-slate-400">{slide.eyebrow}</span>}
@@ -16,3 +17,5 @@ export function SliderCardComponent({ slide, renderContent }: { slide: SliderCar
 
   return renderContent ? renderContent(slide) : Default
 }
+
+export default SliderCardComponent

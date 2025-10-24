@@ -1,2 +1,4 @@
-import { SliderCardComponent } from './SliderCard';
-export { SliderCardComponent }
+import SliderCardComponent from './SliderCard';
+import SliderNavigation from './Navigation';
+
+export { SliderCardComponent, SliderNavigation };

@@ -1,9 +1,9 @@
 import type { PreviewMapping } from './types'
 
-import { SignatureSubHeading, SignatureDisplayTitle, TextParagraph } from '../../../../typography'
-import VillaOlivetoImage from "../../../../assets/images/VillaOlivetoImage"
-import { Column, Grid, Section } from '../../../../layout'
-import LinkButton from '../../../../ui/Buttons/LinkButton'
+import { SignatureSubHeading, SignatureDisplayTitle, TextParagraph } from '@/typography'
+import VillaOlivetoImage from "@images/VillaOlivetoImage"
+import { Column, Grid, Section } from '@/layout'
+import LinkButton from '@/ui/Buttons/LinkButton'
 import { useProjectPreview } from './hooks/useProjectPreview'
 
 

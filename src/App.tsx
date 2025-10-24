@@ -1,7 +1,7 @@
-import { Footer} from './layout'
-import './App.css'
-import { Homepage } from './pages'
-import SocialPage from './features/social/SocialCommentSection'
+import { Footer } from '@/layout'
+import { Homepage } from '@/pages'
+import SocialPage from '@/features/social/SocialCommentSection'
+import '@/App.css'
 
 function App() {
 

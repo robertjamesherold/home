@@ -1,5 +1,5 @@
-import { Section } from "../../layout"
-import NavigationButton from "../../ui/Buttons/NavigationButton"
+import { Section } from "@/layout"
+import NavigationButton from "@/ui/Buttons/NavigationButton"
 import { useSlider } from "./hooks"
 import { sliderCards } from "./data"
 import { SliderCardComponent } from "./components"

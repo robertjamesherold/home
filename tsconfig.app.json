@@ -7,13 +7,31 @@
     "module": "ESNext",
     "types": ["vite/client"],
     "skipLibCheck": true,
+    "ignoreDeprecations": "6.0",
+
+    /* Pfad-Aliase */
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"],
+      "@assets/*": ["assets/*"],
+      "@badges/*": ["assets/badges/*"],
+      "@icons/*": ["assets/icons/*"],
+      "@features/*": ["features/*"],
+      "@layout/*": ["src/layout/*"],
+      "@pages/*": ["pages/*"],
+      "@typography/*": ["typography/*"],
+      "@components/*": ["components/*"],
+      "@images/*": ["assets/images/*"],
+      "@hooks/*": ["hooks/*"],
+      "@ui/*": ["ui/*"]
+    },
 
     /* Bundler mode */
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
+    "allowImportingTsExtensions": false,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
-    "noEmit": true,
+    "noEmit": false,
     "jsx": "react-jsx",
 
     /* Linting */

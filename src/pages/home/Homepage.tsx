@@ -1,5 +1,5 @@
-import Slider from "../../components/Slider/Slider"
-import { Main, Section } from "../../layout"
+import Slider from "@/components/Slider/Slider"
+import { Main, Section } from "@/layout"
 import { ProjectPreview } from './components/project-preview/ProjectPreview'
 import { previewData } from './components/project-preview/data'
 
