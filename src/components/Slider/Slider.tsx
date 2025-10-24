@@ -1,11 +1,11 @@
 import { Section } from "../../layout"
 import NavigationButton from "../../ui/Buttons/NavigationButton"
 import { useSlider } from "./hooks"
-import { defaultSlides } from "./data"
-import { SliderCard } from "./components"
+import { sliderCards } from "./data"
+import { SliderCardComponent } from "./components"
 import type { SliderProps } from "./types"
 
-const Slider = ({ slides = defaultSlides, renderSlideContent, cardHeight = "70vh" }: SliderProps) => {
+const Slider = ({ slides = sliderCards, renderSlideContent, cardHeight = "70vh" }: SliderProps) => {
   const { total, current, visual, transition, extended, goPrev, goNext, goTo, onTransitionEnd } = useSlider(slides)
   const heroHeight = typeof cardHeight === "number" ? `${cardHeight}px` : cardHeight
 
@@ -23,7 +23,9 @@ const Slider = ({ slides = defaultSlides, renderSlideContent, cardHeight = "70vh
             return (
               <article
                 key={`${slide.id}-${i}`}
-                className={`flex h-full w-full flex-shrink-0 flex-col justify-center md:flex-row ${active ? "" : "pointer-events-none"}`}
+                className={`flex h-full w-full flex-shrink-0 flex-col justify-center md:flex-row transition-none ${
+                  active ? "" : "pointer-events-none"
+                }`}
                 aria-hidden={!active}
               >
                 <div className="order-1 relative w-full min-h-[18rem] bg-slate-100 overflow-hidden md:order-2 md:flex-[0_0_50%]">
@@ -35,7 +37,7 @@ const Slider = ({ slides = defaultSlides, renderSlideContent, cardHeight = "70vh
                 </div>
 
                 <div className="order-2 flex w-full flex-col justify-center bg-white px-6 py-12 md:order-1 md:flex-[0_0_50%] md:px-16 lg:px-24">
-                  <SliderCard slide={slide} renderContent={renderSlideContent} />
+                  <SliderCardComponent slide={slide} renderContent={renderSlideContent} />
                 </div>
               </article>
             )

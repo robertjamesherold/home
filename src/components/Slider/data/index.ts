@@ -1,2 +1,2 @@
-import { defaultSlides } from './defaultSlides';
-export { defaultSlides }
+import { sliderCards } from './sliderCards';
+export { sliderCards }
