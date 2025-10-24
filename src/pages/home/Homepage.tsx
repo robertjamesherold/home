@@ -1,7 +1,7 @@
 import Slider, { type SliderCard } from "../../components/Slider/Slider"
 import { Main, Section } from "../../layout"
-import VillaOlivetoImage from "../../assets/images/VillaOlivetoImage"
 import ProjectPreview from './components/project-preview/ProjectPreview'
+import { previewData } from './components/project-preview/data'
 
 const sliderCards: SliderCard[] = [
   {
@@ -57,32 +57,8 @@ const Homepage: React.FC = () => {
           className="text-left"
         />
       </Section>
+      <ProjectPreview {...previewData}/>
 
-   <ProjectPreview />
-
-      {/* <Section fullWidth className="bg-slate-50 py-16" id="ausblick">
-        <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:px-12 lg:px-16">
-          <div className="overflow-hidden rounded-3xl shadow-2xl md:order-2" id="kulinarik">
-            <VillaOlivetoImage map={3} className="h-full w-full" />
-          </div>
-          <div className="flex flex-col gap-6 md:order-1">
-            <span className="text-xs font-semibold uppercase tracking-[0.4em] text-slate-400">
-              Panorama &amp; Genuss
-            </span>
-            <h3 className="text-3xl font-semibold text-slate-900 md:text-4xl">
-              Grenzenloser Blick, kulinarische Freiheit
-            </h3>
-            <p className="text-base leading-relaxed text-slate-600 md:text-lg">
-              Der Infinity Pool legt sich wie ein rahmenloses Spiegelbild über die Hügellandschaft – hier werden
-              goldene Sonnenuntergänge zur täglichen Routine.
-            </p>
-            <p className="text-base leading-relaxed text-slate-600 md:text-lg">
-              Direkt daneben lädt die überdachte Freiluft-Küche mit großzügigem Esstisch zu langen Abenden ein.
-              Slow Food, lokale Weine und leises Zikadenrauschen – mehr braucht es nicht.
-            </p>
-          </div>
-        </div>
-      </Section> */}
     </Main>
   )
 }
