@@ -1,7 +1,7 @@
 import { Footer} from './layout'
 import './App.css'
 import { Homepage } from './pages'
-import SocialPage from './features/social/SocialPage'
+import SocialPage from './features/social/SocialCommentSection'
 
 function App() {
 

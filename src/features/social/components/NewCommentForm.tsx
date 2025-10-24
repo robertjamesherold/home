@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useSocial } from "../PostsProvider";
+import { useSocial } from "../postsprovider";
 
-export default function NewCommentForm({ postId }: { postId: string }) {
+const NewCommentForm = ({ postId }: { postId: string }) => {
   const [content, setContent] = useState("");
   const { createComment } = useSocial();
 
@@ -29,3 +29,5 @@ export default function NewCommentForm({ postId }: { postId: string }) {
     </form>
   );
 }
+
+export default NewCommentForm

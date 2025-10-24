@@ -1,10 +1,8 @@
-import { LikeButton } from "./LikeButton";
-import CommentList from "./CommentList";
-import NewCommentForm from "./NewCommentForm";
 import type { Post } from "../types";
-import { useSocial } from "../PostsProvider";
+import { LikeButton, CommentList, NewCommentForm } from "./";
+import { useSocial } from "../postsprovider";
 
-export function PostCard({ post }: { post: Post }) {
+const PostCard = ({ post }: { post: Post }) => {
   const { isLikedByMe } = useSocial();
 
   return (
@@ -31,3 +29,5 @@ export function PostCard({ post }: { post: Post }) {
     </article>
   );
 }
+
+export default PostCard

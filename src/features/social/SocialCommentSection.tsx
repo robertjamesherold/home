@@ -1,8 +1,8 @@
-import { PostsProvider } from "./PostsProvider";
-import NewPostForm from "./components/NewPostForm";
-import PostFeed from "./components/PostFeed";
+import { PostsProvider } from "./postsprovider";
+import { NewPostForm } from "./components";
+import { PostFeed } from "./components";
 
-export default function SocialPage() {
+const SocialCommentSection:React.FC = () => {
   return (
     <PostsProvider>
       <main className="mx-auto max-w-2xl space-y-4 p-4">
@@ -13,3 +13,5 @@ export default function SocialPage() {
     </PostsProvider>
   );
 }
+
+export default SocialCommentSection

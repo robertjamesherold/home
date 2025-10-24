@@ -1,8 +1,8 @@
-import { useSocial } from "../PostsProvider";
+import { useSocial } from "../postsprovider";
 
 type Props = { postId: string; liked: boolean; count: number };
 
-export function LikeButton({ postId, liked, count }: Props) {
+const LikeButton = ({ postId, liked, count }: Props) => {
   const { toggleLike } = useSocial();
   return (
     <button
@@ -17,3 +17,5 @@ export function LikeButton({ postId, liked, count }: Props) {
     </button>
   );
 }
+
+export default LikeButton

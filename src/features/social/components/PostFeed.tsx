@@ -1,7 +1,7 @@
-import { PostCard } from "./PostCard";
-import { useSocial } from "../PostsProvider";
+import { PostCard } from "./";
+import { useSocial } from "../postsprovider";
 
-export default function PostFeed() {
+const PostFeed = () => {
   const { posts } = useSocial();
   if (!posts.length) return <p className="text-sm text-gray-500">Keine Posts vorhanden.</p>;
   return (
@@ -14,3 +14,5 @@ export default function PostFeed() {
     </ul>
   );
 }
+
+export default PostFeed

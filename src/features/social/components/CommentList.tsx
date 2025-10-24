@@ -1,6 +1,6 @@
 import type { Comment } from "../types";
 
-export default function CommentList({ comments }: { comments: Comment[] }) {
+const CommentList = ({ comments }: { comments: Comment[] }) => {
   if (!comments.length) return null;
   return (
     <ul className="mt-3 space-y-3">
@@ -19,3 +19,5 @@ export default function CommentList({ comments }: { comments: Comment[] }) {
     </ul>
   );
 }
+
+export default CommentList

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useSocial } from "../PostsProvider";
+import { useSocial } from "../postsprovider";
 
-export default function NewPostForm() {
+const NewPostForm = () => {
   const [content, setContent] = useState("");
   const { createPost } = useSocial();
 
@@ -31,3 +31,5 @@ export default function NewPostForm() {
     </form>
   );
 }
+
+export default NewPostForm
