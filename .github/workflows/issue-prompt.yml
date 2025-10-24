@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Create Weather App Issue
-        uses: peter-evans/create-issue@v4
+        uses: robertjamesherold/home/create-issue@v4
         with:
           title: "API-Integration: Weather App Section"
           body: |
@@ -25,7 +25,7 @@ jobs:
           labels: enhancement, homepage
 
       - name: Create Movie Database Issue
-        uses: peter-evans/create-issue@v4
+        uses: robertjamesherold/home/create-issue@v4
         with:
           title: "API-Integration: Movie Database Showcase"
           body: |
@@ -40,7 +40,7 @@ jobs:
           labels: feature, homepage
 
       - name: Create Contact Form Issue
-        uses: peter-evans/create-issue@v4
+        uses: robertjamesherold/home/create-issue@v4
         with:
           title: "Contact Form with Backend Connection"
           body: |
