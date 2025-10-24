@@ -1,6 +1,6 @@
 import Slider, { type SliderCard } from "../../components/Slider/Slider"
 import { Main, Section } from "../../layout"
-import ProjectPreview from './components/project-preview/ProjectPreview'
+import { ProjectPreview } from './components/project-preview/ProjectPreview'
 import { previewData } from './components/project-preview/data'
 
 const sliderCards: SliderCard[] = [
