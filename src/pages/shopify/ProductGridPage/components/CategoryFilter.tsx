@@ -4,24 +4,27 @@ import React from 'react'
 type Props = {
     categories: string[]
     selected: string
-    onSelect: ( c: string ) => void
+    onSelect: (c: string) => void
 }
 
 const CategoryFilter: React.FC<Props> = ( { categories, selected, onSelect } ) =>
 {
     return (
-        <div className="flex gap-2 items-center">
-            <select
-                value={ selected }
-                onChange={ ( e ) => onSelect( e.target.value ) }
-                className="w-full py-3 px-3 border border-gray-300 rounded-lg outline-none"
-            >
-                { categories.map( ( c ) => (
-                    <option key={ c } value={ c }>
-                        { c }
-                    </option>
+        <div>
+            <h3 className="text-lg font-semibold text-[#0F1111]">Departments</h3>
+            <ul className="mt-3 space-y-2 text-sm">
+                { categories.map( ( category ) => (
+                    <li key={ category }>
+                        <button
+                            onClick={ () => onSelect( category ) }
+                            className={ `w-full text-left text-[#007185] transition hover:text-[#C7511F] ${ selected === category ? 'font-semibold text-[#C7511F]' : '' }` }
+                            type="button"
+                        >
+                            { category }
+                        </button>
+                    </li>
                 ) ) }
-            </select>
+            </ul>
         </div>
     )
 }

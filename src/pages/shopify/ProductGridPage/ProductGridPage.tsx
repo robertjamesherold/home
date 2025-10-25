@@ -1,11 +1,11 @@
 // src/pages/Shopify.tsx
-import { Header, CartSidebar, SearchBar, CategoryFilter, Sort, ProductGrid, LoadingGrid, EmptyState } from './components'
-import { useProducts } from './hooks' 
+import { Header, CartSidebar, CategoryFilter, Sort, ProductGrid, LoadingGrid, EmptyState } from './components'
+import { useProducts } from './hooks'
 
 const ProductGridPage: React.FC = () =>
 {
     const [
-        ,
+        products,
         filteredProducts,
         searchTerm,
         setSearchTerm,
@@ -24,43 +24,69 @@ const ProductGridPage: React.FC = () =>
     ] = useProducts()
 
     return (
-        <div className="min-h-screen bg-linear-to-r from-purple-50 via-pink-50 to-blue-50">
-            <Header cartCount={ cart.length } onToggleCart={ () => setShowCart( !showCart ) } />
+        <div className="min-h-screen bg-[#EAEDED]">
+            <Header
+                cartCount={ cart.length }
+                onToggleCart={ () => setShowCart( !showCart ) }
+                searchTerm={ searchTerm }
+                onSearchChange={ setSearchTerm }
+                categories={ categories }
+                selectedCategory={ selectedCategory }
+                onSelectCategory={ setSelectedCategory }
+            />
 
             <CartSidebar open={ showCart } onClose={ () => setShowCart( false ) } cart={ cart } removeFromCart={ removeFromCart } getTotalPrice={ getTotalPrice } />
 
-            <main className="max-w-7xl mx-auto px-4 py-8">
-                <div className="text-center mb-12">
-                    <h2 className="text-4xl font-bold mb-4">Discover Amazing Products</h2>
-                    <p className="text-gray-600 text-lg">Shop the latest trends with our curated collection</p>
-                </div>
+            <main className="mx-auto max-w-[1400px] px-4 py-6">
+                <div className="flex flex-col gap-6 lg:flex-row">
+                    <aside className="hidden w-full space-y-6 lg:block lg:w-64">
+                        <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
+                            <h2 className="text-xl font-semibold text-[#0F1111]">Refine by</h2>
+                            <div className="mt-4">
+                                <CategoryFilter categories={ categories } selected={ selectedCategory } onSelect={ setSelectedCategory } />
+                            </div>
+                        </div>
+                        <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
+                            <h3 className="text-lg font-semibold text-[#0F1111]">Delivery</h3>
+                            <p className="mt-2 text-sm text-[#565959]">Choose products eligible for fast, free delivery and enjoy a premium shopping experience.</p>
+                        </div>
+                    </aside>
 
-                <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <SearchBar value={ searchTerm } onChange={ setSearchTerm } />
-                        <CategoryFilter categories={ categories } selected={ selectedCategory } onSelect={ setSelectedCategory } />
-                        <Sort value={ sortBy } onChange={ setSortBy } />
-                    </div>
+                    <section className="flex-1 space-y-4">
+                        <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+                            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                                <div>
+                                    <h2 className="text-xl font-semibold text-[#0F1111]">Results</h2>
+                                    <p className="text-sm text-[#565959]">
+                                        Showing { filteredProducts.length } of { products.length } items{ searchTerm ? ` for "${ searchTerm }"` : '' }.
+                                    </p>
+                                </div>
+                                <Sort value={ sortBy } onChange={ setSortBy } label="Sort by" />
+                            </div>
 
-                    <div className="mt-4 flex items-center justify-between text-sm text-gray-600">
-                        <span>{ filteredProducts.length } products found</span>
-                        { searchTerm && (
-                            <button onClick={ () => setSearchTerm( '' ) } className="text-purple-600 hover:text-purple-700 flex items-center space-x-1">
-                                <span>Clear search</span>
-                            </button>
+                            <div className="mt-4 space-y-4 lg:hidden">
+                                <div className="rounded-md border border-gray-200 bg-[#F8F9F9] p-3">
+                                    <CategoryFilter categories={ categories } selected={ selectedCategory } onSelect={ setSelectedCategory } />
+                                </div>
+                            </div>
+                        </div>
+
+                        { loading ? (
+                            <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+                                <LoadingGrid />
+                            </div>
+                        ) : filteredProducts.length === 0 ? (
+                            <div className="rounded-lg border border-gray-200 bg-white p-10 shadow-sm">
+                                <EmptyState />
+                            </div>
+                        ) : (
+                            <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+                                <ProductGrid products={ filteredProducts } onAddToCart={ addToCart } />
+                            </div>
                         ) }
-                    </div>
+                    </section>
                 </div>
-
-                { loading ? (
-                    <LoadingGrid />
-                ) : filteredProducts.length === 0 ? (
-                        <EmptyState />
-                ) : (
-                            <ProductGrid products={ filteredProducts } onAddToCart={ addToCart } />
-                ) }
             </main>
-
         </div>
     )
 }
