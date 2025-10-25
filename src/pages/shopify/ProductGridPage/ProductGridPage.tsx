@@ -2,7 +2,7 @@
 import { Header, CartSidebar, SearchBar, CategoryFilter, Sort, ProductGrid, LoadingGrid, EmptyState } from './components'
 import { useProducts } from './hooks' 
 
-const Shopify: React.FC = () =>
+const ProductGridPage: React.FC = () =>
 {
     const [
         ,
@@ -65,4 +65,4 @@ const Shopify: React.FC = () =>
     )
 }
 
-export default Shopify
+export default ProductGridPage
