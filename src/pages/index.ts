@@ -1,2 +1,3 @@
 import Homepage from './home/Homepage';
-export { Homepage }
+import Shopify from './shopify/Shopify';
+export { Homepage, Shopify }
