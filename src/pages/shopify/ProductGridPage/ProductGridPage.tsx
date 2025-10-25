@@ -72,15 +72,15 @@ const ProductGridPage: React.FC = () =>
                         </div>
 
                         { loading ? (
-                            <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+                            <div className="rounded-lg overflow-hidden">
                                 <LoadingGrid />
                             </div>
                         ) : filteredProducts.length === 0 ? (
-                            <div className="rounded-lg border border-gray-200 bg-white p-10 shadow-sm">
+                                <div className="rounded-lg overflow-hidden">
                                 <EmptyState />
                             </div>
                         ) : (
-                            <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+                                    <div className="rounded-lg overflow-hidden">
                                 <ProductGrid products={ filteredProducts } onAddToCart={ addToCart } />
                             </div>
                         ) }
