@@ -1,21 +1,12 @@
-import { useGallery } from '../hooks/useGallery'
+import type { FC } from 'react';
 
-type Product = {
-    title: string;
-    images: string[];
-};
+interface BigImageProps {
+  image: string;
+  title: string;
+}
 
-export const BigImage: React.FC<Product> = ( { images, title } ) =>
-{
-    const gallery = useGallery( images[ 0 ] )
+const BigImage: FC<BigImageProps> = ({ image, title }) => (
+  <img src={image} alt={title} className="w-full h-full object-cover" />
+);
 
-    return (
-        <img
-            src={ gallery[0] }
-            alt={ title }
-            className="w-full h-full object-cover"
-        />
-    )
-} 
-
-export default BigImage
+export default BigImage;

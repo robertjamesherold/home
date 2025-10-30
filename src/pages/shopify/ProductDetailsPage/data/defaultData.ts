@@ -1,4 +1,4 @@
-import type { ColorOption, SizeOption } from '../types'
+import type { ColorOption, SizeOption } from '../types';
 
 export const DEFAULT_COLORS: ColorOption[] = [
   { name: 'Black', hex: '#111827' },
@@ -14,7 +14,7 @@ export const DEFAULT_SIZES: SizeOption[] = [
   { name: 'XL', available: true },
 ];
 
-export const DEFAULT_FEATURES:string[] = [
+export const DEFAULT_FEATURES: string[] = [
   'Premium Materialien für langanhaltende Qualität',
   'Alltagstaugliches Design mit hohem Tragekomfort',
   'Sorgfältig getestete Komponenten und Verarbeitung',
