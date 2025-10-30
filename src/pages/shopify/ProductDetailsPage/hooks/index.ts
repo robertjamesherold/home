@@ -1,2 +1,4 @@
-export * from './useGallery';
-export * from './useProductDetailState';
+import { useGallery } from './useGallery';
+import { useProductDetailState } from './useProductDetailState';
+
+export { useGallery, useProductDetailState };

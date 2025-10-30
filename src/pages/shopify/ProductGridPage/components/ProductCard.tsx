@@ -34,11 +34,11 @@ const ProductCard: React.FC<Props> = ( { product, onAdd } ) =>
 
 
     return (
-        <article className="flex h-full flex-row rounded-lg shadow-sm bg-white transition gap-8 overflow-hidden">
-            <Link to={ `/products/${ product.id }` } className="flex h-64 items-center justify-center">
-                <img src={ product.image } alt={ product.title } className="max-h-full w-full object-contain" />
+        <article className="flex h-full flex-col sm:flex-row rounded-lg shadow-sm bg-white transition sm:gap-8 overflow-hidden">
+            <Link to={ `/products/${ product.id }` } className="flex sm:aspect-square h-32 items-center justify-center overflow-hidden sm:h-full md:h-64 ">
+                <img src={ product.image } alt={ product.title } className="h-full w-full object-cover" />
             </Link>
-            <div className="flex h-64 items-left flex-col justify-center">
+            <div className="flex sm:h-64 min-h-fit items-left flex-col p-4 justify-center">
                 <h1 className="text-2xl text-gray-800 transition hover:text-[#C7511F] hover:underline line-clamp-2">
                     <Link to={ `/products/${ product.id }` }>{ product.title }
                     </Link>
@@ -56,7 +56,7 @@ const ProductCard: React.FC<Props> = ( { product, onAdd } ) =>
                     onClick={ () => onAdd( product ) }
                     label="In den Warenkorb"
                     variant="secondary"
-                    className='w-64 mt-4'
+                    className='sm:w-64 mt-4'
                 />
 
 

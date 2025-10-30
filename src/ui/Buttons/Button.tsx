@@ -50,48 +50,49 @@ const Button: React.FC<ButtonProps> = ({
   let resolvedIcon: ReactElement | null = null;
   let restChildren: ReactNode[] = childArray;
 
-  const withClassName = (
-    element: ReactElement<{ className?: string }>,
-    extra: string,
-  ) => {
-    const existing = element.props.className ?? '';
-    return cloneElement(element, {
-      className: [existing, extra].filter(Boolean).join(' '),
-    });
-  };
+    const iconNode = resolvedIcon ? <span className="flex-none">{ resolvedIcon }</span> : null
+    const extras = restChildren.length > 0 ? (
+        <span className="flex-none inline-flex items-center">{ restChildren }</span>
+    ) : null
+    return ( <>
+        { variant === 'primary' &&
+            <button
+                type='button'
+                onClick={ onClick }
+                className={ ` btn-primary ${ className }` }
+            >
+                { iconPosition === "left" && iconNode }
+                <span className="flex-1 text-center">{ label }</span>
+                { iconPosition === "right" && iconNode }
+                { extras }
+            </button>
+        }
+        { variant === 'secondary' &&
+            <button
+                type='button'
+                onClick={ onClick }
+                className={ `btn-secondary ${ className }` }
+            >
+                { iconPosition === "left" && iconNode }
+                <span className="flex-1 text-center">{ label }</span>
+                { iconPosition === "right" && iconNode }
+                { extras }
+            </button>
 
-  if (icon) {
-    resolvedIcon = withClassName(icon, iconClassName);
-  } else if (autoIcon) {
-    const candidate = childArray[iconIndex];
-    if (candidate && isValidElement(candidate)) {
-      resolvedIcon = withClassName(
-        candidate as ReactElement<{ className?: string }>,
-        iconClassName,
-      );
-      restChildren = childArray.filter((_, index) => index !== iconIndex);
-    }
-  }
-
-  const iconNode = resolvedIcon ? (
-    <span className="flex-none">{resolvedIcon}</span>
-  ) : null;
-
-  const labelNode = label ? (
-    <span className="flex-1 text-center">{label}</span>
-  ) : null;
-
-  const contentNode = restChildren.length > 0 ? (
-    <span
-      className={
-        label
-          ? 'flex-none inline-flex items-center space-x-2'
-          : 'flex-1 inline-flex items-center justify-center space-x-2'
-      }
-    >
-      {restChildren}
-    </span>
-  ) : null;
+        }
+        { variant === 'outline' &&
+            <button
+                type='button'
+                onClick={ onClick }
+                className={ `btn-outline ${ className }` }>
+                { iconPosition === "left" && iconNode }
+                <span className="flex-1 text-center">{ label }</span>
+                { iconPosition === "right" && iconNode }
+                { extras }
+            </button>
+        }
+    </> )
+}
 
   return (
     <button

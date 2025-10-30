@@ -1,8 +1,14 @@
-import type { FC, PropsWithChildren } from 'react';
+
+import type { FC, PropsWithChildren } from 'react'
 
 type GridProps = PropsWithChildren<{
-  className?: string;
-}>;
+    className?: string
+}>
+
+const Grid: FC<GridProps> = ( { children, className = '' } ) => (
+    <div className={ [ 'grid', className ].filter( Boolean ).join( ' ' ) }>{ children }</div>
+)
+
 
 const Grid: FC<GridProps> = ({ children, className = '' }) => (
   <div className={['grid', className].filter(Boolean).join(' ')}>{children}</div>

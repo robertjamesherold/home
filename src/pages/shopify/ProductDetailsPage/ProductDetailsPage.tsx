@@ -1,32 +1,33 @@
-import React, { useEffect, useMemo } from 'react';
-import { Check, Share2, Shield, ShoppingCart, Star, Truck } from 'lucide-react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useEffect, useMemo } from 'react'
+import { Check, Share2, Shield, ShoppingCart, Star, Truck } from 'lucide-react'
+import { Link, useParams } from 'react-router-dom'
 
-import Button from '@/ui/Buttons/Button';
-import { Column } from '@/layout';
+import Button from '@/ui/Buttons/Button'
+import { Column } from '@/layout'
 
-import useProductsData from '../ProductGridPage/hooks/useProductsData';
-import type { Product } from '../ProductGridPage/types';
+import useProductsData from '../ProductGridPage/hooks/useProductsData'
+import type { Product } from '../ProductGridPage/types'
 
-import { CATEGORY_COLORS, CATEGORY_FEATURES, CATEGORY_SIZES, CATEGORY_SPECIFICATIONS } from './data/categoryData';
-import { DEFAULT_COLORS, DEFAULT_FEATURES, DEFAULT_SIZES, DEFAULT_SPECIFICATIONS } from './data/defaultData';
-import { useGallery, useProductDetailState } from './hooks';
-import { BigImage, GalleryImages, Header } from './components';
-import {
+import { CATEGORY_COLORS, CATEGORY_FEATURES, CATEGORY_SIZES, CATEGORY_SPECIFICATIONS } from './data/categoryData'
+import { DEFAULT_COLORS, DEFAULT_FEATURES, DEFAULT_SIZES, DEFAULT_SPECIFICATIONS } from './data/defaultData'
+import { useGallery, useProductDetailState } from './hooks'
+import { BigImage, GalleryImages, Header } from './components'
+import
+{
   ColorButton,
   DiscountBadge,
   FavoritenButton,
   GrößeButton,
   MengeButton,
-} from './ui/Buttons';
-import type { ActiveTab, ColorOption, Review } from './types';
+} from './ui/'
+import type { ActiveTab, ColorOption, Review } from './types'
 
-const formatCurrency = (value: number) =>
-  new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(
+const formatCurrency = ( value: number ) =>
+  new Intl.NumberFormat( 'de-DE', { style: 'currency', currency: 'EUR' } ).format(
     value,
-  );
+  )
 
-const buildReviews = (product: Product, reviewCount: number): Review[] => [
+const buildReviews = ( product: Product, reviewCount: number ): Review[] => [
   {
     id: 1,
     author: 'Sarah M.',
@@ -52,26 +53,28 @@ const buildReviews = (product: Product, reviewCount: number): Review[] => [
     comment: `Ich nutze ${product.title} täglich – Design, Funktion und Komfort passen einfach perfekt zusammen.`,
     verified: reviewCount > 120,
   },
-];
-
+]
 const normalizeSizes = (
-  sizes: typeof CATEGORY_SIZES[keyof typeof CATEGORY_SIZES] | undefined,
-) => {
-  if (!sizes) {
-    return DEFAULT_SIZES.map((size) => size.name);
+  sizes: typeof CATEGORY_SIZES[ keyof typeof CATEGORY_SIZES ] | undefined,
+) =>
+{
+  if ( !sizes )
+  {
+    return DEFAULT_SIZES.map( ( size ) => size.name )
   }
 
-  return sizes.map((size) => size);
-};
+  return sizes.map( ( size ) => size )
+}
 
-const ProductDetailPage: React.FC = () => {
-  const { productId } = useParams<{ productId: string }>();
-  const { products, loading } = useProductsData();
+const ProductDetailPage: React.FC = () =>
+{
+  const { productId } = useParams<{ productId: string }>()
+  const { products, loading } = useProductsData()
 
   const product = useMemo(
-    () => products.find((item) => item.id === productId),
-    [products, productId],
-  );
+    () => products.find( ( item ) => item.id === productId ),
+    [ products, productId ],
+  )
 
   const {
     selectedImage,
@@ -87,12 +90,22 @@ const ProductDetailPage: React.FC = () => {
     setActiveTab,
     isFavorite,
     toggleFavorite,
-  } = useProductDetailState(productId);
+  } = useProductDetailState( productId )
 
-  const availableColors = useMemo<ColorOption[]>(() => {
-    if (!product) {
-      return DEFAULT_COLORS;
+  const availableColors = useMemo<ColorOption[]>( () =>
+  {
+    if ( !product )
+    {
+      return DEFAULT_COLORS
     }
+
+    return CATEGORY_COLORS[ product.category ] ?? DEFAULT_COLORS
+  }, [ product ] )
+
+  const availableSizes = useMemo(
+    () => normalizeSizes( product ? CATEGORY_SIZES[ product.category ] : undefined ),
+    [ product ],
+  )
 
     return CATEGORY_COLORS[product.category] ?? DEFAULT_COLORS;
   }, [product]);
@@ -109,13 +122,17 @@ const ProductDetailPage: React.FC = () => {
     if (defaultColor) {
       setSelectedColor(defaultColor);
     }
-  }, [defaultColor, setSelectedColor]);
+  }, [ defaultColor, setSelectedColor ] )
 
-  useEffect(() => {
-    if (defaultSize) {
-      setSelectedSize(defaultSize);
+  useEffect( () =>
+  {
+    if ( defaultSize )
+    {
+      setSelectedSize( defaultSize )
     }
-  }, [defaultSize, setSelectedSize]);
+  }, [ defaultSize, setSelectedSize ] )
+
+  const galleryImages = useGallery( product?.image )
 
   const galleryImages = useGallery(product?.image);
 
@@ -144,36 +161,36 @@ const ProductDetailPage: React.FC = () => {
     );
   }
 
-  const priceValue = Number(product.price);
-  const originalPriceValue = priceValue * 1.2;
-  const priceDisplay = formatCurrency(priceValue);
-  const originalPrice = formatCurrency(originalPriceValue);
+  const priceValue = Number( product.price )
+  const originalPriceValue = priceValue * 1.2
+  const priceDisplay = formatCurrency( priceValue )
+  const originalPrice = formatCurrency( originalPriceValue )
   const discount = Math.max(
     0,
-    Math.round(((originalPriceValue - priceValue) / originalPriceValue) * 100),
-  );
-  const reviewCount = Math.max(42, Math.round(product.rating * 48));
+    Math.round( ( ( originalPriceValue - priceValue ) / originalPriceValue ) * 100 ),
+  )
+  const reviewCount = Math.max( 42, Math.round( product.rating * 48 ) )
 
-  const features = CATEGORY_FEATURES[product.category] ?? DEFAULT_FEATURES;
+  const features = CATEGORY_FEATURES[ product.category ] ?? DEFAULT_FEATURES
   const specifications =
-    CATEGORY_SPECIFICATIONS[product.category] ?? DEFAULT_SPECIFICATIONS;
-  const reviews = buildReviews(product, reviewCount);
+    CATEGORY_SPECIFICATIONS[ product.category ] ?? DEFAULT_SPECIFICATIONS
+  const reviews = buildReviews( product, reviewCount )
 
-  const renderStars = (rating: number) =>
-    [...Array(5)].map((_, index) => (
+  const renderStars = ( rating: number ) =>
+    [ ...Array( 5 ) ].map( ( _, index ) => (
       <Star
-        key={`star-${index}`}
-        className={`w-5 h-5 ${
-          index < Math.round(rating)
-            ? 'text-yellow-400 fill-current'
-            : 'text-gray-300'
-        }`}
+        key={ `star-${ index }` }
+        className={ `w-5 h-5 ${ index < Math.round( rating )
+          ? 'text-yellow-400 fill-current'
+          : 'text-gray-300'
+          }` }
       />
-    ));
+    ) )
 
-  const handleTabChange = (tab: ActiveTab) => {
-    setActiveTab(tab);
-  };
+  const handleTabChange = ( tab: ActiveTab ) =>
+  {
+    setActiveTab( tab )
+  }
 
   return (
     <div className="min-h-screen bg-linear-to-br from-purple-50 via-pink-50 to-blue-50">
@@ -182,47 +199,47 @@ const ProductDetailPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="space-y-4">
             <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden aspect-square">
-              {galleryImages[selectedImage] && (
-                <BigImage image={galleryImages[selectedImage]} title={product.title} />
-              )}
-              {discount > 0 && <DiscountBadge discount={discount} />}
-              <FavoritenButton isFavorite={isFavorite} onToggle={toggleFavorite} />
+              { galleryImages[ selectedImage ] && (
+                <BigImage image={ galleryImages[ selectedImage ] } title={ product.title } />
+              ) }
+              { discount > 0 && <DiscountBadge discount={ discount } /> }
+              <FavoritenButton isFavorite={ isFavorite } onToggle={ toggleFavorite } />
             </div>
 
-            {galleryImages.length > 0 && (
+            { galleryImages.length > 0 && (
               <GalleryImages
-                images={galleryImages}
-                selectedImage={selectedImage}
-                onSelect={setSelectedImage}
+                images={ galleryImages }
+                selectedImage={ selectedImage }
+                onSelect={ setSelectedImage }
               />
-            )}
+            ) }
           </div>
 
           <div className="space-y-6">
             <div>
               <h1 className="text-4xl font-bold text-gray-900 mb-3">
-                {product.title}
+                { product.title }
               </h1>
               <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-1">
                   {renderStars(product.rating)}
                 </div>
                 <span className="text-gray-600 font-semibold">
-                  {product.rating.toFixed(1)}
+                  { product.rating.toFixed( 1 ) }
                 </span>
-                <span className="text-gray-400">({reviewCount} Bewertungen)</span>
+                <span className="text-gray-400">({ reviewCount } Bewertungen)</span>
               </div>
             </div>
 
             <div className="flex items-baseline space-x-3">
               <span className="text-4xl font-bold text-purple-600">
-                {priceDisplay}
+                { priceDisplay }
               </span>
-              {discount > 0 && (
+              { discount > 0 && (
                 <span className="text-2xl text-gray-400 line-through">
-                  {originalPrice}
+                  { originalPrice }
                 </span>
-              )}
+              ) }
             </div>
 
             <div className="flex items-center space-x-2">
@@ -252,17 +269,35 @@ const ProductDetailPage: React.FC = () => {
               onDecrease={decrease}
             />
 
+            <ColorButton
+              availableColors={ availableColors }
+              selectedColor={ selectedColor }
+              onSelect={ setSelectedColor }
+            />
+
+            <GrößeButton
+              availableSizes={ availableSizes }
+              selectedSize={ selectedSize }
+              onSelect={ setSelectedSize }
+            />
+
+            <MengeButton
+              quantity={ quantity }
+              onIncrease={ increase }
+              onDecrease={ decrease }
+            />
+
             <Column className="gap-4 mt-4">
               <Button
                 variant="primary"
                 label="Jetzt kaufen"
-                icon={<ShoppingCart />}
+                icon={ <ShoppingCart /> }
               />
               <Button variant="secondary" label="In den Warenkorb" />
               <Button
                 variant="outline"
                 label="Produkt teilen"
-                icon={<Share2 />}
+                icon={ <Share2 /> }
               />
             </Column>
 
@@ -295,34 +330,31 @@ const ProductDetailPage: React.FC = () => {
           <div className="flex space-x-8 border-b">
             <button
               type="button"
-              onClick={() => handleTabChange('description')}
-              className={`pb-4 font-semibold transition ${
-                activeTab === 'description'
-                  ? 'text-purple-600 border-b-2 border-purple-600'
-                  : 'text-gray-500 hover:text-gray-700'
-              }`}
+              onClick={ () => handleTabChange( 'description' ) }
+              className={ `pb-4 font-semibold transition ${ activeTab === 'description'
+                ? 'text-purple-600 border-b-2 border-purple-600'
+                : 'text-gray-500 hover:text-gray-700'
+                }` }
             >
               Beschreibung
             </button>
             <button
               type="button"
-              onClick={() => handleTabChange('reviews')}
-              className={`pb-4 font-semibold transition ${
-                activeTab === 'reviews'
-                  ? 'text-purple-600 border-b-2 border-purple-600'
-                  : 'text-gray-500 hover:text-gray-700'
-              }`}
+              onClick={ () => handleTabChange( 'reviews' ) }
+              className={ `pb-4 font-semibold transition ${ activeTab === 'reviews'
+                ? 'text-purple-600 border-b-2 border-purple-600'
+                : 'text-gray-500 hover:text-gray-700'
+                }` }
             >
               Bewertungen ({reviewCount})
             </button>
             <button
               type="button"
-              onClick={() => handleTabChange('shipping')}
-              className={`pb-4 font-semibold transition ${
-                activeTab === 'shipping'
-                  ? 'text-purple-600 border-b-2 border-purple-600'
-                  : 'text-gray-500 hover:text-gray-700'
-              }`}
+              onClick={ () => handleTabChange( 'shipping' ) }
+              className={ `pb-4 font-semibold transition ${ activeTab === 'shipping'
+                ? 'text-purple-600 border-b-2 border-purple-600'
+                : 'text-gray-500 hover:text-gray-700'
+                }` }
             >
               Versand & Retouren
             </button>
@@ -334,9 +366,9 @@ const ProductDetailPage: React.FC = () => {
                 <div>
                   <h3 className="text-2xl font-bold mb-4">Highlights</h3>
                   <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {features.map((feature, index) => (
+                    { features.map( ( feature, index ) => (
                       <li
-                        key={`${feature}-${index}`}
+                        key={ `${ feature }-${ index }` }
                         className="flex items-start space-x-2"
                       >
                         <Check className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" />
@@ -349,12 +381,12 @@ const ProductDetailPage: React.FC = () => {
                 <div>
                   <h3 className="text-2xl font-bold mb-4">Technische Daten</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {Object.entries(specifications).map(([key, value]) => (
-                      <div key={key} className="flex justify-between py-2 border-b">
+                    { Object.entries( specifications ).map( ( [ key, value ] ) => (
+                      <div key={ key } className="flex justify-between py-2 border-b">
                         <span className="font-semibold text-gray-700">
-                          {key}:
+                          { key }:
                         </span>
-                        <span className="text-gray-600 text-right">{value}</span>
+                        <span className="text-gray-600 text-right">{ value }</span>
                       </div>
                     ))}
                   </div>
@@ -370,9 +402,9 @@ const ProductDetailPage: React.FC = () => {
                       <div>
                         <div className="flex items-center space-x-2 mb-2">
                           <span className="font-bold text-gray-900">
-                            {review.author}
+                            { review.author }
                           </span>
-                          {review.verified && (
+                          { review.verified && (
                             <span className="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full inline-flex items-center space-x-1">
                               <Check className="w-3 h-3" />
                               <span>Verifiziert</span>
@@ -381,10 +413,10 @@ const ProductDetailPage: React.FC = () => {
                         </div>
                         <div className="flex items-center space-x-2">
                           <div className="flex">
-                            {renderStars(review.rating)}
+                            { renderStars( review.rating ) }
                           </div>
                           <span className="text-sm text-gray-500">
-                            {review.date}
+                            { review.date }
                           </span>
                         </div>
                       </div>
@@ -436,4 +468,4 @@ const ProductDetailPage: React.FC = () => {
   );
 };
 
-export default ProductDetailPage;
+export default ProductDetailPage

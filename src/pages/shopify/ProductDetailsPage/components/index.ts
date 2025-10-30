@@ -1,3 +1,5 @@
-export { default as BigImage } from './BigImage';
-export { default as GalleryImages } from './GalleryImages';
-export { default as Header } from './Header';
+import BigImage from './BigImage';
+import GalleryImages from './GalleryImages';
+import Header from './Header';
+
+export { BigImage, GalleryImages, Header };

@@ -37,8 +37,8 @@ const ProductGridPage: React.FC = () =>
 
             <CartSidebar open={ showCart } onClose={ () => setShowCart( false ) } cart={ cart } removeFromCart={ removeFromCart } getTotalPrice={ getTotalPrice } />
 
-            <main className="w-full px-18 py-6">
-                <div className="flex flex-col gap-6 lg:flex-row">
+            <main className="main">
+                <div className="flex flex-col gap-6 sm:flex-row md:flex lg:flex-row xl:flex 2xl:flex">
                     <aside className="hidden w-full space-y-6 lg:block lg:w-64">
                         <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-sm">
                             <h2 className="text-xl font-semibold text-[#0F1111]">Refine by</h2>

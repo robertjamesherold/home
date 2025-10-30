@@ -5,7 +5,9 @@ export const createGalleryImages = (src?: string): string[] => {
     return [];
   }
 
-  const separator = src.includes('?') ? '&' : '?';
+  const separator = src.includes('?')
+    ? '&'
+    : '?';
 
   return [
     src,
@@ -13,7 +15,6 @@ export const createGalleryImages = (src?: string): string[] => {
     `${src}${separator}variant=2`,
     `${src}${separator}variant=3`,
   ];
-};
+  };
 
-export const useGallery = (src?: string) =>
-  useMemo(() => createGalleryImages(src), [src]);
+export const useGallery = (src?: string) => useMemo(() => createGalleryImages(src), [src]);
