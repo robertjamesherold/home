@@ -1,6 +1,7 @@
 import React from 'react'
 import { ChevronDown, MapPin, Menu, ShoppingCart } from 'lucide-react'
 import SearchBar from './SearchBar'
+import Button from '@/ui/Buttons/Button'
 
 type Props = {
     cartCount: number
@@ -48,21 +49,17 @@ const Header: React.FC<Props> = ({
                         <span>&amp; Orders</span>
                     </div>
 
-                    <button
+                    <Button
                         onClick={ onToggleCart }
-                        className="relative flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-white transition hover:bg-[#232F3E]"
-                        type="button"
+                        label='Cart'
+                        variant='primary'
+                        className='min-w-32'
+                        iconPosition='left'
                     >
-                        <ShoppingCart className="h-6 w-6" />
-                        <span className="hidden sm:inline">Cart</span>
-                        <span className="font-bold">({ cartCount })</span>
-                        { cartCount > 0 && (
-                            <span className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-[#f08804] text-xs font-bold text-[#111]">
-                                { cartCount }
-                            </span>
-                        ) }
-                    </button>
-                </div>
+                        <ShoppingCart />
+
+
+                    </Button>
             </div>
 
             <div className="bg-[#232F3E] text-white">
@@ -85,6 +82,7 @@ const Header: React.FC<Props> = ({
                         <span>Deals &amp; Promotions</span>
                         <ChevronDown className="h-4 w-4" />
                     </button>
+                </div>
                 </div>
             </div>
         </header>

@@ -2,4 +2,9 @@
   font-size: 16px
 }
 
+body {
+background-color: #01050D}
 
+.grabbing {
+  cursor: grabbing;
+}

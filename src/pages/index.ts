@@ -1,3 +1,5 @@
 import Homepage from './home/Homepage';
-import { ProductGridPage } from './shopify/ProductGridPage';
-export { Homepage, ProductGridPage };
+import { ProductDetailsPage } from '@pages/shopify/ProductDetailsPage';
+import { ProductGridPage } from '@pages/shopify/ProductGridPage';
+import { SeasonSelection } from '@pages/video/SeasonSelection';
+export { Homepage, ProductGridPage, SeasonSelection, ProductDetailsPage };
