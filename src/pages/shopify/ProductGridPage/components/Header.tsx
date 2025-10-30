@@ -40,7 +40,7 @@ const Header: React.FC<Props> = ({
                         </div>
                     </div>
 
-                    <div className="flex-1 min-w-[200px] order-last w-full sm:order-none sm:w-auto">
+                    <div className="flex-1 min-w-[200px] order-last w-full sm:order-0 sm:w-auto">
                         <SearchBar value={ searchTerm } onChange={ onSearchChange } />
                     </div>
 
@@ -51,12 +51,20 @@ const Header: React.FC<Props> = ({
 
                     <Button
                         onClick={ onToggleCart }
-                        label='Cart'
+                        label="Warenkorb"
                         variant='primary'
-                        className='min-w-32'
                         iconPosition='left'
+                        icon={ <ShoppingCart /> }
+                        iconClassName='h-[1.25em] w-[1.25em]'
                     >
-                        <ShoppingCart />
+
+                        { cartCount > 0 ? (
+                            <span className="absolute -top-2 -right-4 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
+                                { cartCount }
+                            </span>
+                        ) : <span className="absolute -top-2 -right-4 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full opacity-0">
+                            { cartCount }
+                        </span> }
 
 
                     </Button>

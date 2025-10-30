@@ -53,27 +53,26 @@ const Button: React.FC<ButtonProps> = ( { children, variant = 'primary', onClick
 
     const iconNode = resolvedIcon ? <span className="flex-none">{ resolvedIcon }</span> : null
     const extras = restChildren.length > 0 ? (
-        <span className="flex-none inline-flex items-center space-x-2">{ restChildren }</span>
+        <span className="flex-none inline-flex items-center">{ restChildren }</span>
     ) : null
     return ( <>
         { variant === 'primary' &&
             <button
                 type='button'
                 onClick={ onClick }
-                className={ ` bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition font-bold text-lg flex items-center justify-center space-x-2 ${ className }` }
+                className={ ` btn-primary ${ className }` }
             >
-                 { extras }
-
                 { iconPosition === "left" && iconNode }
                 <span className="flex-1 text-center">{ label }</span>
                 { iconPosition === "right" && iconNode }
+                { extras }
             </button>
         }
         { variant === 'secondary' &&
             <button
                 type='button'
                 onClick={ onClick }
-                className={ ` bg-gray-900 text-white py-2 rounded-lg hover:bg-gray-800 transition font-bold text-lg ${ className }` }
+                className={ `btn-secondary ${ className }` }
             >
                 { iconPosition === "left" && iconNode }
                 <span className="flex-1 text-center">{ label }</span>
@@ -86,8 +85,7 @@ const Button: React.FC<ButtonProps> = ( { children, variant = 'primary', onClick
             <button
                 type='button'
                 onClick={ onClick }
-                className={ ` border-2 border-gray-300 py-2 rounded-lg hover:border-purple-300 transition font-semibold flex items-center justify-center space-x-2 ${ className }` }>
-
+                className={ `btn-outline ${ className }` }>
                 { iconPosition === "left" && iconNode }
                 <span className="flex-1 text-center">{ label }</span>
                 { iconPosition === "right" && iconNode }

@@ -1,14 +1,11 @@
-type GridProps = { 
-    children: React.ReactNode
-    className?: string
-    }
+import type { FC, PropsWithChildren } from 'react'
 
-const Grid:React.FC<GridProps> = ({children, className}: GridProps) => {
-    return (
-        <div className={`grid auto-cols ${className}`}>
-            {children}
-        </div>
-    )
-}
+type GridProps = PropsWithChildren<{
+    className?: string
+}>
+
+const Grid: FC<GridProps> = ( { children, className = '' } ) => (
+    <div className={ [ 'grid', className ].filter( Boolean ).join( ' ' ) }>{ children }</div>
+)
 
 export default Grid
