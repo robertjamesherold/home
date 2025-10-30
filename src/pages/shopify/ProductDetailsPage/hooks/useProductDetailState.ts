@@ -1,7 +1,5 @@
-// src/pages/ProductDetail/hooks/useProductDetailState.ts
-import { useEffect, useReducer } from 'react';
-
-export type ActiveTab = 'description' | 'reviews' | 'shipping';
+import { useCallback, useEffect, useReducer } from 'react';
+import type { ActiveTab } from '../types';
 
 type State = {
   selectedImage: number;
@@ -31,7 +29,7 @@ const initialState = (): State => ({
   isFavorite: false,
 });
 
-function reducer(state: State, action: Action): State {
+const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case 'SET_SELECTED_IMAGE':
       return { ...state, selectedImage: action.payload };
@@ -52,26 +50,38 @@ function reducer(state: State, action: Action): State {
     default:
       return state;
   }
-}
+};
 
-export function useProductDetailState(productId?: string) {
+export const useProductDetailState = (productId?: string) => {
   const [state, dispatch] = useReducer(reducer, undefined, initialState);
 
-  // Reset wenn Produkt wechselt
   useEffect(() => {
-    // Dispatch RESET, nicht direkt state manipulation
     dispatch({ type: 'RESET' });
   }, [productId]);
 
-  // kleine Action-Wrappers, damit Komponente lesbar bleibt
-  const setSelectedImage = (idx: number) => dispatch({ type: 'SET_SELECTED_IMAGE', payload: idx });
-  const increase = () => dispatch({ type: 'INCREASE' });
-  const decrease = () => dispatch({ type: 'DECREASE' });
-  const setSelectedSize = (s: string) => dispatch({ type: 'SET_SIZE', payload: s });
-  const setSelectedColor = (c: string) => dispatch({ type: 'SET_COLOR', payload: c });
-  const setActiveTab = (t: ActiveTab) => dispatch({ type: 'SET_ACTIVE_TAB', payload: t });
-  const toggleFavorite = () => dispatch({ type: 'TOGGLE_FAVORITE' });
-  const reset = () => dispatch({ type: 'RESET' });
+  const setSelectedImage = useCallback(
+    (index: number) => dispatch({ type: 'SET_SELECTED_IMAGE', payload: index }),
+    [dispatch],
+  );
+  const increase = useCallback(() => dispatch({ type: 'INCREASE' }), [dispatch]);
+  const decrease = useCallback(() => dispatch({ type: 'DECREASE' }), [dispatch]);
+  const setSelectedSize = useCallback(
+    (size: string) => dispatch({ type: 'SET_SIZE', payload: size }),
+    [dispatch],
+  );
+  const setSelectedColor = useCallback(
+    (color: string) => dispatch({ type: 'SET_COLOR', payload: color }),
+    [dispatch],
+  );
+  const setActiveTab = useCallback(
+    (tab: ActiveTab) => dispatch({ type: 'SET_ACTIVE_TAB', payload: tab }),
+    [dispatch],
+  );
+  const toggleFavorite = useCallback(
+    () => dispatch({ type: 'TOGGLE_FAVORITE' }),
+    [dispatch],
+  );
+  const reset = useCallback(() => dispatch({ type: 'RESET' }), [dispatch]);
 
   return {
     selectedImage: state.selectedImage,
@@ -89,4 +99,4 @@ export function useProductDetailState(productId?: string) {
     toggleFavorite,
     reset,
   };
-}
+};

@@ -1,55 +1,54 @@
 import React, {
-    Children,
-    cloneElement,
-    isValidElement,
-} from "react"
-import type { ReactElement, ReactNode } from "react"
+  Children,
+  cloneElement,
+  isValidElement,
+} from 'react';
+import type { ReactElement, ReactNode } from 'react';
 
-type ButtonProps = {
-    children?: ReactNode
-    onClick?: () => void
-    label?: ReactNode
-    className?: string
-    icon?: ReactElement<{ className?: string }>
-    autoIcon?: boolean
-    iconIndex?: number
-    iconClassName?: string
-    iconPosition?: "left" | "right"
-    variant?: 'primary' | 'secondary' | 'outline'
+export type ButtonVariant = 'primary' | 'secondary' | 'outline';
+
+export interface ButtonProps {
+  children?: ReactNode;
+  onClick?: () => void;
+  label?: ReactNode;
+  className?: string;
+  icon?: ReactElement<{ className?: string }>;
+  autoIcon?: boolean;
+  iconIndex?: number;
+  iconClassName?: string;
+  iconPosition?: 'left' | 'right';
+  variant?: ButtonVariant;
+  type?: 'button' | 'submit' | 'reset';
 }
 
-const Button: React.FC<ButtonProps> = ( { children, variant = 'primary', onClick, label, className = '', icon, autoIcon, iconIndex = 0, iconClassName = 'w-6 h-6', iconPosition = 'left' }: ButtonProps ) =>
-{
-    const childArray = Children.toArray( children )
-    let resolvedIcon: ReactElement | null = null
-    let restChildren: ReactNode[] = childArray
+const variantClasses: Record<ButtonVariant, string> = {
+  primary:
+    'bg-purple-600 text-white hover:bg-purple-700 font-bold text-lg',
+  secondary:
+    'bg-gray-900 text-white hover:bg-gray-800 font-bold text-lg',
+  outline:
+    'border-2 border-gray-300 hover:border-purple-300 font-semibold text-gray-900',
+};
 
-    const mergeClassName = ( element: ReactElement<{ className?: string }>, extra: string ) =>
-    {
-        const baseClassName = ( element.props as { className?: string } )?.className ?? ''
-        return cloneElement(
-            element,
-            {
-                className: [ baseClassName, extra ].filter( Boolean ).join( ' ' ),
-            } as Partial<{ className?: string }>
-        )
-    }
+const baseClasses =
+  'inline-flex items-center justify-center space-x-2 rounded-lg transition px-4 py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-purple-500 disabled:opacity-50 disabled:cursor-not-allowed';
 
-    if ( icon )
-    {
-        resolvedIcon = mergeClassName( icon, iconClassName )
-    } else if ( autoIcon )
-    {
-        if ( iconIndex >= 0 && iconIndex < childArray.length )
-        {
-            const candidate = childArray[ iconIndex ]
-            if ( isValidElement( candidate ) )
-            {
-                resolvedIcon = mergeClassName( candidate as ReactElement<{ className?: string }>, iconClassName )
-                restChildren = childArray.slice( 0, iconIndex ).concat( childArray.slice( iconIndex + 1 ) )
-            }
-        }
-    }
+const Button: React.FC<ButtonProps> = ({
+  children,
+  variant = 'primary',
+  onClick,
+  label,
+  className = '',
+  icon,
+  autoIcon = false,
+  iconIndex = 0,
+  iconClassName = 'w-6 h-6',
+  iconPosition = 'left',
+  type = 'button',
+}) => {
+  const childArray = Children.toArray(children);
+  let resolvedIcon: ReactElement | null = null;
+  let restChildren: ReactNode[] = childArray;
 
     const iconNode = resolvedIcon ? <span className="flex-none">{ resolvedIcon }</span> : null
     const extras = restChildren.length > 0 ? (
@@ -95,5 +94,20 @@ const Button: React.FC<ButtonProps> = ( { children, variant = 'primary', onClick
     </> )
 }
 
+  return (
+    <button
+      type={type}
+      onClick={onClick}
+      className={[baseClasses, variantClasses[variant], className]
+        .filter(Boolean)
+        .join(' ')}
+    >
+      {iconPosition === 'left' && iconNode}
+      {labelNode}
+      {contentNode}
+      {iconPosition === 'right' && iconNode}
+    </button>
+  );
+};
 
-export default Button
+export default Button;

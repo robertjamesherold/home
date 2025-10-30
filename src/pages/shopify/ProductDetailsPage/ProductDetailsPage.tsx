@@ -33,13 +33,13 @@ const buildReviews = ( product: Product, reviewCount: number ): Review[] => [
     author: 'Sarah M.',
     rating: 5,
     date: 'vor 2 Wochen',
-    comment: `"${ product.title }" hat meine Erwartungen übertroffen – Qualität und Komfort sind absolut erstklassig!`,
+    comment: `"${product.title}" hat meine Erwartungen übertroffen – Qualität und Komfort sind absolut erstklassig!`,
     verified: true,
   },
   {
     id: 2,
     author: 'Michael R.',
-    rating: Math.round( product.rating ),
+    rating: Math.round(product.rating),
     date: 'vor 1 Monat',
     comment:
       'Top Verarbeitung und schneller Versand. Besonders die kleinen Details machen den Unterschied.',
@@ -50,7 +50,7 @@ const buildReviews = ( product: Product, reviewCount: number ): Review[] => [
     author: 'Emma L.',
     rating: 5,
     date: 'vor 3 Wochen',
-    comment: `Ich nutze ${ product.title } täglich – Design, Funktion und Komfort passen einfach perfekt zusammen.`,
+    comment: `Ich nutze ${product.title} täglich – Design, Funktion und Komfort passen einfach perfekt zusammen.`,
     verified: reviewCount > 120,
   },
 ]
@@ -107,14 +107,20 @@ const ProductDetailPage: React.FC = () =>
     [ product ],
   )
 
-  const defaultColor = availableColors[ 0 ]?.name ?? ''
-  const defaultSize = availableSizes[ 0 ] ?? ''
+    return CATEGORY_COLORS[product.category] ?? DEFAULT_COLORS;
+  }, [product]);
 
-  useEffect( () =>
-  {
-    if ( defaultColor )
-    {
-      setSelectedColor( defaultColor )
+  const availableSizes = useMemo(
+    () => normalizeSizes(product ? CATEGORY_SIZES[product.category] : undefined),
+    [product],
+  );
+
+  const defaultColor = availableColors[0]?.name ?? '';
+  const defaultSize = availableSizes[0] ?? '';
+
+  useEffect(() => {
+    if (defaultColor) {
+      setSelectedColor(defaultColor);
     }
   }, [ defaultColor, setSelectedColor ] )
 
@@ -128,17 +134,17 @@ const ProductDetailPage: React.FC = () =>
 
   const galleryImages = useGallery( product?.image )
 
-  if ( loading )
-  {
+  const galleryImages = useGallery(product?.image);
+
+  if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-purple-50 via-pink-50 to-blue-50">
         <p className="text-gray-600 text-lg">Produktdetails werden geladen…</p>
       </div>
-    )
+    );
   }
 
-  if ( !product )
-  {
+  if (!product) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
         <div className="bg-white shadow-xl rounded-2xl p-10 text-center space-y-4 max-w-md">
@@ -152,7 +158,7 @@ const ProductDetailPage: React.FC = () =>
           </Link>
         </div>
       </div>
-    )
+    );
   }
 
   const priceValue = Number( product.price )
@@ -216,7 +222,7 @@ const ProductDetailPage: React.FC = () =>
               </h1>
               <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-1">
-                  { renderStars( product.rating ) }
+                  {renderStars(product.rating)}
                 </div>
                 <span className="text-gray-600 font-semibold">
                   { product.rating.toFixed( 1 ) }
@@ -243,7 +249,25 @@ const ProductDetailPage: React.FC = () =>
               </span>
             </div>
 
-            <p className="text-gray-600 leading-relaxed">{ product.description }</p>
+            <p className="text-gray-600 leading-relaxed">{product.description}</p>
+
+            <ColorButton
+              availableColors={availableColors}
+              selectedColor={selectedColor}
+              onSelect={setSelectedColor}
+            />
+
+            <GrößeButton
+              availableSizes={availableSizes}
+              selectedSize={selectedSize}
+              onSelect={setSelectedSize}
+            />
+
+            <MengeButton
+              quantity={quantity}
+              onIncrease={increase}
+              onDecrease={decrease}
+            />
 
             <ColorButton
               availableColors={ availableColors }
@@ -322,7 +346,7 @@ const ProductDetailPage: React.FC = () =>
                 : 'text-gray-500 hover:text-gray-700'
                 }` }
             >
-              Bewertungen ({ reviewCount })
+              Bewertungen ({reviewCount})
             </button>
             <button
               type="button"
@@ -337,7 +361,7 @@ const ProductDetailPage: React.FC = () =>
           </div>
 
           <div className="mt-8">
-            { activeTab === 'description' && (
+            {activeTab === 'description' && (
               <div className="space-y-8">
                 <div>
                   <h3 className="text-2xl font-bold mb-4">Highlights</h3>
@@ -348,9 +372,9 @@ const ProductDetailPage: React.FC = () =>
                         className="flex items-start space-x-2"
                       >
                         <Check className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-700">{ feature }</span>
+                        <span className="text-gray-700">{feature}</span>
                       </li>
-                    ) ) }
+                    ))}
                   </ul>
                 </div>
 
@@ -364,16 +388,16 @@ const ProductDetailPage: React.FC = () =>
                         </span>
                         <span className="text-gray-600 text-right">{ value }</span>
                       </div>
-                    ) ) }
+                    ))}
                   </div>
                 </div>
               </div>
-            ) }
+            )}
 
-            { activeTab === 'reviews' && (
+            {activeTab === 'reviews' && (
               <div className="space-y-6">
-                { reviews.map( ( review ) => (
-                  <div key={ review.id } className="border-b pb-6">
+                {reviews.map((review) => (
+                  <div key={review.id} className="border-b pb-6">
                     <div className="flex items-start justify-between mb-3">
                       <div>
                         <div className="flex items-center space-x-2 mb-2">
@@ -385,7 +409,7 @@ const ProductDetailPage: React.FC = () =>
                               <Check className="w-3 h-3" />
                               <span>Verifiziert</span>
                             </span>
-                          ) }
+                          )}
                         </div>
                         <div className="flex items-center space-x-2">
                           <div className="flex">
@@ -397,9 +421,9 @@ const ProductDetailPage: React.FC = () =>
                         </div>
                       </div>
                     </div>
-                    <p className="text-gray-700">{ review.comment }</p>
+                    <p className="text-gray-700">{review.comment}</p>
                   </div>
-                ) ) }
+                ))}
 
                 <button
                   type="button"
@@ -408,9 +432,9 @@ const ProductDetailPage: React.FC = () =>
                   Bewertung schreiben
                 </button>
               </div>
-            ) }
+            )}
 
-            { activeTab === 'shipping' && (
+            {activeTab === 'shipping' && (
               <div className="space-y-6">
                 <div>
                   <h3 className="text-xl font-bold mb-3">Versandinformationen</h3>
@@ -429,7 +453,7 @@ const ProductDetailPage: React.FC = () =>
                   </p>
                 </div>
               </div>
-            ) }
+            )}
           </div>
         </div>
       </main>
@@ -441,7 +465,7 @@ const ProductDetailPage: React.FC = () =>
         </div>
       </footer>
     </div>
-  )
-}
+  );
+};
 
 export default ProductDetailPage

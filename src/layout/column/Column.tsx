@@ -1,14 +1,13 @@
-type ColumnProps = { 
-    children: React.ReactNode
-    className?: string
-    }
+import type { FC, PropsWithChildren } from 'react';
 
-const Column:React.FC<ColumnProps> = ({children, className}: ColumnProps) => {
-    return (
-        <div className={`flex flex-col ${className}`}>
-            {children}
-        </div>
-    )
-}
+type ColumnProps = PropsWithChildren<{
+  className?: string;
+}>;
 
-export default Column
+const Column: FC<ColumnProps> = ({ children, className = '' }) => (
+  <div className={['flex flex-col', className].filter(Boolean).join(' ')}>
+    {children}
+  </div>
+);
+
+export default Column;
