@@ -1,5 +1,6 @@
-import type { FC } from 'react';
-import { Minus, Plus } from 'lucide-react';
+import type { FC } from 'react'
+import { Minus, Plus } from 'lucide-react'
+import { Title } from '@/typography'
 
 interface MengeButtonProps {
   quantity: number;
@@ -12,32 +13,30 @@ const MengeButton: FC<MengeButtonProps> = ({
   onIncrease,
   onDecrease,
 }) => (
-  <div>
-    <label className="block text-sm font-semibold text-gray-700 mb-3">
-      Menge
-    </label>
-    <div className="flex items-center space-x-4">
-      <div className="flex items-center border-2 border-gray-300 rounded-lg">
+  <div className="space-y-2">
+    <Title h6 bold className=" text-gray-700" text='Menge' />
+    <div className="flex items-center gap-4">
+      <div className="flex items-center overflow-hidden rounded-xl border-2 border-gray-200 bg-white shadow-sm">
         <button
           type="button"
           onClick={onDecrease}
-          className="p-3 text-gray-700 hover:text-purple-600 transition"
+          className="grid h-11 w-11 place-items-center text-gray-700 transition hover:text-violet-600 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-violet-200"
           aria-label="Menge verringern"
         >
-          <Minus className="w-5 h-5" />
+          <Minus className="h-5 w-5" />
         </button>
-        <span className="px-6 font-semibold text-lg">{quantity}</span>
+        <span className="px-6 min-w-[6ch] text-center text-lg font-semibold text-gray-900">{ quantity }</span>
         <button
           type="button"
           onClick={onIncrease}
-          className="p-3 text-gray-700 hover:text-purple-600 transition"
+          className="grid h-11 w-11 place-items-center text-gray-700 transition hover:text-violet-600 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-violet-200"
           aria-label="Menge erhöhen"
         >
-          <Plus className="w-5 h-5" />
+          <Plus className="h-5 w-5" />
         </button>
       </div>
     </div>
   </div>
-);
+)
 
-export default MengeButton;
+export default MengeButton

@@ -16,9 +16,10 @@ type ButtonProps = {
     iconClassName?: string
     iconPosition?: "left" | "right"
     variant?: 'primary' | 'secondary' | 'outline'
+    size?: 'small' | 'medium' | 'large'
 }
 
-const Button: React.FC<ButtonProps> = ( { children, variant = 'primary', onClick, label, className = '', icon, autoIcon, iconIndex = 0, iconClassName = 'w-6 h-6', iconPosition = 'left' }: ButtonProps ) =>
+const Button: React.FC<ButtonProps> = ( { children, variant = 'primary', size = 'medium', onClick, label, className = '', icon, autoIcon, iconIndex = 0, iconClassName = 'w-6 h-6', iconPosition = 'left' }: ButtonProps ) =>
 {
     const childArray = Children.toArray( children )
     let resolvedIcon: ReactElement | null = null
@@ -33,6 +34,20 @@ const Button: React.FC<ButtonProps> = ( { children, variant = 'primary', onClick
                 className: [ baseClassName, extra ].filter( Boolean ).join( ' ' ),
             } as Partial<{ className?: string }>
         )
+    }
+
+    const getSizeClasses = () =>
+    {
+        switch ( size )
+        {
+            case 'small':
+                return 'px-3 py-1 text-sm'
+            case 'large':
+                return 'px-6 py-3 text-lg'
+            case 'medium':
+            default:
+                return 'px-4 py-2 text-base'
+        }
     }
 
     if ( icon )
@@ -60,7 +75,7 @@ const Button: React.FC<ButtonProps> = ( { children, variant = 'primary', onClick
             <button
                 type='button'
                 onClick={ onClick }
-                className={ ` btn-primary ${ className }` }
+                className={ `btn-primary ${ getSizeClasses() } ${ className }` }
             >
                 { iconPosition === "left" && iconNode }
                 <span className="flex-1 text-center">{ label }</span>
@@ -72,7 +87,7 @@ const Button: React.FC<ButtonProps> = ( { children, variant = 'primary', onClick
             <button
                 type='button'
                 onClick={ onClick }
-                className={ `btn-secondary ${ className }` }
+                className={ `btn-secondary ${ getSizeClasses() } ${ className }` }
             >
                 { iconPosition === "left" && iconNode }
                 <span className="flex-1 text-center">{ label }</span>
@@ -85,7 +100,7 @@ const Button: React.FC<ButtonProps> = ( { children, variant = 'primary', onClick
             <button
                 type='button'
                 onClick={ onClick }
-                className={ `btn-outline ${ className }` }>
+                className={ `btn-outline ${ getSizeClasses() } ${ className }` }>
                 { iconPosition === "left" && iconNode }
                 <span className="flex-1 text-center">{ label }</span>
                 { iconPosition === "right" && iconNode }

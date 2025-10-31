@@ -25,7 +25,9 @@ export const CATEGORY_COLORS: Record<string, { name: string; hex: string }[]> = 
   ],
 };
 
-export const CATEGORY_SIZES: Record<string, { sizes: string[]; availability: boolean }> = {
+export type CategorySizeConfig = { sizes: string[]; availability: boolean } | string[];
+
+export const CATEGORY_SIZES: Record<string, CategorySizeConfig> = {
   Fashion: { sizes: ['S', 'M', 'L', 'XL'], availability: true },
   Accessories: { sizes: ['One Size'], availability: true },
   Electronics: { sizes: ['One Size'], availability: true },

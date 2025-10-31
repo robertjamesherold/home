@@ -1,5 +1,3 @@
-import { formatCurrency } from './index';
-
 export type Pricing = {
   priceValue: number;
   originalPriceValue: number;
@@ -7,6 +5,9 @@ export type Pricing = {
   originalPrice: string;
   discount: number;
 };
+
+const formatCurrency = (value: number): string =>
+  new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(value);
 
 export const calculatePricing = (price: number): Pricing => {
   const priceValue = Number(price || 0);

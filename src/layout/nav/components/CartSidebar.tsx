@@ -37,7 +37,7 @@ const CartSidebar: React.FC<Props> = ( { open, onClose, cart, removeFromCart, ge
                                     <img src={ item.image } alt={ item.title } className="w-16 h-16 object-cover rounded" />
                                     <div className="flex-1">
                                         <h3 className="font-semibold text-sm">{ item.title }</h3>
-                                        <p className="text-purple-600 font-bold">${ item.price }</p>
+                                        <p className="text-violet-600 font-bold">${ item.price }</p>
                                     </div>
                                     <button onClick={ () => removeFromCart( item.id ) } className="text-red-500 hover:text-red-700">
                                         <X className="w-5 h-5" />
@@ -49,9 +49,9 @@ const CartSidebar: React.FC<Props> = ( { open, onClose, cart, removeFromCart, ge
                         <div className="border-t pt-4">
                             <div className="flex justify-between text-xl font-bold mb-4">
                                 <span>Total:</span>
-                                <span className="text-purple-600">${ getTotalPrice() }</span>
+                                    <span className="text-violet-600">${ getTotalPrice() }</span>
                             </div>
-                            <button className="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition font-semibold">
+                                <button className="w-full bg-violet-600 text-white py-3 rounded-lg hover:bg-violet-700 transition font-semibold">
                                 Checkout
                             </button>
                         </div>

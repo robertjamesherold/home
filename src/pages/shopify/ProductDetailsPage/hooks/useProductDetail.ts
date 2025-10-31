@@ -1,11 +1,15 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useProducts } from '@/hooks'
 import type { Product } from '@/types/Product.types'
-import type { ActiveTab, ColorOption, SizeOption } from '../types'
-import { CATEGORY_COLORS, CATEGORY_FEATURES, CATEGORY_SIZES, CATEGORY_SPECIFICATIONS } from '../data/categoryData';
+import type { ActiveTab, ColorOption } from '../types'
+import { CATEGORY_COLORS, CATEGORY_FEATURES, CATEGORY_SIZES, CATEGORY_SPECIFICATIONS } from '../data/categoryData'
 import { DEFAULT_COLORS, DEFAULT_FEATURES, DEFAULT_SIZES, DEFAULT_SPECIFICATIONS } from '../data/defaultData'
 import { calculatePricing } from '../lib/price'
 import { buildReviews } from '../lib/buildReviews'
+
+const FALLBACK_SIZES = DEFAULT_SIZES
+    .filter( ( option ) => option.availability )
+    .map( ( option ) => option.name )
 
 type ProductDetailState = {
     loading: boolean
@@ -17,7 +21,7 @@ type ProductDetailState = {
     specifications: Record<string, string>
     reviews: ReturnType<typeof buildReviews>
     availableColors: ColorOption[]
-    availableSizes: string[] | SizeOption[] 
+    availableSizes: string[]
     selectedImage: number
     isFavorite: boolean
     quantity: number
@@ -52,24 +56,68 @@ const buildGalleryImages = ( src?: string ) =>
     ]
 }
 
+const resolveAvailableSizes = ( product?: Product ) =>
+{
+    if ( !product )
+    {
+        return FALLBACK_SIZES
+    }
+
+    const categorySizes = CATEGORY_SIZES[ product.category ]
+
+    if ( !categorySizes )
+    {
+        return FALLBACK_SIZES
+    }
+
+    if ( Array.isArray( categorySizes ) )
+    {
+        return categorySizes
+    }
+
+    if ( categorySizes.availability === false )
+    {
+        return []
+    }
+
+    return categorySizes.sizes
+}
+
 export const useProductDetail = ( productId?: string ): ProductDetailState =>
 {
-    const { products, addToCart, setShowCart, loading } = useProductData()
-    const product = useMemo<Product | undefined>(
+    const [
+        loading,
+        products,
+        ,
+        ,
+        ,
+        ,
+        ,
+        ,
+        addToCart,
+        ,
+        ,
+        ,
+        setShowCart,
+    ] = useProducts()
 
-        () => products.find( ( item: Product ) => item.id === productId ),
+    const product = useMemo<Product | undefined>(
+        () => products.find( ( item ) => item.id === productId ),
         [ products, productId ],
     )
 
-    const availableColors = useMemo<ColorOption[]>( () => { return CATEGORY_COLORS[ product?.category ?? '' ] ?? DEFAULT_COLORS }, [ product ] )
+    const availableColors = useMemo<ColorOption[]>(
+        () => CATEGORY_COLORS[ product?.category ?? '' ] ?? DEFAULT_COLORS,
+        [ product ],
+    )
 
-    const availableSizes = useMemo<string[]>( () => { return (CATEGORY_SIZES[ product?.category ?? '' ] ?? DEFAULT_SIZES) as unknown as string[] },[ product ] )
+    const availableSizes = useMemo( () => resolveAvailableSizes( product ), [ product ] )
 
     const [ selectedImage, setSelectedImage ] = useState( 0 )
     const [ isFavorite, setIsFavorite ] = useState( false )
     const [ quantity, setQuantity ] = useState( 1 )
     const [ selectedColor, setSelectedColor ] = useState( availableColors[ 0 ]?.name ?? '' )
-    const [ selectedSize, setSelectedSize ] = useState<string>( availableSizes[ 0 ] ?? '' )
+    const [ selectedSize, setSelectedSize ] = useState( availableSizes[ 0 ] ?? '' )
     const [ activeTab, setActiveTab ] = useState<ActiveTab>( 'description' )
 
     useEffect( () =>
@@ -82,7 +130,7 @@ export const useProductDetail = ( productId?: string ): ProductDetailState =>
             }
 
             const stillAvailable = availableColors.find( ( option ) => option.name === previous )
-            return ( stillAvailable?.name ?? availableColors[ 0 ].name )
+            return stillAvailable?.name ?? availableColors[ 0 ].name
         } )
     }, [ availableColors ] )
 
@@ -96,7 +144,7 @@ export const useProductDetail = ( productId?: string ): ProductDetailState =>
             }
 
             const stillAvailable = availableSizes.find( ( option ) => option === previous )
-            return ( stillAvailable?? availableSizes[ 0 ])
+            return stillAvailable ?? availableSizes[ 0 ]
         } )
     }, [ availableSizes ] )
 
@@ -141,43 +189,33 @@ export const useProductDetail = ( productId?: string ): ProductDetailState =>
         handleAddToCart()
     }, [ handleAddToCart ] )
 
-return {
-    loading,
-    product,
-    galleryImages,
-    pricing,
-    reviewCount,
-    features,
-    specifications,
-    reviews,
-    availableColors,
-    availableSizes,
-    selectedImage,
-    isFavorite,
-    quantity,
-    selectedColor,
-    selectedSize,
-    activeTab,
-    setSelectedImage,
-    increase,
-    decrease,
-    setSelectedColor,
-    setSelectedSize,
-    setActiveTab,
-    toggleFavorite,
-    handleAddToCart,
-    handleBuyNow,
-}
+    return {
+        loading,
+        product,
+        galleryImages,
+        pricing,
+        reviewCount,
+        features,
+        specifications,
+        reviews,
+        availableColors,
+        availableSizes,
+        selectedImage,
+        isFavorite,
+        quantity,
+        selectedColor,
+        selectedSize,
+        activeTab,
+        setSelectedImage,
+        increase,
+        decrease,
+        setSelectedColor,
+        setSelectedSize,
+        setActiveTab,
+        toggleFavorite,
+        handleAddToCart,
+        handleBuyNow,
+    }
 }
 
 export default useProductDetail
-function useProductData ()
-{
-    const productsData = useProducts()
-    const products = productsData[ 1 ]
-    const loading = productsData[ 0 ]
-    const addToCart = productsData[ 8 ]
-    const setShowCart = productsData[ 12 ]
-    return { products, addToCart, setShowCart, loading }
-}
-

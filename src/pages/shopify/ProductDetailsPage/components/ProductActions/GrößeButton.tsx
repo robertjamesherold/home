@@ -1,4 +1,5 @@
-import type { FC } from 'react';
+import { Title } from '@/typography'
+import type { FC } from 'react'
 
 interface SizeButtonProps {
   availableSizes: string[];
@@ -11,28 +12,32 @@ const GrößeButton: FC<SizeButtonProps> = ({
   selectedSize,
   onSelect,
 }) => (
-  <div>
-    <label className="block text-sm font-semibold text-gray-700 mb-3">
-      Größe: <span className="text-purple-600">{selectedSize}</span>
-    </label>
+  <div className="space-y-3">
+    <div className="flex items-center justify-between">
+      <Title h6 bold className="text-gray-700" text='Größe' />
+      <Title h6 medium className="text-violet-600" text={ selectedSize } />
+    </div>
     <div className="flex flex-wrap gap-3">
       {availableSizes.map((size) => (
         <button
           type="button"
           key={size}
           onClick={() => onSelect(size)}
-          className={`px-6 py-3 rounded-lg border-2 font-semibold transition ${
+          aria-label={ `Größe ${ size }` }
+          aria-pressed={ selectedSize === size }
+          className={ `rounded-xl border-2 px-5 py-2 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-violet-200 ${
             selectedSize === size
-              ? 'border-purple-600 bg-purple-600 text-white'
-              : 'border-gray-300 hover:border-purple-300'
-          }`}
-          aria-label={`Größe ${size}`}
+              ? 'border-violet-600 bg-violet-600 text-white shadow-lg shadow-violet-200/70'
+              : 'border-gray-200 text-gray-700 hover:border-violet-300'
+            }` }
         >
           {size}
         </button>
       ))}
     </div>
   </div>
-);
+)
 
-export default GrößeButton;
+GrößeButton.displayName = 'GrößeButton'
+
+export default GrößeButton

@@ -2,6 +2,8 @@ import React from 'react'
 import { Check } from 'lucide-react'
 import Stars from './Stars'
 import type { Review } from '../types'
+import { TextParagraph, Title } from '@/typography'
+import { Button } from '@/ui/Buttons'
 
 type Props = {
     reviews: Review[]
@@ -10,32 +12,37 @@ type Props = {
 const ReviewsList: React.FC<Props> = ( { reviews } ) => (
     <div className="space-y-6">
         { reviews.map( ( review ) => (
-            <div key={ review.id } className="border-b pb-6">
-                <div className="flex items-start justify-between mb-3">
-                    <div>
-                        <div className="flex items-center space-x-2 mb-2">
-                            <span className="font-bold text-gray-900">{ review.author }</span>
+            <article
+                key={ review.id }
+                className="space-y-3 p-2 shadow-sm shadow-violet-100/40"
+            >
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div className="space-y-2">
+                        <div className="flex items-center gap-2">
+                            <Title h5 bold className="text-base font-bold text-gray-900" text={ review.author } />
                             { review.verified && (
-                                <span className="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full inline-flex items-center space-x-1">
-                                    <Check className="w-3 h-3" />
-                                    <span>Verifiziert</span>
+                                <span className="inline-flex items-center gap-1 rounded-full bg-green-100 px-2.5 py-1 text-xs font-semibold text-green-700">
+                                    <Check className="h-3 w-3" />
+                                    Verifiziert
                                 </span>
                             ) }
                         </div>
-                        <div className="flex items-center space-x-2">
-                            <div className="flex">
-                                <Stars rating={ review.rating } />
-                            </div>
-                            <span className="text-sm text-gray-500">{ review.date }</span>
+                        <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500">
+                            <Stars rating={ review.rating } />
+                            <Title h6 text={ review.date } />
                         </div>
                     </div>
                 </div>
-                <p className="text-gray-700">{ review.comment }</p>
-            </div>
+                <TextParagraph sm className="leading-relaxed text-gray-700" text={ review.comment } />
+            </article>
         ) ) }
-        <button type="button" className="w-full border-2 border-purple-600 text-purple-600 py-3 rounded-lg hover:bg-purple-50 transition font-semibold">
-            Bewertung schreiben
-        </button>
+        <Button
+            variant='outline'
+            label='Bewertung schreiben'
+            className='mx-auto mt-4 w-full'
+            size='medium'
+            aria-label='Bewertung schreiben'
+        />
     </div>
 )
 

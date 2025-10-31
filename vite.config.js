@@ -11,6 +11,7 @@ export default defineConfig({
             },
         }),
     ],
+    base: './',
     resolve: {
         alias: {
             '@': path.resolve(__dirname, 'src'),
@@ -22,8 +23,8 @@ export default defineConfig({
             '@features': path.resolve(__dirname, 'src/features'),
             '@hooks': path.resolve(__dirname, 'src/hooks'),
             '@layout': path.resolve(__dirname, 'src/layout'),
-            '@pages': path.resolve( __dirname, 'src/pages' ),
-            '@types': path.resolve( __dirname, 'src/types' ),
+            '@pages': path.resolve(__dirname, 'src/pages'),
+            '@types': path.resolve(__dirname, 'src/types'),
             '@typography': path.resolve(__dirname, 'src/typography'),
             '@ui': path.resolve(__dirname, 'src/ui'),
         },

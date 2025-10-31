@@ -1,5 +1,4 @@
-import SignatureDisplayTitle from './SignatureDisplayTitle';
-import SignatureSubHeading from './SignatureSubHeading';
-import TextParagraph from './TextParagraph'
+import Title from './Title';
+import TextParagraph from './TextParagraph';
 
-export { TextParagraph, SignatureSubHeading, SignatureDisplayTitle }
+export { TextParagraph, Title };

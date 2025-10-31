@@ -1,3 +1,4 @@
+import type { FC } from 'react'
 import { DiscountBadge, FavoritenButton, BigImage, GalleryImages } from '.'
 
 type ImageSectionProps = {
@@ -8,24 +9,32 @@ type ImageSectionProps = {
     onToggle: () => void
     galleryImages: string[]
     selectedImage: number
-    onSelectImage: (index: number) => void
+    onSelectImage: ( index: number ) => void
 }
 
-const ImageSection: React.FC<ImageSectionProps> = ( { bigImage, bigImageTitle, discount, isFavorite, onToggle, galleryImages, selectedImage, onSelectImage }:ImageSectionProps ) =>
-{
-    return (
-        <div className="sticky top-0 space-y-4">
-        <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden aspect-square">
-            <BigImage image={ bigImage } title={ bigImageTitle } />
+const ImageSection: FC<ImageSectionProps> = ( {
+    bigImage,
+    bigImageTitle,
+    discount,
+    isFavorite,
+    onToggle,
+    galleryImages,
+    selectedImage,
+    onSelectImage,
+} ) => (
+    <div className="flex flex-col gap-4 sm:gap-6">
+        <div className="relative overflow-hidden rounded-3xl bg-white shadow-2xl shadow-violet-100/50">
+            <div className="aspect-[4/5] w-full sm:aspect-[4/3]">
+                <BigImage image={ bigImage } title={ bigImageTitle } />
+            </div>
             <DiscountBadge discount={ discount } />
-                <FavoritenButton isFavorite={ isFavorite } onToggle={ onToggle } />
+            <FavoritenButton isFavorite={ isFavorite } onToggle={ onToggle } />
         </div>
-          {
-        galleryImages.length > 0 && (
-                    <GalleryImages images={ galleryImages } selectedImage={ selectedImage } onSelect={ onSelectImage } />
-        )
-    }
-          </div > )
-}
-export default ImageSection
 
+        { galleryImages.length > 0 && (
+            <GalleryImages images={ galleryImages } selectedImage={ selectedImage } onSelect={ onSelectImage } />
+        ) }
+    </div>
+)
+
+export default ImageSection

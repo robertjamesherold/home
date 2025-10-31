@@ -1,5 +1,5 @@
 import React from 'react'
-import { Check, Shield, Truck } from 'lucide-react'
+import { Check, Shield, Truck, type LucideIcon } from 'lucide-react'
 import type { Product } from '@/types/Product.types'
 import type { ActiveTab, ColorOption, Review } from '../types'
 import type { Pricing } from '../lib/price'
@@ -7,6 +7,7 @@ import { ImageSection, ProductActions, Stars } from '../components'
 import Tabs from '../components/Tabs'
 import ReviewsList from '../components/ReviewsList'
 import SpecsAndFeatures from '../components/SpecsAndFeatures'
+import { TextParagraph, Title } from '@/typography'
 
 type ProductDetailsPageReadyProps = {
     product: Product
@@ -34,6 +35,30 @@ type ProductDetailsPageReadyProps = {
     onAddToCart: () => void
     onBuyNow: () => void
 }
+
+type ServiceHighlight = {
+    icon: LucideIcon
+    label: string
+    description: string
+}
+
+const SERVICE_HIGHLIGHTS: ServiceHighlight[] = [
+    {
+        icon: Truck,
+        label: 'Versand am selben Tag',
+        description: 'Bestellungen bis 12 Uhr verlassen noch am gleichen Tag unser Lager.',
+    },
+    {
+        icon: Shield,
+        label: '2 Jahre Garantie',
+        description: 'Kostenfreier Reparatur- oder Austauschservice bei Materialfehlern.',
+    },
+    {
+        icon: Check,
+        label: 'Geprüfte Qualität',
+        description: 'Jedes Produkt wird vor dem Versand sorgfältig auf Funktion geprüft.',
+    },
+]
 
 const ProductDetailsPageReady: React.FC<ProductDetailsPageReadyProps> = ({
     product,
@@ -64,105 +89,95 @@ const ProductDetailsPageReady: React.FC<ProductDetailsPageReadyProps> = ({
 {
     const primaryImage = galleryImages[ selectedImage ] ?? product.image
 
+    const strong = ( text: string ) =>
+    {
+        return <strong>{ text }</strong>
+    }
+
     return (
-        <div className="min-h-screen bg-linear-to-br from-purple-50 via-pink-50 to-blue-50">
-            <main className="main max-w-7xl mx-auto px-4 py-8">
-                <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
-                    <ImageSection
-                        bigImage={ primaryImage }
-                        bigImageTitle={ product.title }
-                        discount={ pricing.discount }
-                        isFavorite={ isFavorite }
-                        onToggle={ onToggleFavorite }
-                        galleryImages={ galleryImages.length > 0 ? galleryImages : [ primaryImage ] }
-                        selectedImage={ selectedImage }
-                        onSelectImage={ onSelectImage }
-                    />
-
-                    <div className="space-y-6">
-                        <div>
-                            <h1 className="mb-3 text-4xl font-bold text-gray-900">
-                                { product.title }
-                            </h1>
-                            <div className="flex items-center space-x-4">
-                                <div className="flex items-center space-x-1">
-                                    <Stars rating={ product.rating } />
-                                </div>
-                                <span className="font-semibold text-gray-600">
-                                    { product.rating.toFixed( 1 ) }
-                                </span>
-                                <span className="text-gray-400">
-                                    ({ reviewCount } Bewertungen)
-                                </span>
-                            </div>
-                        </div>
-
-                        <div className="flex items-baseline space-x-3">
-                            <span className="text-4xl font-bold text-purple-600">
-                                { pricing.priceDisplay }
-                            </span>
-                            { pricing.discount > 0 && (
-                                <span className="text-2xl text-gray-400 line-through">
-                                    { pricing.originalPrice }
-                                </span>
-                            ) }
-                        </div>
-
-                        <div className="flex items-center space-x-2">
-                            <Check className="h-5 w-5 text-green-500" />
-                            <span className="font-semibold text-green-600">
-                                Sofort verfügbar
-                            </span>
-                        </div>
-
-                        <p className="leading-relaxed text-gray-600">
-                            { product.description }
-                        </p>
-
-                        <ProductActions
-                            quantity={ quantity }
-                            onIncrease={ onIncreaseQuantity }
-                            onDecrease={ onDecreaseQuantity }
-                            availableColors={ availableColors }
-                            selectedColor={ selectedColor }
-                            onSelectColor={ onSelectColor }
-                            availableSizes={ availableSizes }
-                            selectedSize={ selectedSize }
-                            onSelectSize={ onSelectSize }
-                            onAddToCart={ onAddToCart }
-                            onBuyNow={ onBuyNow }
+        <div className="min-h-screen bg-linear-to-br from-violet-50 via-pink-50 to-blue-50">
+            <main className="main mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
+                <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-start lg:gap-16">
+                    <div className="flex flex-col gap-6 lg:sticky lg:top-8">
+                        <ImageSection
+                            bigImage={ primaryImage }
+                            bigImageTitle={ product.title }
+                            discount={ pricing.discount }
+                            isFavorite={ isFavorite }
+                            onToggle={ onToggleFavorite }
+                            galleryImages={ galleryImages.length > 0 ? galleryImages : [ primaryImage ] }
+                            selectedImage={ selectedImage }
+                            onSelectImage={ onSelectImage }
                         />
+                    </div>
 
-                        <div className="grid grid-cols-1 gap-4 border-t pt-6 sm:grid-cols-3">
-                            <div className="flex flex-col items-center space-y-2 text-center">
-                                <div className="rounded-full bg-purple-100 p-3">
-                                    <Truck className="h-6 w-6 text-purple-600" />
+                    <div className="flex flex-col gap-6 lg:gap-8">
+                        <section className="rounded-3xl bg-white/90 p-6 shadow-xl backdrop-blur-sm sm:p-8">
+                            <div className="flex flex-col gap-5">
+                                <div className="flex flex-col gap-3">
+                                    <Title
+                                        h1
+                                        bold
+                                        className="text-3xl leading-tight text-gray-900 sm:text-4xl lg:text-5xl"
+                                        text={ product.title }
+                                    />
+
+                                    <div className="flex flex-wrap items-center gap-3 text-sm text-gray-600">
+                                        <Stars rating={ product.rating } />
+                                        <Title h6 bold className="font-semibold text-gray-700" text={ product.rating.toFixed( 1 ) } />
+                                        <Title h6 className="text-gray-500" text={ `(${ reviewCount } Bewertungen)` } />
+                                    </div>
                                 </div>
-                                <span className="text-sm font-semibold">
-                                    Versand am selben Tag
-                                </span>
-                            </div>
-                            <div className="flex flex-col items-center space-y-2 text-center">
-                                <div className="rounded-full bg-purple-100 p-3">
-                                    <Shield className="h-6 w-6 text-purple-600" />
+
+                                <div className="flex flex-wrap items-baseline gap-4 text-gray-900">
+                                    <Title h2 bold className="text-3xl text-violet-600 sm:text-4xl" text={ pricing.priceDisplay } />
+                                    <Title h4 className="text-lg text-gray-400 line-through" text={ pricing.originalPrice } />
                                 </div>
-                                <span className="text-sm font-semibold">
-                                    2 Jahre Garantie
-                                </span>
-                            </div>
-                            <div className="flex flex-col items-center space-y-2 text-center">
-                                <div className="rounded-full bg-purple-100 p-3">
-                                    <Check className="h-6 w-6 text-purple-600" />
+
+                                <div className="inline-flex items-center gap-2 rounded-full bg-green-50 px-4 py-2 text-sm font-semibold text-green-600">
+                                    <Check className="h-4 w-4" />
+                                    Sofort verfügbar
                                 </div>
-                                <span className="text-sm font-semibold">
-                                    Geprüfte Qualität
-                                </span>
+
+                                <TextParagraph sm className="text-gray-600" text={ product.description } />
                             </div>
-                        </div>
+                        </section>
+
+                        <section className="rounded-3xl bg-white p-6 shadow-xl sm:p-8">
+                            <ProductActions
+                                quantity={ quantity }
+                                onIncrease={ onIncreaseQuantity }
+                                onDecrease={ onDecreaseQuantity }
+                                availableColors={ availableColors }
+                                selectedColor={ selectedColor }
+                                onSelectColor={ onSelectColor }
+                                availableSizes={ availableSizes }
+                                selectedSize={ selectedSize }
+                                onSelectSize={ onSelectSize }
+                                onAddToCart={ onAddToCart }
+                                onBuyNow={ onBuyNow }
+                            />
+                        </section>
+
+                        <section className="grid grid-cols-1 gap-4 rounded-3xl bg-white p-6 shadow-xl sm:grid-cols-3 sm:p-8">
+                            { SERVICE_HIGHLIGHTS.map( ( { icon: Icon, label, description } ) => (
+                                <div key={ label } className="flex flex-col items-center gap-3 text-center">
+                                    <span className="rounded-full bg-violet-50 p-4 text-violet-600">
+                                        <Icon className="h-6 w-6" />
+                                    </span>
+                                    <span className="text-sm font-semibold text-gray-900">
+                                        { label }
+                                    </span>
+                                    <span className="text-sm text-gray-500">
+                                        { description }
+                                    </span>
+                                </div>
+                            ) ) }
+                        </section>
                     </div>
                 </div>
 
-                <div className="mt-16 rounded-2xl bg-white p-8 shadow-xl">
+                <section className="mt-14 rounded-3xl bg-white p-6 shadow-xl sm:p-8 lg:mt-20">
                     <Tabs activeTab={ activeTab } onChange={ onChangeTab } reviewCount={ reviewCount } />
 
                     <div className="mt-8">
@@ -174,23 +189,23 @@ const ProductDetailsPageReady: React.FC<ProductDetailsPageReadyProps> = ({
 
                         { activeTab === 'shipping' && (
                             <div className="space-y-4 text-gray-700">
-                                <h3 className="text-2xl font-bold">
-                                    Versand & Retouren
-                                </h3>
-                                <p>
-                                    Wir liefern <strong>{ product.title }</strong> innerhalb von 2-3 Werktagen klimaneutral zu
-                                    dir nach Hause. Du erhältst nach dem Versand eine Sendungsverfolgung per E-Mail.
-                                </p>
+                                <Title h3 bold className=" text-gray-900" text='Versand & Retouren' />
+
+
+                                <TextParagraph className="text-gray-700" text={ `Wir liefern innerhalb von 2-3 Werktagen klimaneutral zu
+                                    dir nach Hause. Du erhältst nach dem Versand eine Sendungsverfolgung per E-Mail.`} />
+
+
                                 <ul className="list-inside list-disc space-y-2">
-                                    <li>Kostenloser Standardversand innerhalb Deutschlands</li>
-                                    <li>Expressversand optional bei Bestellungen vor 12 Uhr</li>
-                                    <li>30 Tage Rückgaberecht ohne Angabe von Gründen</li>
-                                    <li>Retourenlabel liegt jeder Bestellung bei</li>
+                                    <TextParagraph className='flex relative before:text-xl before:absolute before:-mt-0.5 before:-left-0.75 pl-3 before:content-["•"]' text='Kostenloser Standardversand' />
+                                    <TextParagraph className='flex relative before:text-xl before:absolute before:-mt-0.5 before:-left-0.75 pl-3 before:content-["•"]' text='Expressversand bei Bestellungen vor 12 Uhr' />
+                                    <TextParagraph className='flex relative before:text-xl before:absolute before:-mt-0.5 before:-left-0.75 pl-3 before:content-["•"]' text='Kostenloser Rückversand innerhalb Deutschlands' />
+                                    <TextParagraph className='flex relative before:text-xl before:absolute before:-mt-0.5 before:-left-0.75 pl-3 before:content-["•"]' text='30 Tage Rückgaberecht' />
                                 </ul>
                             </div>
                         ) }
                     </div>
-                </div>
+                </section>
             </main>
         </div>
     )

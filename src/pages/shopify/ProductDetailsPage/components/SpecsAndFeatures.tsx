@@ -1,4 +1,6 @@
 import React from 'react'
+import { CheckCircle2 } from 'lucide-react'
+import { TextParagraph, Title } from '@/typography'
 
 type Props = {
     features: string[]
@@ -6,26 +8,26 @@ type Props = {
 }
 
 const SpecsAndFeatures: React.FC<Props> = ( { features, specifications } ) => (
-    <div className="space-y-8">
-        <div>
-            <h3 className="text-2xl font-bold mb-4">Highlights</h3>
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+    <div className="space-y-10">
+        <div className="space-y-4">
+            <Title h3 bold className=" text-gray-900" text='Highlights' />
+            <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 { features.map( ( feature, index ) => (
-                    <li key={ `${ feature }-${ index }` } className="flex items-start space-x-2">
-                        <svg className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" aria-hidden />
-                        <span className="text-gray-700">{ feature }</span>
+                    <li key={ `${ feature }-${ index }` } className="flex items-center gap-3 py-2 px-1">
+                        <CheckCircle2 className="h-5 w-5 shrink-0 text-violet-600" aria-hidden />
+                        <TextParagraph className="text-gray-700" text={ feature } />
                     </li>
                 ) ) }
             </ul>
         </div>
 
-        <div>
-            <h3 className="text-2xl font-bold mb-4">Technische Daten</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="space-y-4">
+            <Title h3 bold className="text-gray-900" text='Technische Daten' />
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 { Object.entries( specifications ).map( ( [ key, value ] ) => (
-                    <div key={ key } className="flex justify-between py-2 border-b">
-                        <span className="font-semibold text-gray-700">{ key }:</span>
-                        <span className="text-gray-600 text-right">{ value }</span>
+                    <div key={ key } className="p-2">
+                        <Title h6 medium className="uppercase tracking-wider text-gray-500" text={ key } />
+                        <TextParagraph className="mt-2 text-gray-800" text={ value } />
                     </div>
                 ) ) }
             </div>

@@ -3,7 +3,7 @@ import React from 'react'
 import Navigation from './Navigation'
 import { CartSidebar, Filter } from './components'
 
-import { useProductsState } from '@/hooks'
+import { useProductsState, useWindowSize } from '@/hooks'
 import useScrollDirection from '@/hooks/useScrollDirection'
 
 type Props = {
@@ -27,10 +27,12 @@ const Nav: React.FC<Props> = ( { isInitial }: Props ) =>
     } = useProductsState()
 
     const scrollDirection = useScrollDirection()
+    const windowSize = useWindowSize()
+    const { width } = windowSize
 
     return (
 
-        <nav className={ `sticky left-0 right-0 z-50 ${ scrollDirection === 'down' ? '-top-16' : scrollDirection === 'up' ? 'top-0' : 'top-0' } transition-all duration-300` }>
+        <nav className={ `sticky left-0 right-0 z-50 w-screen overflow-x-hidden ${ scrollDirection === 'down' ? ( width > 640 ? '-top-16' : '-top-30' ) : scrollDirection === 'up' ? 'top-0' : 'top-0' } transition-all duration-300` }>
             <Navigation
                 cartCount={ totalItems }
                 onToggleCart={ () => setShowCart( !showCart ) }

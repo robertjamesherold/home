@@ -7,9 +7,9 @@
     "module": "ESNext",
     "types": ["vite/client"],
     "skipLibCheck": true,
-
+    "ignoreDeprecations": "6.0",
     /* Pfad-Aliase */
-    "baseUrl": ".",
+    "baseUrl": "",
     "paths": {
       "@/*": ["src/*"],
       "@assets/*": ["src/assets/*"],

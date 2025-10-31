@@ -20,8 +20,8 @@ const GalleryImageButton: FC<GalleryImageButtonProps> = ({
       [
         'relative bg-white rounded-lg overflow-hidden aspect-square border-2 transition',
         isSelected
-          ? 'border-purple-600 shadow-lg'
-          : 'border-gray-200 hover:border-purple-300',
+          ? 'border-violet-600 shadow-lg'
+          : 'border-gray-200 hover:border-violet-300',
         className,
       ]
         .filter(Boolean)

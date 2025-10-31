@@ -6,7 +6,24 @@
     "module": "ESNext",
     "types": ["node"],
     "skipLibCheck": true,
-
+    "ignoreDeprecations": "6.0",
+    /* Pfad-Aliase */
+    "baseUrl": "",
+    "paths": {
+      "@/*": ["src/*"],
+      "@assets/*": ["src/assets/*"],
+      "@badges/*": ["src/assets/badges/*"],
+      "@icons/*": ["src/assets/icons/*"],
+      "@features/*": ["src/features/*"],
+      "@layout/*": ["src/layout/*"],
+      "@pages/*": ["src/pages/*"],
+      "@types/*": ["src/types/*"],
+      "@typography/*": ["src/typography/*"],
+      "@components/*": ["src/components/*"],
+      "@images/*": ["src/assets/images/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@ui/*": ["src/ui/*"]
+    },
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": false,
