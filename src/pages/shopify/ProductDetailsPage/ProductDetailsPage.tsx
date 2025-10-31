@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom'
 import Button from '@/ui/Buttons/Button'
 import { Column } from '@/layout'
 
-import useProductsData from '@/hooks/useProducts/useProductsData'
+import { useProducts } from '@/hooks'
 import type { Product } from '../ProductGridPage/types'
 
 import { CATEGORY_COLORS, CATEGORY_FEATURES, CATEGORY_SIZES, CATEGORY_SPECIFICATIONS } from './data/categoryData'
@@ -69,7 +69,7 @@ const normalizeSizes = (
 const ProductDetailPage: React.FC = () =>
 {
   const { productId } = useParams<{ productId: string }>()
-  const { products, loading } = useProductsData();
+  const { products, loading, addToCart, setShowCart } = useProducts();
 
   const product = useMemo(
     () => products.find( ( item ) => item.id === productId ),
@@ -177,6 +177,23 @@ const ProductDetailPage: React.FC = () =>
       />
     ) );
 
+  const handleAddToCart = () =>
+  {
+    if ( !product )
+    {
+      return;
+    }
+
+    const safeQuantity = Math.max( 1, quantity );
+
+    for ( let index = 0; index < safeQuantity; index += 1 )
+    {
+      addToCart( product );
+    }
+
+    setShowCart( true );
+  };
+
   const handleTabChange = ( tab: ActiveTab ) =>
   {
     setActiveTab( tab )
@@ -264,7 +281,7 @@ const ProductDetailPage: React.FC = () =>
                 label="Jetzt kaufen"
                 icon={ <ShoppingCart /> }
               />
-              <Button variant="secondary" label="In den Warenkorb" />
+              <Button variant="secondary" label="In den Warenkorb" onClick={ handleAddToCart } />
               <Button
                 variant="outline"
                 label="Produkt teilen"

@@ -1,2 +1,2 @@
-export * from './useProducts'
-export { useWindowSize } from './useWindowSize'
+export * from './useProducts';
+export { useWindowSize } from './useWindowSize';

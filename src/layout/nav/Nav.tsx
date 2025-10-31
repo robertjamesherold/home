@@ -1,43 +1,45 @@
-import  Navigation  from './Navigation'
-import {CartSidebar} from './components'
+import React from 'react';
 
-import { useProducts } from '@/hooks'
+import Navigation from './Navigation';
+import { CartSidebar } from './components';
 
-const Nav = () =>
-{
-    const [
-        ,
-        ,
+import { useProducts } from '@/hooks';
+
+const Nav: React.FC = () => {
+    const {
         searchTerm,
         setSearchTerm,
         selectedCategory,
         setSelectedCategory,
         cart,
-        ,
         removeFromCart,
         getTotalPrice,
-        ,
         showCart,
         setShowCart,
-        ,
-        ,
         categories,
-    ] = useProducts()
-    return (
-        <nav>
+        totalItems,
+    } = useProducts();
 
+    return (
+        <nav >
             <Navigation
-                cartCount={ cart.length }
-                onToggleCart={ () => setShowCart( !showCart ) }
+                cartCount={ totalItems }
+                onToggleCart={ () => setShowCart( (prev) => !prev ) }
                 searchTerm={ searchTerm }
                 onSearchChange={ setSearchTerm }
                 categories={ categories }
                 selectedCategory={ selectedCategory }
                 onSelectCategory={ setSelectedCategory }
             />
-            <CartSidebar open={ showCart } onClose={ () => setShowCart( false ) } getTotalPrice={ getTotalPrice } removeFromCart={ () => removeFromCart } cart={ cart } />
+            <CartSidebar
+                open={ showCart }
+                onClose={ () => setShowCart( false ) }
+                cart={ cart }
+                removeFromCart={ removeFromCart }
+                getTotalPrice={ getTotalPrice }
+            />
         </nav>
-    )
-}
+    );
+};
 
-export default Nav
+export default Nav;

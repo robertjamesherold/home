@@ -1,33 +1,25 @@
 // src/pages/Shopify.tsx
-import { CartSidebar, CategoryFilter, Sort, ProductGrid, LoadingGrid, EmptyState } from './components'
+import { CategoryFilter, Sort, ProductGrid, LoadingGrid, EmptyState } from './components'
 import { useProducts } from '@/hooks'
 
 const ProductGridPage: React.FC = () =>
 {
-    const [
+    const {
         products,
         filteredProducts,
         searchTerm,
-        ,
         selectedCategory,
         setSelectedCategory,
-        cart,
         addToCart,
-        removeFromCart,
-        getTotalPrice,
         loading,
-        showCart,
-        setShowCart,
         sortBy,
         setSortBy,
         categories,
-    ] = useProducts()
+    } = useProducts()
 
     return (
         <div className="min-h-screen bg-[#EAEDED]">
 
-
-            <CartSidebar open={ showCart } onClose={ () => setShowCart( false ) } cart={ cart } removeFromCart={ removeFromCart } getTotalPrice={ getTotalPrice } />
 
             <main className="main">
                 <div className="flex flex-col gap-6 sm:flex-row md:flex lg:flex-row xl:flex 2xl:flex">

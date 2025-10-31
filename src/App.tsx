@@ -8,6 +8,7 @@ import
 } from '@/pages'
 import '@/App.css'
 import { Nav } from '@/layout'
+import { ProductsProvider } from '@/hooks'
 
 function App ()
 {
@@ -15,14 +16,16 @@ function App ()
 
 
   return (
-    <Router>
-      <Nav />
-      <Routes>
-        <Route path='/' element={ <SeasonSelection /> } />
-        <Route path='/products' element={ <ProductGridPage /> } />
-        <Route path='/products/:productId' element={ <ProductDetailsPage /> } />
-      </Routes>
-    </Router>
+    <ProductsProvider>
+      <Router>
+        <Nav />
+        <Routes>
+          <Route path='/' element={ <SeasonSelection /> } />
+          <Route path='/products' element={ <ProductGridPage /> } />
+          <Route path='/products/:productId' element={ <ProductDetailsPage /> } />
+        </Routes>
+      </Router>
+    </ProductsProvider>
   )
 }
 
