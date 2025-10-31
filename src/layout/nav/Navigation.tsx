@@ -1,9 +1,8 @@
 import React from 'react'
 import { MapPin, ShoppingCart } from 'lucide-react'
-import {  SearchBar } from './components'
+import { SearchBar } from './components'
 import Button from '@/ui/Buttons/Button'
 import { useWindowSize } from '../../hooks/useWindowSize'
-import { Row } from '../row'
 type Props = {
     cartCount: number
     onToggleCart: () => void
@@ -11,7 +10,7 @@ type Props = {
     onSearchChange: ( value: string ) => void
     categories: string[]
     selectedCategory: string
-  
+
     onSelectCategory: ( category: string ) => void
 }
 
@@ -20,64 +19,85 @@ const Navigation: React.FC<Props> = ( {
     onToggleCart,
     searchTerm,
     onSearchChange,
-
-
-
+    categories,
+    selectedCategory,
+    onSelectCategory,
 } ) =>
 {
-    
-    const windowSize = useWindowSize()
-    const { width } = windowSize;
+    const { width } = useWindowSize()
+    const isMobile = width < 768
 
     return (
+        <div className="relative overflow-hidden border-b border-white/10 bg-linear-to-r from-purple-600/90 via-pink-500/90 to-indigo-500/90 text-white shadow-lg">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.25),transparent_55%)]" aria-hidden />
+            <div className="relative mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 lg:px-8 lg:py-5">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="flex flex-wrap items-center gap-3">
+                        <div className="text-2xl font-semibold tracking-tight sm:text-3xl">
+                            <span className="bg-linear-to-r from-white via-purple-100 to-white bg-clip-text text-transparent">
+                                Shopify
+                            </span>
+                        </div>
 
-        <div className={ `relative h-16 bg-[#131921] text-white ${ width > 640 ? 'h-16' : 'h-30' } px-4 sm:px-6 lg:px-8` }>
-            <div className={ `${ width > 640 ? 'flex-row' : 'flex-col' } main mx-auto w-full flex items-center gap-4 py-4` }>
-                <Row className="w-full gap-4 items-center">
-                    <div className="flex items-center gap-2 text-2xl font-semibold tracking-tigh text-[#f3a847]">Shopify
-                    </div>
-
-                    <div className="hidden xl:flex items-center gap-2 text-xs uppercase text-gray-200">
-                        <MapPin className="h-4 w-4" />
-                        <div className="leading-tight">
-                            <span className="block text-[11px] text-gray-300">Deliver to</span>
-                            <span className="block text-sm font-semibold">Germany</span>
+                        <div className="hidden items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-medium uppercase tracking-wide text-white/80 sm:flex">
+                            <MapPin className="h-4 w-4" />
+                            Germany
                         </div>
                     </div>
 
-                    <Button
-                        onClick={ onToggleCart }
-                        variant='primary'
-                        size='small'
-                        className={ `${ width > 640 ? 'gap-1' : 'gap-1' }` } icon={ <ShoppingCart /> }
-                        iconClassName='h-[1.25em] w-[1.25em]'>
-                        Warenkorb
+                    <div className="flex flex-1 flex-col gap-3 sm:flex-row sm:items-center sm:justify-end sm:gap-4">
+                        <div className="w-full sm:max-w-md">
+                            <SearchBar value={ searchTerm } onChange={ onSearchChange } className="shadow-purple-300/40" />
+                        </div>
 
-                        { cartCount > 0 ? (
-                            <span className="absolute -top-2 -right-4 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
-                                { cartCount }
-                            </span>
-                        ) : <span className="absolute -top-2 -right-4 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full opacity-0">
-                            { cartCount }
-                        </span> }
+                        <div className="flex items-center gap-3">
+                            <div className="hidden flex-col text-xs font-medium text-white/80 lg:flex">
+                                <span className="text-white/70">Bestellungen</span>
+                                <span className="text-white">und Retouren</span>
+                            </div>
 
-
-                    </Button>
-                </Row>
-                <div className="flex-1 min-w-[200px] order-last w-full sm:order-0 sm:w-auto">
-                    <SearchBar value={ searchTerm } onChange={ onSearchChange } />
+                            <Button
+                                onClick={ onToggleCart }
+                                variant="primary"
+                                size={ isMobile ? 'medium' : 'large' }
+                                className="relative w-full sm:w-auto"
+                                icon={ <ShoppingCart /> }
+                                iconClassName="h-5 w-5"
+                                label="Warenkorb"
+                            >
+                                <span
+                                    className={ `absolute -top-2 -right-2 inline-flex h-6 min-w-6 items-center justify-center rounded-full bg-white text-xs font-semibold text-purple-600 shadow ${ cartCount > 0 ? 'opacity-100' : 'opacity-0' }` }
+                                >
+                                    { cartCount }
+                                </span>
+                            </Button>
+                        </div>
+                    </div>
                 </div>
 
-                <div className="hidden lg:flex flex-col text-xs font-semibold text-white">
-                    <span className="text-gray-200">Returns</span>
-                    <span>&amp; Orders</span>
-                </div>
-
-
-                </div>
-
+                { categories.length > 0 && (
+                    <div className="-mx-1 flex gap-2 overflow-x-auto pb-1 pt-1 sm:mx-0 sm:pt-0">
+                        { categories.map( ( category ) =>
+                        {
+                            const isSelected = selectedCategory === category
+                            return (
+                                <button
+                                    key={ category }
+                                    type="button"
+                                    onClick={ () => onSelectCategory( category ) }
+                                    className={ `whitespace-nowrap rounded-full px-4 py-1.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 ${ isSelected
+                                        ? 'bg-white text-purple-600 shadow-lg shadow-purple-200/70'
+                                        : 'bg-white/10 text-white/80 hover:bg-white/20 hover:text-white'
+                                        }` }
+                                >
+                                    { category }
+                                </button>
+                            )
+                        } ) }
+                    </div>
+                ) }
             </div>
-
+        </div>
     )
 }
 

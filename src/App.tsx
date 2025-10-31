@@ -9,8 +9,9 @@ import
 } from '@/pages'
 import '@/App.css'
 import { Nav } from '@/layout'
-import { ProductsProvider } from '@/hooks'
+import { ProductsProvider} from '@/hooks'
 import { useCallback } from 'react';
+
 
 
 function AppContent ()
@@ -18,16 +19,16 @@ function AppContent ()
   const locationObj = useLocation()
   const routeChangeHandler = useCallback( () =>
   {
-    // Handle route changes if needed
   }, [] )
   const location = { path: locationObj.pathname, onChange: routeChangeHandler }
 
   const isInitial = location.path === '/products' || location.path.startsWith( '/products/' )
 
+
   return (
     <ProductsProvider>
       <Nav isInitial={ isInitial } />
-      <Routes>
+      <Routes >
         <Route path='/' element={ <SeasonSelection /> } />
         <Route path='/products' element={ <ProductGridPage /> } />
         <Route path='/products/:productId' element={ <ProductDetailsPage /> } />

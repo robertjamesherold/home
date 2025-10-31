@@ -89,10 +89,6 @@ const ProductDetailsPageReady: React.FC<ProductDetailsPageReadyProps> = ({
 {
     const primaryImage = galleryImages[ selectedImage ] ?? product.image
 
-    const strong = ( text: string ) =>
-    {
-        return <strong>{ text }</strong>
-    }
 
     return (
         <div className="min-h-screen bg-linear-to-br from-violet-50 via-pink-50 to-blue-50">
