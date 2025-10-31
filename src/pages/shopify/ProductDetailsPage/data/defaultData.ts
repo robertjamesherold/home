@@ -8,10 +8,10 @@ export const DEFAULT_COLORS: ColorOption[] = [
 ];
 
 export const DEFAULT_SIZES: SizeOption[] = [
-  { name: 'S', available: true },
-  { name: 'M', available: true },
-  { name: 'L', available: false },
-  { name: 'XL', available: true },
+  { name: 'S', availability: true },
+  { name: 'M', availability: true },
+  { name: 'L', availability: false },
+  { name: 'XL', availability: true },
 ];
 
 export const DEFAULT_FEATURES: string[] = [

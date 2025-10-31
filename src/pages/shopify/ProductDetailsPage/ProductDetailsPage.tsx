@@ -33,7 +33,7 @@ const ProductDetailsPage: React.FC = () =>
             specifications={ detail.specifications }
             reviews={ detail.reviews }
             availableColors={ detail.availableColors }
-            availableSizes={ detail.availableSizes }
+            availableSizes={ Array.isArray(detail.availableSizes) && detail.availableSizes.length > 0 && typeof detail.availableSizes[0] === 'object' ? detail.availableSizes.map((size: { value?: string; label?: string }) => size.value || size.label || String(size)) : detail.availableSizes as string[] }
             selectedImage={ detail.selectedImage }
             isFavorite={ detail.isFavorite }
             selectedColor={ detail.selectedColor }

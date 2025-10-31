@@ -25,11 +25,11 @@ export const CATEGORY_COLORS: Record<string, { name: string; hex: string }[]> = 
   ],
 };
 
-export const CATEGORY_SIZES: Record<string, string[]> = {
-  Fashion: ['S', 'M', 'L', 'XL'],
-  Accessories: ['One Size'],
-  Electronics: ['One Size'],
-  Sports: ['EU 39', 'EU 40', 'EU 41', 'EU 42'],
+export const CATEGORY_SIZES: Record<string, { sizes: string[]; availability: boolean }> = {
+  Fashion: { sizes: ['S', 'M', 'L', 'XL'], availability: true },
+  Accessories: { sizes: ['One Size'], availability: true },
+  Electronics: { sizes: ['One Size'], availability: true },
+  Sports: { sizes: ['EU 39', 'EU 40', 'EU 41', 'EU 42'], availability: true },
 };
 
 export const CATEGORY_FEATURES: Record<string, string[]> = {
