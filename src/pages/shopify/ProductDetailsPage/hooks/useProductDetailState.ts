@@ -1,7 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
 import type { ActiveTab } from '../types';
-import { useDefaultSelection } from './useDefaultSelection'
-import { useProductDetailData } from './useProductDetailData'
 
 
 export const useProductDetailState = (
@@ -12,11 +10,10 @@ export const useProductDetailState = (
   const [selectedImage, setSelectedImage] = useState<number>(0);
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(1);
-  const [selectedColor, setSelectedColor, selectedSize, setSelectedSize ] = useProductDetailData(productId);
-  const [selectedSize, setSelectedSize] = useDefaultSelection(availableSizes[0] ?? '', setSelectedSize, availableColors[0]?.name ?? '', setSelectedColor);
+  const [selectedColor, setSelectedColor] = useState<string>(availableColors[0]?.name ?? '');
+  const [selectedSize, setSelectedSize] = useState<string>(availableSizes[0] ?? '');
   const [activeTab, setActiveTab] = useState<ActiveTab>('description');
 
-  // Wenn availableColors / availableSizes sich ändern (z. B. Produktwechsel), Default resyncen.
   useEffect(() => {
     if (availableColors && availableColors.length > 0) {
       setSelectedColor((prev) => (prev ? prev : availableColors[0].name));
@@ -41,7 +38,7 @@ export const useProductDetailState = (
     setSelectedColor(availableColors[0]?.name ?? '');
     setSelectedSize(availableSizes[0] ?? '');
     setActiveTab('description');
-  }, [productId]);
+  }, [productId, availableColors, availableSizes]);
 
   return {
     selectedImage,
