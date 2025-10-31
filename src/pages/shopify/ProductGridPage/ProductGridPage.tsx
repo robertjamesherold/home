@@ -1,6 +1,6 @@
 // src/pages/Shopify.tsx
-import { Header, CartSidebar, CategoryFilter, Sort, ProductGrid, LoadingGrid, EmptyState } from './components'
-import { useProducts } from './hooks'
+import { CartSidebar, CategoryFilter, Sort, ProductGrid, LoadingGrid, EmptyState } from './components'
+import { useProducts } from '@/hooks'
 
 const ProductGridPage: React.FC = () =>
 {
@@ -8,7 +8,7 @@ const ProductGridPage: React.FC = () =>
         products,
         filteredProducts,
         searchTerm,
-        setSearchTerm,
+        ,
         selectedCategory,
         setSelectedCategory,
         cart,
@@ -25,15 +25,7 @@ const ProductGridPage: React.FC = () =>
 
     return (
         <div className="min-h-screen bg-[#EAEDED]">
-            <Header
-                cartCount={ cart.length }
-                onToggleCart={ () => setShowCart( !showCart ) }
-                searchTerm={ searchTerm }
-                onSearchChange={ setSearchTerm }
-                categories={ categories }
-                selectedCategory={ selectedCategory }
-                onSelectCategory={ setSelectedCategory }
-            />
+
 
             <CartSidebar open={ showCart } onClose={ () => setShowCart( false ) } cart={ cart } removeFromCart={ removeFromCart } getTotalPrice={ getTotalPrice } />
 

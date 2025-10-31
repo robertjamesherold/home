@@ -5,13 +5,13 @@ import { Link, useParams } from 'react-router-dom'
 import Button from '@/ui/Buttons/Button'
 import { Column } from '@/layout'
 
-import useProductsData from '../ProductGridPage/hooks/useProductsData'
+import useProductsData from '@/hooks/useProducts/useProductsData'
 import type { Product } from '../ProductGridPage/types'
 
 import { CATEGORY_COLORS, CATEGORY_FEATURES, CATEGORY_SIZES, CATEGORY_SPECIFICATIONS } from './data/categoryData'
 import { DEFAULT_COLORS, DEFAULT_FEATURES, DEFAULT_SIZES, DEFAULT_SPECIFICATIONS } from './data/defaultData'
 import { useGallery, useProductDetailState } from './hooks'
-import { BigImage, GalleryImages, Header } from './components'
+import { BigImage, GalleryImages } from './components'
 import
 {
   ColorButton,
@@ -19,7 +19,7 @@ import
   FavoritenButton,
   GrößeButton,
   MengeButton,
-} from './ui/'
+} from './ui/Buttons'
 import type { ActiveTab, ColorOption, Review } from './types'
 
 const formatCurrency = ( value: number ) =>
@@ -33,13 +33,13 @@ const buildReviews = ( product: Product, reviewCount: number ): Review[] => [
     author: 'Sarah M.',
     rating: 5,
     date: 'vor 2 Wochen',
-    comment: `"${product.title}" hat meine Erwartungen übertroffen – Qualität und Komfort sind absolut erstklassig!`,
+    comment: `"${ product.title }" hat meine Erwartungen übertroffen – Qualität und Komfort sind absolut erstklassig!`,
     verified: true,
   },
   {
     id: 2,
     author: 'Michael R.',
-    rating: Math.round(product.rating),
+    rating: Math.round( product.rating ),
     date: 'vor 1 Monat',
     comment:
       'Top Verarbeitung und schneller Versand. Besonders die kleinen Details machen den Unterschied.',
@@ -50,7 +50,7 @@ const buildReviews = ( product: Product, reviewCount: number ): Review[] => [
     author: 'Emma L.',
     rating: 5,
     date: 'vor 3 Wochen',
-    comment: `Ich nutze ${product.title} täglich – Design, Funktion und Komfort passen einfach perfekt zusammen.`,
+    comment: `Ich nutze ${ product.title } täglich – Design, Funktion und Komfort passen einfach perfekt zusammen.`,
     verified: reviewCount > 120,
   },
 ]
@@ -60,21 +60,21 @@ const normalizeSizes = (
 {
   if ( !sizes )
   {
-    return DEFAULT_SIZES.map( ( size ) => size.name )
+    return DEFAULT_SIZES.map( ( size ) => size.name );
   }
 
   return sizes.map( ( size ) => size )
-}
+};
 
 const ProductDetailPage: React.FC = () =>
 {
   const { productId } = useParams<{ productId: string }>()
-  const { products, loading } = useProductsData()
+  const { products, loading } = useProductsData();
 
   const product = useMemo(
     () => products.find( ( item ) => item.id === productId ),
     [ products, productId ],
-  )
+  );
 
   const {
     selectedImage,
@@ -90,22 +90,14 @@ const ProductDetailPage: React.FC = () =>
     setActiveTab,
     isFavorite,
     toggleFavorite,
-  } = useProductDetailState( productId )
+  } = useProductDetailState( productId );
 
   const availableColors = useMemo<ColorOption[]>( () =>
   {
     if ( !product )
     {
-      return DEFAULT_COLORS
+      return DEFAULT_COLORS;
     }
-
-    return CATEGORY_COLORS[ product.category ] ?? DEFAULT_COLORS
-  }, [ product ] )
-
-  const availableSizes = useMemo(
-    () => normalizeSizes( product ? CATEGORY_SIZES[ product.category ] : undefined ),
-    [ product ],
-  )
 
     return CATEGORY_COLORS[product.category] ?? DEFAULT_COLORS;
   }, [product]);
@@ -122,17 +114,15 @@ const ProductDetailPage: React.FC = () =>
     if (defaultColor) {
       setSelectedColor(defaultColor);
     }
-  }, [ defaultColor, setSelectedColor ] )
+  }, [ defaultColor, setSelectedColor ] );
 
   useEffect( () =>
   {
     if ( defaultSize )
     {
-      setSelectedSize( defaultSize )
+      setSelectedSize( defaultSize );
     }
-  }, [ defaultSize, setSelectedSize ] )
-
-  const galleryImages = useGallery( product?.image )
+  }, [ defaultSize, setSelectedSize ] );
 
   const galleryImages = useGallery(product?.image);
 
@@ -164,17 +154,17 @@ const ProductDetailPage: React.FC = () =>
   const priceValue = Number( product.price )
   const originalPriceValue = priceValue * 1.2
   const priceDisplay = formatCurrency( priceValue )
-  const originalPrice = formatCurrency( originalPriceValue )
+  const originalPrice = formatCurrency( originalPriceValue );
   const discount = Math.max(
     0,
     Math.round( ( ( originalPriceValue - priceValue ) / originalPriceValue ) * 100 ),
   )
-  const reviewCount = Math.max( 42, Math.round( product.rating * 48 ) )
+  const reviewCount = Math.max( 42, Math.round( product.rating * 48 ) );
 
-  const features = CATEGORY_FEATURES[ product.category ] ?? DEFAULT_FEATURES
+  const features = CATEGORY_FEATURES[ product.category ] ?? DEFAULT_FEATURES;
   const specifications =
     CATEGORY_SPECIFICATIONS[ product.category ] ?? DEFAULT_SPECIFICATIONS
-  const reviews = buildReviews( product, reviewCount )
+  const reviews = buildReviews( product, reviewCount );
 
   const renderStars = ( rating: number ) =>
     [ ...Array( 5 ) ].map( ( _, index ) => (
@@ -185,16 +175,15 @@ const ProductDetailPage: React.FC = () =>
           : 'text-gray-300'
           }` }
       />
-    ) )
+    ) );
 
   const handleTabChange = ( tab: ActiveTab ) =>
   {
     setActiveTab( tab )
-  }
+  };
 
   return (
     <div className="min-h-screen bg-linear-to-br from-purple-50 via-pink-50 to-blue-50">
-      <Header />
       <main className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="space-y-4">
@@ -267,24 +256,6 @@ const ProductDetailPage: React.FC = () =>
               quantity={quantity}
               onIncrease={increase}
               onDecrease={decrease}
-            />
-
-            <ColorButton
-              availableColors={ availableColors }
-              selectedColor={ selectedColor }
-              onSelect={ setSelectedColor }
-            />
-
-            <GrößeButton
-              availableSizes={ availableSizes }
-              selectedSize={ selectedSize }
-              onSelect={ setSelectedSize }
-            />
-
-            <MengeButton
-              quantity={ quantity }
-              onIncrease={ increase }
-              onDecrease={ decrease }
             />
 
             <Column className="gap-4 mt-4">

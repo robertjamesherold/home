@@ -1,7 +1,6 @@
 import React from 'react'
 import { X } from 'lucide-react'
-import type { Product } from '../types'
-
+import type { Product } from '../../../pages/shopify/ProductGridPage/types'
 type Props = {
     open: boolean
     onClose: () => void

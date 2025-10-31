@@ -1,4 +1,3 @@
-
 import type { FC, PropsWithChildren } from 'react'
 
 type GridProps = PropsWithChildren<{
@@ -9,9 +8,4 @@ const Grid: FC<GridProps> = ( { children, className = '' } ) => (
     <div className={ [ 'grid', className ].filter( Boolean ).join( ' ' ) }>{ children }</div>
 )
 
-
-const Grid: FC<GridProps> = ({ children, className = '' }) => (
-  <div className={['grid', className].filter(Boolean).join(' ')}>{children}</div>
-);
-
-export default Grid;
+export default Grid

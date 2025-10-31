@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from 'react';
-import type { Product } from '../types';
+import type { Product } from '@pages/shopify/ProductGridPage/types';
 
 
 const useCart = (initial: Product[] = []) => {

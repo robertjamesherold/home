@@ -1,12 +1,7 @@
 // useFilterSort.ts
-import {  useMemo, useState } from 'react';
-import type{ Product, SortBy } from '../types';
+import { useMemo, useState } from 'react';
+import type { Product, SortBy } from '@pages/shopify/ProductGridPage/types';
 
-/**
- * Verantwortlichkeit:
- * - Manage searchTerm, selectedCategory, sortBy
- * - Liefert filteredProducts (relevant für Anzeige)
- */
 type UseFilterSortInput = {
   products: Product[];
 };

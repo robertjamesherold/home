@@ -5,3 +5,4 @@ export { Hr } from './divider';
 export { Main } from './main';
 export { Row } from './row';
 export { Section } from './section';
+export { Nav, Navigation } from './nav';
