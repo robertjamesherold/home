@@ -8,7 +8,7 @@ const LinkButton:React.FC<LinkButtonProps> = ({entry, label, icon }:LinkButtonPr
     return (
         <a
             href={entry}
-            className="inline-flex w-fit items-center gap-3 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-white transition hover:bg-slate-800"
+            className="inline-flex w-fit sm:w-auto items-center gap-3 rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-white transition hover:bg-slate-800"
         >
         {label}
             {icon && <span aria-hidden className="text-lg">

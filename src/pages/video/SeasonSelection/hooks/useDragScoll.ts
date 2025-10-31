@@ -103,15 +103,3 @@ export function useDragScroll(options: UseDragScrollOptions = {}) {
 
   return containerRef;
 }
-
-
-
-const useDrag = () =>
-{
-    const posX = window.addEventListener( 'pointerdown', ( e ) => ( e.pageX ) )
-    const posY = window.addEventListener( 'pointerdown', ( e ) => ( e.pageY ) )
-
-    return { posX, posY }
-}
-
-export default useDrag;

@@ -11,7 +11,6 @@ const ProductGridPage: React.FC = () =>
             sortBy,
             setSortBy,
             loading,
-
             categories,
             selectedCategory,
             setSelectedCategory,

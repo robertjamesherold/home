@@ -1,221 +1,67 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
-import { useProducts } from '@/hooks'
-import type { Product } from '@/types/Product.types'
-import type { ActiveTab, ColorOption } from '../types'
-import { CATEGORY_COLORS, CATEGORY_FEATURES, CATEGORY_SIZES, CATEGORY_SPECIFICATIONS } from '../data/categoryData'
-import { DEFAULT_COLORS, DEFAULT_FEATURES, DEFAULT_SIZES, DEFAULT_SPECIFICATIONS } from '../data/defaultData'
-import { calculatePricing } from '../lib/price'
-import { buildReviews } from '../lib/buildReviews'
+import { useEffect } from 'react';
+import { useDetailState } from './useDetailState';
+import { useProductData } from './useProductData';
+import { useProductOptions } from './useProductOptions';
+import { useProductContent } from './useProductContent';
+import { useProductActions } from './useProductActions';
+import { useProductValidation, useSizeValidation } from './useProductValidation';
 
-const FALLBACK_SIZES = DEFAULT_SIZES
-    .filter( ( option ) => option.availability )
-    .map( ( option ) => option.name )
+export const useProductDetail = (productId?: string) => {
+  const { loading, product, productsState } = useProductData(productId);
+  const { availableColors, availableSizes } = useProductOptions(product);
+  const {
+    galleryImages,
+    pricing,
+    reviewCount,
+    features,
+    specifications,
+    reviews,
+  } = useProductContent(product);
+  const { state, dispatch } = useDetailState(
+    availableColors[0]?.name ?? '',
+    availableSizes[0] ?? '',
+  );
+  const { handleAddToCart } = useProductActions(product, state.quantity, productsState);
 
-type ProductDetailState = {
-    loading: boolean
-    product?: Product
-    galleryImages: string[]
-    pricing: ReturnType<typeof calculatePricing>
-    reviewCount: number
-    features: string[]
-    specifications: Record<string, string>
-    reviews: ReturnType<typeof buildReviews>
-    availableColors: ColorOption[]
-    availableSizes: string[]
-    selectedImage: number
-    isFavorite: boolean
-    quantity: number
-    selectedColor: string
-    selectedSize: string
-    activeTab: ActiveTab
-    setSelectedImage: ( index: number ) => void
-    increase: () => void
-    decrease: () => void
-    setSelectedColor: ( color: string ) => void
-    setSelectedSize: ( size: string ) => void
-    setActiveTab: ( tab: ActiveTab ) => void
-    toggleFavorite: () => void
-    handleAddToCart: () => void
-    handleBuyNow: () => void
-}
+  // Validations
+  useProductValidation(dispatch, availableColors, state.selectedColor);
+  useSizeValidation(dispatch, availableSizes, state.selectedSize);
 
-const buildGalleryImages = ( src?: string ) =>
-{
-    if ( !src )
-    {
-        return []
-    }
+  // Reset on product change
+  useEffect(() => {
+    dispatch({
+      type: 'RESET',
+      payload: { color: availableColors[0]?.name ?? '', size: availableSizes[0] ?? '' },
+    });
+  }, [productId]);
 
-    const separator = src.includes( '?' ) ? '&' : '?'
+  return {
+    loading,
+    product,
+    selectedImage: state.selectedImage,
+    isFavorite: state.isFavorite,
+    quantity: state.quantity,
+    selectedColor: state.selectedColor,
+    selectedSize: state.selectedSize,
+    activeTab: state.activeTab,
+    galleryImages,
+    pricing,
+    reviewCount,
+    features,
+    specifications,
+    reviews,
+    availableColors,
+    availableSizes,
+    setSelectedImage: (i: number) => dispatch({ type: 'SET_IMAGE', payload: i }),
+    toggleFavorite: () => dispatch({ type: 'TOGGLE_FAVORITE' }),
+    increase: () => dispatch({ type: 'INC_QTY' }),
+    decrease: () => dispatch({ type: 'DEC_QTY' }),
+    setQuantity: (q: number) => dispatch({ type: 'SET_QTY', payload: q }),
+    setSelectedColor: (c: string) => dispatch({ type: 'SET_COLOR', payload: c }),
+    setSelectedSize: (s: string) => dispatch({ type: 'SET_SIZE', payload: s }),
+    setActiveTab: (t: any) => dispatch({ type: 'SET_TAB', payload: t }),
+    handleAddToCart,
+  } as const;
+};
 
-    return [
-        src,
-        `${ src }${ separator }variant=1`,
-        `${ src }${ separator }variant=2`,
-        `${ src }${ separator }variant=3`,
-    ]
-}
-
-const resolveAvailableSizes = ( product?: Product ) =>
-{
-    if ( !product )
-    {
-        return FALLBACK_SIZES
-    }
-
-    const categorySizes = CATEGORY_SIZES[ product.category ]
-
-    if ( !categorySizes )
-    {
-        return FALLBACK_SIZES
-    }
-
-    if ( Array.isArray( categorySizes ) )
-    {
-        return categorySizes
-    }
-
-    if ( categorySizes.availability === false )
-    {
-        return []
-    }
-
-    return categorySizes.sizes
-}
-
-export const useProductDetail = ( productId?: string ): ProductDetailState =>
-{
-    const [
-        loading,
-        products,
-        ,
-        ,
-        ,
-        ,
-        ,
-        ,
-        addToCart,
-        ,
-        ,
-        ,
-        setShowCart,
-    ] = useProducts()
-
-    const product = useMemo<Product | undefined>(
-        () => products.find( ( item ) => item.id === productId ),
-        [ products, productId ],
-    )
-
-    const availableColors = useMemo<ColorOption[]>(
-        () => CATEGORY_COLORS[ product?.category ?? '' ] ?? DEFAULT_COLORS,
-        [ product ],
-    )
-
-    const availableSizes = useMemo( () => resolveAvailableSizes( product ), [ product ] )
-
-    const [ selectedImage, setSelectedImage ] = useState( 0 )
-    const [ isFavorite, setIsFavorite ] = useState( false )
-    const [ quantity, setQuantity ] = useState( 1 )
-    const [ selectedColor, setSelectedColor ] = useState( availableColors[ 0 ]?.name ?? '' )
-    const [ selectedSize, setSelectedSize ] = useState( availableSizes[ 0 ] ?? '' )
-    const [ activeTab, setActiveTab ] = useState<ActiveTab>( 'description' )
-
-    useEffect( () =>
-    {
-        setSelectedColor( ( previous ) =>
-        {
-            if ( availableColors.length === 0 )
-            {
-                return ''
-            }
-
-            const stillAvailable = availableColors.find( ( option ) => option.name === previous )
-            return stillAvailable?.name ?? availableColors[ 0 ].name
-        } )
-    }, [ availableColors ] )
-
-    useEffect( () =>
-    {
-        setSelectedSize( ( previous ) =>
-        {
-            if ( availableSizes.length === 0 )
-            {
-                return ''
-            }
-
-            const stillAvailable = availableSizes.find( ( option ) => option === previous )
-            return stillAvailable ?? availableSizes[ 0 ]
-        } )
-    }, [ availableSizes ] )
-
-    useEffect( () =>
-    {
-        setSelectedImage( 0 )
-        setIsFavorite( false )
-        setQuantity( 1 )
-        setActiveTab( 'description' )
-    }, [ productId ] )
-
-    const increase = useCallback( () => setQuantity( ( value ) => value + 1 ), [] )
-    const decrease = useCallback( () => setQuantity( ( value ) => Math.max( 1, value - 1 ) ), [] )
-    const toggleFavorite = useCallback( () => setIsFavorite( ( value ) => !value ), [] )
-
-    const galleryImages = useMemo( () => buildGalleryImages( product?.image ), [ product?.image ] )
-    const pricing = useMemo( () => calculatePricing( Number( product?.price ?? 0 ) ), [ product?.price ] )
-    const reviewCount = useMemo( () => Math.max( 42, Math.round( ( product?.rating ?? 0 ) * 48 ) ), [ product?.rating ] )
-    const features = useMemo( () => ( product ? CATEGORY_FEATURES[ product.category ] ?? DEFAULT_FEATURES : DEFAULT_FEATURES ), [ product ] )
-    const specifications = useMemo( () => ( product ? CATEGORY_SPECIFICATIONS[ product.category ] ?? DEFAULT_SPECIFICATIONS : DEFAULT_SPECIFICATIONS ), [ product ] )
-    const reviews = useMemo( () => ( product ? buildReviews( product, reviewCount ) : [] ), [ product, reviewCount ] )
-
-    const handleAddToCart = useCallback( () =>
-    {
-        if ( !product )
-        {
-            return
-        }
-
-        const safeQuantity = Math.max( 1, quantity )
-
-        for ( let index = 0; index < safeQuantity; index += 1 )
-        {
-            addToCart( product )
-        }
-
-        setShowCart( true )
-    }, [ addToCart, product, quantity, setShowCart ] )
-
-    const handleBuyNow = useCallback( () =>
-    {
-        handleAddToCart()
-    }, [ handleAddToCart ] )
-
-    return {
-        loading,
-        product,
-        galleryImages,
-        pricing,
-        reviewCount,
-        features,
-        specifications,
-        reviews,
-        availableColors,
-        availableSizes,
-        selectedImage,
-        isFavorite,
-        quantity,
-        selectedColor,
-        selectedSize,
-        activeTab,
-        setSelectedImage,
-        increase,
-        decrease,
-        setSelectedColor,
-        setSelectedSize,
-        setActiveTab,
-        toggleFavorite,
-        handleAddToCart,
-        handleBuyNow,
-    }
-}
-
-export default useProductDetail
+export default useProductDetail;
