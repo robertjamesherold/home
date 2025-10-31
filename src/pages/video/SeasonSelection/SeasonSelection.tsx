@@ -26,11 +26,15 @@ const SeasonSelection: React.FC = () =>
     {
       title: 'Verbrechenswellen',
       images: [ g3, g4, g5, g6, g7, g8, g9, g10, g11, g12 ]
+    },
+    {
+      title: 'Verbrechenswellen',
+      images: [ g3, g4, g5, g6, g7, g8, g9, g10, g11, g12 ]
     }
   ]
 
   return (
-    <Column className='gap-12'>
+    <Column className='gap-4'>
      { ScrollListData.map(( { title, images }, index  ) => (
         <HorizontalScrollList key={ index } title={ title } images={ images } />
       ) ) }

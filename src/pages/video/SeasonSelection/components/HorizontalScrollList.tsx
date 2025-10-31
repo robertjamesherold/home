@@ -26,14 +26,14 @@ const HorizontalScrollList: React.FC<Props> = ( { title, images, wheelMultiplier
 
     return (
         <section className='overflow-hidden'>
-            <div className='px-18 pb-4 max-h-11'>
+            <div className='main pb-4 max-h-11'>
                 <h3 className='text-xl font-bold leading-7 text-left'>{ title }</h3>
             </div>
             <div
                 ref={ ref }
                 style={ { overflowX: "auto", overflowY: "hidden", WebkitOverflowScrolling: "touch", scrollbarWidth: 'none', ...style } }
                 id="draggable"
-                className='draggable flex flex-row px-18 w-screen overflow-y-hidden overscroll-x-contain bg-scroll scrollbar-hide scroll-px-18 scroll-smooth cursor-grab 
+                className='draggable flex flex-row main w-screen overflow-y-hidden overscroll-x-contain bg-scroll scrollbar-hide scroll-smooth cursor-grab 
 '>
                 { images.map( ( image, index ) => (
                     <li key={ index } className='select-none h-39 min-w-69 rounded-2xl overflow-hidden mr-6 last:mr-0 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ChevronDown, MapPin, Menu, ShoppingCart } from 'lucide-react'
+import { MapPin, ShoppingCart } from 'lucide-react'
 import {  SearchBar } from './components'
 import Button from '@/ui/Buttons/Button'
 type Props = {
@@ -18,9 +18,7 @@ const Navigation: React.FC<Props> = ( {
     onToggleCart,
     searchTerm,
     onSearchChange,
-    categories,
-    selectedCategory,
-    onSelectCategory,
+
 
 
 } ) =>
@@ -28,10 +26,9 @@ const Navigation: React.FC<Props> = ( {
     
 
     return (
-        <>
-        <header className="sticky top-0 z-50 shadow-md" >
-            <div className="bg-[#131921] text-white">
-                <div className="max-w-[1400px] mx-auto flex flex-wrap items-center gap-4 px-4 py-3">
+
+        <div className="relative h-16 bg-[#131921] text-white">
+            <div className="main flex-row mx-auto flex items-center gap-4 py-4">
                     <div className="flex items-center gap-2 text-2xl font-semibold tracking-tight">
                         <span className="text-[#f3a847]">Shopify</span>
                         <span>Market</span>
@@ -75,30 +72,8 @@ const Navigation: React.FC<Props> = ( {
                     </Button>
                 </div>
 
-                <div className="bg-[#232F3E] text-white">
-                    <div className="max-w-[1400px] mx-auto flex items-center gap-4 overflow-x-auto px-4 py-2 text-sm">
-                        <button className="flex items-center gap-2 font-semibold hover:text-[#f3a847]" type="button">
-                            <Menu className="h-5 w-5" />
-                            <span>All</span>
-                        </button>
-                        { categories.map( ( category ) => (
-                            <button
-                            key={ category }
-                            onClick={ () => onSelectCategory( category ) }
-                            className={ `whitespace-nowrap rounded-full px-3 py-1 transition ${ selectedCategory === category ? 'bg-white text-[#232F3E] font-semibold' : 'hover:text-[#f3a847]' }` }
-                            type="button"
-                        >
-                            { category }
-                        </button>
-                    ) ) }
-                        <button className="ml-auto hidden items-center gap-1 whitespace-nowrap font-semibold hover:text-[#f3a847] lg:flex" type="button">
-                            <span>Deals &amp; Promotions</span>
-                            <ChevronDown className="h-4 w-4" />
-                        </button>
-                    </div>
-                </div>
             </div>
-            </header></>
+
     )
 }
 

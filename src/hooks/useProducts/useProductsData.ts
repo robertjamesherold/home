@@ -10,7 +10,6 @@ const useProductsData = () => {
     const fetchProducts = async () => {
       setLoading(true);
 
-      // Simulierter API-Call
       await new Promise((r) => setTimeout(r, 400));
 
       const mockProducts: Product[] = [

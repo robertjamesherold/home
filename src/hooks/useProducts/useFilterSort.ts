@@ -47,7 +47,7 @@ const useFilterSort = ({ products }: UseFilterSortInput) => {
   );
 
   const categories = useMemo(
-    () => ['all', ...Array.from(new Set(products.map((p) => p.category)))],
+    () => ['All', ...Array.from(new Set(products.map((p) => p.category)))],
     [products],
   );
 

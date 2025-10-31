@@ -1,21 +1,24 @@
 // src/pages/Shopify.tsx
 import { CategoryFilter, Sort, ProductGrid, LoadingGrid, EmptyState } from './components'
-import { useProducts } from '@/hooks'
+import { useProductsState } from '@/hooks'
 
 const ProductGridPage: React.FC = () =>
 {
-    const {
-        products,
-        filteredProducts,
-        searchTerm,
-        selectedCategory,
-        setSelectedCategory,
-        addToCart,
-        loading,
-        sortBy,
-        setSortBy,
-        categories,
-    } = useProducts()
+    const
+        {
+            filteredProducts,
+            searchTerm,
+            sortBy,
+            setSortBy,
+            loading,
+
+            categories,
+            selectedCategory,
+            setSelectedCategory,
+            addToCart,
+            products,
+        } = useProductsState()
+
 
     return (
         <div className="min-h-screen bg-[#EAEDED]">
@@ -65,7 +68,7 @@ const ProductGridPage: React.FC = () =>
                             </div>
                         ) : (
                                     <div className="rounded-lg overflow-hidden">
-                                <ProductGrid products={ filteredProducts } onAddToCart={ addToCart } />
+                                        <ProductGrid products={ filteredProducts } onAddToCart={ ( product ) => addToCart( product ) } />
                             </div>
                         ) }
                     </section>

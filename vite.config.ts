@@ -24,13 +24,14 @@ export default defineConfig({
       '@hooks': path.resolve(__dirname, 'src/hooks'),
       '@layout': path.resolve(__dirname, 'src/layout'),
       '@pages': path.resolve(__dirname, 'src/pages'),
+      '@types': path.resolve(__dirname, 'src/types'),
       '@typography': path.resolve(__dirname, 'src/typography'),
       '@ui': path.resolve(__dirname, 'src/ui'),
-     }, 
+    },
   },
   server: {
     host: true,
     port: 5173,
     open: true,
   },
-})
+});

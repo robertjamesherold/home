@@ -1,10 +1,11 @@
 import React from 'react'
 import { X } from 'lucide-react'
 import type { Product } from '../../../pages/shopify/ProductGridPage/types'
+
 type Props = {
     open: boolean
     onClose: () => void
-    cart: Product[]
+    cart: Array<Product & { id: string }>
     removeFromCart: ( id: string ) => void
     getTotalPrice: () => string
 }

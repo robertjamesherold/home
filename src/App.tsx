@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 import
 {
@@ -9,24 +10,39 @@ import
 import '@/App.css'
 import { Nav } from '@/layout'
 import { ProductsProvider } from '@/hooks'
+import { useCallback } from 'react';
 
-function App ()
+
+function AppContent ()
 {
+  const locationObj = useLocation()
+  const routeChangeHandler = useCallback( () =>
+  {
+    // Handle route changes if needed
+  }, [] )
+  const location = { path: locationObj.pathname, onChange: routeChangeHandler }
 
-
+  const isInitial = location.path === '/products' || location.path.startsWith( '/products/' )
 
   return (
     <ProductsProvider>
-      <Router>
-        <Nav />
-        <Routes>
-          <Route path='/' element={ <SeasonSelection /> } />
-          <Route path='/products' element={ <ProductGridPage /> } />
-          <Route path='/products/:productId' element={ <ProductDetailsPage /> } />
-        </Routes>
-      </Router>
+      <Nav isInitial={ isInitial } />
+      <Routes>
+        <Route path='/' element={ <SeasonSelection /> } />
+        <Route path='/products' element={ <ProductGridPage /> } />
+        <Route path='/products/:productId' element={ <ProductDetailsPage /> } />
+      </Routes>
     </ProductsProvider>
+
   )
 }
 
+function App ()
+{
+  return (
+    <Router>
+      <AppContent />
+    </Router>
+  )
+}
 export default App

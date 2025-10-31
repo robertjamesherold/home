@@ -1,36 +1,46 @@
-import React from 'react';
+import React from 'react'
 
-import Navigation from './Navigation';
-import { CartSidebar } from './components';
+import Navigation from './Navigation'
+import { CartSidebar, Filter } from './components'
 
-import { useProducts } from '@/hooks';
+import { useProductsState } from '@/hooks'
+import useScrollDirection from '@/hooks/useScrollDirection'
 
-const Nav: React.FC = () => {
+type Props = {
+    isInitial?: boolean
+}
+
+const Nav: React.FC<Props> = ( { isInitial }: Props ) =>
+{
     const {
         searchTerm,
         setSearchTerm,
         selectedCategory,
         setSelectedCategory,
-        cart,
         removeFromCart,
         getTotalPrice,
         showCart,
         setShowCart,
         categories,
+        cart,
         totalItems,
-    } = useProducts();
+    } = useProductsState()
+
+    const scrollDirection = useScrollDirection()
 
     return (
-        <nav >
+
+        <nav className={ `sticky left-0 right-0 z-50 ${ scrollDirection === 'down' ? '-top-16' : scrollDirection === 'up' ? 'top-0' : 'top-0' } transition-all duration-300` }>
             <Navigation
                 cartCount={ totalItems }
-                onToggleCart={ () => setShowCart( (prev) => !prev ) }
+                onToggleCart={ () => setShowCart( !showCart ) }
                 searchTerm={ searchTerm }
                 onSearchChange={ setSearchTerm }
                 categories={ categories }
                 selectedCategory={ selectedCategory }
                 onSelectCategory={ setSelectedCategory }
             />
+            { isInitial && <Filter /> }
             <CartSidebar
                 open={ showCart }
                 onClose={ () => setShowCart( false ) }
@@ -39,7 +49,7 @@ const Nav: React.FC = () => {
                 getTotalPrice={ getTotalPrice }
             />
         </nav>
-    );
-};
+    )
+}
 
-export default Nav;
+export default Nav

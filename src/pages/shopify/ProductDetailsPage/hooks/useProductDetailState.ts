@@ -1,102 +1,64 @@
-import { useCallback, useEffect, useReducer } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import type { ActiveTab } from '../types';
+import { useDefaultSelection } from './useDefaultSelection'
+import { useProductDetailData } from './useProductDetailData'
 
-type State = {
-  selectedImage: number;
-  quantity: number;
-  selectedSize: string;
-  selectedColor: string;
-  activeTab: ActiveTab;
-  isFavorite: boolean;
-};
 
-type Action =
-  | { type: 'SET_SELECTED_IMAGE'; payload: number }
-  | { type: 'INCREASE' }
-  | { type: 'DECREASE' }
-  | { type: 'SET_SIZE'; payload: string }
-  | { type: 'SET_COLOR'; payload: string }
-  | { type: 'SET_ACTIVE_TAB'; payload: ActiveTab }
-  | { type: 'TOGGLE_FAVORITE' }
-  | { type: 'RESET' };
+export const useProductDetailState = (
+  productId?: string,
+  availableColors: { name: string }[] = [],
+  availableSizes: string[] = [],
+) => {
+  const [selectedImage, setSelectedImage] = useState<number>(0);
+  const [isFavorite, setIsFavorite] = useState<boolean>(false);
+  const [quantity, setQuantity] = useState<number>(1);
+  const [selectedColor, setSelectedColor, selectedSize, setSelectedSize ] = useProductDetailData(productId);
+  const [selectedSize, setSelectedSize] = useDefaultSelection(availableSizes[0] ?? '', setSelectedSize, availableColors[0]?.name ?? '', setSelectedColor);
+  const [activeTab, setActiveTab] = useState<ActiveTab>('description');
 
-const initialState = (): State => ({
-  selectedImage: 0,
-  quantity: 1,
-  selectedSize: '',
-  selectedColor: '',
-  activeTab: 'description',
-  isFavorite: false,
-});
-
-const reducer = (state: State, action: Action): State => {
-  switch (action.type) {
-    case 'SET_SELECTED_IMAGE':
-      return { ...state, selectedImage: action.payload };
-    case 'INCREASE':
-      return { ...state, quantity: state.quantity + 1 };
-    case 'DECREASE':
-      return { ...state, quantity: Math.max(1, state.quantity - 1) };
-    case 'SET_SIZE':
-      return { ...state, selectedSize: action.payload };
-    case 'SET_COLOR':
-      return { ...state, selectedColor: action.payload };
-    case 'SET_ACTIVE_TAB':
-      return { ...state, activeTab: action.payload };
-    case 'TOGGLE_FAVORITE':
-      return { ...state, isFavorite: !state.isFavorite };
-    case 'RESET':
-      return initialState();
-    default:
-      return state;
-  }
-};
-
-export const useProductDetailState = (productId?: string) => {
-  const [state, dispatch] = useReducer(reducer, undefined, initialState);
+  // Wenn availableColors / availableSizes sich ändern (z. B. Produktwechsel), Default resyncen.
+  useEffect(() => {
+    if (availableColors && availableColors.length > 0) {
+      setSelectedColor((prev) => (prev ? prev : availableColors[0].name));
+    }
+  }, [availableColors]);
 
   useEffect(() => {
-    dispatch({ type: 'RESET' });
+    if (availableSizes && availableSizes.length > 0) {
+      setSelectedSize((prev) => (prev ? prev : availableSizes[0]));
+    }
+  }, [availableSizes]);
+
+  const increase = useCallback(() => setQuantity((q) => q + 1), []);
+  const decrease = useCallback(() => setQuantity((q) => (q > 1 ? q - 1 : 1)), []);
+
+  const toggleFavorite = useCallback(() => setIsFavorite((f) => !f), []);
+
+  useEffect(() => {
+    setSelectedImage(0);
+    setIsFavorite(false);
+    setQuantity(1);
+    setSelectedColor(availableColors[0]?.name ?? '');
+    setSelectedSize(availableSizes[0] ?? '');
+    setActiveTab('description');
   }, [productId]);
 
-  const setSelectedImage = useCallback(
-    (index: number) => dispatch({ type: 'SET_SELECTED_IMAGE', payload: index }),
-    [dispatch],
-  );
-  const increase = useCallback(() => dispatch({ type: 'INCREASE' }), [dispatch]);
-  const decrease = useCallback(() => dispatch({ type: 'DECREASE' }), [dispatch]);
-  const setSelectedSize = useCallback(
-    (size: string) => dispatch({ type: 'SET_SIZE', payload: size }),
-    [dispatch],
-  );
-  const setSelectedColor = useCallback(
-    (color: string) => dispatch({ type: 'SET_COLOR', payload: color }),
-    [dispatch],
-  );
-  const setActiveTab = useCallback(
-    (tab: ActiveTab) => dispatch({ type: 'SET_ACTIVE_TAB', payload: tab }),
-    [dispatch],
-  );
-  const toggleFavorite = useCallback(
-    () => dispatch({ type: 'TOGGLE_FAVORITE' }),
-    [dispatch],
-  );
-  const reset = useCallback(() => dispatch({ type: 'RESET' }), [dispatch]);
-
   return {
-    selectedImage: state.selectedImage,
+    selectedImage,
+    isFavorite,
+    quantity,
+    selectedColor,
+    selectedSize,
+    activeTab,
+
     setSelectedImage,
-    quantity: state.quantity,
+    setIsFavorite,
+    setQuantity,
+    setSelectedColor,
+    setSelectedSize,
+    setActiveTab,
     increase,
     decrease,
-    selectedSize: state.selectedSize,
-    setSelectedSize,
-    selectedColor: state.selectedColor,
-    setSelectedColor,
-    activeTab: state.activeTab,
-    setActiveTab,
-    isFavorite: state.isFavorite,
     toggleFavorite,
-    reset,
-  };
+  } as const;
 };
