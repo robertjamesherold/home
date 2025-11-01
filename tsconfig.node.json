@@ -6,11 +6,11 @@
     "module": "ESNext",
     "types": ["node"],
     "skipLibCheck": true,
-    "ignoreDeprecations": "6.0",
     /* Pfad-Aliase */
-    "baseUrl": "",
+    "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
+      "@/css/*": ["src/css/*"],
       "@assets/*": ["src/assets/*"],
       "@badges/*": ["src/assets/badges/*"],
       "@icons/*": ["src/assets/icons/*"],

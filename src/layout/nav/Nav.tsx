@@ -27,29 +27,33 @@ const Nav: React.FC<Props> = ( { isInitial }: Props ) =>
     } = useProductsState()
 
     const scrollDirection = useScrollDirection()
+    const { width } = useWindowSize()
+    const hideOnScroll = scrollDirection === 'down' && width > 640
 
     return (
         <>
-            <nav className={ `sticky left-0 right-0 top-0 z-50 w-full transition-all duration-300 ${ scrollDirection === 'down' ? '-translate-y-full' : scrollDirection === 'up' ? 'translate-y-0' : '' }` }>
-            <Navigation
-                cartCount={ totalItems }
-                onToggleCart={ () => setShowCart( !showCart ) }
-                searchTerm={ searchTerm }
-                onSearchChange={ setSearchTerm }
-                categories={ categories }
-                selectedCategory={ selectedCategory }
-                onSelectCategory={ setSelectedCategory }
-            />
-            </nav >
-            <aside>
-                <CartSidebar
+            <nav className={ `sticky left-0 right-0 top-0 z-50 w-full transition-transform duration-300 ${ hideOnScroll ? '-translate-y-full' : 'translate-y-0' }` }>
+                <Navigation
+                    cartCount={ totalItems }
+                    onToggleCart={ () => setShowCart( !showCart ) }
+                    searchTerm={ searchTerm }
+                    onSearchChange={ setSearchTerm }
+                    categories={ categories }
+                    selectedCategory={ selectedCategory }
+                    onSelectCategory={ setSelectedCategory }
+                />
+            </nav>
+
+            { isInitial && <Filter /> }
+
+            <CartSidebar
                 open={ showCart }
                 onClose={ () => setShowCart( false ) }
                 cart={ cart }
                 removeFromCart={ removeFromCart }
                 getTotalPrice={ getTotalPrice }
             />
-            </aside></>
+        </>
     )
 }
 

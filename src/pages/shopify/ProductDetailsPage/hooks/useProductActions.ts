@@ -8,5 +8,11 @@ export const useProductActions = (product: Product | undefined, quantity: number
     setShowCart(true)
   }, [product, quantity, addToCart, setShowCart])
 
-  return { handleAddToCart }
+  const handleBuyNow = useCallback(() => {
+    if (!product) return
+    addToCart(product)
+    setShowCart(true)
+  }, [product, addToCart, setShowCart])
+
+  return { handleAddToCart, handleBuyNow }
 }

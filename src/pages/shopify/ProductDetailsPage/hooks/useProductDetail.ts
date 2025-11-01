@@ -21,7 +21,7 @@ export const useProductDetail = (productId?: string) => {
     availableColors[0]?.name ?? '',
     availableSizes[0] ?? '',
   );
-  const { handleAddToCart } = useProductActions(product, state.quantity, productsState);
+  const { handleAddToCart, handleBuyNow } = useProductActions(product, state.quantity, productsState);
 
   // Validations
   useProductValidation(dispatch, availableColors, state.selectedColor);
@@ -61,6 +61,7 @@ export const useProductDetail = (productId?: string) => {
     setSelectedSize: (s: string) => dispatch({ type: 'SET_SIZE', payload: s }),
     setActiveTab: (t: any) => dispatch({ type: 'SET_TAB', payload: t }),
     handleAddToCart,
+    handleBuyNow,
   } as const;
 };
 

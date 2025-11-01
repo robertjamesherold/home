@@ -3,14 +3,14 @@ import { useLocation } from 'react-router-dom'
 
 import
 {
-  SeasonSelection,
+  LandingPage,
   ProductDetailsPage,
   ProductGridPage
 } from '@/pages'
-import '@/App.css'
 import { Nav } from '@/layout'
 import { ProductsProvider} from '@/hooks'
 import { useCallback } from 'react';
+
 
 
 
@@ -29,7 +29,7 @@ function AppContent ()
     <ProductsProvider>
       <Nav isInitial={ isInitial } />
       <Routes >
-        <Route path='/' element={ <SeasonSelection /> } />
+        <Route path='/' element={ <LandingPage /> } />
         <Route path='/products' element={ <ProductGridPage /> } />
         <Route path='/products/:productId' element={ <ProductDetailsPage /> } />
       </Routes>
