@@ -17,7 +17,8 @@ const useProducts = () => {
     categories,
   } = useFilterSort({ products });
 
-  const { cart, addToCart, removeFromCart, getTotalPrice, totalItems } = useCart();
+  const { cart, addToCart, removeFromCart, getTotalPrice, totalItems } =
+    useCart();
   const { showCart, setShowCart } = useUI(false);
 
   return [

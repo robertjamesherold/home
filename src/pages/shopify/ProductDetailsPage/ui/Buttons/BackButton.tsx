@@ -7,7 +7,7 @@ const BackButton: FC = () => (
     to="/products"
     className="flex items-center space-x-2 text-gray-700 transition hover:text-violet-600"
   >
-    <ArrowLeft className="w-5 h-5" />
+    <ArrowLeft className="h-5 w-5" />
     <span className="font-semibold">Zurück zur Übersicht</span>
   </Link>
 );

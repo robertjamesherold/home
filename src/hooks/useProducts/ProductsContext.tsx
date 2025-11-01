@@ -1,9 +1,9 @@
 // useProducts.ts
-import { createContext  } from 'react'
-import useProductsState from './useProductsState'
+import { createContext } from 'react';
+import useProductsState from './useProductsState';
 
-type ProductsState = ReturnType<typeof useProductsState>
+type ProductsState = ReturnType<typeof useProductsState>;
 
-const ProductsContext = createContext<ProductsState | null>( null )
+const ProductsContext = createContext<ProductsState | null>(null);
 
-export default ProductsContext
+export default ProductsContext;

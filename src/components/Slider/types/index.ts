@@ -1,1 +1,1 @@
-export type * from './Slider.types'
+export type * from './Slider.types';

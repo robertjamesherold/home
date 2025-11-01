@@ -1,21 +1,24 @@
-import { useState } from "react";
-import { useSocial } from "../postsprovider";
+import { useState } from 'react';
+import { useSocial } from '../postsprovider';
 
 const NewPostForm = () => {
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState('');
   const { createPost } = useSocial();
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     await createPost({ content });
-    setContent("");
+    setContent('');
   }
 
   return (
-    <form onSubmit={onSubmit} className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
+    <form
+      onSubmit={onSubmit}
+      className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm"
+    >
       <textarea
         value={content}
-        onChange={e => setContent(e.target.value)}
+        onChange={(e) => setContent(e.target.value)}
         placeholder="Was gibt’s Neues?"
         className="mb-3 h-24 w-full resize-none rounded-lg border border-gray-200 p-3 text-sm focus:border-gray-400 focus:outline-none"
       />
@@ -30,6 +33,6 @@ const NewPostForm = () => {
       </div>
     </form>
   );
-}
+};
 
-export default NewPostForm
+export default NewPostForm;

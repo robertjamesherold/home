@@ -1,8 +1,8 @@
-import type { SocialState } from "../types";
+import type { SocialState } from '../types';
 
 export const initialUser = {
-  id: "user_robert",
-  name: "Robert James Herold",
+  id: 'user_robert',
+  name: 'Robert James Herold',
   avatar: undefined,
 };
 

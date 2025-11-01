@@ -1,2 +1,2 @@
 import { useSlider } from './useSlider';
-export {useSlider}
+export { useSlider };

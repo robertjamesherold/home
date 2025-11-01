@@ -1,8 +1,13 @@
 import { useEffect, useRef } from 'react';
-import type { UseDragScrollOptions } from '../types'
+import type { UseDragScrollOptions } from '../types';
 
 export function useDragScroll(options: UseDragScrollOptions = {}) {
-  const { snap = false, snapSelector, snapBehavior = 'smooth', dragMultiplier = 1 } = options;
+  const {
+    snap = false,
+    snapSelector,
+    snapBehavior = 'smooth',
+    dragMultiplier = 1,
+  } = options;
 
   const containerRef = useRef<HTMLDivElement | null>(null);
 

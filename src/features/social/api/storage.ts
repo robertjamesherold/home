@@ -1,9 +1,9 @@
-import type { Post } from "../postsprovider";
+import type { Post } from '../postsprovider';
 
-const LS_KEY = "social_data_v1";
+const LS_KEY = 'social_data_v1';
 
 export type Store = {
-  posts: (Omit<Post, "likes"> & { likes: string[] })[];
+  posts: (Omit<Post, 'likes'> & { likes: string[] })[];
 };
 
 export function load(): Store {

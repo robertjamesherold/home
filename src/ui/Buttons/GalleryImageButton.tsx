@@ -16,20 +16,18 @@ const GalleryImageButton: FC<GalleryImageButtonProps> = ({
 }) => (
   <button
     type="button"
-    className={
-      [
-        'relative bg-white rounded-lg overflow-hidden aspect-square border-2 transition',
-        isSelected
-          ? 'border-violet-600 shadow-lg'
-          : 'border-gray-200 hover:border-violet-300',
-        className,
-      ]
-        .filter(Boolean)
-        .join(' ')
-    }
+    className={[
+      'relative aspect-square overflow-hidden rounded-lg border-2 bg-white transition',
+      isSelected
+        ? 'border-violet-600 shadow-lg'
+        : 'border-gray-200 hover:border-violet-300',
+      className,
+    ]
+      .filter(Boolean)
+      .join(' ')}
     {...props}
   >
-    <img src={image} alt={alt} className="w-full h-full object-cover" />
+    <img src={image} alt={alt} className="h-full w-full object-cover" />
   </button>
 );
 

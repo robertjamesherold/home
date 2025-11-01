@@ -7,7 +7,9 @@ export type Pricing = {
 };
 
 const formatCurrency = (value: number): string =>
-  new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(value);
+  new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(
+    value
+  );
 
 export const calculatePricing = (price: number): Pricing => {
   const priceValue = Number(price || 0);
@@ -16,8 +18,14 @@ export const calculatePricing = (price: number): Pricing => {
   const originalPrice = formatCurrency(originalPriceValue);
   const discount = Math.max(
     0,
-    Math.round(((originalPriceValue - priceValue) / originalPriceValue) * 100),
+    Math.round(((originalPriceValue - priceValue) / originalPriceValue) * 100)
   );
 
-  return { priceValue, originalPriceValue, priceDisplay, originalPrice, discount };
+  return {
+    priceValue,
+    originalPriceValue,
+    priceDisplay,
+    originalPrice,
+    discount,
+  };
 };

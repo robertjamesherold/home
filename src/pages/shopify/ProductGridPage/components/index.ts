@@ -6,4 +6,12 @@ import ProductGrid from './ProductGrid';
 import LoadingGrid from './LoadingGrid';
 import EmptyState from './EmptyState';
 
-export { CartSidebar, SearchBar, CategoryFilter, Sort, ProductGrid, LoadingGrid, EmptyState };
+export {
+  CartSidebar,
+  SearchBar,
+  CategoryFilter,
+  Sort,
+  ProductGrid,
+  LoadingGrid,
+  EmptyState,
+};

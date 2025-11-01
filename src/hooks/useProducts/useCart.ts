@@ -1,7 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 import type { Product } from '@/types/Product.types';
 
-
 const useCart = (initial: Product[] = []) => {
   const [cart, setCart] = useState<Product[]>(initial);
 
@@ -22,8 +21,9 @@ const useCart = (initial: Product[] = []) => {
   }, []);
 
   const getTotalPrice = useMemo(
-    () => () => cart.reduce((sum, p) => sum + parseFloat(p.price), 0).toFixed(2),
-    [cart],
+    () => () =>
+      cart.reduce((sum, p) => sum + parseFloat(p.price), 0).toFixed(2),
+    [cart]
   );
 
   const totalItems = cart.length;

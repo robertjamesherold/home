@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export const useWindowSize = () => {
   const getWindowSize = () => {
@@ -9,7 +9,7 @@ export const useWindowSize = () => {
   };
 
   const [windowSize, setWindowSize] = useState(() =>
-    typeof window !== "undefined" ? getWindowSize() : { width: 0, height: 0 }
+    typeof window !== 'undefined' ? getWindowSize() : { width: 0, height: 0 }
   );
 
   useEffect(() => {
@@ -23,12 +23,12 @@ export const useWindowSize = () => {
 
     handleResize();
 
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("orientationchange", handleResize);
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', handleResize);
 
     return () => {
-      window.removeEventListener("resize", handleResize);
-      window.removeEventListener("orientationchange", handleResize);
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
     };
   }, []);
 

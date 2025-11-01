@@ -1,31 +1,34 @@
-export const CATEGORY_COLORS: Record<string, { name: string; hex: string }[]> = {
-  Electronics: [
-    { name: 'Black', hex: '#111827' },
-    { name: 'Silver', hex: '#D1D5DB' },
-    { name: 'Blue', hex: '#2563EB' },
-    { name: 'Burgundy', hex: '#7C2D12' },
-  ],
-  Fashion: [
-    { name: 'Cognac', hex: '#92400E' },
-    { name: 'Black', hex: '#111827' },
-    { name: 'Olive', hex: '#4D7C0F' },
-    { name: 'Stone', hex: '#9CA3AF' },
-  ],
-  Accessories: [
-    { name: 'Charcoal', hex: '#374151' },
-    { name: 'Sand', hex: '#D6D3D1' },
-    { name: 'Forest', hex: '#14532D' },
-    { name: 'Ocean', hex: '#1D4ED8' },
-  ],
-  Sports: [
-    { name: 'Midnight', hex: '#0F172A' },
-    { name: 'Volt', hex: '#FACC15' },
-    { name: 'Crimson', hex: '#DC2626' },
-    { name: 'Ice', hex: '#E0F2FE' },
-  ],
-};
+export const CATEGORY_COLORS: Record<string, { name: string; hex: string }[]> =
+  {
+    Electronics: [
+      { name: 'Black', hex: '#111827' },
+      { name: 'Silver', hex: '#D1D5DB' },
+      { name: 'Blue', hex: '#2563EB' },
+      { name: 'Burgundy', hex: '#7C2D12' },
+    ],
+    Fashion: [
+      { name: 'Cognac', hex: '#92400E' },
+      { name: 'Black', hex: '#111827' },
+      { name: 'Olive', hex: '#4D7C0F' },
+      { name: 'Stone', hex: '#9CA3AF' },
+    ],
+    Accessories: [
+      { name: 'Charcoal', hex: '#374151' },
+      { name: 'Sand', hex: '#D6D3D1' },
+      { name: 'Forest', hex: '#14532D' },
+      { name: 'Ocean', hex: '#1D4ED8' },
+    ],
+    Sports: [
+      { name: 'Midnight', hex: '#0F172A' },
+      { name: 'Volt', hex: '#FACC15' },
+      { name: 'Crimson', hex: '#DC2626' },
+      { name: 'Ice', hex: '#E0F2FE' },
+    ],
+  };
 
-export type CategorySizeConfig = { sizes: string[]; availability: boolean } | string[];
+export type CategorySizeConfig =
+  | { sizes: string[]; availability: boolean }
+  | string[];
 
 export const CATEGORY_SIZES: Record<string, CategorySizeConfig> = {
   Fashion: { sizes: ['S', 'M', 'L', 'XL'], availability: true },

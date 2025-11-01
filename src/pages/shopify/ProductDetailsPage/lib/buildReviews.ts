@@ -1,7 +1,10 @@
 import type { Product } from '@/types/Product.types';
 import type { Review } from '../types';
 
-export const buildReviews = (product: Product, reviewCount: number): Review[] => [
+export const buildReviews = (
+  product: Product,
+  reviewCount: number
+): Review[] => [
   {
     id: 1,
     author: 'Sarah M.',
@@ -15,7 +18,8 @@ export const buildReviews = (product: Product, reviewCount: number): Review[] =>
     author: 'Michael R.',
     rating: Math.round(product.rating),
     date: 'vor 1 Monat',
-    comment: 'Top Verarbeitung und schneller Versand. Besonders die kleinen Details machen den Unterschied.',
+    comment:
+      'Top Verarbeitung und schneller Versand. Besonders die kleinen Details machen den Unterschied.',
     verified: true,
   },
   {

@@ -1,11 +1,9 @@
-const ProductDetailsPageLoading = () =>
-{
-    return (
-       
-        <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-violet-50 via-pink-50 to-blue-50">
-            <p className="text-gray-600 text-lg">Produktdetails werden geladen…</p>
-        </div>
-    )
-}
+const ProductDetailsPageLoading = () => {
+  return (
+    <div className="bg-linear-to-br flex min-h-screen items-center justify-center from-violet-50 via-pink-50 to-blue-50">
+      <p className="text-lg text-gray-600">Produktdetails werden geladen…</p>
+    </div>
+  );
+};
 
-export default ProductDetailsPageLoading
+export default ProductDetailsPageLoading;

@@ -1,13 +1,8 @@
 type Props = {
-  discount: number
-}
+  discount: number;
+};
 
-const DiscountBadge = ( { discount }: Props ) =>
-  discount <= 0 ? null : (
-    <div className="discount-badge">
-      -{ discount }%
-    </div>
-  )
+const DiscountBadge = ({ discount }: Props) =>
+  discount <= 0 ? null : <div className="discount-badge">-{discount}%</div>;
 
-export default DiscountBadge
-
+export default DiscountBadge;

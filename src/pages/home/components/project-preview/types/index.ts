@@ -1,1 +1,1 @@
-export type * from './ProjectPreview.types'
+export type * from './ProjectPreview.types';

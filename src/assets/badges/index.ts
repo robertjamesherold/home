@@ -1,3 +1,3 @@
-import MetaBadge from './MetaBadge'
+import MetaBadge from './MetaBadge';
 
-export { MetaBadge }
+export { MetaBadge };

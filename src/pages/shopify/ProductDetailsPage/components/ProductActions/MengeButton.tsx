@@ -1,6 +1,6 @@
-import type { FC } from 'react'
-import { Minus, Plus } from 'lucide-react'
-import { Title } from '@/typography'
+import type { FC } from 'react';
+import { Minus, Plus } from 'lucide-react';
+import { Title } from '@/typography';
 
 interface MengeButtonProps {
   quantity: number;
@@ -14,7 +14,7 @@ const MengeButton: FC<MengeButtonProps> = ({
   onDecrease,
 }) => (
   <div className="space-y-2">
-    <Title h6 bold className=" text-gray-700" text='Menge' />
+    <Title h6 bold className="text-gray-700" text="Menge" />
     <div className="flex items-center gap-4">
       <div className="flex items-center overflow-hidden rounded-xl border-2 border-gray-200 bg-white shadow-sm">
         <button
@@ -25,7 +25,9 @@ const MengeButton: FC<MengeButtonProps> = ({
         >
           <Minus className="h-5 w-5" />
         </button>
-        <span className="px-6 min-w-[6ch] text-center text-lg font-semibold text-gray-900">{ quantity }</span>
+        <span className="min-w-[6ch] px-6 text-center text-lg font-semibold text-gray-900">
+          {quantity}
+        </span>
         <button
           type="button"
           onClick={onIncrease}
@@ -37,6 +39,6 @@ const MengeButton: FC<MengeButtonProps> = ({
       </div>
     </div>
   </div>
-)
+);
 
-export default MengeButton
+export default MengeButton;

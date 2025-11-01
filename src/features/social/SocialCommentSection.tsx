@@ -1,8 +1,8 @@
-import { PostsProvider } from "./postsprovider";
-import { NewPostForm } from "./components";
-import { PostFeed } from "./components";
+import { PostsProvider } from './postsprovider';
+import { NewPostForm } from './components';
+import { PostFeed } from './components';
 
-const SocialCommentSection:React.FC = () => {
+const SocialCommentSection: React.FC = () => {
   return (
     <PostsProvider>
       <main className="mx-auto max-w-2xl space-y-4 p-4">
@@ -12,6 +12,6 @@ const SocialCommentSection:React.FC = () => {
       </main>
     </PostsProvider>
   );
-}
+};
 
-export default SocialCommentSection
+export default SocialCommentSection;

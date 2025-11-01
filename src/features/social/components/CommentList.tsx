@@ -1,10 +1,10 @@
-import type { Comment } from "../types";
+import type { Comment } from '../types';
 
 const CommentList = ({ comments }: { comments: Comment[] }) => {
   if (!comments.length) return null;
   return (
     <ul className="mt-3 space-y-3">
-      {comments.map(c => (
+      {comments.map((c) => (
         <li key={c.id} className="rounded-lg bg-gray-50 p-3">
           <div className="mb-1 flex items-center gap-2">
             <div className="h-6 w-6 rounded-full bg-gray-300" />
@@ -18,6 +18,6 @@ const CommentList = ({ comments }: { comments: Comment[] }) => {
       ))}
     </ul>
   );
-}
+};
 
-export default CommentList
+export default CommentList;

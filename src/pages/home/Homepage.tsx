@@ -1,7 +1,7 @@
-import Slider from "@/components/Slider/Slider"
-import { Main, Section } from "@/layout"
-import { ProjectPreview } from './components/project-preview/ProjectPreview'
-import { previewData } from './components/project-preview/data'
+import Slider from '@/components/Slider/Slider';
+import { Main, Section } from '@/layout';
+import { ProjectPreview } from './components/project-preview/ProjectPreview';
+import { previewData } from './components/project-preview/data';
 
 const Homepage: React.FC = () => {
   return (
@@ -13,10 +13,9 @@ const Homepage: React.FC = () => {
           className="text-left"
         />
       </Section>
-      <ProjectPreview {...previewData}/>
-
+      <ProjectPreview {...previewData} />
     </Main>
-  )
-}
+  );
+};
 
-export default Homepage
+export default Homepage;
