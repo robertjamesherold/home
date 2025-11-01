@@ -4,7 +4,10 @@ import { useProductData } from './useProductData';
 import { useProductOptions } from './useProductOptions';
 import { useProductContent } from './useProductContent';
 import { useProductActions } from './useProductActions';
-import { useProductValidation, useSizeValidation } from './useProductValidation';
+import {
+  useProductValidation,
+  useSizeValidation,
+} from './useProductValidation';
 
 export const useProductDetail = (productId?: string) => {
   const { loading, product, productsState } = useProductData(productId);
@@ -19,9 +22,13 @@ export const useProductDetail = (productId?: string) => {
   } = useProductContent(product);
   const { state, dispatch } = useDetailState(
     availableColors[0]?.name ?? '',
-    availableSizes[0] ?? '',
+    availableSizes[0] ?? ''
   );
-  const { handleAddToCart, handleBuyNow } = useProductActions(product, state.quantity, productsState);
+  const { handleAddToCart, handleBuyNow } = useProductActions(
+    product,
+    state.quantity,
+    productsState
+  );
 
   // Validations
   useProductValidation(dispatch, availableColors, state.selectedColor);
@@ -31,7 +38,10 @@ export const useProductDetail = (productId?: string) => {
   useEffect(() => {
     dispatch({
       type: 'RESET',
-      payload: { color: availableColors[0]?.name ?? '', size: availableSizes[0] ?? '' },
+      payload: {
+        color: availableColors[0]?.name ?? '',
+        size: availableSizes[0] ?? '',
+      },
     });
   }, [productId]);
 
@@ -52,12 +62,14 @@ export const useProductDetail = (productId?: string) => {
     reviews,
     availableColors,
     availableSizes,
-    setSelectedImage: (i: number) => dispatch({ type: 'SET_IMAGE', payload: i }),
+    setSelectedImage: (i: number) =>
+      dispatch({ type: 'SET_IMAGE', payload: i }),
     toggleFavorite: () => dispatch({ type: 'TOGGLE_FAVORITE' }),
     increase: () => dispatch({ type: 'INC_QTY' }),
     decrease: () => dispatch({ type: 'DEC_QTY' }),
     setQuantity: (q: number) => dispatch({ type: 'SET_QTY', payload: q }),
-    setSelectedColor: (c: string) => dispatch({ type: 'SET_COLOR', payload: c }),
+    setSelectedColor: (c: string) =>
+      dispatch({ type: 'SET_COLOR', payload: c }),
     setSelectedSize: (s: string) => dispatch({ type: 'SET_SIZE', payload: s }),
     setActiveTab: (t: any) => dispatch({ type: 'SET_TAB', payload: t }),
     handleAddToCart,

@@ -1,1 +1,1 @@
-export type * from './Shopify.types'
+export type * from './Shopify.types';

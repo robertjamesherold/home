@@ -1,9 +1,9 @@
-import {CartPage} from './CartPage';
-import {CheckoutPage} from './CheckoutPage';
-import {CongratulationsPage} from './CongratulationsPage';
-import {LandingPage} from './LandingPage'
-import {ProductDetailsPage} from './ProductDetailsPage';
-import {ProductGridPage} from './ProductGridPage';
+import { CartPage } from './CartPage';
+import { CheckoutPage } from './CheckoutPage';
+import { CongratulationsPage } from './CongratulationsPage';
+import { LandingPage } from './LandingPage';
+import { ProductDetailsPage } from './ProductDetailsPage';
+import { ProductGridPage } from './ProductGridPage';
 
 export {
   CartPage,
@@ -13,5 +13,3 @@ export {
   ProductDetailsPage,
   ProductGridPage,
 };
-
-    

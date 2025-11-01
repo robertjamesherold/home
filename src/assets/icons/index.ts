@@ -1,3 +1,3 @@
-import SocialIcon from './SocialIcon'
+import SocialIcon from './SocialIcon';
 
-export { SocialIcon }
+export { SocialIcon };

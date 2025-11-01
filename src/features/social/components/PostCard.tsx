@@ -1,6 +1,6 @@
-import type { Post } from "../types";
-import { LikeButton, CommentList, NewCommentForm } from "./";
-import { useSocial } from "../postsprovider";
+import type { Post } from '../types';
+import { LikeButton, CommentList, NewCommentForm } from './';
+import { useSocial } from '../postsprovider';
 
 const PostCard = ({ post }: { post: Post }) => {
   const { isLikedByMe } = useSocial();
@@ -20,14 +20,20 @@ const PostCard = ({ post }: { post: Post }) => {
       <p className="mb-4 whitespace-pre-wrap text-sm">{post.content}</p>
 
       <div className="mb-3 flex items-center gap-4">
-        <LikeButton postId={post.id} liked={isLikedByMe(post)} count={post.likes.size} />
-        <span className="text-xs text-gray-500">{post.comments.length} Kommentare</span>
+        <LikeButton
+          postId={post.id}
+          liked={isLikedByMe(post)}
+          count={post.likes.size}
+        />
+        <span className="text-xs text-gray-500">
+          {post.comments.length} Kommentare
+        </span>
       </div>
 
       <NewCommentForm postId={post.id} />
       <CommentList comments={post.comments} />
     </article>
   );
-}
+};
 
-export default PostCard
+export default PostCard;

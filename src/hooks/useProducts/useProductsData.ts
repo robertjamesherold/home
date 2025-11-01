@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { Product } from '@pages/shopify/ProductGridPage/types';
 
-
 const useProductsData = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -21,13 +20,15 @@ const useProductsData = () => {
             'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop',
           category: 'Electronics',
           rating: 4.8,
-          description: 'High-quality wireless headphones with noise cancellation',
+          description:
+            'High-quality wireless headphones with noise cancellation',
         },
         {
           id: '2',
           title: 'Classic Leather Jacket',
           price: '189.99',
-          image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&h=400&fit=crop',
+          image:
+            'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&h=400&fit=crop',
           category: 'Fashion',
           rating: 4.6,
           description: 'Genuine leather jacket, perfect for any season',
@@ -56,7 +57,8 @@ const useProductsData = () => {
           id: '5',
           title: 'Running Shoes Elite',
           price: '129.99',
-          image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop',
+          image:
+            'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop',
           category: 'Sports',
           rating: 4.7,
           description: 'Professional running shoes for athletes',
@@ -65,7 +67,8 @@ const useProductsData = () => {
           id: '6',
           title: 'Minimalist Backpack',
           price: '79.99',
-          image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop',
+          image:
+            'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop',
           category: 'Accessories',
           rating: 4.4,
           description: 'Sleek and functional everyday backpack',

@@ -10,7 +10,7 @@ const applyFiltersAndSort = (
   products: Product[],
   searchTerm: string,
   selectedCategory: string,
-  sortBy: SortBy,
+  sortBy: SortBy
 ) => {
   let result = [...products];
 
@@ -21,7 +21,9 @@ const applyFiltersAndSort = (
   if (searchTerm.trim().length > 0) {
     const term = searchTerm.toLowerCase();
     result = result.filter(
-      (p) => p.title.toLowerCase().includes(term) || p.description.toLowerCase().includes(term),
+      (p) =>
+        p.title.toLowerCase().includes(term) ||
+        p.description.toLowerCase().includes(term)
     );
   }
 
@@ -43,12 +45,12 @@ const useFilterSort = ({ products }: UseFilterSortInput) => {
 
   const filteredProducts = useMemo(
     () => applyFiltersAndSort(products, searchTerm, selectedCategory, sortBy),
-    [products, searchTerm, selectedCategory, sortBy],
+    [products, searchTerm, selectedCategory, sortBy]
   );
 
   const categories = useMemo(
     () => ['All', ...Array.from(new Set(products.map((p) => p.category)))],
-    [products],
+    [products]
   );
 
   return {

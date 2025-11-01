@@ -1,1 +1,1 @@
-export { postsApi as api } from "./posts";
+export { postsApi as api } from './posts';

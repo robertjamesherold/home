@@ -1,3 +1,3 @@
-import { Hr }  from './Divider'
+import { Hr } from './Divider';
 
-export { Hr }
+export { Hr };

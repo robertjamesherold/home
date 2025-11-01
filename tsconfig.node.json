@@ -6,7 +6,7 @@
     "module": "ESNext",
     "types": ["node"],
     "skipLibCheck": true,
-    /* Pfad-Aliase */
+    "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],

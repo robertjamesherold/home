@@ -1,18 +1,15 @@
 // useProducts.ts
-import { useContext } from 'react'
-import ProductsContext from './ProductsContext'
+import { useContext } from 'react';
+import ProductsContext from './ProductsContext';
 
+const useProducts = () => {
+  const context = useContext(ProductsContext);
 
-const useProducts = () =>
-{
-  const context = useContext( ProductsContext )
-
-  if ( !context )
-  {
-    throw new Error( 'useProducts must be used within a ProductsProvider' )
+  if (!context) {
+    throw new Error('useProducts must be used within a ProductsProvider');
   }
 
-  return context
-}
+  return context;
+};
 
-export default useProducts
+export default useProducts;
