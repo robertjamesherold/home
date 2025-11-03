@@ -1,7 +1,6 @@
 import React from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Button } from './Button';
-import { NavigationDots } from './NavigationDots';
+import { NavigationDots, Button } from './';
 
 interface SliderControlsProps {
   onPrev: () => void;
@@ -12,7 +11,7 @@ interface SliderControlsProps {
   disabled: boolean;
 }
 
-export const SliderControls: React.FC<SliderControlsProps> = ({
+const SliderControls: React.FC<SliderControlsProps> = ({
   onPrev,
   onNext,
   dotsCount,
@@ -47,3 +46,5 @@ export const SliderControls: React.FC<SliderControlsProps> = ({
     </Button>
   </div>
 );
+
+export default SliderControls

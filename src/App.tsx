@@ -1,10 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import { LandingPage, ProductDetailsPage, ProductGridPage } from '@/pages';
-import { default as Home } from '@/pages/doctor/LandingPage/LandingPage';
+import { LandingPage, ProductDetailsPage, ProductGridPage, Homepage } from '@/pages';
 import { ProductsProvider } from '@/hooks';
-import { Header } from './pages/doctor/LandingPage/components/Header'
-import { Footer } from './pages/doctor/LandingPage/components/Footer'
+import { Header } from '@/pages/doctor/LandingPage/components/Header'
+import { Footer } from '@/pages/doctor/LandingPage/components/Footer'
 
 function AppContent() {
 
@@ -14,7 +13,7 @@ function AppContent() {
       <Header />
       
       <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Homepage />} />
         <Route path="/movie" element={<LandingPage />} />
         <Route path="/products" element={<ProductGridPage />} />
         <Route path="/products/:productId" element={<ProductDetailsPage />} />

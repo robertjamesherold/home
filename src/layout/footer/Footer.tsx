@@ -1,4 +1,4 @@
-import { MetaBadge } from '../../assets/badges';
+/* import { MetaBadge } from '../../assets/badges';
 import { SocialIcon } from '../../assets/icons';
 import { Section, Row, Column, Grid, Hr } from '../';
 import { useWindowSize } from '../../hooks/useWindowSize';
@@ -114,5 +114,21 @@ const Footer: React.FC = () => {
     </footer>
   );
 };
+
+export default Footer;
+ */
+
+type FooterProps = {
+  children: React.ReactNode;
+  className?: string;
+}
+
+ const Footer:React.FC<FooterProps> = ({children, className}) => {
+  return (
+    <footer className={className}>
+      {children}
+    </footer>
+  );
+} 
 
 export default Footer;

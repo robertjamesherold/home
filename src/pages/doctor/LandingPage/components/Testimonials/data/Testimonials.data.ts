@@ -1,6 +1,6 @@
-import type { Testimonials } from '../types/Testimonials.types';
+import type { TestimonialsProps } from '../types';
 
-const testimonialsData: Testimonials[] = [
+const testimonialsData: TestimonialsProps[] = [
   {
     name: "Anna Schmidt",
     role: "Patientin seit 2022",

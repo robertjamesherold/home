@@ -8,7 +8,7 @@ interface ButtonProps {
   'aria-label'?: string;
 }
 
-export const Button: React.FC<ButtonProps> = ({
+const Button: React.FC<ButtonProps> = ({
   children,
   onClick,
   disabled,
@@ -24,3 +24,5 @@ export const Button: React.FC<ButtonProps> = ({
     {children}
   </button>
 );
+
+export default Button

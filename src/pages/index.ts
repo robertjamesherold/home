@@ -1,8 +1,8 @@
-import Homepage from './home/Homepage';
-import { ProductDetailsPage } from '@pages/shopify/ProductDetailsPage';
-import { LandingPage } from '@pages/shopify/LandingPage';
-import { ProductGridPage } from '@pages/shopify/ProductGridPage';
-import { SeasonSelection } from '@pages/video/SeasonSelection';
+import { Homepage}  from './home';
+import { ProductDetailsPage } from './shopify/ProductDetailsPage';
+import { LandingPage } from './doctor';
+import { ProductGridPage } from './shopify/ProductGridPage';
+import { SeasonSelection } from './video/SeasonSelection';
 export {
   Homepage,
   ProductGridPage,

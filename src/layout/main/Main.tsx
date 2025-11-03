@@ -1,10 +1,11 @@
 type MainProps = {
   children?: React.ReactNode;
+  className?: string;
 };
 
-const Main: React.FC<MainProps> = ({ children }: MainProps) => {
+const Main: React.FC<MainProps> = ({ children, className }: MainProps) => {
   return (
-    <main className={`grid w-screen auto-rows-auto overflow-clip`}>
+    <main className={`grid w-screen auto-rows-auto overflow-clip ${className}`}>
       {children}
     </main>
   );

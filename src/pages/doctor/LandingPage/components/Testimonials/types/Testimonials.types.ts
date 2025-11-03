@@ -1,4 +1,4 @@
-export interface Testimonials {
+export type TestimonialsProps = {
   name: string;
   role: string;
   content: string;

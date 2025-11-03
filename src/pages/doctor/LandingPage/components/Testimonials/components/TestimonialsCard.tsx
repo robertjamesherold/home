@@ -1,8 +1,8 @@
 import React from 'react';
 import { Star } from 'lucide-react';
-import type { Testimonials } from '../types/Testimonials.types';
+import type { TestimonialsProps } from '../types/Testimonials.types';
 
-const TestimonialsCard: React.FC<Testimonials> = ({ name, role, content, rating }) => (
+const TestimonialsCard: React.FC<TestimonialsProps> = ({ name, role, content, rating }) => (
   <div className="px-4 sm:px-8 md:px-12 lg:px-16 py-8 sm:py-12 md:py-16">
     <div className="max-w-4xl mx-auto text-center">
       {/* Rating Stars */}

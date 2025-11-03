@@ -7,7 +7,7 @@ interface NavigationDotsProps {
   disabled: boolean;
 }
 
-export const NavigationDots: React.FC<NavigationDotsProps> = ({
+ const NavigationDots: React.FC<NavigationDotsProps> = ({
   count,
   activeIndex,
   onDotClick,
@@ -31,3 +31,5 @@ export const NavigationDots: React.FC<NavigationDotsProps> = ({
     })}
   </div>
 );
+
+export default NavigationDots;

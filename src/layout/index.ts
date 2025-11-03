@@ -1,5 +1,7 @@
 export { Column } from './column';
+export { Article } from './article';
 export { Footer } from './footer';
+export { Container } from './container';
 export { Grid } from './grid';
 export { Hr } from './divider';
 export { Main } from './main';
