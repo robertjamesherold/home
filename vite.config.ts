@@ -1,10 +1,8 @@
+import path from "path"
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
-import { dirname, resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
 
-const rootDir = dirname( fileURLToPath( import.meta.url ) )
 
 export default defineConfig({
   plugins: [
@@ -18,20 +16,20 @@ export default defineConfig({
   base: "./",
   resolve: {
     alias: {
-      '@': resolve( rootDir, 'src' ),
-      '@css': resolve( rootDir, 'src/css' ),
-      '@assets': resolve( rootDir, 'src/assets' ),
-      '@badges': resolve( rootDir, 'src/assets/badges' ),
-      '@components': resolve( rootDir, 'src/components' ),
-      '@icons': resolve( rootDir, 'src/assets/icons' ),
-      '@images': resolve( rootDir, 'src/assets/images' ),
-      '@features': resolve( rootDir, 'src/features' ),
-      '@hooks': resolve( rootDir, 'src/hooks' ),
-      '@layout': resolve( rootDir, 'src/layout' ),
-      '@pages': resolve( rootDir, 'src/pages' ),
-      '@types': resolve( rootDir, 'src/types' ),
-      '@typography': resolve( rootDir, 'src/typography' ),
-      '@ui': resolve( rootDir, 'src/ui' ),
+      "@": path.resolve(__dirname, "./src"),
+      '@css': path.resolve(__dirname, 'src/css'),
+      '@assets': path.resolve(__dirname, 'src/assets'),
+      '@badges': path.resolve(__dirname, 'src/assets/badges'),
+      '@components': path.resolve(__dirname, 'src/components'),
+      '@icons': path.resolve(__dirname, 'src/assets/icons'),
+      '@images': path.resolve(__dirname, 'src/assets/images'),
+      '@features': path.resolve(__dirname, 'src/features'),
+      '@hooks': path.resolve(__dirname, 'src/hooks'),
+      '@layout': path.resolve(__dirname, 'src/layout'),
+      '@pages': path.resolve(__dirname, 'src/pages'),
+      '@types': path.resolve(__dirname, 'src/types'),
+      '@typography': path.resolve(__dirname, 'src/typography'),
+      '@ui': path.resolve(__dirname, 'src/ui'),
     },
   },
   server: {

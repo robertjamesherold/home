@@ -25,7 +25,7 @@ const Button: React.FC<ButtonProps> = ({
   icon,
   autoIcon,
   iconIndex = 0,
-  iconClassName = 'w-6 h-6',
+  iconClassName = 'w-4 h-4 mr-2',
   iconPosition = 'left',
 }: ButtonProps) => {
   const childArray = Children.toArray(children);
@@ -85,10 +85,10 @@ const Button: React.FC<ButtonProps> = ({
         <button
           type="button"
           onClick={onClick}
-          className={`btn-primary ${getSizeClasses()} ${className}`}
+          className={`btn-primary inline-flex justify-center align-middle ${getSizeClasses()} ${className}`}
         >
           {iconPosition === 'left' && iconNode}
-          <span className="flex-1 text-center">{label}</span>
+          <span className="flex-1 text-center inline-flex">{label}</span>
           {iconPosition === 'right' && iconNode}
           {extras}
         </button>
@@ -97,10 +97,10 @@ const Button: React.FC<ButtonProps> = ({
         <button
           type="button"
           onClick={onClick}
-          className={`btn-secondary ${getSizeClasses()} ${className}`}
+          className={`btn-secondary inline-flex justify-center align-middle  ${getSizeClasses()} ${className}`}
         >
           {iconPosition === 'left' && iconNode}
-          <span className="flex-1 text-center">{label}</span>
+          <span className="flex-1 text-center inline-flex">{label}</span>
           {iconPosition === 'right' && iconNode}
           {extras}
         </button>
@@ -109,10 +109,10 @@ const Button: React.FC<ButtonProps> = ({
         <button
           type="button"
           onClick={onClick}
-          className={`btn-outline ${getSizeClasses()} ${className}`}
+          className={`btn-outline inline-flex justify-center align-middle  ${getSizeClasses()} ${className}`}
         >
           {iconPosition === 'left' && iconNode}
-          <span className="flex-1 text-center">{label}</span>
+          <span className="flex-1 text-center inline-flex">{label}</span>
           {iconPosition === 'right' && iconNode}
           {extras}
         </button>

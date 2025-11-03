@@ -1,27 +1,25 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
 
 import { LandingPage, ProductDetailsPage, ProductGridPage } from '@/pages';
-import { Nav } from '@/layout';
+import { default as Home } from '@/pages/doctor/LandingPage/LandingPage';
 import { ProductsProvider } from '@/hooks';
-import { useCallback } from 'react';
+import { Header } from './pages/doctor/LandingPage/components/Header'
+import { Footer } from './pages/doctor/LandingPage/components/Footer'
 
 function AppContent() {
-  const locationObj = useLocation();
-  const routeChangeHandler = useCallback(() => {}, []);
-  const location = { path: locationObj.pathname, onChange: routeChangeHandler };
 
-  const isInitial =
-    location.path === '/products' || location.path.startsWith('/products/');
 
   return (
     <ProductsProvider>
-      <Nav isInitial={isInitial} />
+      <Header />
+      
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+      <Route path="/" element={<Home />} />
+        <Route path="/movie" element={<LandingPage />} />
         <Route path="/products" element={<ProductGridPage />} />
         <Route path="/products/:productId" element={<ProductDetailsPage />} />
       </Routes>
+      <Footer />
     </ProductsProvider>
   );
 }

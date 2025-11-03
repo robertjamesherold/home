@@ -32,13 +32,13 @@ const Hero: React.FC<{ content: HeroContent; compact: boolean }> = ({
       <div className="flex flex-wrap gap-4">
         <button
           type="button"
-          className="rounded-full bg-[#00a8e1] px-6 py-3 text-sm font-semibold uppercase tracking-wide text-[#0f171e] transition hover:bg-white"
+          className="btn-primary"
         >
           {content.primaryCta}
         </button>
         <button
           type="button"
-          className="rounded-full border border-white/30 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white transition hover:border-white hover:text-white"
+          className="btn-secondary"
         >
           {content.secondaryCta}
         </button>

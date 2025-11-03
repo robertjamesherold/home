@@ -9,22 +9,24 @@
     "skipLibCheck": true,
     "ignoreDeprecations": "6.0",
     /* Pfad-Aliase */
-    "baseUrl": ".",
+       "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@/css/*": ["src/css/*"],
-      "@assets/*": ["src/assets/*"],
-      "@badges/*": ["src/assets/badges/*"],
-      "@icons/*": ["src/assets/icons/*"],
-      "@features/*": ["src/features/*"],
-      "@layout/*": ["src/layout/*"],
-      "@pages/*": ["src/pages/*"],
-      "@types/*": ["src/types/*"],
-      "@typography/*": ["src/typography/*"],
-      "@components/*": ["src/components/*"],
-      "@images/*": ["src/assets/images/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@ui/*": ["src/ui/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@/css/*": ["./src/css/*"],
+      "@/assets/*": ["./src/assets/*"],
+      "@/badges/*": ["./src/assets/badges/*"],
+      "@/icons/*": ["./src/assets/icons/*"],
+      "@/features/*": ["./src/features/*"],
+      "@/layout/*": ["./src/layout/*"],
+      "@/pages/*": ["./src/pages/*"],
+      "@/types/*": ["./src/types/*"],
+      "@/typography/*": ["./src/typography/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/images/*": ["./src/assets/images/*"],
+      "@/hooks/*": ["./src/hooks/*"],
+      "@/ui/*": ["./src/ui/*"]
     },
 
     /* Bundler mode */
@@ -43,5 +45,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
+  "include": ["./src"]
 }

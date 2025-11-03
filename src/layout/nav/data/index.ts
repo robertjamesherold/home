@@ -1,0 +1,1 @@
+export { default as NavItemsData } from './NavItems.data';
