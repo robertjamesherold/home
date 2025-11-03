@@ -88,7 +88,7 @@ const Button: React.FC<ButtonProps> = ({
           className={`btn-primary inline-flex justify-center align-middle ${getSizeClasses()} ${className}`}
         >
           {iconPosition === 'left' && iconNode}
-          <span className="flex-1 text-center inline-flex">{label}</span>
+          <span className="inline-flex flex-1 text-center">{label}</span>
           {iconPosition === 'right' && iconNode}
           {extras}
         </button>
@@ -97,10 +97,10 @@ const Button: React.FC<ButtonProps> = ({
         <button
           type="button"
           onClick={onClick}
-          className={`btn-secondary inline-flex justify-center align-middle  ${getSizeClasses()} ${className}`}
+          className={`btn-secondary inline-flex justify-center align-middle ${getSizeClasses()} ${className}`}
         >
           {iconPosition === 'left' && iconNode}
-          <span className="flex-1 text-center inline-flex">{label}</span>
+          <span className="inline-flex flex-1 text-center">{label}</span>
           {iconPosition === 'right' && iconNode}
           {extras}
         </button>
@@ -109,10 +109,10 @@ const Button: React.FC<ButtonProps> = ({
         <button
           type="button"
           onClick={onClick}
-          className={`btn-outline inline-flex justify-center align-middle  ${getSizeClasses()} ${className}`}
+          className={`btn-outline inline-flex justify-center align-middle ${getSizeClasses()} ${className}`}
         >
           {iconPosition === 'left' && iconNode}
-          <span className="flex-1 text-center inline-flex">{label}</span>
+          <span className="inline-flex flex-1 text-center">{label}</span>
           {iconPosition === 'right' && iconNode}
           {extras}
         </button>

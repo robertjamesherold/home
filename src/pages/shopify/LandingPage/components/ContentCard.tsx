@@ -18,13 +18,13 @@ const ContentCard: React.FC<{
           className="h-full w-full object-cover"
           src={item.image}
         />
-        <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent opacity-60 transition duration-300 group-hover:opacity-90" />
+        <div className="bg-linear-to-t absolute inset-0 from-black via-black/40 to-transparent opacity-60 transition duration-300 group-hover:opacity-90" />
         {item.tag && variant !== 'continue' && (
           <span className="absolute left-3 top-3 inline-flex items-center rounded-full bg-[#00a8e1] px-3 py-1 text-xs font-semibold uppercase tracking-wide text-[#0f171e]">
             {item.tag}
           </span>
         )}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 space-y-2 bg-linear-to-t from-black/90 via-black/40 to-transparent px-4 pb-4 pt-10">
+        <div className="bg-linear-to-t pointer-events-none absolute inset-x-0 bottom-0 z-10 space-y-2 from-black/90 via-black/40 to-transparent px-4 pb-4 pt-10">
           <p className="text-sm font-semibold text-white">{item.title}</p>
           {variant === 'continue' ? (
             <div className="space-y-2">

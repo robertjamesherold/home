@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { Product } from '@pages/shopify/ProductGridPage/types';
+import type { Product } from '@/pages/shopify/ProductGridPage/types';
 
 const useProductsData = () => {
   const [products, setProducts] = useState<Product[]>([]);

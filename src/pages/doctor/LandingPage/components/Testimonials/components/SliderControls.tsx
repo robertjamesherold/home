@@ -19,14 +19,14 @@ const SliderControls: React.FC<SliderControlsProps> = ({
   onDotClick,
   disabled,
 }) => (
-  <div className="flex justify-center items-center gap-3 sm:gap-4 mt-6 sm:mt-8 px-4">
+  <div className="mt-6 flex items-center justify-center gap-3 px-4 sm:mt-8 sm:gap-4">
     <Button
       onClick={onPrev}
       disabled={disabled}
-      className="rounded-full hover:bg-green-600 hover:text-white hover:border-green-600"
+      className="rounded-full hover:border-green-600 hover:bg-green-600 hover:text-white"
       aria-label="Vorheriges Testimonial"
     >
-      <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+      <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
     </Button>
 
     <NavigationDots
@@ -39,12 +39,12 @@ const SliderControls: React.FC<SliderControlsProps> = ({
     <Button
       onClick={onNext}
       disabled={disabled}
-      className="rounded-full hover:bg-green-600 hover:text-white hover:border-green-600"
+      className="rounded-full hover:border-green-600 hover:bg-green-600 hover:text-white"
       aria-label="Nächstes Testimonial"
     >
-      <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+      <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
     </Button>
   </div>
 );
 
-export default SliderControls
+export default SliderControls;

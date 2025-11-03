@@ -4,7 +4,8 @@ const ContentRowData: ContentRow[] = [
   {
     id: 'continue-watching',
     title: 'Weiterschauen',
-    subtitle: 'Setzen Sie Ihre Serien und Filme genau dort fort, wo Sie aufgehört haben.',
+    subtitle:
+      'Setzen Sie Ihre Serien und Filme genau dort fort, wo Sie aufgehört haben.',
     variant: 'continue',
     items: [
       {

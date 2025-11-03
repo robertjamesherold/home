@@ -1,4 +1,4 @@
-import { Homepage}  from './home';
+import { Homepage } from './home';
 import { ProductDetailsPage } from './shopify/ProductDetailsPage';
 import { LandingPage } from './doctor';
 import { ProductGridPage } from './shopify/ProductGridPage';

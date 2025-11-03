@@ -12,7 +12,7 @@ const Hero: React.FC<{ content: HeroContent; compact: boolean }> = ({
       className="absolute inset-0 h-full w-full object-cover"
       src={content.background}
     />
-    <div className="absolute inset-0 bg-linear-to-r from-[#0f171e] via-[#16222f]/90 to-transparent" />
+    <div className="bg-linear-to-r absolute inset-0 from-[#0f171e] via-[#16222f]/90 to-transparent" />
     <div className="relative z-10 w-full max-w-xl space-y-6 p-10">
       <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-wide text-white/70">
         <BoltIcon className="h-3.5 w-3.5" />
@@ -30,16 +30,10 @@ const Hero: React.FC<{ content: HeroContent; compact: boolean }> = ({
         </p>
       )}
       <div className="flex flex-wrap gap-4">
-        <button
-          type="button"
-          className="btn-primary"
-        >
+        <button type="button" className="btn-primary">
           {content.primaryCta}
         </button>
-        <button
-          type="button"
-          className="btn-secondary"
-        >
+        <button type="button" className="btn-secondary">
           {content.secondaryCta}
         </button>
       </div>

@@ -4,7 +4,8 @@ const ChannelData: Channel[] = [
   {
     id: 'starzplay',
     name: 'STARZPLAY',
-    description: 'Hollywood-Hits, Star-Serien und exklusive Releases – monatlich kündbar.',
+    description:
+      'Hollywood-Hits, Star-Serien und exklusive Releases – monatlich kündbar.',
     image:
       'https://images.unsplash.com/photo-1518895949257-7621c3c786d4?auto=format&fit=crop&w=1200&q=80',
     price: '7 Tage gratis, danach 4,99 €/Monat',
@@ -28,7 +29,8 @@ const ChannelData: Channel[] = [
   {
     id: 'arnd',
     name: 'ArthouseCNMA',
-    description: 'Preisgekrönte Arthouse-Filme, Klassiker und Festival-Lieblinge.',
+    description:
+      'Preisgekrönte Arthouse-Filme, Klassiker und Festival-Lieblinge.',
     image:
       'https://images.unsplash.com/photo-1497032205916-ac775f0649ae?auto=format&fit=crop&w=1200&q=80',
     price: '14 Tage gratis, danach 5,99 €/Monat',

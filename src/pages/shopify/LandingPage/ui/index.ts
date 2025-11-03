@@ -5,11 +5,4 @@ import Logo from '../../../../layout/nav/ui/Logo';
 import SearchIcon from './SearchIcon';
 import UserIcon from './UserIcon';
 
-export {
-  BoltIcon,
-  ChevronDownIcon,
-  MenuIcon,
-  Logo,
-  SearchIcon,
-  UserIcon,
-};
+export { BoltIcon, ChevronDownIcon, MenuIcon, Logo, SearchIcon, UserIcon };

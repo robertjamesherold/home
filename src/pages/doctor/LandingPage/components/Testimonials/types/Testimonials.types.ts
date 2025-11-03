@@ -4,4 +4,4 @@ export type TestimonialsProps = {
   content: string;
   rating: number;
   image?: string;
-}
+};

@@ -1,2 +1,2 @@
 import { useInfiniteSlider } from './useInfiniteSlider';
-export { useInfiniteSlider }
+export { useInfiniteSlider };

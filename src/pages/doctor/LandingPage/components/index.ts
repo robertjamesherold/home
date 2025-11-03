@@ -22,4 +22,4 @@ export {
   TreatmentGrid,
   Benefits,
   CTASection,
-};  
+};

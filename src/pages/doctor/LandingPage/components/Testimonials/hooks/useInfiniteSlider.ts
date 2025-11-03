@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { TRANSITION_MS, AUTOPLAY_INTERVAL_MS, SWIPE_THRESHOLD_PX } from '../constants';
+import {
+  TRANSITION_MS,
+  AUTOPLAY_INTERVAL_MS,
+  SWIPE_THRESHOLD_PX,
+} from '../constants';
 
 export const useInfiniteSlider = (dataLength: number) => {
   const [currentIndex, setCurrentIndex] = useState<number>(1);
@@ -28,12 +32,16 @@ export const useInfiniteSlider = (dataLength: number) => {
     if (currentIndex === slideCount - 1) {
       setUseTransition(false);
       setCurrentIndex(1);
-      requestAnimationFrame(() => requestAnimationFrame(() => setUseTransition(true)));
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => setUseTransition(true))
+      );
     }
     if (currentIndex === 0) {
       setUseTransition(false);
       setCurrentIndex(slideCount - 2);
-      requestAnimationFrame(() => requestAnimationFrame(() => setUseTransition(true)));
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => setUseTransition(true))
+      );
     }
   };
 
@@ -89,7 +97,8 @@ export const useInfiniteSlider = (dataLength: number) => {
     if (!sliderRef.current || touchStartXRef.current === null) return;
     const delta = e.touches[0].clientX - touchStartXRef.current;
     touchDeltaXRef.current = delta;
-    const width = sliderRef.current.getBoundingClientRect().width || window.innerWidth;
+    const width =
+      sliderRef.current.getBoundingClientRect().width || window.innerWidth;
     const percentShift = (delta / width) * 100;
     sliderRef.current.style.transform = `translateX(-${currentIndex * 100 - percentShift}%)`;
   };

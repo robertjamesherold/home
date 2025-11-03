@@ -1,4 +1,4 @@
-import type { ContentItem } from './'
+import type { ContentItem } from './';
 
 export type ContentRow = {
   id: string;

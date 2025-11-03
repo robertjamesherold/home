@@ -1,13 +1,18 @@
-import { TextParagraph, Title } from '@/typography'
-import { TestimonialsCard, SliderControls, useInfiniteSlider, testimonialsData } from './';
-import { Header,Main,Section,Footer,Article } from '@/layout'
+import { TextParagraph, Title } from '@/typography';
+import {
+  TestimonialsCard,
+  SliderControls,
+  useInfiniteSlider,
+  testimonialsData,
+} from './';
+import { Header,  Section, Footer, Article } from '@/layout';
 
 const Testimonials = () => {
   const data = testimonialsData;
   if (!data || data.length === 0) return null;
 
   const slides = [data[data.length - 1], ...data, data[0]];
-  
+
   const {
     currentIndex,
     useTransition,
@@ -27,21 +32,24 @@ const Testimonials = () => {
 
   return (
     <Section
-      className="py-8 sm:py-12 md:py-16 lg:py-20 w-full bg-white overflow-hidden"
+      className="w-full overflow-hidden bg-white py-8 sm:py-12 md:py-16 lg:py-20"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onFocus={() => setIsPaused(true)}
       onBlur={() => setIsPaused(false)}
     >
-      <Header className="text-center mb-8 sm:mb-12 px-4">
-        <Title level={2} className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-2 sm:mb-4">
+      <Header className="mb-8 px-4 text-center sm:mb-12">
+        <Title
+          level={2}
+          className="mb-2 text-2xl font-bold text-slate-900 sm:mb-4 sm:text-3xl md:text-4xl"
+        >
           Das sagen unsere <span className="text-green-600">Patienten</span>!
         </Title>
       </Header>
 
       {/* Slider */}
-      <Article className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative bg-slate-50 rounded-xl sm:rounded-2xl overflow-hidden shadow-lg sm:shadow-xl">
+      <Article className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative overflow-hidden rounded-xl bg-slate-50 shadow-lg sm:rounded-2xl sm:shadow-xl">
           <div
             ref={sliderRef}
             onTransitionEnd={handleTransitionEnd}
@@ -51,10 +59,14 @@ const Testimonials = () => {
             className="flex w-full touch-pan-y"
             style={{
               transform: `translateX(-${currentIndex * 100}%)`,
-              transition: useTransition ? 'transform 1500ms ease-in-out' : 'none',
+              transition: useTransition
+                ? 'transform 1500ms ease-in-out'
+                : 'none',
             }}
           >
-            {slides.map((testimonial, index) => (<TestimonialsCard key={index} {...testimonial} /> ))}
+            {slides.map((testimonial, index) => (
+              <TestimonialsCard key={index} {...testimonial} />
+            ))}
           </div>
         </div>
 
@@ -70,9 +82,13 @@ const Testimonials = () => {
       </Article>
 
       {/* Footer */}
-      <Footer className="text-center mt-8 sm:mt-12 px-4">
-        <TextParagraph className="text-sm sm:text-base md:text-lg text-slate-600">
-          Über <span className="text-green-600 font-semibold">2.000 zufriedene Patienten</span> vertrauen auf unsere Expertise
+      <Footer className="mt-8 px-4 text-center sm:mt-12">
+        <TextParagraph className="text-sm text-slate-600 sm:text-base md:text-lg">
+          Über{' '}
+          <span className="font-semibold text-green-600">
+            2.000 zufriedene Patienten
+          </span>{' '}
+          vertrauen auf unsere Expertise
         </TextParagraph>
       </Footer>
     </Section>

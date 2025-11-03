@@ -1,6 +1,6 @@
 // useFilterSort.ts
 import { useMemo, useState } from 'react';
-import type { Product, SortBy } from '@pages/shopify/ProductGridPage/types';
+import type { Product, SortBy } from '@/pages/shopify/ProductGridPage/types';
 
 type UseFilterSortInput = {
   products: Product[];

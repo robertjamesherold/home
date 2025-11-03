@@ -1,6 +1,11 @@
-import { Button, NavigationDots, SliderControls, TestimonialsCard } from './components';
+import {
+  Button,
+  NavigationDots,
+  SliderControls,
+  TestimonialsCard,
+} from './components';
 import { useInfiniteSlider } from './hooks';
-import {testimonialsData} from './data';
+import { testimonialsData } from './data';
 import Testimonials from './Testimonials';
 
 export {
@@ -13,4 +18,3 @@ export {
   Testimonials,
 };
 export type * from './types';
-

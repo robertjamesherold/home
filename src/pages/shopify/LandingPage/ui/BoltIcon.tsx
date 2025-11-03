@@ -1,5 +1,4 @@
 const BoltIcon: React.FC<{ className?: string }> = ({ className }) => (
- 
   <svg
     aria-hidden="true"
     className={className}

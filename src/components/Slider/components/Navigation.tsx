@@ -1,4 +1,4 @@
-import NavigationButton from '@ui/Buttons/NavigationButton';
+import NavigationButton from '@/ui/Buttons/NavigationButton';
 
 type NavigationProps = {
   total: number;

@@ -7,7 +7,7 @@ interface NavigationDotsProps {
   disabled: boolean;
 }
 
- const NavigationDots: React.FC<NavigationDotsProps> = ({
+const NavigationDots: React.FC<NavigationDotsProps> = ({
   count,
   activeIndex,
   onDotClick,
@@ -22,7 +22,9 @@ interface NavigationDotsProps {
           onClick={() => onDotClick(idx)}
           disabled={disabled}
           className={`h-2 rounded-full transition-all duration-300 ${
-            isActive ? 'bg-green-600 w-8' : 'bg-slate-300 hover:bg-slate-400 w-2'
+            isActive
+              ? 'w-8 bg-green-600'
+              : 'w-2 bg-slate-300 hover:bg-slate-400'
           } disabled:cursor-not-allowed`}
           aria-label={`Gehe zu Testimonial ${idx + 1}`}
           aria-current={isActive ? 'true' : 'false'}

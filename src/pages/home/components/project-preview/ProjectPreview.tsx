@@ -1,7 +1,7 @@
 import type { PreviewMapping } from './types';
 
 import { Title, TextParagraph } from '@/typography';
-import VillaOlivetoImage from '@images/VillaOlivetoImage';
+import VillaOlivetoImage from '@/images/VillaOlivetoImage'
 import { Column, Grid, Section } from '@/layout';
 import LinkButton from '@/ui/Buttons/LinkButton';
 import { useProjectPreview } from './hooks/useProjectPreview';

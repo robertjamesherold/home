@@ -1,8 +1,7 @@
 import React from 'react';
 import Navigation from './Navigation';
-import { CartSidebar, Filter } from './components';
+import { CartSidebar} from './components';
 import { useProductsState, useWindowSize } from '@/hooks';
-import useHorizontalPadding from '../../pages/shopify/LandingPage/hooks/useHorizontalPadding';
 
 type Props = {
   isInitial?: boolean;
@@ -18,17 +17,15 @@ const Nav: React.FC<Props> = () => {
     totalItems,
   } = useProductsState();
 
-const horizontalPadding = useHorizontalPadding();
 
   return (
     <>
-  
       <Navigation
-          cartCount={totalItems}
-          onToggleCart={() => setShowCart(!showCart)}
-          isMobile={useWindowSize().width < 768}
-        />
-   
+        cartCount={totalItems}
+        onToggleCart={() => setShowCart(!showCart)}
+        isMobile={useWindowSize().width < 768}
+      />
+
       <CartSidebar
         open={showCart}
         onClose={() => setShowCart(false)}

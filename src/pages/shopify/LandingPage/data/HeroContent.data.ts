@@ -1,4 +1,4 @@
-import type { HeroContent } from '../types'
+import type { HeroContent } from '../types';
 
 const HeroContentData: HeroContent = {
   highlight: 'Neu bei Prime: Night Sky',

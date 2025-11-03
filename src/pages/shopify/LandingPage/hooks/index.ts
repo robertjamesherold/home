@@ -1,1 +1,1 @@
-export { default as useHorizontalPadding } from "./useHorizontalPadding";   
+export { default as useHorizontalPadding } from './useHorizontalPadding';
