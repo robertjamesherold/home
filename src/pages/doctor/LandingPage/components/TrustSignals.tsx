@@ -1,4 +1,6 @@
 import { Badge } from '../ui/badge';
+import { Section, Container, Header, Grid } from '@/layout';
+import { Title } from '@/typography';
 
 const partners = [
   { name: 'BDH', description: 'Bund Deutscher Heilpraktiker' },
@@ -9,37 +11,16 @@ const partners = [
 
 export function TrustSignals() {
   return (
-    <section className="bg-slate-50 py-12 md:py-16">
-      <div className="container mx-auto px-4">
-        {/* Trust Statement */}
-        <div className="mb-12 text-center">
-          <p className="mb-4 text-slate-700">
-            Über 15 Jahre Erfahrung in der Naturheilkunde
-          </p>
-          <h2 className="mb-8 text-slate-900">
-            Vertrauen Sie auf unsere Expertise
-          </h2>
-        </div>
-
-        {/* Partner Logos */}
-        <div className="mb-12 flex flex-wrap items-center justify-center gap-8 md:gap-12">
-          {partners.map((partner, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-center gap-2 opacity-60 transition-opacity hover:opacity-100"
-            >
-              <Badge variant="outline" className="px-6 py-2 text-lg">
-                {partner.name}
-              </Badge>
-              <span className="text-slate-600">{partner.description}</span>
-            </div>
-          ))}
-        </div>
-
-        {/* Practitioner Section */}
-        <div className="mx-auto max-w-4xl rounded-xl bg-white p-8 shadow-lg md:p-12">
-          <div className="grid items-center gap-8 md:grid-cols-2">
-            <div></div>
+    <Section className="bg-slate-50 section safe-area-padding">
+        <Header className="mb-8 text-center">
+          <Title level={6} className=" text-slate-700" text="Über 15 Jahre Erfahrung in der Naturheilkunde" />
+          <Title level={2} weight="bold" className="text-slate-900">Vertrauen Sie auf unsere <span className="text-lime-600"> Expertise</span></Title>
+        </Header>
+        <Container outerClass='@container' innerClass=' mx-auto lg:w-[60cqw] xl:w-[70cqw] 2xl:w-[60cqw] p-8 rounded-xl bg-white'>
+          <Grid className="h-fit items-center gap-8 md:grid-cols-2">
+            <Container className='@container relative col-span-1'>
+              <img src="" alt="" className='relative w-full h-full object-cover'/> 
+            </Container>
             <div className="space-y-4">
               <h3 className="text-slate-900">Dr. med. Sarah Müller</h3>
               <p className="text-green-600">
@@ -51,16 +32,10 @@ export function TrustSignals() {
                 ihre Gesundheit auf natürliche Weise wiederherzustellen und zu
                 erhalten.
               </p>
-              <div className="flex flex-wrap gap-2 pt-4">
-                <Badge>Akupunktur</Badge>
-                <Badge>TCM</Badge>
-                <Badge>Kräuterheilkunde</Badge>
-                <Badge>Ernährungsberatung</Badge>
-              </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
+          </Grid>
+        </Container>
+    
+    </Section>
   );
 }

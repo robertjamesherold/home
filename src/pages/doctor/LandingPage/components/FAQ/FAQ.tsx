@@ -13,7 +13,7 @@ const FAQ = () => {
     <Section className="bg-slate-50 section safe-area-padding">
       <Container
         outerClass="@container"
-        innerClass="w-[100cqw]"
+        innerClass="mx-auto lg:w-[80cqw] xl:w-[70cqw] 2xl:w-[60cqw]"
       >
         <Header className="mb-12 text-center">
           <Title

@@ -1,33 +1,22 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {  LandingPage } from '@/pages';
+import { MainFooter as Footer } from '@/pages/doctor/LandingPage/components/Footer';
 
-import {
-  LandingPage,
-  ProductDetailsPage,
-  ProductGridPage,
-} from '@/pages';
-import { ProductsProvider } from '@/hooks'
-import { Footer } from '@/pages/doctor/LandingPage/components/Footer';
-
-function AppContent() {
+function Pages() {
   return (
-    <ProductsProvider>
-
       <Routes>
         <Route path="/" element={ <LandingPage /> } />
-        <Route path="/movie" element={<LandingPage />} />
-        <Route path="/products" element={<ProductGridPage />} />
-        <Route path="/products/:productId" element={<ProductDetailsPage />} />
       </Routes>
-      <Footer />
-    </ProductsProvider>
   );
 }
 
 function App() {
   return (
     <Router>
-      <AppContent />
+      <Pages />
+      <Footer />
     </Router>
   );
 }
+
 export default App;

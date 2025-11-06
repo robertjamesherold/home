@@ -1,45 +1,41 @@
 import { Facebook, Instagram, Linkedin, Mail } from 'lucide-react';
+import { Footer } from '@/layout';
+import AndreaMeyer from '@/assets/logos/AndreaMeyer';
 
-export function Footer() {
+export function MainFooter() {
   const footerLinks = {
     Behandlungen: [
-      'Akupunktur',
-      'Kräuterheilkunde',
-      'Massage',
-      'Meditation',
-      'Ernährungsberatung',
-      'Schmerztherapie',
+      'Psychologische Beratung',
+      'Omega-3-Therapie',
+      'Gesprächskreise',
     ],
     'Über uns': [
       'Unsere Praxis',
-      'Team',
       'Philosophie',
-      'Zertifikate',
-      'Karriere',
-      'Blog',
+      'Team',
     ],
     Service: [
       'Terminbuchung',
       'FAQ',
-      'Kostenübernahme',
-      'Notfall-Hotline',
-      'Downloads',
-      'Newsletter',
+      'Downloads'
     ],
-    Rechtliches: ['Impressum', 'Datenschutz', 'AGB', 'Cookie-Richtlinie'],
+    Rechtliches: [
+      'Impressum', 
+      'Datenschutz'
+    ],
   };
 
   return (
-    <footer className="bg-slate-900 pb-6 pt-12 text-white">
+    <Footer className="bg-slate-900 pb-6 pt-12 text-white">
       <div className="container mx-auto px-4">
         {/* Main Footer Content */}
         <div className="mb-12 grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-6">
           {/* Brand */}
           <div className="col-span-2">
-            <h3 className="mb-4 text-green-400">NaturHeil</h3>
+            <AndreaMeyer className='text-lg md:text-xl xl:text-2xl' />
             <p className="mb-6 text-slate-400">
-              Ihre Praxis für ganzheitliche Naturheilkunde in Musterstadt. Seit
-              2008 helfen wir Menschen auf ihrem Weg zu mehr Gesundheit und
+              Ihre Praxis in Wächtersbach. Seit
+              2021 helfen wir Menschen auf ihrem Weg zu mehr Gesundheit und
               Wohlbefinden.
             </p>
             <div className="flex gap-4">
@@ -123,6 +119,6 @@ export function Footer() {
           </div>
         </div>
       </div>
-    </footer>
+    </Footer>
   );
 }

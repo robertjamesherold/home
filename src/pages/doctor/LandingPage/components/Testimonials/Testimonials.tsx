@@ -48,26 +48,27 @@ const Testimonials = () => {
       </Header>
 
       {/* Slider */}
-      <Article className="relative mx-auto w-full">
-        <Container outerClass="relative overflow-hidden rounded-xl bg-slate-50 shadow-lg sm:rounded-2xl sm:shadow-xl"
-          innerClass="flex w-full touch-pan-y"
-          ref={ sliderRef }
-          onTransitionEnd={ handleTransitionEnd }
-          onTouchStart={ onTouchStart }
-          onTouchMove={ onTouchMove }
-          onTouchEnd={ onTouchEnd }
-          style={ {
-            transform: `translateX(-${ currentIndex * 100 }%)`,
-            transition: useTransition
-                ? 'transform 1500ms ease-in-out'
-                : 'none',
-            }}
-          >
-            {slides.map((testimonial, index) => (
-              <TestimonialsCard key={index} {...testimonial} />
-            ))}
-        </Container>
+      <Article className="@container relative mx-auto w-full">
+        <Container className="lg:w-[60cqw] xl:w-[70cqw] 2xl:w-[60cqw] mx-auto relative overflow-hidden rounded-xl bg-slate-50 shadow-lg sm:rounded-2xl sm:shadow-xl">
+          <Container className="flex w-full touch-pan-y"
+            ref={ sliderRef }
+            onTransitionEnd={ handleTransitionEnd }
+            onTouchStart={ onTouchStart }
+            onTouchMove={ onTouchMove }
+            onTouchEnd={ onTouchEnd }
+            style={ {
+              transform: `translateX(-${ currentIndex * 100 }%)`,
+              transition: useTransition
+                  ? 'transform 1500ms ease-in-out'
+                  : 'none',
+              }}
+            >
+              {slides.map((testimonial, index) => (
+                <TestimonialsCard key={index} {...testimonial} />
+              ))}
+              </Container>
 
+        </Container>
 
         {/* Controls */}
         <SliderControls
@@ -78,6 +79,7 @@ const Testimonials = () => {
           onDotClick={goToSlide}
           disabled={isLocked}
         />
+  
       </Article>
 
       {/* Footer */}

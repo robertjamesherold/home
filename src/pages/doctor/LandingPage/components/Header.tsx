@@ -48,7 +48,7 @@ const Navigation = () =>
       <Container outerClass="container mx-auto px-4" innerClass="flex items-center justify-between">
           {/* Logo */}
 
-          <Title level= className="text-green-600">NaturHeil</h1>
+          <Title level={4} className="text-green-600" text='NaturHeil' />
 
           {/* Desktop Navigation */}
           <nav className="hidden items-center gap-6 md:flex">
@@ -92,8 +92,7 @@ const Navigation = () =>
               </SheetContent>
             </Sheet>
           </div>
-        </div>
-      </div>
+      </Container>
     </Header >
   );
 }
