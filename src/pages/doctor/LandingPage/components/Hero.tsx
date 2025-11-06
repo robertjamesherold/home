@@ -1,18 +1,22 @@
 import Button from '@/ui/Buttons/Button';
+import HeroImage from '@images/g8.webp'
 import { Badge } from '../ui/badge';
 import { Title } from '@/typography';
-import { Column, Row } from '@/layout';
+import { Column, Row, Section, Container, Grid } from '@/layout'
 import { useBreakpoint } from '../../../../hooks/useBreakpoint';
 
-export function Hero() {
+const Hero = () =>
+{
   const breakpoint = useBreakpoint();
+  const desktop = ( breakpoint === 'md' ) || ( breakpoint === 'lg' ) || ( breakpoint === 'xl' );
+
 
   return (
-    <section className="bg-linear-to-br relative overflow-hidden from-slate-50 to-green-50">
-      <div className="container mx-auto px-4 py-12 md:py-20 lg:py-24">
-        <div className="grid items-center gap-8 md:grid-cols-2 lg:gap-12">
+    <Section className="bg-linear-to-b relative overflow-hidden  from-slate-50 to-green-500">
+      <Container className="relative w-full">
+        <Grid className="relative h-fit items-center gap-8 md:grid-cols-2 lg:gap-12">
           {/* Left Content */}
-          <div className="space-y-6">
+          <Column className={ `max-h-[70vh] ${ desktop || breakpoint === 'sm' ? 'order-1' : 'order-2' } relative space-y-6 section px-4 md:pl-12 lg:pl-12  xl:pl-24 col-span-1` }>
             <Badge className="bg-green-600 hover:bg-green-700">
               Neue Patienten Aktion
             </Badge>
@@ -30,7 +34,7 @@ export function Hero() {
               text="Entdecken Sie die Kraft der Naturheilkunde. Unsere ganzheitlichen Behandlungsmethoden bringen Körper, Geist und Seele in Einklang."
             />
 
-            {breakpoint === 'md' ? (
+            { desktop ? (
               <Row className="gap-4">
                 <Button
                   size="large"
@@ -71,18 +75,17 @@ export function Hero() {
                 <Badge variant="danger">ISO 9001</Badge>
               </Row>
             </Row>
-          </div>
+          </Column>
 
           {/* Right Content - Product/Service Cards */}
-          <div className="relative">
-            <div className="grid grid-cols-1 gap-4"></div>
-          </div>
-        </div>
-      </div>
-
-      {/* Decorative elements */}
-      <div className="absolute right-0 top-0 -z-10 h-64 w-64 rounded-full bg-green-200 opacity-20 blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 -z-10 h-96 w-96 rounded-full bg-blue-200 opacity-20 blur-3xl"></div>
-    </section>
+          <Column className={ ` ${ desktop || breakpoint === 'sm' ? 'order-2 max-h-[70vh]' : 'order-1 max-h-[40vh]' } @container relative` }>
+            <img src={ HeroImage } alt="Hero Image" className="overflow-hidden w-full h-[100cqh] object-cover" />
+          </Column>
+        </Grid>
+      </Container>
+    </Section>
   );
 }
+
+
+export default Hero

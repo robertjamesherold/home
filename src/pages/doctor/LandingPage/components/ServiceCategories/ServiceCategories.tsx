@@ -1,19 +1,20 @@
 import { TextParagraph, Title } from '@/typography';
-import { Grid, Section } from '@/layout';
+import { Article, Grid, Section } from '@/layout'
 import ServiceCategoriesData from './data';
-import { Header } from '@/layout';
+import { Header, Container } from '@/layout';
 
 export function ServiceCategories() {
   return (
-    <Section className="bg-white py-12 md:py-20">
-      <div className="container mx-auto px-4">
+    <Section className="bg-white section safe-area-padding">
+      <Container className="container">
         <Header className="mb-12 text-center">
           <Title
             level={2}
             weight="bold"
             className="mb-4 text-slate-900"
-            text="Entdecken Sie unsere Behandlungsmethoden"
-          />
+          >
+            Entdecken Sie unsere <span className='text-green-600'>Behandlungsmethoden</span>
+          </Title>
           <Title
             level={5}
             weight="normal"
@@ -34,7 +35,7 @@ export function ServiceCategories() {
                 key={category.id}
                 className="group cursor-pointer overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:shadow-xl"
               >
-                <div className="relative aspect-square overflow-hidden">
+                <Article className="relative aspect-square overflow-hidden">
                   <img className="h-full object-cover" src={category.image} />
                   <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
                     <Title level={3} className="mb-1" text={category.title} />
@@ -43,12 +44,12 @@ export function ServiceCategories() {
                       text={category.description}
                     />
                   </div>
-                </div>
+                </Article>
               </div>
             )
           )}
         </Grid>
-      </div>
+      </Container>
     </Section>
   );
 }

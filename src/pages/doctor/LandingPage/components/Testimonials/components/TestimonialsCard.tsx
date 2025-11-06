@@ -8,7 +8,7 @@ const TestimonialsCard: React.FC<TestimonialsProps> = ({
   content,
   rating,
 }) => (
-  <div className="px-4 py-8 sm:px-8 sm:py-12 md:px-12 md:py-16 lg:px-16">
+  <div className="shrink-0 w-full px-4 py-8 sm:px-8 sm:py-12 md:px-12 md:py-16 lg:px-16">
     <div className="mx-auto max-w-4xl text-center">
       {/* Rating Stars */}
       <div className="mb-4 flex justify-center gap-1 sm:mb-6">

@@ -1,10 +1,11 @@
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Phone, Mail, MapPin } from 'lucide-react';
+import { Section } from '@/layout';
 
 export function CTASection() {
   return (
-    <section className="bg-gradient-to-br from-green-600 to-green-700 py-12 text-white md:py-20">
+    <Section className="bg-gradient-to-br from-green-600 to-green-700 py-12 text-white md:py-20">
       <div className="container mx-auto px-4">
         <div className="grid items-center gap-12 md:grid-cols-2">
           {/* Left side - CTA */}
@@ -89,6 +90,6 @@ export function CTASection() {
           </div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

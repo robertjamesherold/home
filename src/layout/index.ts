@@ -8,4 +8,4 @@ export { Main } from './main';
 export { Row } from './row';
 export { Section } from './section';
 export { Header } from './header';
-export { Nav, Navigation } from './nav';
+export { Nav } from './nav';

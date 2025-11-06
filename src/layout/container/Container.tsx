@@ -1,16 +1,32 @@
-const Container = ({
-  children,
-  outerClass,
-  innerClass,
-}: {
-  children: React.ReactNode;
-  outerClass?: string;
-  innerClass?: string;
-}) => {
+import { forwardRef } from 'react'
+
+interface ContainerProps extends React.HTMLAttributes<HTMLDivElement>
+{
+  children: React.ReactNode
+  outerClass?: string
+  innerClass?: string
+  className?: string
+}
+
+const Container = forwardRef<HTMLDivElement, ContainerProps>( (
+  { children, outerClass, innerClass, className, ...rest },
+  ref
+) =>
+{
+  const hasOuterClass = outerClass !== undefined
+  const hasInnerClass = innerClass !== undefined
+
   return (
-    <div className={outerClass}>
-      <div className={innerClass}>{children}</div>
-    </div>
-  );
-};
-export default Container;
+    <>
+      { ( hasOuterClass || hasInnerClass ) ? (
+        <div className={ outerClass }>
+          <div className={ innerClass } ref={ ref } { ...rest }>{ children }</div>
+        </div>
+      ) : (
+        <div className={ className } ref={ ref } { ...rest }>{ children }</div>
+      ) }
+    </>
+  )
+} )
+
+export default Container

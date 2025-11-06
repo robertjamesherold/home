@@ -2,7 +2,7 @@ import { Title } from '@/typography';
 import type { ContentRow } from '../types';
 import ContentCard from './ContentCard';
 
-const ContentRowSection: React.FC<{ row: ContentRow; compact: boolean }> = ({
+const ContentRowSection: React.FC<{ row: ContentRow }> = ( {
   row,
   compact,
 }) => (
@@ -18,8 +18,7 @@ const ContentRowSection: React.FC<{ row: ContentRow; compact: boolean }> = ({
       <ul className="grid auto-cols-max grid-flow-col gap-4 px-1">
         {row.items.map((item) => (
           <ContentCard
-            key={item.id}
-            compact={compact}
+            key={ item.id }
             item={item}
             variant={row.variant ?? 'default'}
           />

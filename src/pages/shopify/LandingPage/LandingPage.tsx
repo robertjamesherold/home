@@ -7,19 +7,19 @@ import { Header, Hero, ContentRowSection, ChannelGrid } from './components';
 
 const LandingPage: React.FC = () => {
   const horizontalPadding = useHorizontalPadding();
-  const compact = useBreakpoint() === 'xs' || useBreakpoint() === 'sm';
+  const compact = useBreakpoint() === 'xs' || 'sm';
   const heroContent = HeroContentData;
   const contentRows = ContentRowData;
 
   return (
     <div className="min-h-screen w-full bg-[#0f171e] text-white">
       <div className={`relative space-y-10 pb-14 ${horizontalPadding}`}>
-        <Header compact={compact} />
-        <Hero compact={compact} content={heroContent} />
+        <Header />
+        <Hero content={ heroContent } />
       </div>
       <main className={`space-y-16 ${horizontalPadding}`}>
         {contentRows.map((row) => (
-          <ContentRowSection key={row.id} compact={compact} row={row} />
+          <ContentRowSection key={ row.id } row={ row } />
         ))}
         <ChannelGrid />
       </main>

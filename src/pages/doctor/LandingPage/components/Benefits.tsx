@@ -1,4 +1,6 @@
-import { Shield, Leaf, Heart, Clock, Award, Users } from 'lucide-react';
+import { Shield, Leaf, Heart, Clock, Award, Users } from 'lucide-react'
+import { TextParagraph, Title } from '@/typography'
+import { Grid, Header, Section, Container, Article } from '@/layout';
 
 const benefits = [
   {
@@ -33,39 +35,39 @@ const benefits = [
   },
 ];
 
-export function Benefits() {
+const Benefits = () =>{
   return (
-    <section className="bg-white py-12 md:py-20">
-      <div className="container mx-auto px-4">
-        <div className="mb-12 text-center">
-          <h2 className="mb-4 text-slate-900">
-            Warum Sie uns vertrauen können
-          </h2>
-          <p className="mx-auto max-w-2xl text-slate-600">
+    <Section id='benefits'>
+      <Container className="container section safe-area-padding">
+        <Header className="mb-8 text-center">
+          <Title level={ 2 } weight='bold' className="mb-4 text-slate-900">Warum Sie uns <span className='text-green-600'>vertrauen</span> können</Title>
+          <TextParagraph className="mx-auto max-w-2xl text-slate-600" text="
             Ihre Gesundheit liegt uns am Herzen. Deshalb bieten wir Ihnen
             erstklassige naturheilkundliche Behandlungen mit persönlicher
-            Betreuung
-          </p>
-        </div>
+            Betreuung"
+          />
+        </Header>
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <Grid className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {benefits.map((benefit, index) => {
             const Icon = benefit.icon;
             return (
-              <div
+              <Article
                 key={index}
                 className="flex flex-col items-center rounded-xl p-6 text-center transition-colors duration-300 hover:bg-slate-50"
               >
                 <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
                   <Icon className="h-8 w-8 text-green-600" />
                 </div>
-                <h3 className="mb-2 text-slate-900">{benefit.title}</h3>
-                <p className="text-slate-600">{benefit.description}</p>
-              </div>
+                <Title level={ 4 } className="mb-2 text-slate-900" text={ benefit.title } />
+                <TextParagraph className="text-slate-600" text={ benefit.description } />
+              </Article>
             );
           })}
-        </div>
-      </div>
-    </section>
+        </Grid>
+      </Container>
+    </Section>
   );
 }
+
+export default Benefits

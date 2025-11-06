@@ -10,19 +10,22 @@ import { FAQSdata } from './data';
 
 const FAQ = () => {
   return (
-    <Section className="bg-slate-50 py-12 md:py-20">
+    <Section className="bg-slate-50 section safe-area-padding">
       <Container
-        outerClass="container mx-auto px-4"
-        innerClass="max-w-3xl mx-auto"
+        outerClass="@container"
+        innerClass="w-[100cqw]"
       >
         <Header className="mb-12 text-center">
           <Title
-            level={2}
+            level={ 2 }
+            weight="bold"
             className="mb-4 text-slate-900"
             text="Häufig gestellte Fragen"
           />
-          <TextParagraph
-            className="text-slate-600"
+          <Title
+            level={ 5 }
+            weight="normal"
+            className="mx-auto text-slate-600"
             text="Hier finden Sie Antworten auf die wichtigsten Fragen rund um unsere Praxis und Behandlungen"
           />
         </Header>

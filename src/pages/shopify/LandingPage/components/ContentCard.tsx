@@ -3,15 +3,14 @@ import type { ContentItem } from '../types';
 const ContentCard: React.FC<{
   item: ContentItem;
   variant: 'default' | 'continue';
-  compact: boolean;
-}> = ({ item, variant, compact }) => {
-  const widthClass = compact ? 'w-[200px]' : 'w-[260px]';
+}> = ( { item, variant } ) =>
+{
   const progress = Math.max(0, Math.min(1, item.progress ?? 0));
 
   return (
     <li>
       <article
-        className={`group relative aspect-video ${widthClass} overflow-hidden rounded-2xl bg-[#1f2933] shadow-lg shadow-black/40 transition duration-300 hover:-translate-y-1 hover:shadow-black/60`}
+        className={ `group relative aspect-video  overflow-hidden rounded-2xl bg-[#1f2933] shadow-lg shadow-black/40 transition duration-300 hover:-translate-y-1 hover:shadow-black/60` }
       >
         <img
           alt={item.title}
