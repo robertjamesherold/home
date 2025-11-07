@@ -51,21 +51,36 @@ function Carousel({
   children,
   ...props
 }: React.ComponentProps<'div'> & CarouselProps) {
-  const [carouselRef, api] = useEmblaCarousel(
-    {
+  const axis: 'x' | 'y' = orientation === 'horizontal' ? 'x' : 'y'
+  const carouselOptions = React.useMemo(
+    () => ( {
       ...opts,
-      axis: orientation === 'horizontal' ? 'x' : 'y',
-    },
-    plugins
+      loop: opts?.loop ?? true,
+      axis,
+    } ),
+    [ axis, opts ]
   );
+  const [ carouselRef, api ] = useEmblaCarousel( carouselOptions, plugins );
   const [canScrollPrev, setCanScrollPrev] = React.useState(false);
   const [canScrollNext, setCanScrollNext] = React.useState(false);
+  const isLooping = carouselOptions.loop ?? false;
 
-  const onSelect = React.useCallback((api: CarouselApi) => {
-    if (!api) return;
-    setCanScrollPrev(api.canScrollPrev());
-    setCanScrollNext(api.canScrollNext());
-  }, []);
+  const onSelect = React.useCallback(
+    ( api: CarouselApi ) =>
+    {
+      if ( !api ) return
+      if ( isLooping )
+      {
+        const hasMultipleSlides = api.scrollSnapList().length > 1
+        setCanScrollPrev( hasMultipleSlides )
+        setCanScrollNext( hasMultipleSlides )
+        return
+      }
+      setCanScrollPrev( api.canScrollPrev() )
+      setCanScrollNext( api.canScrollNext() )
+    },
+    [ isLooping ]
+  );
 
   const scrollPrev = React.useCallback(() => {
     api?.scrollPrev();
@@ -109,9 +124,10 @@ function Carousel({
       value={{
         carouselRef,
         api: api,
-        opts,
+        opts: carouselOptions,
         orientation:
-          orientation || (opts?.axis === 'y' ? 'vertical' : 'horizontal'),
+          orientation ||
+          ( carouselOptions.axis === 'y' ? 'vertical' : 'horizontal' ),
         scrollPrev,
         scrollNext,
         canScrollPrev,
@@ -138,7 +154,7 @@ function CarouselContent({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       ref={carouselRef}
-      className="overflow-hidden"
+      className="overflow-hidden pl-1"
       data-slot="carousel-content"
     >
       <div

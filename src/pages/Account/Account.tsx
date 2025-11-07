@@ -1,5 +1,6 @@
 import { ShieldCheck, Truck } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle, Button, Badge, Separator } from '@ui/.'
+import { Column } from '@/layout'
 
 const upcomingDeliveries = [
   {
@@ -71,7 +72,7 @@ const AccountPage: React.FC = () =>
         <Card className="bg-white shadow-sm">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-lg">
-              <ShieldCheck className="h-5 w-5 text-primary" />
+              <ShieldCheck className="h-5 w-5 text-gray-900" />
               Mitgliedschaft
             </CardTitle>
           </CardHeader>
@@ -79,10 +80,12 @@ const AccountPage: React.FC = () =>
             <div className="rounded-2xl bg-gray-50 px-4 py-3 text-sm text-gray-600">
               Luxe+ garantiert kostenlosen Versand, 30 Tage Rückgabe und Early Access.
             </div>
-            <Button className="w-full">Vorteile ansehen</Button>
-            <Button variant="outline" className="w-full">
-              Mitgliedschaft verwalten
-            </Button>
+            <Column className="gap-4 space-y-1">
+              <Button className="w-full">Vorteile ansehen</Button>
+              <Button variant="outline" className="w-full">
+                Mitgliedschaft verwalten
+              </Button>
+            </Column>
           </CardContent>
         </Card>
       </div>
@@ -115,7 +118,7 @@ const AccountPage: React.FC = () =>
         <Card className="bg-white shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle className="text-lg">Präferenzen</CardTitle>
-            <Truck className="h-5 w-5 text-primary" />
+            <Truck className="h-5 w-5 text-gray-900" />
           </CardHeader>
           <CardContent className="space-y-4 text-sm text-gray-600">
             { preferences.map( ( preference ) => (

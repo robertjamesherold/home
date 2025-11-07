@@ -73,13 +73,13 @@ const PageFooter = forwardRef<HTMLElement, PageFooterProps>( ( { className = '',
           <div>
             <p className="mb-3 text-xs uppercase tracking-[0.3em] text-gray-400">Social</p>
             <div className="flex gap-3 text-gray-500">
-              <a href="#" className="rounded-full border border-gray-200 p-2 transition hover:border-primary hover:text-primary">
+              <a href="#" className="rounded-full border border-gray-200 p-2 transition hover:border-gray-900 hover:text-gray-900">
                 <Facebook className="h-4 w-4" />
               </a>
-              <a href="#" className="rounded-full border border-gray-200 p-2 transition hover:border-primary hover:text-primary">
+              <a href="#" className="rounded-full border border-gray-200 p-2 transition hover:border-gray-900 hover:text-gray-900">
                 <Instagram className="h-4 w-4" />
               </a>
-              <a href="#" className="rounded-full border border-gray-200 p-2 transition hover:border-primary hover:text-primary">
+              <a href="#" className="rounded-full border border-gray-200 p-2 transition hover:border-gray-900 hover:text-gray-900">
                 <Twitter className="h-4 w-4" />
               </a>
             </div>

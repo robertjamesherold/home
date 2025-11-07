@@ -71,15 +71,16 @@ const [ selectedCategories, setSelectedCategories ] =  useState<string[]>( [
   }, [ productsData, selectedCategories, priceRange, sortBy, normalizedSearch ] )
     
     return {
-        selectedCategories,
-        priceRange,
-        sortBy,
-        handleCategoryToggle,
-        setPriceRange,
-        setSortBy,
-        filteredProducts,
-        searchTerm,
-        setSearchTerm,
+      selectedCategories,
+      priceRange,
+      sortBy,
+      handleCategoryToggle,
+      setPriceRange,
+      setSortBy,
+      setSelectedCategories,
+      filteredProducts,
+      searchTerm,
+      setSearchTerm,
     };
 };
 

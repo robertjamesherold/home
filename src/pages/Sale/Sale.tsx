@@ -15,7 +15,7 @@ const SalePage: React.FC = () =>
       <Header className="mb-8 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <div>
           <div className="flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-gray-400">
-            <Flame className="h-4 w-4 text-primary" />
+            <Flame className="h-4 w-4 text-gray-900" />
             Sale
           </div>
           <Title level={ 1 } weight="bold" text="Kuratiertes Sale-Sortiment" />
@@ -24,7 +24,7 @@ const SalePage: React.FC = () =>
             text="Minimalistische Looks, maximal reduziert. Entdecken Sie zeitlose Essentials mit frischem Akzent."
           />
         </div>
-        <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary/10">
+        <Button asChild variant="outline" className="border-gray-900 text-gray-900 hover:bg-gray-100">
           <Link to="/products">Alle Produkte</Link>
         </Button>
       </Header>

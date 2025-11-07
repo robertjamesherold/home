@@ -24,7 +24,7 @@ const CheckoutSuccess: React.FC = () =>
   return (
     <section className="container mx-auto px-4 py-10">
       <div className="flex flex-col items-center text-center">
-        <CheckCircle2 className="mb-4 h-14 w-14 text-primary" />
+        <CheckCircle2 className="mb-4 h-14 w-14 text-gray-900" />
         <p className="text-xs uppercase tracking-[0.4em] text-gray-400">Erfolg</p>
         <h1 className="text-3xl font-semibold text-gray-900">Vielen Dank!</h1>
         <p className="mt-2 max-w-xl text-gray-500">

@@ -19,7 +19,7 @@ const productsData: ProductType[] = [
   },
   {
     id: '2',
-    name: 'Luxury Chronograph Watch',
+    name: 'Luxury  Watch',
     price: 299.99,
     originalPrice: 449.99,
     description:

@@ -1,7 +1,8 @@
+import { number } from 'motion/react'
 import type { ReactNode } from 'react';
 
 type TextParagraphProps = {
-  text?: string;
+  text?: string | number;
   lg?: boolean;
   md?: boolean;
   sm?: boolean;

@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react'
+import { ProductDetails } from './components/TabSpecsRow'
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   ChevronLeft,
@@ -10,12 +11,27 @@ import {
   Star,
   Truck,
 } from 'lucide-react';
-import { Badge, Button, Card, CardContent, Separator } from '@ui/.';
+import
+{
+  Badge,
+  Button,
+  Card,
+  CardContent,
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  type CarouselApi,
+  Separator,
+  TabsContent, TabsList, TabsTrigger
+} from '@ui/.'
 import { productsData } from '@data/.';
 import { useCart } from '@hooks/useProductContext';
 import { toast } from 'sonner';
 
 import useRandomImages from '@/hooks/useRandomImages';
+import { Image } from '@/layout'
+import { Tabs } from '@radix-ui/react-tabs'
+import * as TabsPrimitive from '@radix-ui/react-tabs';
 
 const MIN_RELATED_COUNT = 12;
 const MAX_RELATED_COUNT = 24;
@@ -27,8 +43,7 @@ const ProductPage: React.FC = () =>
   const { addToCart } = useCart();
   const [ quantity, setQuantity ] = useState( 1 );
   const [ selectedImage, setSelectedImage ] = useState( 0 );
-  const relatedListRef = useRef<HTMLDivElement | null>( null );
-  const baseSequenceWidthRef = useRef( 0 );
+  const [ relatedCarouselApi, setRelatedCarouselApi ] = useState<CarouselApi | null>( null );
   const { getRandomImageUrl, getRandomImageUrls } = useRandomImages();
 
   const product = productsData.find( ( p ) => p.id === id );
@@ -63,6 +78,23 @@ const ProductPage: React.FC = () =>
   {
     addToCart( product, quantity );
     toast.success( `${ product.name } wurde zum Warenkorb hinzugefügt` );
+  };
+
+  const handleRelatedCarousel = ( direction: 'prev' | 'next' ) =>
+  {
+    if ( !relatedCarouselApi )
+    {
+      return
+    }
+
+    if ( direction === 'next' )
+    {
+      relatedCarouselApi.scrollNext()
+    }
+    else
+    {
+      relatedCarouselApi.scrollPrev()
+    }
   };
 
   const relatedProductsBase = useMemo( () =>
@@ -107,138 +139,31 @@ const ProductPage: React.FC = () =>
     return picks;
   }, [ product.category, product.id ] );
 
-  const showCarouselControls = relatedProductsBase.length > 4;
-
-  const displayedRelatedProducts = useMemo( () =>
-  {
-    if ( !relatedProductsBase.length )
-    {
-      return [] as { product: typeof productsData[ number ]; duplicateIndex: number }[];
-    }
-
-    if ( !showCarouselControls )
-    {
-      return relatedProductsBase.map( ( relatedProduct, index ) => ( {
+  const relatedProductInstances = useMemo(
+    () =>
+      relatedProductsBase.map( ( relatedProduct, index ) => ( {
         product: relatedProduct,
         duplicateIndex: index,
-      } ) );
-    }
+      } ) ),
+    [ relatedProductsBase ]
+  );
 
-    const tripled = [] as { product: typeof productsData[ number ]; duplicateIndex: number }[];
-    for ( let copyIndex = 0; copyIndex < 3; copyIndex += 1 )
-    {
-      relatedProductsBase.forEach( ( relatedProduct, itemIndex ) =>
-      {
-        tripled.push( {
-          product: relatedProduct,
-          duplicateIndex: copyIndex * relatedProductsBase.length + itemIndex,
-        } );
-      } );
-    }
-
-    return tripled;
-  }, [ relatedProductsBase, showCarouselControls ] );
-
-  useEffect( () =>
-  {
-    const container = relatedListRef.current;
-    if ( !showCarouselControls || !container )
-    {
-      baseSequenceWidthRef.current = 0;
-      return;
-    }
-
-    let frame = 0;
-
-    const measure = () =>
-    {
-      cancelAnimationFrame( frame );
-      frame = requestAnimationFrame( () =>
-      {
-        const node = relatedListRef.current;
-        if ( !node )
-        {
-          return;
-        }
-        const totalWidth = node.scrollWidth;
-        const baseWidth = totalWidth / 3;
-        baseSequenceWidthRef.current = baseWidth;
-        node.scrollLeft = baseWidth;
-      } );
-    };
-
-    measure();
-
-    const handleScroll = () =>
-    {
-      const node = relatedListRef.current;
-      const baseWidth = baseSequenceWidthRef.current;
-      if ( !node || !baseWidth )
-      {
-        return;
-      }
-
-      if ( node.scrollLeft <= 0 )
-      {
-        node.scrollLeft += baseWidth;
-      }
-      else if ( node.scrollLeft >= baseWidth * 2 )
-      {
-        node.scrollLeft -= baseWidth;
-      }
-    };
-
-    const handleResize = () => measure();
-
-    container.addEventListener( 'scroll', handleScroll );
-    if ( typeof window !== 'undefined' )
-    {
-      window.addEventListener( 'resize', handleResize );
-    }
-
-    return () =>
-    {
-      container.removeEventListener( 'scroll', handleScroll );
-      if ( typeof window !== 'undefined' )
-      {
-        window.removeEventListener( 'resize', handleResize );
-      }
-      cancelAnimationFrame( frame );
-    };
-  }, [ showCarouselControls, relatedProductsBase.length ] );
-
-  const scrollRelatedProducts = ( direction: 'prev' | 'next' ) =>
-  {
-    const container = relatedListRef.current;
-    if ( !container )
-    {
-      return;
-    }
-
-    const baseWidth = baseSequenceWidthRef.current || container.clientWidth;
-    const scrollAmount = baseWidth * 0.85;
-
-    container.scrollBy( {
-      left: direction === 'next' ? scrollAmount : -scrollAmount,
-      behavior: 'smooth',
-    } );
-  };
+  const showCarouselControls = relatedProductInstances.length > 4;
 
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
         <div className="space-y-4">
-          <div className="overflow-hidden rounded-lg border border-border bg-muted/40">
-            { heroImage && (
-              <img
-                src={ heroImage }
-                alt={ product.name }
-                className="h-full w-full object-cover"
-              />
-            ) }
-          </div>
+          { heroImage && (
+            <Image
+              src={ heroImage }
+              alt={ product.name }
+              className="rounded-lg border border-border bg-muted/40"
+              loaderLabel="Produktbild wird geladen …"
+            />
+          ) }
           { productImages.length > 1 && (
-            <div className="grid grid-cols-4 gap-3">
+            <div className="grid grid-cols-4 gap-3 ">
               { productImages.map( ( image, index ) => (
                 <button
                   key={ image }
@@ -246,10 +171,11 @@ const ProductPage: React.FC = () =>
                   onClick={ () => setSelectedImage( index ) }
                   className={`overflow-hidden rounded-md border ${ selectedImage === index ? 'border-foreground' : 'border-transparent' }`}
                 >
-                  <img
+                  <Image
                     src={ image }
                     alt={`${ product.name } ${ index + 1 }`}
-                    className="h-full w-full object-cover"
+                    className="h-full w-full overflow-hidden rounded-md"
+                    showLatencyIndicator={ false }
                   />
                 </button>
               ) ) }
@@ -324,6 +250,31 @@ const ProductPage: React.FC = () =>
             </Button>
           </div>
 
+
+
+          <Card className="border-border/80 bg-muted/50">
+            <CardContent className="p-4">
+              <h3 className="mb-2 text-lg font-semibold">Produktdetails</h3>
+              <div className="space-y-1 text-sm text-muted-foreground">
+                <div className="flex justify-between">
+                  <span>Kategorie:</span>
+                  <span>{ product.category }</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Verfügbarkeit:</span>
+                  <span>{ product.inStock ? 'Auf Lager' : 'Ausverkauft' }</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Artikelnummer:</span>
+                  <span>{ product.id }</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <ProductDetails />
+
+
           <div className="space-y-3 pt-4 text-sm text-muted-foreground">
             <div className="flex items-center gap-3">
               <Truck className="h-5 w-5 text-muted-foreground" />
@@ -341,18 +292,19 @@ const ProductPage: React.FC = () =>
         </div>
       </div>
 
-      { relatedProductsBase.length > 0 && (
-        <section className="mt-16">
-          <div className="mb-6 flex items-center justify-between">
+      { relatedProductInstances.length > 0 && (
+        <section className="mt-16 overflow-visible">
+          <div className="mb-6 flex items-center justify-between overflow-visible">
             <h2 className="text-2xl font-semibold">Ähnliche Produkte</h2>
             { showCarouselControls && (
-              <div className="hidden gap-2 md:flex">
+              <div className="hidden gap-2 sm:flex">
                 <Button
                   type="button"
                   variant="ghost"
                   size="icon"
                   className="h-9 w-9 rounded-full border"
-                  onClick={ () => scrollRelatedProducts( 'prev' ) }
+                  onClick={ () => handleRelatedCarousel( 'prev' ) }
+                  disabled={ !relatedCarouselApi }
                 >
                   <ChevronLeft className="h-4 w-4" />
                 </Button>
@@ -361,7 +313,8 @@ const ProductPage: React.FC = () =>
                   variant="ghost"
                   size="icon"
                   className="h-9 w-9 rounded-full border"
-                  onClick={ () => scrollRelatedProducts( 'next' ) }
+                  onClick={ () => handleRelatedCarousel( 'next' ) }
+                  disabled={ !relatedCarouselApi }
                 >
                   <ChevronRight className="h-4 w-4" />
                 </Button>
@@ -369,58 +322,40 @@ const ProductPage: React.FC = () =>
             ) }
           </div>
 
-          <div className="relative">
-            { showCarouselControls && (
-              <>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="icon"
-                  className="absolute left-0 top-1/2 z-10 hidden h-9 w-9 -translate-y-1/2 rounded-full border bg-background/80 backdrop-blur md:flex"
-                  onClick={ () => scrollRelatedProducts( 'prev' ) }
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                </Button>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="icon"
-                  className="absolute right-0 top-1/2 z-10 hidden h-9 w-9 -translate-y-1/2 rounded-full border bg-background/80 backdrop-blur md:flex"
-                  onClick={ () => scrollRelatedProducts( 'next' ) }
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </Button>
-              </>
-            ) }
+          <Carousel
+            className="relative overflow-visible"
+            opts={ {
+              align: 'start',
+              loop: true,
+              containScroll: 'trimSnaps',
+              skipSnaps: false,
+            } }
+            setApi={ setRelatedCarouselApi }
+          >
+            <CarouselContent className="pb-4 overflow-visible">
+              { relatedProductInstances.map( ( { product: relatedProduct, duplicateIndex } ) =>
+              {
+                const imageUrl = getRandomImageUrl( { cacheKey: `${ relatedProduct.id }-related-${ duplicateIndex }` } );
 
-            <div
-              ref={ relatedListRef }
-              className={`overflow-x-auto ${ showCarouselControls ? 'scroll-smooth' : '' }`}
-            >
-              <div className={`flex gap-4 ${ showCarouselControls ? 'flex-nowrap' : 'flex-wrap' }`}>
-                { displayedRelatedProducts.map( ( { product: relatedProduct, duplicateIndex } ) =>
-                {
-                  const imageUrl = getRandomImageUrl( { cacheKey: `${ relatedProduct.id }-related-${ duplicateIndex }` } );
-
-                  return (
+                return (
+                  <CarouselItem
+                    key={ `${ relatedProduct.id }-${ duplicateIndex }` }
+                    className="basis-[80%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
+                  >
                     <Card
-                      key={`${ relatedProduct.id }-${ duplicateIndex }`}
-                      className="w-[180px] shrink-0 border border-border/80 transition-shadow duration-200 hover:shadow-md sm:w-[200px]"
+                      className="h-full w-full border border-border/80 overflow-hidden transition-shadow duration-200 hover:shadow-md"
                       onClick={ () =>
                       {
                         navigate( `/product/${ relatedProduct.id }` );
                         window.scrollTo( { top: 0, behavior: 'smooth' } );
                       } }
                     >
-                      <div className="h-40 w-full overflow-hidden bg-muted">
-                        { imageUrl && (
-                          <img
-                            src={ imageUrl }
-                            alt={ relatedProduct.name }
-                            className="h-full w-full object-cover"
-                          />
-                        ) }
-                      </div>
+                      <Image
+                        src={ imageUrl }
+                        alt={ relatedProduct.name }
+                        className="h-40 w-full bg-muted"
+                        loaderLabel="Produktvorschau lädt …"
+                      />
                       <CardContent className="space-y-2 p-3">
                         <h3 className="text-sm font-medium leading-snug">{ relatedProduct.name }</h3>
                         <div className="flex items-center gap-2 text-sm">
@@ -433,11 +368,12 @@ const ProductPage: React.FC = () =>
                         </div>
                       </CardContent>
                     </Card>
-                  );
-                } ) }
-              </div>
-            </div>
-          </div>
+                  </CarouselItem>
+                )
+              } ) }
+            </CarouselContent>
+
+          </Carousel>
         </section>
       ) }
     </div>
