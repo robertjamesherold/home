@@ -18,7 +18,7 @@ const FeaturedProducts: React.FC<FeaturedProductsType> = (featuredProductsData: 
                     <TextParagraph className="text-gray-600" text={featuredProductsData.subtitle} />
                 </Header>
 
-                <Grid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <Grid className="grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-6">
                     <ImageCard product={ featuredProductsData } />
                 </Grid>
 

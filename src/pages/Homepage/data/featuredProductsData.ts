@@ -7,8 +7,7 @@ const featuredProductsData: FeaturedProductsType = {
   buttonlink: '/products',
   buttontext: 'Alle Produkte ansehen',
   featuredProducts: productsData
-    .filter((p) => p.tags.includes('new'))
-    .slice(0, 4),
+    .slice(0, 3),
 };
 
 export default featuredProductsData;

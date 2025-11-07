@@ -3,12 +3,12 @@ export type ProductType = {
   name: string;
   price: number;
   originalPrice?: number;
-  description: string;
-  category: string;
-  rating: number;
-  reviews: number;
-  inStock: boolean;
-  tags: string[];
+  description?: string;
+  category?: string;
+  rating?: number;
+  reviews?: number;
+  inStock?: boolean;
+  tags?: string[];
 };
 
 export type CartItemType = {
@@ -22,6 +22,6 @@ export type CartContextType = {
   removeFromCart: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
   clearCart: () => void;
-  totalItems: number;
-  totalPrice: number;
+  totalItems?: number;
+  totalPrice?: number;
 };

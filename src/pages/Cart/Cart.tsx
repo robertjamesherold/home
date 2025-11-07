@@ -3,6 +3,8 @@ import { Trash2, Plus, Minus, ShoppingBag } from 'lucide-react'
 import { Button, Card, CardContent, Separator } from '@ui/.'
 import { useCart } from '@hooks/.'
 import useRandomImages from '@/hooks/useRandomImages'
+import { Title } from '@typography/.'
+import { Column } from '@/layout'
 
 const Cart: React.FC = () =>
 {
@@ -114,7 +116,7 @@ const Cart: React.FC = () =>
           <div>
             <Card className="sticky top-24">
               <CardContent className="p-6">
-                <h2 className="mb-6">Zusammenfassung</h2>
+                <Title level={ 4 } weight='semibold' className='mb-6' text="Zusammenfassung" />
 
                 <div className="space-y-3 mb-6">
                   <div className="flex justify-between">
@@ -149,7 +151,7 @@ const Cart: React.FC = () =>
                     Noch { ( 50 - totalPrice ).toFixed( 2 ) }€ bis zum kostenlosen Versand
                   </p>
                 ) }
-
+                <Column className='gap-4'>
                 <Button
                   onClick={ () => navigate( '/checkout' ) }
                   className="w-full"
@@ -162,7 +164,8 @@ const Cart: React.FC = () =>
                   <Button variant="outline" className="w-full mt-3">
                     Weiter einkaufen
                   </Button>
-                </Link>
+                  </Link>
+                </Column>
               </CardContent>
             </Card>
           </div>

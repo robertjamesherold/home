@@ -5,6 +5,8 @@ import { featuresData, heroData, featuredProductsData, bannerData } from './data
 
 const Homepage: React.FC = () =>
 {
+
+
   return (
     <Main className="flex flex-col">
       {/* Hero Section */ }
