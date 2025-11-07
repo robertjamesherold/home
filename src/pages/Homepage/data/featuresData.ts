@@ -1,8 +1,6 @@
 import { Truck, RefreshCw, Shield } from 'lucide-react';
 import type { FeaturesType } from '@/pages/Homepage/types';
 
-
-
 const featuresData: FeaturesType = {
   data: [
     {
@@ -21,6 +19,6 @@ const featuresData: FeaturesType = {
       text: 'SSL-verschlüsselt und sicher',
     },
   ],
-}; 
+};
 
 export default featuresData;

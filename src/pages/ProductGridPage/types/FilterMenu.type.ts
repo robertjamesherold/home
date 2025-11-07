@@ -6,7 +6,7 @@ export type FilterMenuType = {
   categoriesData: string[];
   selectedCategories: string[];
   setSelectedCategories: (categories: string[]) => void;
-    priceRange: number[];
+  priceRange: number[];
   setPriceRange: (value: number[]) => void;
   handleCategoryToggle: (categoryId: string) => void;
   filteredProducts: ProductType[];

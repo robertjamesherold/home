@@ -1,11 +1,11 @@
-import React, {  useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { CartItemType, ProductType } from '@/types';
 import CartContext from './CartContext';
 
-const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
- 
-  const [ items, setItems ] = useState<CartItemType[]>( () =>
-  {
+const CartProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [items, setItems] = useState<CartItemType[]>(() => {
     const saved = localStorage.getItem('cart');
     return saved ? JSON.parse(saved) : [];
   });
@@ -72,5 +72,3 @@ const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 };
 
 export default CartProvider;
-
-

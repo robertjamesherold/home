@@ -14,10 +14,8 @@ const buttonVariants = cva(
           ' text-white bg-red-500 hover:bg-red-600/90 focus-visible:ring-red-400/20 dark:focus-visible:ring-red-400/40 dark:bg-red-300/60 ',
         outline:
           'border border-gray-200 bg-white text-orange-400 hover:bg-gray-100',
-        secondary:
-          'bg text-orange-400 hover:bg-gray-200',
-        ghost:
-          'text-orange-400 hover:bg-gray-100',
+        secondary: 'bg text-orange-400 hover:bg-gray-200',
+        ghost: 'text-orange-400 hover:bg-gray-100',
         link: 'text-orange-400 underline-offset-4 hover:underline',
       },
       size: {
@@ -49,7 +47,10 @@ function Button({
   return (
     <Comp
       data-slot="button"
-      className={ cn( buttonVariants( { variant, size, className } ), 'cursor-pointer' ) }
+      className={cn(
+        buttonVariants({ variant, size, className }),
+        'cursor-pointer'
+      )}
       {...props}
     />
   );
