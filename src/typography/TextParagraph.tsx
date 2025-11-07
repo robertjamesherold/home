@@ -1,4 +1,4 @@
-import { number } from 'motion/react'
+import { number } from 'motion/react';
 import type { ReactNode } from 'react';
 
 type TextParagraphProps = {
@@ -20,10 +20,14 @@ const TextParagraph: React.FC<TextParagraphProps> = ({
   className = '',
   children,
 }) => {
-  const sizeClass = lg ? 'text-lg'
-    : md ? 'text-base'
-      : sm ? 'text-sm'
-        : xs ? 'text-xs'
+  const sizeClass = lg
+    ? 'text-lg'
+    : md
+      ? 'text-base'
+      : sm
+        ? 'text-sm'
+        : xs
+          ? 'text-xs'
           : 'text-base';
   const content = children ?? text;
 

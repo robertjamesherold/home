@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from 'react'
-import { ProductDetails } from './components/TabSpecsRow'
+import { useEffect, useMemo, useState } from 'react';
+import { ProductDetails } from './components/TabSpecsRow';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   ChevronLeft,
@@ -11,8 +11,7 @@ import {
   Star,
   Truck,
 } from 'lucide-react';
-import
-{
+import {
   Badge,
   Button,
   Card,
@@ -22,130 +21,117 @@ import
   CarouselItem,
   type CarouselApi,
   Separator,
-  TabsContent, TabsList, TabsTrigger
-} from '@ui/.'
+
+} from '@ui/.';
 import { productsData } from '@data/.';
 import { useCart } from '@hooks/useProductContext';
 import { toast } from 'sonner';
 
 import useRandomImages from '@/hooks/useRandomImages';
-import { Image } from '@/layout'
-import { Tabs } from '@radix-ui/react-tabs'
-import * as TabsPrimitive from '@radix-ui/react-tabs';
+import { Image } from '@/layout';
 
 const MIN_RELATED_COUNT = 12;
 const MAX_RELATED_COUNT = 24;
 
-const ProductPage: React.FC = () =>
-{
+const ProductPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { addToCart } = useCart();
-  const [ quantity, setQuantity ] = useState( 1 );
-  const [ selectedImage, setSelectedImage ] = useState( 0 );
-  const [ relatedCarouselApi, setRelatedCarouselApi ] = useState<CarouselApi | null>( null );
+  const [quantity, setQuantity] = useState(1);
+  const [selectedImage, setSelectedImage] = useState(0);
+  const [relatedCarouselApi, setRelatedCarouselApi] =
+    useState<CarouselApi | null>(null);
   const { getRandomImageUrl, getRandomImageUrls } = useRandomImages();
 
-  const product = productsData.find( ( p ) => p.id === id );
+  const product = productsData.find((p) => p.id === id);
 
-  useEffect( () =>
-  {
-    setQuantity( 1 );
-    setSelectedImage( 0 );
-  }, [ id ] );
+  useEffect(() => {
+    setQuantity(1);
+    setSelectedImage(0);
+  }, [id]);
 
-  if ( !product )
-  {
+  if (!product) {
     return (
       <div className="container mx-auto px-4 py-16 text-center">
         <h2 className="mb-4 text-2xl font-semibold">Produkt nicht gefunden</h2>
-        <Button onClick={ () => navigate( '/products' ) }>
+        <Button onClick={() => navigate('/products')}>
           Zurück zu Produkten
         </Button>
       </div>
     );
   }
 
-  const productImages = useMemo( () =>
-  {
-    const images = getRandomImageUrls( 4, { cacheKey: `${ product.id }-gallery` } );
-    return images.length ? images : getRandomImageUrls( 1, { cacheKey: `${ product.id }-gallery-fallback` } );
-  }, [ getRandomImageUrls, product.id ] );
+  const productImages = useMemo(() => {
+    const images = getRandomImageUrls(4, { cacheKey: `${product.id}-gallery` });
+    return images.length
+      ? images
+      : getRandomImageUrls(1, { cacheKey: `${product.id}-gallery-fallback` });
+  }, [getRandomImageUrls, product.id]);
 
-  const heroImage = productImages[ selectedImage ] ?? productImages[ 0 ] ?? '';
+  const heroImage = productImages[selectedImage] ?? productImages[0] ?? '';
 
-  const handleAddToCart = () =>
-  {
-    addToCart( product, quantity );
-    toast.success( `${ product.name } wurde zum Warenkorb hinzugefügt` );
+  const handleAddToCart = () => {
+    addToCart(product, quantity);
+    toast.success(`${product.name} wurde zum Warenkorb hinzugefügt`);
   };
 
-  const handleRelatedCarousel = ( direction: 'prev' | 'next' ) =>
-  {
-    if ( !relatedCarouselApi )
-    {
-      return
+  const handleRelatedCarousel = (direction: 'prev' | 'next') => {
+    if (!relatedCarouselApi) {
+      return;
     }
 
-    if ( direction === 'next' )
-    {
-      relatedCarouselApi.scrollNext()
-    }
-    else
-    {
-      relatedCarouselApi.scrollPrev()
+    if (direction === 'next') {
+      relatedCarouselApi.scrollNext();
+    } else {
+      relatedCarouselApi.scrollPrev();
     }
   };
 
-  const relatedProductsBase = useMemo( () =>
-  {
-    const others = productsData.filter( ( p ) => p.id !== product.id );
-    if ( !others.length )
-    {
+  const relatedProductsBase = useMemo(() => {
+    const others = productsData.filter((p) => p.id !== product.id);
+    if (!others.length) {
       return [];
     }
 
-    const sameCategory = others.filter( ( p ) => p.category === product.category );
-    const differentCategory = others.filter( ( p ) => p.category !== product.category );
-    const targetCount = Math.floor( Math.random() * ( MAX_RELATED_COUNT - MIN_RELATED_COUNT + 1 ) ) + MIN_RELATED_COUNT;
+    const sameCategory = others.filter((p) => p.category === product.category);
+    const differentCategory = others.filter(
+      (p) => p.category !== product.category
+    );
+    const targetCount =
+      Math.floor(Math.random() * (MAX_RELATED_COUNT - MIN_RELATED_COUNT + 1)) +
+      MIN_RELATED_COUNT;
 
     const picks = [] as typeof others;
-    for ( let index = 0; index < targetCount; index += 1 )
-    {
+    for (let index = 0; index < targetCount; index += 1) {
       let pool = sameCategory.length ? sameCategory : others;
-      if ( sameCategory.length && differentCategory.length )
-      {
+      if (sameCategory.length && differentCategory.length) {
         pool = Math.random() < 0.7 ? sameCategory : differentCategory;
-      }
-      else if ( !sameCategory.length && differentCategory.length )
-      {
+      } else if (!sameCategory.length && differentCategory.length) {
         pool = differentCategory;
       }
 
-      if ( !pool.length )
-      {
+      if (!pool.length) {
         break;
       }
 
-      const randomIndex = Math.floor( Math.random() * pool.length );
-      picks.push( pool[ randomIndex ] );
+      const randomIndex = Math.floor(Math.random() * pool.length);
+      picks.push(pool[randomIndex]);
     }
 
-    if ( !picks.length )
-    {
-      return others.slice( 0, Math.min( targetCount, others.length ) );
+    if (!picks.length) {
+      return others.slice(0, Math.min(targetCount, others.length));
     }
 
     return picks;
-  }, [ product.category, product.id ] );
+  }, [product.category, product.id]);
 
   const relatedProductInstances = useMemo(
     () =>
-      relatedProductsBase.map( ( relatedProduct, index ) => ( {
+      relatedProductsBase.map((relatedProduct, index) => ({
         product: relatedProduct,
         duplicateIndex: index,
-      } ) ),
-    [ relatedProductsBase ]
+      })),
+    [relatedProductsBase]
   );
 
   const showCarouselControls = relatedProductInstances.length > 4;
@@ -154,69 +140,75 @@ const ProductPage: React.FC = () =>
     <div className="container mx-auto px-4 py-8">
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
         <div className="space-y-4">
-          { heroImage && (
+          {heroImage && (
             <Image
-              src={ heroImage }
-              alt={ product.name }
+              src={heroImage}
+              alt={product.name}
               className="rounded-lg border border-border bg-muted/40"
               loaderLabel="Produktbild wird geladen …"
             />
-          ) }
-          { productImages.length > 1 && (
-            <div className="grid grid-cols-4 gap-3 ">
-              { productImages.map( ( image, index ) => (
+          )}
+          {productImages.length > 1 && (
+            <div className="grid grid-cols-4 gap-3">
+              {productImages.map((image, index) => (
                 <button
-                  key={ image }
+                  key={image}
                   type="button"
-                  onClick={ () => setSelectedImage( index ) }
-                  className={`overflow-hidden rounded-md border ${ selectedImage === index ? 'border-foreground' : 'border-transparent' }`}
+                  onClick={() => setSelectedImage(index)}
+                  className={`overflow-hidden rounded-md border ${selectedImage === index ? 'border-foreground' : 'border-transparent'}`}
                 >
                   <Image
-                    src={ image }
-                    alt={`${ product.name } ${ index + 1 }`}
+                    src={image}
+                    alt={`${product.name} ${index + 1}`}
                     className="h-full w-full overflow-hidden rounded-md"
-                    showLatencyIndicator={ false }
+                    showLatencyIndicator={false}
                   />
                 </button>
-              ) ) }
+              ))}
             </div>
-          ) }
+          )}
         </div>
 
         <div className="space-y-6">
           <div>
             <div className="mb-2 flex items-center gap-2">
-              { product.tags.includes( 'new' ) && <Badge>Neu</Badge> }
-              { product.tags.includes( 'sale' ) && <Badge variant="destructive">Sale</Badge> }
+              {product.tags.includes('new') && <Badge>Neu</Badge>}
+              {product.tags.includes('sale') && (
+                <Badge variant="destructive">Sale</Badge>
+              )}
             </div>
-            <h1 className="text-3xl font-semibold">{ product.name }</h1>
+            <h1 className="text-3xl font-semibold">{product.name}</h1>
             <div className="mt-3 flex items-center gap-2">
               <div className="flex items-center gap-1">
-                { [ ...Array( 5 ) ].map( ( _, starIndex ) => (
+                {[...Array(5)].map((_, starIndex) => (
                   <Star
-                    key={ starIndex }
-                    className={`h-4 w-4 ${ starIndex < Math.floor( product.rating ) ? 'fill-yellow-400 text-yellow-400' : 'text-muted-foreground/40' }`}
+                    key={starIndex}
+                    className={`h-4 w-4 ${starIndex < Math.floor(product.rating) ? 'fill-yellow-400 text-yellow-400' : 'text-muted-foreground/40'}`}
                   />
-                ) ) }
+                ))}
               </div>
               <span className="text-sm text-muted-foreground">
-                { product.rating } ({ product.reviews } Bewertungen)
+                {product.rating} ({product.reviews} Bewertungen)
               </span>
             </div>
           </div>
 
           <div className="flex items-baseline gap-3">
-            <span className="text-3xl font-semibold">{ product.price.toFixed( 2 ) }€</span>
-            { product.originalPrice && (
+            <span className="text-3xl font-semibold">
+              {product.price.toFixed(2)}€
+            </span>
+            {product.originalPrice && (
               <span className="text-lg text-muted-foreground line-through">
-                { product.originalPrice.toFixed( 2 ) }€
+                {product.originalPrice.toFixed(2)}€
               </span>
-            ) }
+            )}
           </div>
 
           <Separator />
 
-          <p className="text-base text-muted-foreground">{ product.description }</p>
+          <p className="text-base text-muted-foreground">
+            {product.description}
+          </p>
 
           <div className="flex flex-wrap items-center gap-4">
             <div className="flex items-center rounded-md border">
@@ -224,16 +216,16 @@ const ProductPage: React.FC = () =>
                 type="button"
                 variant="ghost"
                 size="icon"
-                onClick={ () => setQuantity( Math.max( 1, quantity - 1 ) ) }
+                onClick={() => setQuantity(Math.max(1, quantity - 1))}
               >
                 <Minus className="h-4 w-4" />
               </Button>
-              <span className="px-4 text-sm font-medium">{ quantity }</span>
+              <span className="px-4 text-sm font-medium">{quantity}</span>
               <Button
                 type="button"
                 variant="ghost"
                 size="icon"
-                onClick={ () => setQuantity( quantity + 1 ) }
+                onClick={() => setQuantity(quantity + 1)}
               >
                 <Plus className="h-4 w-4" />
               </Button>
@@ -241,16 +233,14 @@ const ProductPage: React.FC = () =>
 
             <Button
               type="button"
-              onClick={ handleAddToCart }
-              className="flex-1 min-w-[200px]"
+              onClick={handleAddToCart}
+              className="min-w-[200px] flex-1"
               size="lg"
-              disabled={ !product.inStock }
+              disabled={!product.inStock}
             >
-              { product.inStock ? 'In den Warenkorb' : 'Ausverkauft' }
+              {product.inStock ? 'In den Warenkorb' : 'Ausverkauft'}
             </Button>
           </div>
-
-
 
           <Card className="border-border/80 bg-muted/50">
             <CardContent className="p-4">
@@ -258,22 +248,21 @@ const ProductPage: React.FC = () =>
               <div className="space-y-1 text-sm text-muted-foreground">
                 <div className="flex justify-between">
                   <span>Kategorie:</span>
-                  <span>{ product.category }</span>
+                  <span>{product.category}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Verfügbarkeit:</span>
-                  <span>{ product.inStock ? 'Auf Lager' : 'Ausverkauft' }</span>
+                  <span>{product.inStock ? 'Auf Lager' : 'Ausverkauft'}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Artikelnummer:</span>
-                  <span>{ product.id }</span>
+                  <span>{product.id}</span>
                 </div>
               </div>
             </CardContent>
           </Card>
 
           <ProductDetails />
-
 
           <div className="space-y-3 pt-4 text-sm text-muted-foreground">
             <div className="flex items-center gap-3">
@@ -292,19 +281,19 @@ const ProductPage: React.FC = () =>
         </div>
       </div>
 
-      { relatedProductInstances.length > 0 && (
+      {relatedProductInstances.length > 0 && (
         <section className="mt-16 overflow-visible">
           <div className="mb-6 flex items-center justify-between overflow-visible">
             <h2 className="text-2xl font-semibold">Ähnliche Produkte</h2>
-            { showCarouselControls && (
+            {showCarouselControls && (
               <div className="hidden gap-2 sm:flex">
                 <Button
                   type="button"
                   variant="ghost"
                   size="icon"
                   className="h-9 w-9 rounded-full border"
-                  onClick={ () => handleRelatedCarousel( 'prev' ) }
-                  disabled={ !relatedCarouselApi }
+                  onClick={() => handleRelatedCarousel('prev')}
+                  disabled={!relatedCarouselApi}
                 >
                   <ChevronLeft className="h-4 w-4" />
                 </Button>
@@ -313,69 +302,74 @@ const ProductPage: React.FC = () =>
                   variant="ghost"
                   size="icon"
                   className="h-9 w-9 rounded-full border"
-                  onClick={ () => handleRelatedCarousel( 'next' ) }
-                  disabled={ !relatedCarouselApi }
+                  onClick={() => handleRelatedCarousel('next')}
+                  disabled={!relatedCarouselApi}
                 >
                   <ChevronRight className="h-4 w-4" />
                 </Button>
               </div>
-            ) }
+            )}
           </div>
 
           <Carousel
             className="relative overflow-visible"
-            opts={ {
+            opts={{
               align: 'start',
               loop: true,
               containScroll: 'trimSnaps',
               skipSnaps: false,
-            } }
-            setApi={ setRelatedCarouselApi }
+            }}
+            setApi={setRelatedCarouselApi}
           >
-            <CarouselContent className="pb-4 overflow-visible">
-              { relatedProductInstances.map( ( { product: relatedProduct, duplicateIndex } ) =>
-              {
-                const imageUrl = getRandomImageUrl( { cacheKey: `${ relatedProduct.id }-related-${ duplicateIndex }` } );
+            <CarouselContent className="overflow-visible pb-4">
+              {relatedProductInstances.map(
+                ({ product: relatedProduct, duplicateIndex }) => {
+                  const imageUrl = getRandomImageUrl({
+                    cacheKey: `${relatedProduct.id}-related-${duplicateIndex}`,
+                  });
 
-                return (
-                  <CarouselItem
-                    key={ `${ relatedProduct.id }-${ duplicateIndex }` }
-                    className="basis-[80%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
-                  >
-                    <Card
-                      className="h-full w-full border border-border/80 overflow-hidden transition-shadow duration-200 hover:shadow-md"
-                      onClick={ () =>
-                      {
-                        navigate( `/product/${ relatedProduct.id }` );
-                        window.scrollTo( { top: 0, behavior: 'smooth' } );
-                      } }
+                  return (
+                    <CarouselItem
+                      key={`${relatedProduct.id}-${duplicateIndex}`}
+                      className="basis-[80%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
                     >
-                      <Image
-                        src={ imageUrl }
-                        alt={ relatedProduct.name }
-                        className="h-40 w-full bg-muted"
-                        loaderLabel="Produktvorschau lädt …"
-                      />
-                      <CardContent className="space-y-2 p-3">
-                        <h3 className="text-sm font-medium leading-snug">{ relatedProduct.name }</h3>
-                        <div className="flex items-center gap-2 text-sm">
-                          <span className="font-semibold">{ relatedProduct.price.toFixed( 2 ) }€</span>
-                          { relatedProduct.originalPrice && (
-                            <span className="text-xs text-muted-foreground line-through">
-                              { relatedProduct.originalPrice.toFixed( 2 ) }€
+                      <Card
+                        className="h-full w-full overflow-hidden border border-border/80 transition-shadow duration-200 hover:shadow-md"
+                        onClick={() => {
+                          navigate(`/product/${relatedProduct.id}`);
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
+                      >
+                        <Image
+                          src={imageUrl}
+                          alt={relatedProduct.name}
+                          className="h-40 w-full bg-muted"
+                          loaderLabel="Produktvorschau lädt …"
+                        />
+                        <CardContent className="space-y-2 p-3">
+                          <h3 className="text-sm font-medium leading-snug">
+                            {relatedProduct.name}
+                          </h3>
+                          <div className="flex items-center gap-2 text-sm">
+                            <span className="font-semibold">
+                              {relatedProduct.price.toFixed(2)}€
                             </span>
-                          ) }
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </CarouselItem>
-                )
-              } ) }
+                            {relatedProduct.originalPrice && (
+                              <span className="text-xs text-muted-foreground line-through">
+                                {relatedProduct.originalPrice.toFixed(2)}€
+                              </span>
+                            )}
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </CarouselItem>
+                  );
+                }
+              )}
             </CarouselContent>
-
           </Carousel>
         </section>
-      ) }
+      )}
     </div>
   );
 };

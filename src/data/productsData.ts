@@ -1,7 +1,5 @@
 import type { ProductType } from '@/types';
 
-
-
 const productsData: ProductType[] = [
   {
     id: '1',

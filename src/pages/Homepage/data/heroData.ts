@@ -6,6 +6,6 @@ const heroData: HeroType = {
     'Entdecken Sie zeitlose Eleganz und moderne Designs für jeden Anlass',
   buttonText: 'Jetzt einkaufen',
   buttonLink: '/products',
-}
+};
 
 export default heroData;

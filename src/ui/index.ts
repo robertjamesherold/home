@@ -129,7 +129,7 @@ export {
   ChartLegend,
   ChartLegendContent,
   ChartStyle,
-}   from './chart';
+} from './chart';
 export {
   Dialog,
   DialogClose,
@@ -141,7 +141,7 @@ export {
   DialogPortal,
   DialogTitle,
   DialogTrigger,
-} from './dialog'
+} from './dialog';
 
 export {
   Drawer,
@@ -154,7 +154,7 @@ export {
   DrawerFooter,
   DrawerTitle,
   DrawerDescription,
-} from './drawer';  
+} from './drawer';
 
 export {
   DropdownMenu,
@@ -172,8 +172,7 @@ export {
   DropdownMenuSub,
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
-} from './dropdown-menu';   
-
+} from './dropdown-menu';
 
 export {
   useFormField,
@@ -215,7 +214,7 @@ export {
   NavigationMenuIndicator,
   NavigationMenuViewport,
   navigationMenuTriggerStyle,
-} from './navigation-menu'; 
+} from './navigation-menu';
 
 export {
   Pagination,
@@ -238,7 +237,7 @@ export {
   SelectSeparator,
   SelectTrigger,
   SelectValue,
-}   from './select';
+} from './select';
 
 export {
   Sheet,
@@ -249,7 +248,7 @@ export {
   SheetFooter,
   SheetTitle,
   SheetDescription,
-}   from './sheet';
+} from './sheet';
 
 export {
   Sidebar,
@@ -276,8 +275,7 @@ export {
   SidebarSeparator,
   SidebarTrigger,
   useSidebar,
-}   from './sidebar';
-
+} from './sidebar';
 
 export {
   Table,
@@ -288,4 +286,4 @@ export {
   TableRow,
   TableCell,
   TableCaption,
-}   from './table';
+} from './table';

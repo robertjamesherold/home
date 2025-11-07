@@ -25,17 +25,16 @@ const LatencyLoader: FC<LatencyLoaderProps> = ({
     <div
       className={cn(
         wrapperBase,
-        isVisible ? 'opacity-100'  :'opacity-0',
+        isVisible ? 'opacity-100' : 'opacity-0',
         className
       )}
       aria-hidden={!isVisible}
     >
       <div
-        className="flex w-full h-full bg-amber-400 animate-pulse flex-col items-center gap-2  px-4 py-3 text-xs font-medium shadow-lg backdrop-blur"
+        className="flex h-full w-full animate-pulse flex-col items-center gap-2 bg-amber-400 px-4 py-3 text-xs font-medium shadow-lg backdrop-blur"
         role="status"
         aria-live="polite"
-      >
-        </div>
+      ></div>
     </div>
   );
 };

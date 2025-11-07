@@ -37,7 +37,12 @@ export const useLatencyLoader = (
       finishDelay: options?.finishDelay ?? 200,
       rampInterval: options?.rampInterval ?? 180,
     }),
-    [options?.delay, options?.finishDelay, options?.minimumVisible, options?.rampInterval]
+    [
+      options?.delay,
+      options?.finishDelay,
+      options?.minimumVisible,
+      options?.rampInterval,
+    ]
   );
 
   const [isVisible, setIsVisible] = useState(false);
@@ -155,4 +160,3 @@ export const useLatencyLoader = (
     reset,
   };
 };
-

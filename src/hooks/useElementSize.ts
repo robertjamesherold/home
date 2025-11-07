@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-
 const useElementSize = <T extends HTMLElement>(
   ref: React.RefObject<T | null>
 ) => {
@@ -46,6 +45,6 @@ const useElementSize = <T extends HTMLElement>(
   }, [ref]);
 
   return size; // { width, height }
-}
+};
 
 export default useElementSize;

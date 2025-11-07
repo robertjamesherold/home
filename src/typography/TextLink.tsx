@@ -21,10 +21,14 @@ const TextLink: React.FC<TextLinkProps> = ({
   children,
   href,
 }) => {
-  const sizeClass = lg ? 'text-lg'
-    : md ? 'text-base'
-      : sm ? 'text-sm'
-        : xs ? 'text-xs'
+  const sizeClass = lg
+    ? 'text-lg'
+    : md
+      ? 'text-base'
+      : sm
+        ? 'text-sm'
+        : xs
+          ? 'text-xs'
           : 'text-base';
   const content = children ?? text;
 
@@ -33,7 +37,12 @@ const TextLink: React.FC<TextLinkProps> = ({
   }
 
   return (
-    <a href={href} className={`${sizeClass} leading-relaxed ${className} hover:underline hover:text-blue-400`}>{content}</a>
+    <a
+      href={href}
+      className={`${sizeClass} leading-relaxed ${className} hover:text-blue-400 hover:underline`}
+    >
+      {content}
+    </a>
   );
 };
 
