@@ -1,4 +1,5 @@
 import { Star } from 'lucide-react';
+import { type ReactNode } from 'react';
 import {
   Table,
   TableBody,
@@ -11,8 +12,12 @@ import {
   TabsList,
   TabsTrigger,
   Card,
-  CardContent,
 } from '@ui/.';
+
+type SpecRow = {
+  label: string;
+  value: ReactNode | (() => ReactNode);
+};
 
 export function ProductDetails() {
   const rating = 4.3;
@@ -41,6 +46,67 @@ export function ProductDetails() {
     { label: 'Material Typ frei', value: 'Ohne Silikone, ohne Parabene' },
   ];
 
+  const articleRows: SpecRow[] = [
+    ...articleData.map((item) => ({
+      label: item.label,
+      value: item.value,
+    })),
+    {
+      label: 'Durchschnittliche Kundenbewertung',
+      value: () => (
+        <div className="flex flex-wrap items-center gap-2 text-sm text-foreground">
+          <span className="font-semibold">{rating.toFixed(1)}</span>
+          <div className="flex items-center">
+            {[...Array(5)].map((_, i) => (
+              <Star
+                key={`rating-star-${i}`}
+                className={`h-4 w-4 ${
+                  i < Math.floor(rating)
+                    ? 'fill-yellow-400 text-yellow-400'
+                    : i < rating
+                      ? 'fill-yellow-400 text-yellow-400 opacity-50'
+                      : 'fill-gray-200 text-gray-200'
+                }`}
+              />
+            ))}
+          </div>
+          <span className="text-xs text-muted-foreground">
+            ({reviewCount.toLocaleString('de-DE')} Rezensionen)
+          </span>
+        </div>
+      ),
+    },
+    {
+      label: 'Amazon Bestseller-Rang',
+      value: () => (
+        <div className="space-y-1 text-sm text-foreground">
+          <div>
+            Nr. 1.591 in{' '}
+            <span className="cursor-pointer text-blue-600 hover:underline">
+              Kosmetik
+            </span>
+          </div>
+          <div>
+            Nr. 7 in{' '}
+            <span className="cursor-pointer text-blue-600 hover:underline">
+              Frisiercremes &amp; Haarwachs
+            </span>
+          </div>
+        </div>
+      ),
+    },
+  ];
+
+  const dimensionRows: SpecRow[] = dimensionsData.map((item) => ({
+    label: item.label,
+    value: item.value,
+  }));
+
+  const additionalRows: SpecRow[] = additionalData.map((item) => ({
+    label: item.label,
+    value: item.value,
+  }));
+
   return (
     <Card className="w-full">
       <Tabs defaultValue="article" className="@container">
@@ -63,116 +129,62 @@ export function ProductDetails() {
         </TabsList>
 
         <TabsContent value="article" className="mt-6">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-[300px]">Eigenschaft</TableHead>
-                <TableHead>Wert</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {articleData.map((item, index) => (
-                <TableRow key={index}>
-                  <TableCell className="align-top text-gray-600">
-                    {item.label}
-                  </TableCell>
-                  <TableCell>{item.value}</TableCell>
-                </TableRow>
-              ))}
-              <TableRow>
-                <TableCell className="align-top text-gray-600">
-                  Durchschnittliche Kundenbewertung
-                </TableCell>
-                <TableCell>
-                  <div className="flex items-center gap-2">
-                    <span>{rating}</span>
-                    <div className="flex items-center">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`h-4 w-4 ${
-                            i < Math.floor(rating)
-                              ? 'fill-yellow-400 text-yellow-400'
-                              : i < rating
-                                ? 'fill-yellow-400 text-yellow-400 opacity-50'
-                                : 'fill-gray-200 text-gray-200'
-                          }`}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                  <p className="mt-1 cursor-pointer text-sm text-blue-600 hover:underline">
-                    ({reviewCount.toLocaleString('de-DE')} Rezensionen)
-                  </p>
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell className="align-top text-gray-600">
-                  Amazon Bestseller-Rang
-                </TableCell>
-                <TableCell>
-                  <div className="space-y-1">
-                    <div>
-                      Nr. 1.591 in{' '}
-                      <span className="cursor-pointer text-blue-600 hover:underline">
-                        Kosmetik
-                      </span>
-                    </div>
-                    <div>
-                      Nr. 7 in{' '}
-                      <span className="cursor-pointer text-blue-600 hover:underline">
-                        Frisiercremes &amp; Haarwachs
-                      </span>
-                    </div>
-                  </div>
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
+          <SpecsContent rows={articleRows} />
         </TabsContent>
 
         <TabsContent value="dimensions" className="mt-6">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-[300px]">Eigenschaft</TableHead>
-                <TableHead>Wert</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {dimensionsData.map((item, index) => (
-                <TableRow key={index}>
-                  <TableCell className="align-top text-gray-600">
-                    {item.label}
-                  </TableCell>
-                  <TableCell>{item.value}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+          <SpecsContent rows={dimensionRows} />
         </TabsContent>
 
         <TabsContent value="additional" className="mt-6">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-[300px]">Eigenschaft</TableHead>
-                <TableHead>Wert</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {additionalData.map((item, index) => (
-                <TableRow key={index}>
-                  <TableCell className="align-top text-gray-600">
-                    {item.label}
-                  </TableCell>
-                  <TableCell>{item.value}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+          <SpecsContent rows={additionalRows} />
         </TabsContent>
       </Tabs>
     </Card>
   );
 }
+
+const renderRowValue = (row: SpecRow) =>
+  typeof row.value === 'function' ? row.value() : row.value;
+
+const SpecsContent = ({ rows }: { rows: SpecRow[] }) => (
+  <div className="space-y-4">
+    <div className="hidden md:block">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-[320px] whitespace-nowrap text-muted-foreground">
+              Eigenschaft
+            </TableHead>
+            <TableHead className="text-muted-foreground">Wert</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow key={row.label}>
+              <TableCell className="whitespace-normal align-top text-sm text-muted-foreground">
+                {row.label}
+              </TableCell>
+              <TableCell className="whitespace-normal align-top text-sm text-foreground">
+                {renderRowValue(row)}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
+    <div className="grid gap-3 md:hidden">
+      {rows.map((row) => (
+        <div
+          key={`${row.label}-mobile`}
+          className="rounded-xl border border-border/70 bg-background/80 p-4 shadow-sm"
+        >
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
+            {row.label}
+          </p>
+          <div className="mt-2 text-sm text-foreground">{renderRowValue(row)}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+);

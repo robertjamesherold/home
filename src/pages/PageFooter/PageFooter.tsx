@@ -1,13 +1,41 @@
-import { forwardRef, type HTMLAttributes } from 'react';
+import { forwardRef, type FormEvent, type HTMLAttributes } from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Twitter } from 'lucide-react';
 
+import { Button, Input } from '@ui/.';
+import { cn } from '@ui/utils';
+
 type PageFooterProps = HTMLAttributes<HTMLElement>;
 
-const footerLinks = [
+type FooterLink = {
+  label: string;
+  to?: string;
+  href?: string;
+};
+
+const shopLinks: FooterLink[] = [
   { label: 'Alle Produkte', to: '/products' },
   { label: 'Neuheiten', to: '/products' },
   { label: 'Sale', to: '/sale' },
+];
+
+const serviceLinks: FooterLink[] = [
+  { label: 'Kontakt', href: 'mailto:hello@luxe.studio' },
+  { label: 'Versand & Rückgabe', href: '#' },
+  { label: 'FAQ', href: '#' },
+  { label: 'Größenguide', href: '#' },
+];
+
+const inspirationLinks: FooterLink[] = [
+  { label: 'Stories', href: '#' },
+  { label: 'Lookbook', href: '#' },
+  { label: 'Geschenkideen', href: '#' },
+];
+
+const footerNavigation = [
+  { title: 'Shop', links: shopLinks },
+  { title: 'Service', links: serviceLinks },
+  { title: 'Inspiration', links: inspirationLinks },
 ];
 
 const infoLinks = [
@@ -16,108 +44,135 @@ const infoLinks = [
   { label: 'Impressum', href: '#' },
 ];
 
+const socials = [
+  { label: 'Instagram', href: 'https://www.instagram.com', icon: Instagram },
+  { label: 'Facebook', href: 'https://www.facebook.com', icon: Facebook },
+  { label: 'Twitter', href: 'https://www.twitter.com', icon: Twitter },
+];
+
 const PageFooter = forwardRef<HTMLElement, PageFooterProps>(
   ({ className = '', ...rest }, ref) => {
-    const footerClassName = className
-      ? `mt-auto border-t border-gray-100 bg-white ${className}`
-      : 'mt-auto border-t border-gray-100 bg-white';
+    const footerClassName = cn(
+      'mt-auto border-t border-border/60 bg-gradient-to-b from-background via-muted/40 to-muted/70',
+      className
+    );
+
+    const handleNewsletterSubmit = (event: FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+    };
 
     return (
       <footer ref={ref} className={footerClassName} {...rest}>
         <div className="container mx-auto px-4 py-12">
-          <div className="grid grid-cols-1 gap-10 md:grid-cols-[2fr,1fr,1fr,1fr]">
-            <div>
-              <div className="mb-4 flex items-center gap-3">
-                <div className="h-9 w-9 rounded-full bg-gray-900 text-white" />
-                <span className="text-xl font-semibold tracking-tight">
-                  LUXE
-                </span>
-              </div>
-              <p className="text-sm text-gray-500">
-                Präzise kuratierte Looks mit einem klaren Akzent. Designed in
-                Berlin, verschickt in recycelten Boxen.
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.4fr,1fr,1fr,1.2fr]">
+            <div className="space-y-6">
+              <Link
+                to="/"
+                className="inline-flex items-center gap-3 text-foreground"
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-foreground text-xs font-semibold tracking-[0.6em] text-background">
+                  LX
+                </div>
+                <div>
+                  <p className="text-xl font-semibold tracking-tight">LUXE</p>
+                  <p className="text-sm text-muted-foreground">
+                    Modern Wardrobe Studio
+                  </p>
+                </div>
+              </Link>
+              <p className="max-w-sm text-sm text-muted-foreground">
+                Bewusst gefertigte Essentials, entworfen in Berlin und aus
+                recycelten Materialien verpackt. Wir kombinieren klare Linien mit
+                langlebigen Stoffen für Looks, die jede Saison tragen.
               </p>
-            </div>
-
-            <div>
-              <p className="mb-3 text-xs uppercase tracking-[0.3em] text-gray-400">
-                Shop
-              </p>
-              <ul className="space-y-2 text-sm text-gray-600">
-                {footerLinks.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      to={link.to}
-                      className="transition hover:text-gray-900"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
+              <div className="flex flex-wrap gap-3">
+                {socials.map(({ label, href, icon: Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={label}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-border/60 text-muted-foreground transition hover:border-foreground hover:text-foreground"
+                  >
+                    <Icon className="h-4 w-4" />
+                  </a>
                 ))}
-              </ul>
-            </div>
-
-            <div>
-              <p className="mb-3 text-xs uppercase tracking-[0.3em] text-gray-400">
-                Service
-              </p>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li>
-                  <a href="#" className="transition hover:text-gray-900">
-                    Kontakt
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition hover:text-gray-900">
-                    Versand & Rückgabe
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="transition hover:text-gray-900">
-                    FAQ
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <p className="mb-3 text-xs uppercase tracking-[0.3em] text-gray-400">
-                Social
-              </p>
-              <div className="flex gap-3 text-gray-500">
-                <a
-                  href="#"
-                  className="rounded-full border border-gray-200 p-2 transition hover:border-gray-900 hover:text-gray-900"
-                >
-                  <Facebook className="h-4 w-4" />
-                </a>
-                <a
-                  href="#"
-                  className="rounded-full border border-gray-200 p-2 transition hover:border-gray-900 hover:text-gray-900"
-                >
-                  <Instagram className="h-4 w-4" />
-                </a>
-                <a
-                  href="#"
-                  className="rounded-full border border-gray-200 p-2 transition hover:border-gray-900 hover:text-gray-900"
-                >
-                  <Twitter className="h-4 w-4" />
-                </a>
               </div>
+              <div className="rounded-2xl border border-border/60 bg-background/70 p-4 text-sm text-muted-foreground shadow-sm">
+                <p className="font-semibold text-foreground">Studio & Versand</p>
+                <p>Rosenthaler Straße 72</p>
+                <p>10119 Berlin</p>
+                <p className="mt-2">Mo–Fr · 10:00 – 18:00 Uhr</p>
+              </div>
+            </div>
+            {footerNavigation.map((section) => (
+              <div key={section.title} className="space-y-3">
+                <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                  {section.title}
+                </p>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  {section.links.map((link) => (
+                    <li key={link.label}>
+                      {link.to ? (
+                        <Link
+                          to={link.to}
+                          className="transition hover:text-foreground"
+                        >
+                          {link.label}
+                        </Link>
+                      ) : (
+                        <a
+                          href={link.href ?? '#'}
+                          className="transition hover:text-foreground"
+                        >
+                          {link.label}
+                        </a>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+            <div className="space-y-4">
+              <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                Newsletter
+              </p>
+              <p className="text-sm text-muted-foreground">
+                Drops, Stories und Previews zuerst erfahren – direkt in dein
+                Postfach.
+              </p>
+              <form
+                onSubmit={handleNewsletterSubmit}
+                className="flex w-full flex-col gap-3 sm:flex-row"
+              >
+                <Input
+                  type="email"
+                  placeholder="E-Mail-Adresse"
+                  required
+                  className="flex-1 border-border/60 bg-background/80"
+                />
+                <Button type="submit" className="sm:w-auto">
+                  Abonnieren
+                </Button>
+              </form>
+              <p className="text-xs text-muted-foreground">
+                Keine Werbung – nur kuratierte Inspiration und limitierte
+                Vorabzugänge.
+              </p>
             </div>
           </div>
-
-          <div className="mt-10 flex flex-col gap-4 border-t border-gray-100 pt-6 text-sm text-gray-500 md:flex-row md:items-center md:justify-between">
+          <div className="mt-10 flex flex-col gap-4 border-t border-border/60 pt-6 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
             <p>
-              &copy; {new Date().getFullYear()} LUXE. Redefining essential
-              wardrobe pieces.
+              &copy; {new Date().getFullYear()} LUXE · Entworfen in Berlin und
+              verantwortungsvoll produziert in Europa.
             </p>
             <div className="flex flex-wrap gap-4">
               {infoLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
-                  className="transition hover:text-gray-900"
+                  className="transition hover:text-foreground"
                 >
                   {link.label}
                 </a>
