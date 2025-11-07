@@ -23,7 +23,7 @@ const SliderControls: React.FC<SliderControlsProps> = ({
     <Button
       onClick={onPrev}
       disabled={disabled}
-      className="rounded-full hover:border-green-600 hover:bg-green-600 hover:text-white"
+      className="hover:border-[#2f6d8b]/40 hover:bg-[#f4fbfb]"
       aria-label="Vorheriges Testimonial"
     >
       <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
@@ -39,7 +39,7 @@ const SliderControls: React.FC<SliderControlsProps> = ({
     <Button
       onClick={onNext}
       disabled={disabled}
-      className="rounded-full hover:border-green-600 hover:bg-green-600 hover:text-white"
+      className="hover:border-[#2f6d8b]/40 hover:bg-[#f4fbfb]"
       aria-label="Nächstes Testimonial"
     >
       <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />

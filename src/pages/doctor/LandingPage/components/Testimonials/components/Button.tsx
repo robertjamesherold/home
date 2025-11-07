@@ -19,7 +19,7 @@ const Button: React.FC<ButtonProps> = ({
     onClick={onClick}
     disabled={disabled}
     aria-label={ariaLabel}
-    className={`border-2 border-slate-300 bg-white p-3 transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
+    className={`rounded-full border border-[#dceaea] bg-white p-3 text-[#2f6d8b] shadow-sm transition-all duration-300 hover:border-[#2f6d8b]/40 hover:bg-[#f4fbfb] disabled:cursor-not-allowed disabled:opacity-40 ${className}`}
   >
     {children}
   </button>

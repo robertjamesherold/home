@@ -30,28 +30,29 @@ const Testimonials = () => {
   const activeSlideIndex = (currentIndex - 1 + data.length) % data.length;
 
   return (
-    <Section
-      className="section bg-white safe-area-padding"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      onFocus={() => setIsPaused(true)}
-      onBlur={() => setIsPaused(false)}
-    >
-      <Header className="mb-8 text-center">
-        <Title
-          level={ 2 }
-          weight="bold"
-          className="mb-4 text-slate-900"
-        >
-          Das sagen unsere <span className="text-green-600">Patienten</span>!
+    <Section id="patientenstimmen" isBox className="text-slate-800">
+
+      <Header className="mb-10 text-center">
+        <Title level={ 2 } weight="bold" className="mb-4 text-[#1f3e4d]">
+          Das sagen unsere{ ' ' }
+          <span className="text-[#2f6d8b]">Patient:innen</span>
         </Title>
+        <TextParagraph
+          className="mx-auto max-w-2xl text-[#4a5d66]"
+          text="Echte Erfahrungsberichte aus unserer Naturheilpraxis – empathisch, persönlich und nachhaltig wirksam."
+        />
       </Header>
 
-      {/* Slider */}
+      {/* Slider */ }
       <Article className="@container relative mx-auto w-full">
-        <Container className="lg:w-[60cqw] xl:w-[70cqw] 2xl:w-[60cqw] mx-auto relative overflow-hidden rounded-xl bg-slate-50 shadow-lg sm:rounded-2xl sm:shadow-xl">
-          <Container className="flex w-full touch-pan-y"
+        <Container className="mx-auto w-full overflow-hidden rounded-4xl border border-[#dceaea] bg-white shadow-[0_45px_120px_-70px_rgba(47,109,139,0.35)] lg:w-[60cqw] xl:w-[70cqw] 2xl:w-[60cqw]">
+          <Container
+            className="flex w-full touch-pan-y"
             ref={ sliderRef }
+            onMouseEnter={ () => setIsPaused( true ) }
+            onMouseLeave={ () => setIsPaused( false ) }
+            onFocus={ () => setIsPaused( true ) }
+            onBlur={ () => setIsPaused( false ) }
             onTransitionEnd={ handleTransitionEnd }
             onTouchStart={ onTouchStart }
             onTouchMove={ onTouchMove }
@@ -61,34 +62,32 @@ const Testimonials = () => {
               transition: useTransition
                   ? 'transform 1500ms ease-in-out'
                   : 'none',
-              }}
+              } }
             >
               {slides.map((testimonial, index) => (
                 <TestimonialsCard key={index} {...testimonial} />
               ))}
-              </Container>
-
+          </Container>
         </Container>
 
-        {/* Controls */}
+        {/* Controls */ }
         <SliderControls
-          onPrev={prevSlide}
-          onNext={nextSlide}
-          dotsCount={data.length}
-          activeIndex={activeSlideIndex}
-          onDotClick={goToSlide}
-          disabled={isLocked}
+          onPrev={ prevSlide }
+          onNext={ nextSlide }
+          dotsCount={ data.length }
+          activeIndex={ activeSlideIndex }
+          onDotClick={ goToSlide }
+          disabled={ isLocked }
         />
-  
       </Article>
 
-      {/* Footer */}
+      {/* Footer */ }
       <Footer className="mt-8 px-4 text-center sm:mt-12">
-        <TextParagraph className="text-slate-600">
-          Über{' '}
-          <span className="font-semibold text-green-600">
-            2.000 zufriedene Patienten
-          </span>{' '}
+        <TextParagraph className="text-[#4a5d66]">
+          Über{ ' ' }
+          <span className="font-semibold text-[#2f6d8b]">
+            2.000 zufriedene Patient:innen
+          </span>{ ' ' }
           vertrauen auf unsere Expertise
         </TextParagraph>
       </Footer>

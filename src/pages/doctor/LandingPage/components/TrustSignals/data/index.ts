@@ -1,0 +1,1 @@
+export { Headertext, Article } from './TrustSignals.data';

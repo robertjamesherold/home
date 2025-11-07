@@ -5,6 +5,7 @@ type TextParagraphProps = {
   lg?: boolean;
   md?: boolean;
   sm?: boolean;
+  xs?: boolean;
   className?: string;
   children?: ReactNode;
 };
@@ -14,16 +15,15 @@ const TextParagraph: React.FC<TextParagraphProps> = ({
   lg,
   md,
   sm,
+  xs,
   className = '',
   children,
 }) => {
-  const sizeClass = lg
-    ? 'text-lg'
-    : md
-      ? 'text-base'
-      : sm
-        ? 'text-sm'
-        : 'text-base';
+  const sizeClass = lg ? 'text-lg'
+    : md ? 'text-base'
+      : sm ? 'text-sm'
+        : xs ? 'text-xs'
+          : 'text-base';
   const content = children ?? text;
 
   if (content == null || content === '') {

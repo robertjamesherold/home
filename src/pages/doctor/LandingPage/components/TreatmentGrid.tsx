@@ -1,126 +1,122 @@
-import { Button } from '../ui/button';
-import { Badge } from '../ui/badge';
+import { Button } from '../ui/button'
 import { Star, Clock } from 'lucide-react';
+import Service_1 from '@images/service_1.jpeg'
+import Service_2 from '@images/service_2.jpeg'
+import Service_3 from '@images/service_3.jpeg'
+import Service_4 from '@images/service_4.jpeg'
+import { Section, Container, Header as SectionHeader, Grid, Article } from '@/layout'
+import { Title } from '@/typography'
+
+const Headertext = {
+  subtitle: 'Unsere Behandlungen',
+  title: 'Entdecken Sie unsere ',
+  span: 'wirksamen Therapien',
+};
 
 const treatments = [
   {
     id: 1,
-    title: 'Akupunktur-Paket',
-    description: '10 Sitzungen inkl. Erstgespräch',
-    price: '€ 450',
-    originalPrice: '€ 580',
+    title: 'Psychologische Beratung für Angehörige',
     duration: '60 Min.',
     rating: 4.9,
-    image:
-      'https://images.unsplash.com/photo-1529088512498-64b87b354b8f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhY3VwdW5jdHVyZSUyMHRyZWF0bWVudHxlbnwxfHx8fDE3NjIxMDM5NTl8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    badge: 'Beliebt',
+    image: Service_1,
   },
   {
     id: 2,
-    title: 'Kräuter-Therapie',
-    description: 'Individuelle Kräutermischung für 4 Wochen',
-    price: '€ 180',
-    originalPrice: '€ 230',
+    title: 'Psychologische Beratung für Betroffene',
     duration: '30 Min.',
     rating: 4.8,
-    image:
-      'https://images.unsplash.com/photo-1758614037334-ed50e9ee9e2c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuYXR1cmFsJTIwaGVhbGluZyUyMGhlcmJzfGVufDF8fHx8MTc2MjAzMzA1Mnww&ixlib=rb-4.1.0&q=80&w=1080',
-    badge: 'Neu',
+    image: Service_2,
   },
   {
     id: 3,
-    title: 'Massage-Therapie',
-    description: 'Therapeutische Ganzkörpermassage',
-    price: '€ 85',
-    originalPrice: '€ 110',
+    title: 'Omega-3-Fettsäureberatung & Analyse',
     duration: '90 Min.',
     rating: 5.0,
-    image:
-      'https://images.unsplash.com/photo-1598901986949-f593ff2a31a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYXNzYWdlJTIwdGhlcmFweXxlbnwxfHx8fDE3NjIwOTk2NTl8MA&ixlib=rb-4.1.0&q=80&w=1080',
+    image: Service_3,
   },
   {
     id: 4,
-    title: 'Meditations-Kurs',
-    description: '8 Wochen Achtsamkeitstraining',
-    price: '€ 220',
-    originalPrice: '€ 280',
+    title: 'Gesprächskreis für Betroffene & Angehörige',
     duration: '45 Min.',
     rating: 4.9,
-    image:
-      'https://images.unsplash.com/photo-1695795910772-6336b0beba36?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtZWRpdGF0aW9uJTIwd2VsbmVzc3xlbnwxfHx8fDE3NjIwMTcwNzd8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    badge: 'Empfohlen',
+    image: Service_4,
   },
 ];
 
 export function TreatmentGrid() {
   return (
-    <section className="bg-slate-50 py-12 md:py-20">
-      <div className="container mx-auto px-4">
-        <div className="mb-12 text-center">
-          <h2 className="mb-4 text-slate-900">Unsere Behandlungsangebote</h2>
-          <p className="mx-auto max-w-2xl text-slate-600">
-            Wählen Sie aus unserem umfangreichen Angebot an naturheilkundlichen
-            Behandlungen
-          </p>
-        </div>
+    <Section
+      id="leistungen"
+      className="relative text-slate-800"
+    >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 -top-40 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[#6fc4a3]/20 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-[-180px] bottom-[-220px] h-[460px] w-[460px] rounded-full bg-[#f7d6c3]/30 blur-3xl"
+      />
+      <Container className="section safe-area-padding relative z-1">
+        <SectionHeader className="mb-12 text-center">
+          <Title
+            level={ 6 }
+            className="font-semibold uppercase tracking-[0.4em] text-[#6fc4a3]"
+            text={ Headertext.subtitle }
+          />
+          <Title level={ 2 } weight="bold" className="mt-4 text-[#1f3e4d]">
+            { Headertext.title }
+            <span className="text-[#2f6d8b]">{ Headertext.span }</span>
+          </Title>
+        </SectionHeader>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <Grid className="gap-6 md:grid-cols-2 xl:grid-cols-4">
           {treatments.map((treatment) => (
-            <div
+            <Article
               key={treatment.id}
-              className="overflow-hidden rounded-xl bg-white shadow-lg transition-shadow duration-300 hover:shadow-xl"
+              className="group relative overflow-hidden rounded-3xl border border-[#dceaea] bg-white shadow-[0_30px_70px_-45px_rgba(47,109,139,0.35)] transition-all duration-300 hover:-translate-y-1 hover:border-[#2f6d8b]/30 hover:shadow-[0_32px_75px_-40px_rgba(47,109,139,0.45)]"
             >
-              {/* Image */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 bg-gradient-to-br from-white via-transparent to-[#fcd8c2]/60 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              />
+
               <div className="relative aspect-[4/3] overflow-hidden">
-                {treatment.badge && (
-                  <Badge className="absolute left-3 top-3 bg-green-600">
-                    {treatment.badge}
-                  </Badge>
-                )}
+                <img
+                  src={ treatment.image }
+                  alt={ treatment.title }
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
               </div>
 
-              {/* Content */}
-              <div className="space-y-3 p-5">
-                <div className="flex items-center gap-2">
-                  <div className="flex items-center gap-1">
-                    <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                    <span className="text-slate-900">{treatment.rating}</span>
-                  </div>
-                  <div className="flex items-center gap-1 text-slate-600">
-                    <Clock className="h-4 w-4" />
-                    <span>{treatment.duration}</span>
-                  </div>
+              <div className="relative space-y-4 p-6">
+                <div className="flex items-center justify-between gap-3 text-sm text-[#2f6d8b]">
+                  <span className="inline-flex items-center gap-2 rounded-full border border-[#6fc4a3]/50 bg-[#6fc4a3]/15 px-3 py-1 text-[#2f7266]">
+                    <Star className="h-4 w-4 text-[#2f7266]" />
+                    { treatment.rating }
+                  </span>
+                  <span className="inline-flex items-center gap-2 rounded-full border border-[#f7d6c3]/60 bg-[#fff2ea] px-3 py-1 text-[#c35b35]">
+                    <Clock className="h-4 w-4 text-[#c35b35]" />
+                    { treatment.duration }
+                  </span>
                 </div>
 
-                <h3 className="text-slate-900">{treatment.title}</h3>
+                <Title level={ 4 } weight="bold" className="text-lg text-[#1f3e4d]">
+                  { treatment.title }
+                </Title>
 
-                <p className="line-clamp-2 text-slate-600">
-                  {treatment.description}
-                </p>
-
-                <div className="flex items-baseline gap-2 pt-2">
-                  <span className="text-green-600">{treatment.price}</span>
-                  {treatment.originalPrice && (
-                    <span className="text-slate-400 line-through">
-                      {treatment.originalPrice}
-                    </span>
-                  )}
-                </div>
-
-                <Button className="w-full bg-green-600 hover:bg-green-700">
+                <Button
+                  size="lg"
+                  className="w-full rounded-xl border border-[#2f6d8b] bg-[#2f6d8b] text-sm font-semibold text-white shadow-[0_18px_48px_-30px_rgba(47,109,139,0.45)] transition hover:bg-[#285b74]"
+                >
                   Jetzt buchen
                 </Button>
               </div>
-            </div>
+            </Article>
           ))}
-        </div>
-
-        <div className="mt-12 text-center">
-          <Button variant="outline" size="lg">
-            Alle Behandlungen anzeigen
-          </Button>
-        </div>
-      </div>
-    </section>
+        </Grid>
+      </Container>
+    </Section>
   );
 }

@@ -23,8 +23,8 @@ const NavigationDots: React.FC<NavigationDotsProps> = ({
           disabled={disabled}
           className={`h-2 rounded-full transition-all duration-300 ${
             isActive
-              ? 'w-8 bg-green-600'
-              : 'w-2 bg-slate-300 hover:bg-slate-400'
+              ? 'w-8 bg-[#2f6d8b] hover:bg-[#285b74]'
+              : 'w-2 bg-[#dceaea] hover:bg-[#b1c8cf]'
           } disabled:cursor-not-allowed`}
           aria-label={`Gehe zu Testimonial ${idx + 1}`}
           aria-current={isActive ? 'true' : 'false'}

@@ -1,3 +1,1 @@
-import FAQSdata from './FAQ.data';
-
-export { FAQSdata };
+export { FAQSdata, Headertext } from './FAQ.data';

@@ -1,11 +1,11 @@
 import * as React from "react";
 
-const LogoSvg: React.FC<React.SVGProps<SVGSVGElement>> = (props, ref) => { 
+const AndreaMeyer: React.FC<React.SVGProps<SVGSVGElement>> = ( props: React.SVGProps<SVGSVGElement> ) =>
+{ 
     const width = '15em'
     const height = '5em'
     return (
-    <svg
-      ref={ref}
+      <svg
       viewBox="0 0 465.7 103.6"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -16,11 +16,11 @@ const LogoSvg: React.FC<React.SVGProps<SVGSVGElement>> = (props, ref) => {
         {...props}
     >
       <style>
-        {`  .st0{fill:#428AC8;}
-            .st1{fill:#26E7CB;}
-            .st2{fill:#FF8673;}
+          {`.st0{fill:oklch(50% 0.134 242.749)}
+            .st1{fill:oklch(76.5% 0.177 163.223);}
+            .st2{fill:oklch(64.5% 0.246 16.439);}
             .st3{fill:#FFFFFF;}
-            .st4{fill:#004C6F;}`}
+            .st4{fill:oklch(76.5% 0.177 163.223);}`}
       </style>
       <g>
         <g id="Ebene_2_00000162335129003868484550000003935235275117318579_">
@@ -277,4 +277,4 @@ const LogoSvg: React.FC<React.SVGProps<SVGSVGElement>> = (props, ref) => {
   )
 };
 
-export default LogoSvg;
+export default AndreaMeyer

@@ -4,7 +4,7 @@
 
 @layer base {
   .safe-area-padding {
-    @apply px-4 sm:px-12 md:px-16 lg:px-20 xl:px-24;
+    @apply px-8 sm:px-12 md:px-16 lg:px-20 xl:px-24 max-w-[1600px] mx-auto;
   }
 
   .safe-area-padding-small {
@@ -12,7 +12,7 @@
   }
 
   .section {
-    @apply w-full max-w-[1440px] mx-auto py-12 sm:py-20 md:py-24 lg:py-32;
+    @apply w-full mx-auto py-12 sm:py-20 md:py-24 lg:py-32;
   }
 
 }

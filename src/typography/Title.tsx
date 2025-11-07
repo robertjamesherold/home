@@ -29,8 +29,8 @@ const sizeMap: Record<1 | 2 | 3 | 4 | 5 | 6, string> = {
   2: 'text-4xl',
   3: 'text-3xl',
   4: 'text-2xl',
-  5: 'text-base',
-  6: 'text-sm',
+  5: 'text-xl',
+  6: 'text-base',
 };
 
 const weightMap: Record<'bold' | 'semibold' | 'medium' | 'normal', string> = {

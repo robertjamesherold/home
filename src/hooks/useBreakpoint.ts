@@ -4,6 +4,7 @@ export const useBreakpoint = () => {
   const { width } = useWindowSize();
 
   const breakpoints = {
+    default: 0,
     xs: 576,
     sm: 768,
     md: 992,
@@ -17,8 +18,16 @@ export const useBreakpoint = () => {
     if (width >= breakpoints.md && width < breakpoints.lg) return 'md';
     if (width >= breakpoints.lg && width < breakpoints.xl) return 'lg';
     if (width >= breakpoints.xl) return 'xl';
-    return 'xs';
+    return 'default';
   };
 
-  return getBreakpoint();
+  const isDesktop = () => {
+    return ['md', 'lg', 'xl'].includes(getBreakpoint());
+  };
+
+  const isMobile = () => {
+    return ['default', 'sm'].includes(getBreakpoint());
+  };
+
+  return { getBreakpoint, isDesktop, isMobile };
 };

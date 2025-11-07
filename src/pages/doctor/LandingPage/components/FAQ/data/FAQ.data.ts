@@ -33,4 +33,12 @@ const FAQSdata: FAQProps[] = [
   },
 ];
 
-export default FAQSdata;
+
+const Headertext = {
+  title: 'Häufig gestellte',
+  span: 'Fragen',
+  subtitle:
+    'Hier finden Sie Antworten auf die wichtigsten Fragen rund um unsere Praxis und Behandlungen',
+};
+
+export { FAQSdata, Headertext };

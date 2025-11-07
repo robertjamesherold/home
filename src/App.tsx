@@ -1,20 +1,24 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import {  LandingPage } from '@/pages';
-import { MainFooter as Footer } from '@/pages/doctor/LandingPage/components/Footer';
+import { LandingPage } from '@/pages'
+import { MainFooter } from '@/pages/doctor/LandingPage/components/Footer'
 
-function Pages() {
+const Pages = () =>
+{
   return (
+
       <Routes>
         <Route path="/" element={ <LandingPage /> } />
       </Routes>
+
   );
 }
 
-function App() {
+const App = () =>
+{
   return (
     <Router>
       <Pages />
-      <Footer />
+      <MainFooter />
     </Router>
   );
 }
