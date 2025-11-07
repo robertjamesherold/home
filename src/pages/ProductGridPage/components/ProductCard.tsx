@@ -1,16 +1,34 @@
-import type { ProductType } from '@/types';
+import React, { useEffect, useState } from 'react'
+import type { ProductType } from '@/types'
 import { Link } from 'react-router-dom';
 import { Card, CardAction, CardContent, Button } from '@ui/.';
 import { Badge } from '@ui/badge';
 import { Star } from 'lucide-react';
-import { Image, Container, Column, Row, Header, Footer } from '@/layout';
+import { Image, Container, Row, Header, Footer } from '@/layout'
 import useRandomImages from '@/hooks/useRandomImages';
 import { TextParagraph, Title } from '@/typography';
+import { useCart } from '@hooks/useProductContext'
+import { productsData } from '@/data'
+import { toast } from 'sonner';
+
 
 const ProductCard: React.FC<{ filteredProducts: ProductType[] }> = ({
   filteredProducts,
-}) => {
-  const { getRandomImageUrls } = useRandomImages();
+} ) =>
+{
+    const [ quantity, setQuantity ] = useState( 1 )
+    const product = productsData.find( ( p ) => p.id === id )
+    const { getRandomImageUrls } = useRandomImages();
+    const { addToCart } = useCart()
+
+
+    const handleAddToCart = () =>
+    {
+        addToCart( product, quantity )
+        toast.success( `${ product?.title } wurde zum Warenkorb hinzugefügt` )
+    };
+
+
 
   return (
     <>
@@ -89,7 +107,7 @@ const ProductCard: React.FC<{ filteredProducts: ProductType[] }> = ({
                   )}
                 </Footer>
                 <CardAction>
-                  <Button variant="destructive" className="w-full">
+                            <Button variant="destructive" className="w-full" onClick={ handleAddToCart }>
                     In den Warenkorb
                   </Button>
                 </CardAction>
