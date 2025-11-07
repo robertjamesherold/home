@@ -11,11 +11,12 @@ export default defineConfig({
             },
         }),
     ],
-    base: "./",
+    base: './',
     resolve: {
         alias: {
-            "@": path.resolve(__dirname, "./src"),
+            '@': path.resolve(__dirname, './src'),
             '@css': path.resolve(__dirname, 'src/css'),
+            '@data': path.resolve(__dirname, 'src/data'),
             '@assets': path.resolve(__dirname, 'src/assets'),
             '@badges': path.resolve(__dirname, 'src/assets/badges'),
             '@components': path.resolve(__dirname, 'src/components'),

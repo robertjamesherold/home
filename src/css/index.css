@@ -3,6 +3,28 @@
 @import './reset.css';
 
 @layer base {
+  :root {
+      --background: 48 29% 97%;
+      --foreground: 217 22% 12%;
+      --card: 0 0% 100%;
+      --card-foreground: 217 22% 12%;
+      --popover: 0 0% 100%;
+      --popover-foreground: 217 22% 12%;
+      --primary: 18 94% 56%;
+      --primary-foreground: 0 0% 100%;
+      --secondary: 0 0% 96%;
+      --secondary-foreground: 217 22% 12%;
+      --muted: 48 20% 92%;
+      --muted-foreground: 217 10% 40%;
+      --accent: 18 96% 90%;
+      --accent-foreground: 22 95% 32%;
+      --destructive: 0 72% 50%;
+      --destructive-foreground: 0 0% 100%;
+      --border: 42 15% 85%;
+      --input: 42 15% 85%;
+      --ring: 18 94% 56%;
+      --radius: 1.25rem;
+    }
   .safe-area-padding {
     @apply px-8 sm:px-12 md:px-16 lg:px-20 xl:px-24 max-w-[1600px] mx-auto;
   }
@@ -18,18 +40,18 @@
 }
 @layer components {
   .btn-primary {
-    @apply inline-block cursor-pointer rounded-md bg-blue-600 px-4 py-2 text-center text-base font-medium text-white no-underline shadow-sm transition duration-200 ease-in-out hover:bg-blue-700 hover:shadow-md active:bg-blue-800 active:shadow-sm;
+    @apply inline-block cursor-pointer rounded-full px-5 py-2 text-center text-sm font-semibold no-underline shadow-sm transition duration-200 ease-in-out hover:shadow-md active:shadow-sm;
   }
 
   .btn-secondary {
-    @apply inline-block cursor-pointer rounded-md bg-gray-600 px-4 py-2 text-center text-base font-medium text-white no-underline shadow-sm transition duration-200 ease-in-out hover:bg-gray-700 hover:shadow-md active:bg-gray-800 active:shadow-sm;
+    @apply inline-block cursor-pointer rounded-full px-5 py-2 text-center text-sm font-semibold no-underline shadow-sm transition duration-200 ease-in-out hover:shadow-md active:shadow-sm;
   }
 
   .navlink {
-    @apply inline-block cursor-pointer rounded-md px-1 py-2 text-center text-base font-medium text-gray-600 no-underline transition duration-100 ease-in-out hover:text-gray-500 active:text-gray-400;
+    @apply inline-block cursor-pointer rounded-full px-3 py-1.5 text-center text-sm font-medium text-gray-600 no-underline transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-900;
   }
 
   .navbutton {
-    @apply flex cursor-pointer justify-center gap-2 rounded-full border border-white/10 px-6 py-2 align-baseline text-sm font-semibold text-white transition hover:border-white/40;
+    @apply flex cursor-pointer justify-center gap-2 rounded-full border border-white/20 bg-gray-900/80 px-6 py-2 align-baseline text-sm font-semibold text-white transition hover:border-white/60;
   }
 }
