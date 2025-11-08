@@ -1,15 +1,12 @@
 import React from 'react';
 import { Star } from 'lucide-react';
+import type { RatingProps } from '@/types';
 
-interface ProductRatingProps {
-  rating: number;
-  reviews: number;
-}
-
-export const ProductRating: React.FC<ProductRatingProps> = ({
-  rating,
-  reviews,
-}) => {
+export const ProductRating: React.FC<RatingProps> = ( {
+  score,
+  reviews
+}: RatingProps ) =>
+{
   return (
     <div className="mt-3 flex items-center gap-2">
       <div className="flex items-center gap-1">
@@ -17,7 +14,7 @@ export const ProductRating: React.FC<ProductRatingProps> = ({
           <Star
             key={starIndex}
             className={`h-4 w-4 ${
-              starIndex < Math.floor(Number(rating))
+              starIndex < Math.floor( Number( score ) )
                 ? 'fill-yellow-400 text-yellow-400'
                 : 'text-muted-foreground/40'
             }`}
@@ -25,7 +22,7 @@ export const ProductRating: React.FC<ProductRatingProps> = ({
         ))}
       </div>
       <span className="text-sm text-muted-foreground">
-        {String(rating)} ({String(reviews)} Bewertungen)
+        { String( reviews ) } ({ String( reviews ) } Bewertungen)
       </span>
     </div>
   );

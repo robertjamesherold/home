@@ -17,19 +17,20 @@ export const useProductImages = ({ productId }: UseProductImagesProps) => {
       cacheKey: `${productId}-gallery`,
     });
 
-    const finalImages = images.length
-      ? images
-      : getRandomImageUrls(1, {
-          cacheKey: `${productId}-gallery-fallback`,
-        });
+      const handleRandomImages = async () => {
+        setProductImages(images);
+      };
 
-    setProductImages(finalImages);
-    setSelectedImage(0);
-  }, [productId, getRandomImageUrls]);
+      handleRandomImages();
+    }, [productId, getRandomImageUrls]);          
 
+  const handleSelectImage = (index: number) => {
+    setSelectedImage(index);
+  };
   return {
     productImages,
     selectedImage,
     setSelectedImage,
+    handleSelectImage,
   };
 };

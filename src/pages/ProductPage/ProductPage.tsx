@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { productsData } from '@data/.';
 import { useCart } from '@hooks/useProductContext';
 import { useProductQuantity } from './hooks/useProductQuantity'
@@ -8,24 +8,23 @@ import { ProductBadges } from './components/ProductGallery/ProductBadges'
 import { ProductRating } from './components/ProductInfo/ProductRating'
 import { ProductPrice } from './components/ProductInfo/ProductPrice'
 import { AddToCartSection } from './components/ProductInfo/AddToCartSection'
-import { ProductDetailsCard } from './components/ProductDetails/ProductDetailsCard'
+import { ProductDetailsCard } from './components/ProductDetails'
 import { ShippingInfo } from './components/ProductDetails/ShippingInfo'
-import type { Product } from './types/product';
+import type { ProductType } from '@/types'
 
 const ProductPage = () =>
 {
   const [ selectedImage, setSelectedImage ] = useState( 0 )
   const { id } = useParams<{ id: string }>();
-  const { addToCart } = useCart();
+  const product = productsData.find( ( p ) => p.id === id ) as ProductType
+  const addToCart = useCart()
+  useMemo( () => addToCart, [ addToCart ] )
 
-  const product = productsData.find( ( p ) => p.id === id ) as Product
+
   const { quantity, increment, decrement } = useProductQuantity( 1 )
+  const handleAddToCart = () => setIsQuantity( isQuantity + 1 )
+  const [ isQuantity, setIsQuantity ] = useState( quantity )
 
-
-
-  const handleAddToCart = () => {
-    addToCart( product, quantity );
-  };
 
   return (
     <div className="container relative mx-auto grid w-full gap-8 px-4 py-8 md:grid-cols-2">
@@ -44,7 +43,7 @@ const ProductPage = () =>
 
         <h1 className="text-3xl font-semibold">{String(product.name)}</h1>
 
-        <ProductRating rating={ product.rating } reviews={ product.reviews } />
+        <ProductRating score={ product.rating?.score } reviews={ product.rating?.reviews } />
 
         <ProductPrice
           price={ product.price }
@@ -66,9 +65,7 @@ const ProductPage = () =>
 
         <div className="mt-6">
           <ProductDetailsCard
-            category={ String( product.category ) }
-            inStock={ product.inStock }
-            productId={ String( product.id ) }
+            { ...product.details }
           />
           <ShippingInfo />
         </div>

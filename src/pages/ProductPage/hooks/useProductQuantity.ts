@@ -7,5 +7,11 @@ export const useProductQuantity = (initialQuantity: number = 1) => {
   const decrement = () => setQuantity((q) => Math.max(1, q - 1));
   const reset = () => setQuantity(initialQuantity);
 
-  return { quantity, setQuantity, increment, decrement, reset };
+  return {
+    quantity,
+    setQuantity,
+    increment,
+    decrement,
+    reset,
+    };
 };

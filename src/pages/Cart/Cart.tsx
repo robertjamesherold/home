@@ -5,27 +5,13 @@ import { useCart } from '@hooks/.'
 import { useRandomImages } from '@/hooks/useRandomImages'
 import { Title } from '@typography/.'
 import { Column } from '@/layout'
-import { EmptyCart } from './components'
-import { productsData } from '@/data'
+import { EmptyCart, CartItem } from './components'
 
 const Cart: React.FC = () =>
 {
   {
-    const { items, removeFromCart, updateQuantity } = useCart()
-    const navigate = useNavigate()
-    const { getRandomImageUrls } = useRandomImages()
-    const shippingCost = items.reduce(
-      ( total, item ) => total + item.product.price * item.quantity,
-      0
-    ) >= 50 ? 0 : 4.99
-    const tax = items.reduce(
-      ( total, item ) => total + item.product.price * item.quantity,
-      0
-    ) * 0.19
-    const total = items.reduce(
-      ( total, item ) => total + item.product.price * item.quantity,
-      0
-    ) + shippingCost
+    const { items, total, shippingCost, tax } = useCart()
+    const navigate = useNavigate()  
 
     return (
       <>
@@ -35,75 +21,7 @@ const Cart: React.FC = () =>
 
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
               {/* Cart Items */ }
-              <div className="space-y-4 lg:col-span-2">
-                { items.map( ( item ) => (
-                  <Card key={ item.product.id }>
-                    <CardContent className="p-4">
-                      <div className="flex gap-4">
-                        <div className="h-24 w-24 shrink-0 overflow-hidden rounded-md bg-gray-100">
-                          { getRandomImageUrls( 2, { cacheKey: item.product.id } ).map(
-                            ( img ) => (
-                              <img
-                                src={ img }
-                                alt={ item.product.name }
-                                className="h-full w-full object-cover"
-                              />
-                            )
-                          ) }
-                        </div>
-
-                        <div className="flex flex-1 flex-col justify-between gap-4 sm:flex-row sm:items-start">
-                          <div className="flex-1">
-                            <Link to={ `/product/${ item.product.id }` }>
-                              <h3 className="mb-1 hover:underline">
-                                { item.product.name }
-                              </h3>
-                            </Link>
-                            <p className="mb-2 text-sm text-gray-600">
-                              { item.product.category }
-                            </p>
-                            <p className="text-lg">
-                              { item.product.price.toFixed( 2 ) }€
-                            </p>
-                          </div>
-
-                          <div className="flex items-center gap-4">
-                            <div className="flex items-center rounded-md border">
-                              <Button
-                                variant="ghost"
-                                size="icon"
-                                onClick={ () =>
-                                  updateQuantity( item.product.id, item.quantity - 1 )
-                                }
-                              >
-                                <Minus className="h-4 w-4" />
-                              </Button>
-                              <span className="px-4">{ item.quantity }</span>
-                              <Button
-                                variant="ghost"
-                                size="icon"
-                                onClick={ () =>
-                                  updateQuantity( item.product.id, item.quantity + 1 )
-                                }
-                              >
-                                <Plus className="h-4 w-4" />
-                              </Button>
-                            </div>
-
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              onClick={ () => removeFromCart( item.product.id ) }
-                            >
-                              <Trash2 className="h-5 w-5 text-red-500" />
-                            </Button>
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ) ) }
-              </div>
+              <CartItem { ...items } />
 
               {/* Order Summary */ }
               <div>

@@ -2,14 +2,15 @@ import React from 'react';
 import { Button } from '@ui/.';
 import { QuantitySelector } from './QuantitySelector';
 
-interface AddToCartSectionProps {
+type AddToCartSectionProps = {
   quantity: number;
   onQuantityIncrement: () => void;
   onQuantityDecrement: () => void;
   category: string;
   onAddToCart: () => void;
   inStock: boolean;
-}
+} & React.HTMLAttributes<HTMLDivElement>;
+
 
 export const AddToCartSection: React.FC<AddToCartSectionProps> = ({
   quantity,

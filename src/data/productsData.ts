@@ -1,118 +1,317 @@
-import type { ProductType } from '@/types';
+import type { ProductContextType } from '@/types';
 
-const productsData: ProductType[] = [
-  {
-    id: '1',
-    name: 'Premium Cotton T-Shirt',
-    price: 49.99,
-    originalPrice: 69.99,
-    description:
-      'Luxuriöses T-Shirt aus 100% Bio-Baumwolle. Perfekt für jeden Anlass mit zeitlosem Design.',
-    category: 'Clothing',
+const productPageData: ProductContextType = {
+  data: {
+    products: [
+      {
+        product: {
+          id: '1',
+          name: 'Sample Product',
+          price: 29.99,
+          category: 'Electronics',
+          description: 'A great product for testing.',
+          rating: { score: 4.5, reviews: 10 },
+          inStock: true,
+          link: 'sample-product',
+          details: {
+            title: 'Product Details',
+            tab: [
+              {
+                tabtitle: 'Details',
+                tabcontent: {
+                  Eigenschaften: ['Feature 1', 'Feature 2', 'Feature 3'],
+                  Wert: ['Value 1', 'Value 2', 'Value 3'],
+                },
+              },
+              {
+                tabtitle: 'Details',
+                tabcontent: {
+                  Eigenschaften: ['Feature 1', 'Feature 2', 'Feature 3'],
+                  Wert: ['Value 1', 'Value 2', 'Value 3'],
+                },
+              },
+              {
+                tabtitle: 'Details',
+                tabcontent: {
+                  Eigenschaften: ['Feature 1', 'Feature 2', 'Feature 3'],
+                  Wert: ['Value 1', 'Value 2', 'Value 3'],
+                },
+              },
+            ],
+          },
+        },
+      },
 
-    rating: 4.8,
-    reviews: 124,
-    inStock: true,
-    tags: ['new', 'sale'],
+      {
+        product: {
+          id: '2',
+          name: 'Another Product',
+          price: 59.99,
+          category: 'Home',
+          description: 'Another great product for testing.',
+          rating: { score: 4.5, reviews: 10 },
+
+          inStock: false,
+          link: 'another-product',
+          details: {
+            title: 'Product Details',
+            tab: [
+              {
+                tabtitle: 'Details',
+                tabcontent: {
+                  Eigenschaften: ['Feature 1', 'Feature 2', 'Feature 3'],
+                  Wert: ['Value 1', 'Value 2', 'Value 3'],
+                },
+              },
+              {
+                tabtitle: 'Details',
+                tabcontent: {
+                  Eigenschaften: ['Feature 1', 'Feature 2', 'Feature 3'],
+                  Wert: ['Value 1', 'Value 2', 'Value 3'],
+                },
+              },
+              {
+                tabtitle: 'Details',
+                tabcontent: {
+                  Eigenschaften: ['Feature 1', 'Feature 2', 'Feature 3'],
+                  Wert: ['Value 1', 'Value 2', 'Value 3'],
+                },
+              },
+            ],
+          },
+        },
+      },
+      {
+        product: {
+          id: '3',
+          name: 'Third Product',
+          price: 19.99,
+          category: 'Books',
+          description: 'A fascinating book for testing.',
+          rating: { score: 4.5, reviews: 10 },
+          inStock: true,
+          link: 'third-product',
+          details: {
+            title: 'Product Details',
+            tab: [
+              {
+                tabtitle: 'Details',
+                tabcontent: {
+                  Eigenschaften: ['Feature 1', 'Feature 2', 'Feature 3'],
+                  Wert: ['Value 1', 'Value 2', 'Value 3'],
+                },
+              },
+              {
+                tabtitle: 'Details',
+                tabcontent: {
+                  Eigenschaften: ['Feature 1', 'Feature 2', 'Feature 3'],
+                  Wert: ['Value 1', 'Value 2', 'Value 3'],
+                },
+              },
+              {
+                tabtitle: 'Details',
+                tabcontent: {
+                  Eigenschaften: ['Feature 1', 'Feature 2', 'Feature 3'],
+                  Wert: ['Value 1', 'Value 2', 'Value 3'],
+                },
+              },
+            ],
+          },
+        },
+      },
+      {
+        product: {
+          id: '4',
+          name: 'Fourth Product',
+          price: 39.99,
+          category: 'Clothing',
+          description: 'A stylish shirt for testing.',
+          rating: { score: 4.5, reviews: 10 },
+          inStock: true,
+          image: '/images/fourth-product.jpg',
+          link: 'fourth-product',
+          details: {
+            title: 'Product Details',
+            tab: [
+              {
+                tabtitle: 'Details',
+                tabcontent: {
+                  Eigenschaften: ['Feature 1', 'Feature 2', 'Feature 3'],
+                  Wert: ['Value 1', 'Value 2', 'Value 3'],
+                },
+              },
+              {
+                tabtitle: 'Details',
+                tabcontent: {
+                  Eigenschaften: ['Feature 1', 'Feature 2', 'Feature 3'],
+                  Wert: ['Value 1', 'Value 2', 'Value 3'],
+                },
+              },
+              {
+                tabtitle: 'Details',
+                tabcontent: {
+                  Eigenschaften: ['Feature 1', 'Feature 2', 'Feature 3'],
+                  Wert: ['Value 1', 'Value 2', 'Value 3'],
+                },
+              },
+            ],
+          },
+        },
+      },
+      {
+        product: {
+          id: '5',
+          name: 'Fifth Product',
+          price: 89.99,
+          category: 'Gadgets',
+          description: 'A cool gadget for testing.',
+          rating: { score: 4.5, reviews: 10 },
+          inStock: false,
+          link: 'fifth-product',
+          details: {
+            title: 'Product Details',
+            tab: [
+              {
+                tabtitle: 'Details',
+                tabcontent: {
+                  Eigenschaften: ['Feature 1', 'Feature 2', 'Feature 3'],
+                  Wert: ['Value 1', 'Value 2', 'Value 3'],
+                },
+              },
+              {
+                tabtitle: 'Details',
+                tabcontent: {
+                  Eigenschaften: ['Feature 1', 'Feature 2', 'Feature 3'],
+                  Wert: ['Value 1', 'Value 2', 'Value 3'],
+                },
+              },
+              {
+                tabtitle: 'Details',
+                tabcontent: {
+                  Eigenschaften: ['Feature 1', 'Feature 2', 'Feature 3'],
+                  Wert: ['Value 1', 'Value 2', 'Value 3'],
+                },
+              },
+            ],
+          },
+        },
+      },
+      {
+        product: {
+          id: '6',
+          name: 'Sixth Product',
+          price: 24.99,
+          category: 'Toys',
+          description: 'A fun toy for testing.',
+          rating: { score: 4.5, reviews: 10 },
+          inStock: true,
+          link: 'sixth-product',
+          details: {
+            title: 'Product Details',
+            tab: [
+              {
+                tabtitle: 'Details',
+                tabcontent: {
+                  Eigenschaften: ['Feature 1', 'Feature 2', 'Feature 3'],
+                  Wert: ['Value 1', 'Value 2', 'Value 3'],
+                },
+              },
+              {
+                tabtitle: 'Details',
+                tabcontent: {
+                  Eigenschaften: ['Feature 1', 'Feature 2', 'Feature 3'],
+                  Wert: ['Value 1', 'Value 2', 'Value 3'],
+                },
+              },
+              {
+                tabtitle: 'Details',
+                tabcontent: {
+                  Eigenschaften: ['Feature 1', 'Feature 2', 'Feature 3'],
+                  Wert: ['Value 1', 'Value 2', 'Value 3'],
+                },
+              },
+            ],
+          },
+        },
+      },
+      {
+        product: {
+          id: '7',
+          name: 'Seventh Product',
+          price: 49.99,
+          category: 'Kitchen',
+          description: 'A useful kitchen appliance for testing.',
+          rating: { score: 4.5, reviews: 10 },
+          inStock: true,
+          link: 'seventh-product',
+          details: {
+            title: 'Product Details',
+            tab: [
+              {
+                tabtitle: 'Details',
+                tabcontent: {
+                  Eigenschaften: ['Feature 1', 'Feature 2', 'Feature 3'],
+                  Wert: ['Value 1', 'Value 2', 'Value 3'],
+                },
+              },
+              {
+                tabtitle: 'Details',
+                tabcontent: {
+                  Eigenschaften: ['Feature 1', 'Feature 2', 'Feature 3'],
+                  Wert: ['Value 1', 'Value 2', 'Value 3'],
+                },
+              },
+              {
+                tabtitle: 'Details',
+                tabcontent: {
+                  Eigenschaften: ['Feature 1', 'Feature 2', 'Feature 3'],
+                  Wert: ['Value 1', 'Value 2', 'Value 3'],
+                },
+              },
+            ],
+          },
+        },
+      },
+      {
+        product: {
+          id: '8',
+          name: 'Eighth Product',
+          price: 34.99,
+          category: 'Sports',
+          description: 'A great product for sports enthusiasts.',
+          rating: { score: 4.5, reviews: 10 },
+          inStock: true,
+          link: 'eighth-product',
+          details: {
+            title: 'Product Details',
+            tab: [
+              {
+                tabtitle: 'Details',
+                tabcontent: {
+                  Eigenschaften: ['Feature 1', 'Feature 2', 'Feature 3'],
+                  Wert: ['Value 1', 'Value 2', 'Value 3'],
+                },
+              },
+              {
+                tabtitle: 'Details',
+                tabcontent: {
+                  Eigenschaften: ['Feature 1', 'Feature 2', 'Feature 3'],
+                  Wert: ['Value 1', 'Value 2', 'Value 3'],
+                },
+              },
+              {
+                tabtitle: 'Details',
+                tabcontent: {
+                  Eigenschaften: ['Feature 1', 'Feature 2', 'Feature 3'],
+                  Wert: ['Value 1', 'Value 2', 'Value 3'],
+                },
+              },
+            ],
+          },
+        },
+      },
+    ],
   },
-  {
-    id: '2',
-    name: 'Luxury  Watch',
-    price: 299.99,
-    originalPrice: 449.99,
-    description:
-      'Elegante Armbanduhr mit Schweizer Uhrwerk und Saphirglas. Wasserdicht bis 50m.',
-    category: 'Accessories',
+};
 
-    rating: 4.9,
-    reviews: 87,
-    inStock: true,
-    tags: ['sale'],
-  },
-  {
-    id: '3',
-    name: 'Designer Sunglasses',
-    price: 159.99,
-    originalPrice: 279.99,
-
-    description:
-      'Polarisierte Designer-Sonnenbrille mit UV400-Schutz. Modernes Design trifft auf Funktionalität.',
-    category: 'Accessories',
-
-    rating: 4.7,
-    reviews: 156,
-    inStock: true,
-    tags: ['new'],
-  },
-  {
-    id: '4',
-    name: 'Leather Crossbody Bag',
-    price: 199.99,
-    originalPrice: 279.99,
-    description:
-      'Handgefertigte Ledertasche aus italienischem Leder. Zeitloses Design mit praktischen Fächern.',
-    category: 'Bags',
-
-    rating: 4.6,
-    reviews: 203,
-    inStock: true,
-    tags: ['sale'],
-  },
-  {
-    id: '5',
-    name: 'Running Shoes',
-    price: 129.99,
-    originalPrice: 279.99,
-    description:
-      'Hochwertige Laufschuhe mit optimaler Dämpfung und Atmungsaktivität. Ideal für lange Strecken.',
-    category: 'Shoes',
-    rating: 4.8,
-    reviews: 342,
-    inStock: true,
-    tags: ['new'],
-  },
-  {
-    id: '6',
-    name: 'Wireless Headphones',
-    price: 249.99,
-    originalPrice: 329.99,
-    description:
-      'Premium Kopfhörer mit aktiver Geräuschunterdrückung. Bis zu 30 Stunden Akkulaufzeit.',
-    category: 'Electronics',
-
-    rating: 4.9,
-    reviews: 521,
-    inStock: true,
-    tags: ['sale', 'popular'],
-  },
-  {
-    id: '7',
-    name: 'Minimal Backpack',
-    price: 89.99,
-    description:
-      'Minimalistischer Rucksack mit Laptop-Fach. Perfekt für den Alltag und auf Reisen.',
-    category: 'Bags',
-
-    rating: 4.5,
-    reviews: 178,
-    inStock: true,
-    tags: [],
-  },
-  {
-    id: '8',
-    name: 'Smart Watch Pro',
-    price: 399.99,
-    originalPrice: 279.99,
-
-    description:
-      'Smartwatch mit Fitness-Tracking, GPS und Herzfrequenzmessung. Kompatibel mit iOS und Android.',
-    category: 'Electronics',
-
-    rating: 4.7,
-    reviews: 289,
-    inStock: true,
-    tags: ['new', 'popular'],
-  },
-];
-
-export default productsData;
+export default productPageData;

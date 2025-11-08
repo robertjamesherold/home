@@ -10,31 +10,20 @@ import { TextParagraph, Title } from '@typography/.';
 
 const ProductCard: React.FC<{ filteredProducts: ProductType[] }> = ( {
   filteredProducts,
-} ) =>
+}: ProductType ) =>
 {
-  const [ quantity, setQuantity ] = useState( 1 )
-  const product = filteredProducts
-  const { getRandomImageUrls } = useRandomImages()
-  const { addToCart } = useCart();
 
-  const handleAddToCart = () =>
-  {
-    addToCart( product, quantity )
-    setQuantity( 1 )
-  };
 
-  return (
-    <>
-      { filteredProducts.map( ( product ) =>
-      {
-        const imageUrls = getRandomImageUrls( 1, { cacheKey: product.id } );
+
+
+
 
         return (
           <Article>
             <Card className="@container group h-full overflow-hidden transition-shadow hover:shadow-lg">
               <Link
-                key={ product.id }
-                to={ `/product/${ product.id }` }
+                key={ filteredProducts.id }
+                to={ `/product/${ filteredProducts.link }` }
                 className="aspect-4/3 relative max-h-[30cqh] overflow-hidden"
               >
                 <Badge className="absolute left-2 top-2 z-10">Neu</Badge>

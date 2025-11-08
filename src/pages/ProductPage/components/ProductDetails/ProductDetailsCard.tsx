@@ -1,36 +1,40 @@
-import React from 'react';
-import { Card, CardContent } from '@ui/.';
+import { Card, CardContent, Tabs, TabsList, TabsContent, TabsTrigger } from '@ui/.'
+import { Title } from '@/typography'
+import type { ProductDetailsCardType } from '@/types/.'
 
-interface ProductDetailsCardProps {
-  category: string;
-  inStock: boolean;
-  productId: string;
-}
 
-export const ProductDetailsCard: React.FC<ProductDetailsCardProps> = ({
-  category,
-  inStock,
-  productId,
-}) => {
+
+
+const ProductDetailsCard: React.FC<ProductDetailsCardType> = ( {
+  title, tab }: ProductDetailsCardType ) =>
+{
   return (
     <Card className="border-border/80 bg-muted/50">
       <CardContent className="p-4">
-        <h3 className="mb-2 text-lg font-semibold">Produktdetails</h3>
-        <div className="space-y-1 text-sm text-muted-foreground">
-          <div className="flex justify-between">
-            <span>Kategorie:</span>
-            <span>{category}</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Verfügbarkeit:</span>
-            <span>{inStock ? 'Auf Lager' : 'Ausverkauft'}</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Artikelnummer:</span>
-            <span>{productId}</span>
-          </div>
-        </div>
+        <Title level={ 3 } className="mb-2" weight="semibold" text={ title } />
+
+
+
+        { tab?.map( ( { tabtitle, tabcontent } ) =>
+        {
+          return (
+            <Tabs className="flex justify-between">
+              <TabsList>
+                <TabsTrigger value={ tabtitle }> { tabtitle } </TabsTrigger>
+              </TabsList>
+              <TabsContent value={ tabtitle } className="flex justify-between">
+                <span>{ tabcontent.Eigenschaften }</span>
+                <span>{ tabcontent.Wert }</span>
+              </TabsContent>
+            </Tabs>
+          )
+        } ) }
+
+
       </CardContent>
     </Card>
-  );
+  )
 };
+
+export default ProductDetailsCard;
+
