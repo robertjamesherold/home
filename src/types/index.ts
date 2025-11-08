@@ -2,7 +2,6 @@ import type {
   ProductType,
   CartItemType,
   CartContextType,
-  ProductContextType,
   ProductDetailsCardType,
   RatingProps,
 } from './Product.types';
@@ -12,7 +11,6 @@ export type {
   ProductType,
   CartItemType,
   CartContextType,
-  ProductContextType,
   ProductDetailsCardType,
   RatingProps,
 };

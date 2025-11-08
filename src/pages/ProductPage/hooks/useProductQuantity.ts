@@ -13,5 +13,5 @@ export const useProductQuantity = (initialQuantity: number = 1) => {
     increment,
     decrement,
     reset,
-    };
+  };
 };

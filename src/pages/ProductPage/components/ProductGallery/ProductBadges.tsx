@@ -1,5 +1,5 @@
 import React from 'react';
-import { Badge } from '@ui/.';
+import { Badge } from '@/ui';
 
 interface ProductBadgesProps {
   tags?: string[];

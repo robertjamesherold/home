@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'motion/react';
-import { Button } from '@ui/.';
+import { Button } from '@/ui';
 import { X } from 'lucide-react';
 import { FilterContent } from './';
 import type { FilterMenuType } from '../types';

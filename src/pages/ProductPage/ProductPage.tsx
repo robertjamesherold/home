@@ -1,75 +1,84 @@
-import { useParams } from 'react-router-dom'
-import { useMemo, useState } from 'react'
-import { productsData } from '@data/.';
-import { useCart } from '@hooks/useProductContext';
-import { useProductQuantity } from './hooks/useProductQuantity'
-import { ProductGallery } from './components/ProductGallery/ProductGallery'
-import { ProductBadges } from './components/ProductGallery/ProductBadges'
-import { ProductRating } from './components/ProductInfo/ProductRating'
-import { ProductPrice } from './components/ProductInfo/ProductPrice'
-import { AddToCartSection } from './components/ProductInfo/AddToCartSection'
-import { ProductDetailsCard } from './components/ProductDetails'
-import { ShippingInfo } from './components/ProductDetails/ShippingInfo'
-import type { ProductType } from '@/types'
+import { useMemo } from 'react';
+import { useParams } from 'react-router-dom';
 
-const ProductPage = () =>
-{
-  const [ selectedImage, setSelectedImage ] = useState( 0 )
+import { productsData } from '@/data';
+import { useCart } from '@/hooks';
+import { Column } from '@/layout';
+import type { ProductType } from '@/types';
+
+import { useProductImages } from './hooks/useProductImages';
+import { ProductGallery } from './components/ProductGallery/ProductGallery';
+import { ProductBadges } from './components/ProductGallery/ProductBadges';
+import { ProductRating } from './components/ProductInfo/ProductRating';
+import { ProductPrice } from './components/ProductInfo/ProductPrice';
+import { AddToCartSection } from './components/ProductInfo/AddToCartSection';
+import { ProductDetailsCard } from './components/ProductDetails';
+import { ShippingInfo } from './components/ProductDetails/ShippingInfo';
+import { useProductQuantity } from './hooks/useProductQuantity';
+
+const ProductPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const product = productsData.find( ( p ) => p.id === id ) as ProductType
-  const addToCart = useCart()
-  useMemo( () => addToCart, [ addToCart ] )
+  const product = useMemo<ProductType | undefined>(
+    () => productsData.find((item) => item.id === id),
+    [id]
+  );
 
+  const { addToCart } = useCart();
+  const { quantity, increment, decrement, reset } = useProductQuantity(1);
 
-  const { quantity, increment, decrement } = useProductQuantity( 1 )
-  const handleAddToCart = () => setIsQuantity( isQuantity + 1 )
-  const [ isQuantity, setIsQuantity ] = useState( quantity )
+  const { productImages, selectedImage, setSelectedImage } = useProductImages({
+    productId: product?.id,
+    initialImages: product?.images,
+  });
 
+  if (!product) {
+    return null;
+  }
+
+  const handleAddToCart = () => {
+    addToCart(product, quantity);
+    reset();
+  };
 
   return (
     <div className="container relative mx-auto grid w-full gap-8 px-4 py-8 md:grid-cols-2">
-      {/* Gallery Section */ }
       <div>
         <ProductGallery
-          productName={ String( product.name ) }
-          selectedIndex={ selectedImage }
-          onSelectImage={ setSelectedImage }
+          productName={product.name}
+          images={productImages}
+          selectedIndex={selectedImage}
+          onSelectImage={setSelectedImage}
         />
       </div>
 
-      {/* Info Section */ }
-      <div>
-        <ProductBadges tags={ product.tags } />
+      <Column className="gap-6">
+        <ProductBadges tags={product.tags} />
 
-        <h1 className="text-3xl font-semibold">{String(product.name)}</h1>
+        <h1 className="text-3xl font-semibold">{product.name}</h1>
 
-        <ProductRating score={ product.rating?.score } reviews={ product.rating?.reviews } />
-
-        <ProductPrice
-          price={ product.price }
-          originalPrice={ product.originalPrice }
+        <ProductRating
+          score={product.rating.score}
+          reviews={product.rating.reviews}
         />
 
-        <p className="mt-4 text-base text-muted-foreground">
-          { String( product.description ) }
-        </p>
+        <ProductPrice price={product.price} originalPrice={product.originalPrice} />
+
+        <p className="text-base text-muted-foreground">{product.description}</p>
 
         <AddToCartSection
-          quantity={ quantity }
-          onQuantityIncrement={ increment }
-          onQuantityDecrement={ decrement }
-          category={ String( product.category ) }
-          onAddToCart={ handleAddToCart }
-          inStock={ product.inStock }
+          quantity={quantity}
+          onQuantityIncrement={increment}
+          onQuantityDecrement={decrement}
+          category={product.category}
+          onAddToCart={handleAddToCart}
+          inStock={product.inStock}
         />
 
-        <div className="mt-6">
-          <ProductDetailsCard
-            { ...product.details }
-          />
+        <div className="space-y-6">
+          <ProductDetailsCard {...product.details} />
           <ShippingInfo />
         </div>
-      </div>
+      </Column>
     </div>
   );
 };

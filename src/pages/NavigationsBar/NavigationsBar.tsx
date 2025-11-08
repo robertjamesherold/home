@@ -2,8 +2,8 @@ import { forwardRef, type HTMLAttributes, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { ShoppingCart, Search, Menu, User, X } from 'lucide-react';
-import { Button, Badge, Input } from '@ui/.';
-import { useCart } from '@hooks/useProductContext';
+import { Button, Badge, Input } from '@/ui';
+import { useCart } from '@/hooks';
 
 type NavigationsBarProps = HTMLAttributes<HTMLElement>;
 

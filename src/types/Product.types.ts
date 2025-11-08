@@ -10,29 +10,9 @@ export type ProductDetailsCardType = {
 };
 
 export type RatingProps = {
-  score?: number;
-  reviews?: number;
+  score: number;
+  reviews: number;
 };
-
-export type CartItemType = {
-  product?: ProductType;
-};
-
-export type CartContextType = {
-  product?: ProductType;
-  products?: CartItemType[];
-  addToCart?: (product: ProductType, quantity?: number) => void;
-  removeFromCart?: (productId: string) => void;
-  updateQuantity?: (productId: string, quantity: number) => void;
-  clearCart?: () => void;
-  totalItems?: number;
-  totalPrice?: number;
-  sumQuantity?: (productId: string, quantity?: number) => void;
-};
-
-export type ProductContextType = {
-  data: CartContextType;
-} & React.HTMLAttributes<HTMLDivElement>;
 
 export type ProductType = {
   id: string;
@@ -40,13 +20,30 @@ export type ProductType = {
   price: number;
   originalPrice?: number;
   description?: string;
-  category?: string;
-  rating?: RatingProps;
+  category: string;
+  rating: RatingProps;
   inStock: boolean;
   tags?: string[];
   image?: string;
   images?: string[];
-  link?: string;
+  link: string;
   quantity?: number;
   details?: ProductDetailsCardType;
+};
+
+export type CartItemType = {
+  product: ProductType;
+  quantity: number;
+};
+
+export type CartContextType = {
+  items: CartItemType[];
+  addToCart: (product: ProductType, quantity?: number) => void;
+  removeFromCart: (productId: string) => void;
+  updateQuantity: (productId: string, quantity: number) => void;
+  clearCart: () => void;
+  totalItems: number;
+  totalPrice: number;
+  isLoading: boolean;
+  isInitialized: boolean;
 };

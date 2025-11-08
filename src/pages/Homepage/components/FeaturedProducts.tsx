@@ -1,8 +1,10 @@
 import type { FeaturedProductsType } from '../types';
 import { Link } from 'react-router-dom';
-import { Button } from '@ui/.';
+
 import { Row, Grid, Section, Container, Header } from '@/layout';
-import { TextParagraph, Title } from '@typography/.';
+import { TextParagraph, Title } from '@/typography';
+import { Button } from '@/ui';
+
 import { ImageCard } from '../ui';
 
 const FeaturedProducts: React.FC<FeaturedProductsType> = (

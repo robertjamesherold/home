@@ -1,5 +1,5 @@
-import { Section, Grid, Column, Container } from '@layout/.';
-import { Title, TextParagraph } from '@typography/.';
+import { Section, Grid, Column, Container } from '@/layout';
+import { Title, TextParagraph } from '@/typography';
 import type { FeaturesType } from '../types';
 
 const Features: React.FC<FeaturesType> = (featuresData: FeaturesType) => {

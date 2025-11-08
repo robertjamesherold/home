@@ -68,7 +68,17 @@ const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
               : JSON.stringify(result.value),
             []
           );
-          setItems(parsed);
+
+          const sanitized = parsed
+            .filter((item): item is CartItemType => {
+              return Boolean(item?.product?.id);
+            })
+            .map((item) => ({
+              product: item.product,
+              quantity: Math.max(1, Number(item.quantity ?? 1)),
+            }));
+
+          setItems(sanitized);
         }
       } catch (err) {
         console.error('Failed to initialize cart from storage:', err);
@@ -121,7 +131,10 @@ const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
         // Build map from existing items
         for (const item of prev) {
-          map.set(item.product.id, { ...item });
+          map.set(item.product.id, {
+            product: item.product,
+            quantity: Math.max(1, item.quantity),
+          });
         }
 
         // Add or update product

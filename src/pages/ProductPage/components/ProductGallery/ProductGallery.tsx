@@ -2,27 +2,29 @@ import React from 'react';
 import { Image } from '@/layout';
 import { useRandomImages } from '@/hooks';
 
-interface ProductGalleryProps
-{
+interface ProductGalleryProps {
   productName: string;
   images?: string[];
   selectedIndex: number;
   onSelectImage: (index: number) => void;
 }
 
-export const ProductGallery: React.FC<ProductGalleryProps> = ( {
+export const ProductGallery: React.FC<ProductGalleryProps> = ({
   productName,
   images,
   selectedIndex,
   onSelectImage,
 }) => {
-  const { getRandomImageUrl, getRandomImageUrls } = useRandomImages()
-  const fallbackHero = getRandomImageUrl( { cacheKey: productName + '-hero' } )
-  const fallbackImages = getRandomImageUrls( 4, {
-    cacheKey: productName + '-thumbs',
-  } )
-  const galleryImages = images ? images : fallbackImages
-  const heroImage = fallbackHero;
+  const { getRandomImageUrl, getRandomImageUrls } = useRandomImages();
+  const fallbackHero = getRandomImageUrl({ cacheKey: `${productName}-hero` });
+  const fallbackImages = getRandomImageUrls(4, {
+    cacheKey: `${productName}-thumbs`,
+  });
+
+  const galleryImages =
+    images && images.length > 0 ? images : fallbackImages;
+  const heroImage =
+    galleryImages[selectedIndex] ?? galleryImages[0] ?? fallbackHero;
 
   return (
     <div className="space-y-3">
@@ -33,11 +35,11 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ( {
           className="rounded-lg border border-border bg-muted/40"
         />
       )}
-      { galleryImages.length > 1 && (
+      {galleryImages.length > 1 && (
         <div className="grid grid-cols-4 gap-3">
-          { galleryImages.map( ( image, index ) => (
+          {galleryImages.map((image, index) => (
             <button
-              key={ `${ image }-${ index }` }
+              key={`${image}-${index}`}
               type="button"
               onClick={() => onSelectImage(index)}
               className={`overflow-hidden rounded-md border ${

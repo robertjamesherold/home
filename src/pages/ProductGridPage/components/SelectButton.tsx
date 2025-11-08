@@ -4,7 +4,7 @@ import {
   SelectContent,
   SelectValue,
   SelectItem,
-} from '@ui/.';
+} from '@/ui';
 
 type SelectType = {
   value: string;

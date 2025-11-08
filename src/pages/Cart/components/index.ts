@@ -1,2 +1,3 @@
 export { default as EmptyCart } from './EmptyCart';
-export { default as CartItem } from './CartItems';
+export { default as CartItems } from './CartItems';
+export { default as OrderSummary } from './OrderSummary';

@@ -1,17 +1,16 @@
 import { Link } from 'react-router-dom';
 import { Flame } from 'lucide-react';
-import { Button } from '@ui/.';
-import { productsData } from '@data/.';
-import { Grid, Header } from '@layout/.';
+import { productsData } from '@/data';
+import { Grid, Header } from '@/layout';
+import { Title, TextParagraph } from '@/typography';
+import { Button } from '@/ui';
 import {
   ProductCard,
   NoFilteredProducts,
 } from '@/pages/ProductGridPage/components';
-import { Title, TextParagraph } from '@/typography';
-
 const SalePage: React.FC = () => {
   const saleProducts = productsData.filter((product) =>
-    product.tags.includes('sale')
+    (product.tags ?? []).includes('sale')
   );
 
   return (

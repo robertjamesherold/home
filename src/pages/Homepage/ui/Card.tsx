@@ -1,86 +1,114 @@
 import { Link } from 'react-router-dom';
-import { Card, CardContent } from '@ui/.';
-import { useRandomImages } from '@/hooks/useRandomImages'
-import type { FeaturedProductsType } from '../types';
-import { Row, Image, Header, Footer } from '@/layout';
-import { Title, TextParagraph } from '@typography/.';
+import { useMemo } from 'react';
 import { Star } from 'lucide-react';
-import { CardAction, Button } from '@ui/.';
+
+import { useCart, useRandomImages } from '@/hooks';
+import { Image, Row, Header, Footer } from '@/layout';
+import { TextParagraph, Title } from '@/typography';
+import { Button, Card, CardAction, CardContent } from '@/ui';
+
+import type { FeaturedProductsType } from '../types';
 
 const ImageCard: React.FC<{ product: FeaturedProductsType }> = ({
   product,
 }) => {
   const { getRandomImageUrls } = useRandomImages();
+  const { addToCart } = useCart();
+
+  const featuredProducts = useMemo(
+    () => product.featuredProducts ?? [],
+    [product.featuredProducts]
+  );
+
+  if (featuredProducts.length === 0) {
+    return null;
+  }
 
   return (
     <>
-      {product.featuredProducts.map((product) => (
-        <Link key={product.id} to={`/product/${product.id}`}>
-          <Card className="overflow-hidden transition-shadow hover:shadow-lg">
-            {getRandomImageUrls(1, { cacheKey: product.id }).map((img) => (
-              <Image
-                isAbsolute={false}
-                key={img}
-                src={img}
-                alt={product.name}
-                className="aspect-5/3 h-full w-full object-cover transition-transform duration-300 hover:scale-105"
-              />
-            ))}
-            <CardContent className="h-fit space-y-1 p-4">
-              <Header className="flex flex-col gap-0">
-                <Row className="align-center h-6 place-items-center">
+      {featuredProducts.map((featuredProduct) => {
+        const galleryImages =
+          featuredProduct.images?.length && featuredProduct.images.length > 0
+            ? featuredProduct.images
+            : getRandomImageUrls(1, { cacheKey: `featured-${featuredProduct.id}` });
+
+        return (
+          <Link
+            key={featuredProduct.id}
+            to={`/product/${featuredProduct.link ?? featuredProduct.id}`}
+          >
+            <Card className="overflow-hidden transition-shadow hover:shadow-lg">
+              {galleryImages.map((img) => (
+                <Image
+                  key={img}
+                  isAbsolute={false}
+                  src={img}
+                  alt={featuredProduct.name}
+                  className="aspect-5/3 h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                />
+              ))}
+              <CardContent className="h-fit space-y-1 p-4">
+                <Header className="flex flex-col gap-0">
+                  <Row className="align-center h-6 place-items-center">
+                    <TextParagraph
+                      sm
+                      className="text-gray-500"
+                      text={featuredProduct.category}
+                    />
+                  </Row>
+                  <Row className="align-center h-6 place-items-center">
+                    <Title
+                      level={5}
+                      weight="bold"
+                      className="align-center flex"
+                      text={featuredProduct.name}
+                    />
+                  </Row>
+                </Header>
+                <Row className="align-center h-6 place-items-center gap-1">
+                  <Star className="h-4 w-4 fill-yellow-400 leading-4 text-yellow-400" />
                   <TextParagraph
                     sm
-                    className="text-gray-500"
-                    text={product.category}
+                    className="leading-4 text-slate-900"
+                    text={featuredProduct.rating.score.toFixed(1)}
+                  />
+                  <TextParagraph
+                    sm
+                    className="leading-4 text-gray-500"
+                    text={`(${featuredProduct.rating.reviews})`}
                   />
                 </Row>
-                <Row className="align-center h-6 place-items-center">
+
+                <Footer className="align-center flex h-6 place-items-center gap-2">
                   <Title
                     level={5}
-                    weight="bold"
-                    className="align-center flex"
-                    text={product.name}
+                    text={`${featuredProduct.price.toFixed(2)}€`}
                   />
-                </Row>
-              </Header>
-              <Row className="align-center h-6 place-items-center gap-1">
-                <Star className="h-4 w-4 fill-yellow-400 leading-4 text-yellow-400" />
-                <TextParagraph
-                  sm
-                  className="leading-4 text-slate-900"
-                  text={product.rating}
-                />
-                <TextParagraph
-                  sm
-                  className="leading-4 text-gray-500"
-                  text={`(${product.reviews})`}
-                />
-              </Row>
-
-              <Footer className="align-center flex h-6 place-items-center gap-2">
-                <Title
-                  level={5}
-                  className=""
-                  text={`${product.price.toFixed(2)}€`}
-                />
-                {product.originalPrice && (
-                  <Title
-                    level={6}
-                    className="text-gray-500 line-through"
-                    text={`${product.originalPrice.toFixed(2)}€`}
-                  />
-                )}
-              </Footer>
-              <CardAction>
-                <Button variant="destructive" className="w-full">
-                  In den Warenkorb
-                </Button>
-              </CardAction>
-            </CardContent>
-          </Card>
-        </Link>
-      ))}
+                  {featuredProduct.originalPrice && (
+                    <Title
+                      level={6}
+                      className="text-gray-500 line-through"
+                      text={`${featuredProduct.originalPrice.toFixed(2)}€`}
+                    />
+                  )}
+                </Footer>
+                <CardAction>
+                  <Button
+                    variant="destructive"
+                    className="w-full"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      addToCart(featuredProduct, 1);
+                    }}
+                  >
+                    In den Warenkorb
+                  </Button>
+                </CardAction>
+              </CardContent>
+            </Card>
+          </Link>
+        );
+      })}
     </>
   );
 };

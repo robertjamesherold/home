@@ -1,9 +1,10 @@
-import { Section, Image, Container } from '@layout/.';
-import { Title, TextParagraph } from '@typography/.';
 import { Link } from 'react-router-dom';
-import { Button } from '@ui/.';
 import { ArrowRight } from 'lucide-react';
-import { useRandomImages } from '@/hooks/useRandomImages'
+
+import { useRandomImages } from '@/hooks';
+import { Section, Image, Container } from '@/layout';
+import { Title, TextParagraph } from '@/typography';
+import { Button } from '@/ui';
 import type { HeroType } from '../types';
 
 const Hero: React.FC<HeroType> = ({

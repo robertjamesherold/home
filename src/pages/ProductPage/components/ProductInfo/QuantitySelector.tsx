@@ -1,6 +1,6 @@
 import React from 'react';
 import { Minus, Plus } from 'lucide-react';
-import { Button } from '@ui/.';
+import { Button } from '@/ui';
 
 interface QuantitySelectorProps {
   quantity: number;

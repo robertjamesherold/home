@@ -2,9 +2,9 @@ import type { BannerType } from '../types/';
 import { useRandomImages } from '@/hooks';
 
 import { Section, Image, Column } from '@/layout';
-import { TextParagraph, Title } from '@/typography/.';
+import { TextParagraph, Title } from '@/typography';
 import { Link } from 'react-router-dom';
-import { Button } from '@ui/.';
+import { Button } from '@/ui';
 
 const Banner: React.FC<BannerType> = ({
   title,

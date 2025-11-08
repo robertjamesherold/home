@@ -1,30 +1,48 @@
 import type { ProductType } from '@/types';
 import { Link } from 'react-router-dom';
-import { Card, CardAction, CardContent, Button } from '@ui/.';
-import { Badge } from '@ui/badge';
+import { useMemo } from 'react';
 import { Star } from 'lucide-react';
-import { Image, Container, Row, Header, Footer } from '@/layout';
-import { useRandomImages } from '@/hooks/useRandomImages'
-import { TextParagraph, Title } from '@/typography';
 
-const ProductCard: React.FC<{ filteredProducts: ProductType[] }> = ({
+import { useCart, useRandomImages } from '@/hooks';
+import { Image, Container, Row, Header, Footer } from '@/layout';
+import { TextParagraph, Title } from '@/typography';
+import { Badge, Button, Card, CardAction, CardContent } from '@/ui';
+
+type HomepageProductCardProps = {
+  filteredProducts: ProductType[];
+};
+
+const ProductCard: React.FC<HomepageProductCardProps> = ({
   filteredProducts,
 }) => {
   const { getRandomImageUrls } = useRandomImages();
+  const { addToCart } = useCart();
+
+  const products = useMemo(() => filteredProducts ?? [], [filteredProducts]);
+
+  if (products.length === 0) {
+    return null;
+  }
 
   return (
     <>
-      {filteredProducts.map((product) => {
-        const imageUrls = getRandomImageUrls(2, { cacheKey: product.id });
+      {products.map((product) => {
+        const galleryImages =
+          product.images?.length && product.images.length > 0
+            ? product.images
+            : getRandomImageUrls(2, { cacheKey: `home-${product.id}` });
+        const tags = product.tags ?? [];
+
+        const handleAddToCart = () => addToCart(product, 1);
 
         return (
-          <Link key={product.id} to={`/product/${product.id}`}>
+          <Link key={product.id} to={`/product/${product.link ?? product.id}`}>
             <Card className="@container group h-full overflow-hidden transition-shadow hover:shadow-lg">
               <Container className="aspect-4/3 relative max-h-[30cqh] overflow-hidden">
-                {product.tags.includes('new') && (
+                {tags.includes('new') && (
                   <Badge className="absolute left-2 top-2 z-10">Neu</Badge>
                 )}
-                {product.tags.includes('sale') && (
+                {tags.includes('sale') && (
                   <Badge
                     className="absolute right-2 top-2 z-10"
                     variant="destructive"
@@ -32,9 +50,9 @@ const ProductCard: React.FC<{ filteredProducts: ProductType[] }> = ({
                     Sale
                   </Badge>
                 )}
-                {imageUrls.map((img) => (
+                {galleryImages.map((img) => (
                   <Image
-                    isAbsolute={true}
+                    isAbsolute
                     key={img}
                     src={img}
                     alt={product.name}
@@ -65,19 +83,18 @@ const ProductCard: React.FC<{ filteredProducts: ProductType[] }> = ({
                   <TextParagraph
                     sm
                     className="leading-4 text-slate-900"
-                    text={product.rating}
+                    text={product.rating.score.toFixed(1)}
                   />
                   <TextParagraph
                     sm
                     className="leading-4 text-gray-500"
-                    text={`(${product.reviews})`}
+                    text={`(${product.rating.reviews})`}
                   />
                 </Row>
 
                 <Footer className="align-center flex h-6 place-items-center gap-2">
                   <Title
                     level={5}
-                    className=""
                     text={`${product.price.toFixed(2)}€`}
                   />
                   {product.originalPrice && (
@@ -89,7 +106,14 @@ const ProductCard: React.FC<{ filteredProducts: ProductType[] }> = ({
                   )}
                 </Footer>
                 <CardAction>
-                  <Button variant="destructive" className="w-full">
+                  <Button
+                    variant="destructive"
+                    className="w-full"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      handleAddToCart();
+                    }}
+                  >
                     In den Warenkorb
                   </Button>
                 </CardAction>

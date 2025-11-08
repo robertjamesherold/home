@@ -12,57 +12,57 @@ import {
   Separator,
   RadioGroup,
   RadioGroupItem,
-} from '@ui/.';
-import { useCart } from '@hooks/useProductContext';
+} from '@/ui';
+import { useCart } from '@/hooks';
 import { toast } from 'sonner';
 
 const Checkout: React.FC = () => {
-  {
-    const { items, totalPrice, clearCart } = useCart();
-    const navigate = useNavigate();
-    const [paymentMethod, setPaymentMethod] = useState('card');
+  const { items, totalPrice, clearCart } = useCart();
+  const navigate = useNavigate();
+  const [paymentMethod, setPaymentMethod] = useState('card');
 
-    const shippingCost = totalPrice >= 50 ? 0 : 4.99;
-    const tax = totalPrice * 0.19;
-    const total = totalPrice + shippingCost;
+  const subtotal = totalPrice ?? 0;
+  const shippingCost = subtotal >= 50 ? 0 : 4.99;
+  const tax = subtotal * 0.19;
+  const total = subtotal + shippingCost;
 
-    const handleSubmit = (e: React.FormEvent) => {
-      e.preventDefault();
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
 
-      const summaryItems = items.map((item) => ({
-        id: item.product.id,
-        name: item.product.name,
-        quantity: item.quantity,
-        price: item.product.price,
-      }));
+    const summaryItems = items.map((item) => ({
+      id: item.product.id,
+      name: item.product.name,
+      quantity: item.quantity,
+      price: item.product.price,
+    }));
 
-      toast.success('Bestellung erfolgreich aufgegeben!');
+    toast.success('Bestellung erfolgreich aufgegeben!');
 
-      setTimeout(() => {
-        clearCart();
-        navigate('/checkout/success', {
-          state: {
-            total,
-            shippingCost,
-            tax,
-            items: summaryItems,
-            orderNumber: `LX-${Date.now().toString().slice(-6)}`,
-          },
-        });
-      }, 1200);
-    };
+    setTimeout(() => {
+      clearCart();
+      navigate('/checkout/success', {
+        state: {
+          total,
+          shippingCost,
+          tax,
+          items: summaryItems,
+          orderNumber: `LX-${Date.now().toString().slice(-6)}`,
+        },
+      });
+    }, 1200);
+  };
 
-    if (items.length === 0) {
-      navigate('/cart');
-      return null;
-    }
+  if (items.length === 0) {
+    navigate('/cart');
+    return null;
+  }
 
-    return (
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="mb-8">Kasse</h1>
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="mb-8">Kasse</h1>
 
-        <form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+      <form onSubmit={handleSubmit}>
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             {/* Checkout Form */}
             <div className="space-y-6 lg:col-span-2">
               {/* Shipping Information */}
@@ -198,7 +198,7 @@ const Checkout: React.FC = () => {
                   <div className="space-y-2">
                     <div className="flex justify-between">
                       <span className="text-gray-600">Zwischensumme</span>
-                      <span>{totalPrice.toFixed(2)}€</span>
+                      <span>{subtotal.toFixed(2)}€</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Versand</span>
@@ -237,8 +237,7 @@ const Checkout: React.FC = () => {
           </div>
         </form>
       </div>
-    );
-  }
+  );
 };
 
 export default Checkout;

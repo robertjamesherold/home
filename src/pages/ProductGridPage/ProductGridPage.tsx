@@ -11,7 +11,7 @@ import {
   FilterMenu,
 } from './components';
 import { TextParagraph, Title } from '@/typography';
-import { Button } from '@ui/.';
+import { Button } from '@/ui';
 import { SlidersHorizontal } from 'lucide-react';
 import { useState } from 'react';
 
