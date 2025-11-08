@@ -1,3 +1,6 @@
 export { CartProvider, useCart } from './useProductContext';
+export { useBreakpoint } from './useBreakpoint';
+export { useElementSize } from './useElementSize'; 
 export { useWindowSize } from './useWindowSize';
-export { useLatencyLoader } from './useLatencyLoader';
+export { useRandomImages } from './useRandomImages';
+

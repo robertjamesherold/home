@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, useCallback } from 'react';
 import { productsData } from '@data/.';
-import useRandomImages from '@/hooks/useRandomImages';
+import { useRandomImages } from '@/hooks/useRandomImages';
 
 const MIN_RELATED_COUNT = 12;
 const MAX_RELATED_COUNT = 24;

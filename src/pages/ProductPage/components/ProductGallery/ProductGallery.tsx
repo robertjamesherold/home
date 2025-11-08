@@ -1,22 +1,28 @@
 import React from 'react';
 import { Image } from '@/layout';
+import { useRandomImages } from '@/hooks';
 
-interface ProductGalleryProps {
-  images: string[];
+interface ProductGalleryProps
+{
   productName: string;
+  images?: string[];
   selectedIndex: number;
   onSelectImage: (index: number) => void;
 }
 
-export const ProductGallery: React.FC<ProductGalleryProps> = ({
-  images,
+export const ProductGallery: React.FC<ProductGalleryProps> = ( {
   productName,
+  images,
   selectedIndex,
   onSelectImage,
 }) => {
-  if (!images.length) return null;
-
-  const heroImage = images[selectedIndex] ?? images[0];
+  const { getRandomImageUrl, getRandomImageUrls } = useRandomImages()
+  const fallbackHero = getRandomImageUrl( { cacheKey: productName + '-hero' } )
+  const fallbackImages = getRandomImageUrls( 4, {
+    cacheKey: productName + '-thumbs',
+  } )
+  const galleryImages = images ? images : fallbackImages
+  const heroImage = fallbackHero;
 
   return (
     <div className="space-y-3">
@@ -27,15 +33,17 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({
           className="rounded-lg border border-border bg-muted/40"
         />
       )}
-      {images.length > 1 && (
+      { galleryImages.length > 1 && (
         <div className="grid grid-cols-4 gap-3">
-          {images.map((image, index) => (
+          { galleryImages.map( ( image, index ) => (
             <button
-              key={image + index}
+              key={ `${ image }-${ index }` }
               type="button"
               onClick={() => onSelectImage(index)}
               className={`overflow-hidden rounded-md border ${
-                selectedIndex === index ? 'border-foreground' : 'border-transparent'
+                selectedIndex === index
+                  ? 'border-foreground'
+                  : 'border-transparent'
               }`}
             >
               <Image

@@ -3,7 +3,7 @@ import { Title, TextParagraph } from '@typography/.';
 import { Link } from 'react-router-dom';
 import { Button } from '@ui/.';
 import { ArrowRight } from 'lucide-react';
-import useRandomImages from '@/hooks/useRandomImages';
+import { useRandomImages } from '@/hooks/useRandomImages'
 import type { HeroType } from '../types';
 
 const Hero: React.FC<HeroType> = ({

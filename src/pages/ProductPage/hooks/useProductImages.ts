@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import useRandomImages from '@/hooks/useRandomImages';
+import { useRandomImages } from '@/hooks/useRandomImages';
 
 interface UseProductImagesProps {
   productId?: string;

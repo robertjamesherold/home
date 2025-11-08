@@ -15,21 +15,11 @@ export const QuantitySelector: React.FC<QuantitySelectorProps> = ({
 }) => {
   return (
     <div className="flex items-center rounded-md border">
-      <Button
-        type="button"
-        variant="ghost"
-        size="icon"
-        onClick={onDecrement}
-      >
+      <Button type="button" variant="ghost" size="icon" onClick={onDecrement}>
         <Minus className="h-4 w-4" />
       </Button>
       <span className="px-4 text-sm font-medium">{quantity}</span>
-      <Button
-        type="button"
-        variant="ghost"
-        size="icon"
-        onClick={onIncrement}
-      >
+      <Button type="button" variant="ghost" size="icon" onClick={onIncrement}>
         <Plus className="h-4 w-4" />
       </Button>
     </div>

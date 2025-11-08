@@ -4,7 +4,7 @@ import { Card, CardAction, CardContent, Button } from '@ui/.';
 import { Badge } from '@ui/badge';
 import { Star } from 'lucide-react';
 import { Image, Container, Row, Header, Footer } from '@/layout';
-import useRandomImages from '@/hooks/useRandomImages';
+import { useRandomImages } from '@/hooks/useRandomImages'
 import { TextParagraph, Title } from '@/typography';
 
 const ProductCard: React.FC<{ filteredProducts: ProductType[] }> = ({

@@ -1,5 +1,5 @@
 import type { BannerType } from '../types/';
-import useRandomImages from '@/hooks/useRandomImages';
+import { useRandomImages } from '@/hooks';
 
 import { Section, Image, Column } from '@/layout';
 import { TextParagraph, Title } from '@/typography/.';

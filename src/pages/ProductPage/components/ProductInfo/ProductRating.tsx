@@ -6,7 +6,10 @@ interface ProductRatingProps {
   reviews: number;
 }
 
-export const ProductRating: React.FC<ProductRatingProps> = ({ rating, reviews }) => {
+export const ProductRating: React.FC<ProductRatingProps> = ({
+  rating,
+  reviews,
+}) => {
   return (
     <div className="mt-3 flex items-center gap-2">
       <div className="flex items-center gap-1">

@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
-import type { ProductType } from '@/types'
+import type { ProductType } from '@types/.'
 import { Link } from 'react-router-dom';
-import { Card, CardAction, CardContent, Button } from '@ui/.';
-import { Badge } from '@ui/badge';
+import { Card, CardAction, CardContent, Button, Badge } from '@ui/.'
 import { Star } from 'lucide-react';
-import { Image, Row, Header, Footer, Article } from '@/layout'
-import useRandomImages from '@/hooks/useRandomImages';
-import { TextParagraph, Title } from '@/typography';
-import { useCart } from '@hooks/useProductContext'
+import { Image, Row, Header, Footer, Article } from '@layout/.'
+import { useRandomImages, useCart } from '@hooks/.'
+import { TextParagraph, Title } from '@typography/.';
+
 
 const ProductCard: React.FC<{ filteredProducts: ProductType[] }> = ( {
   filteredProducts,
@@ -16,21 +15,19 @@ const ProductCard: React.FC<{ filteredProducts: ProductType[] }> = ( {
   const [ quantity, setQuantity ] = useState( 1 )
   const product = filteredProducts
   const { getRandomImageUrls } = useRandomImages()
-  const { addToCart } = useCart()
+  const { addToCart } = useCart();
 
-
-  const handleAddToCart =
-    () =>
-    {
-      addToCart( product, quantity )
-      setQuantity( 1 )
-    };
+  const handleAddToCart = () =>
+  {
+    addToCart( product, quantity )
+    setQuantity( 1 )
+  };
 
   return (
     <>
       { filteredProducts.map( ( product ) =>
       {
-        const imageUrls = getRandomImageUrls(2, { cacheKey: product.id });
+        const imageUrls = getRandomImageUrls( 1, { cacheKey: product.id } );
 
         return (
           <Article>
@@ -53,7 +50,7 @@ const ProductCard: React.FC<{ filteredProducts: ProductType[] }> = ( {
                     isAbsolute={true}
                     key={img}
                     src={ img }
-                    className="h-full w-full object-cover inset-0 transition-transform duration-300 group-hover:scale-105"
+                    className="inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 ))}
               </Link>
@@ -80,9 +77,9 @@ const ProductCard: React.FC<{ filteredProducts: ProductType[] }> = ( {
                 </Header>
                 <Row className="align-center h-6 place-items-center gap-1">
                   <Star className="h-4 w-4 fill-yellow-400 leading-4 text-yellow-400" />
-                  <TextParagraph
-                    sm
-                    className="leading-4 text-slate-900">{ product.rating }</TextParagraph>
+                  <TextParagraph sm className="leading-4 text-slate-900">
+                    { product.rating }
+                  </TextParagraph>
                   <TextParagraph
                     sm
                     className="leading-4 text-gray-500"
@@ -103,8 +100,7 @@ const ProductCard: React.FC<{ filteredProducts: ProductType[] }> = ( {
                       className="text-gray-500 line-through"
                       text={ `${ product.originalPrice.toFixed( 2 ) }€` }
                     />
-                  )}
-
+                  ) }
                 </Footer>
                 <CardAction>
                   <Button
@@ -116,7 +112,6 @@ const ProductCard: React.FC<{ filteredProducts: ProductType[] }> = ( {
                   </Button>
                 </CardAction>
               </CardContent>
-
             </Card>
           </Article>
         );

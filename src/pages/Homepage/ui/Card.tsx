@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Card, CardContent } from '@ui/.';
-import useRandomImages from '@/hooks/useRandomImages';
+import { useRandomImages } from '@/hooks/useRandomImages'
 import type { FeaturedProductsType } from '../types';
 import { Row, Image, Header, Footer } from '@/layout';
 import { Title, TextParagraph } from '@typography/.';

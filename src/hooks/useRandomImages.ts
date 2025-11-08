@@ -13,7 +13,7 @@ type RandomImageOptions = {
 const DEFAULT_WIDTH = 600;
 const DEFAULT_HEIGHT = 600;
 
-const useRandomImages = () => {
+export const useRandomImages = () => {
   const cacheRef = useRef<Map<string, string[]>>(new Map());
 
   const createSeed = () => Math.random().toString(36).slice(2, 9);
@@ -72,4 +72,3 @@ const useRandomImages = () => {
   return { getRandomImageUrl, getRandomImageUrls };
 };
 
-export default useRandomImages;
