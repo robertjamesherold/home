@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import type { ProductType } from '@/types'
 import { Link } from 'react-router-dom';
 import { Card, CardAction, CardContent, Button } from '@ui/.';
 import { Badge } from '@ui/badge';
 import { Star } from 'lucide-react';
-import { Image, Container, Row, Header, Footer } from '@/layout'
+import { Image, Container, Row, Header, Footer, Article } from '@/layout'
 import useRandomImages from '@/hooks/useRandomImages';
 import { TextParagraph, Title } from '@/typography';
 import { useCart } from '@hooks/useProductContext'
@@ -17,7 +17,7 @@ const ProductCard: React.FC<{ filteredProducts: ProductType[] }> = ({
 } ) =>
 {
     const [ quantity, setQuantity ] = useState( 1 )
-    const product = productsData.find( ( p ) => p.id === id )
+    const product = productsData;    
     const { getRandomImageUrls } = useRandomImages();
     const { addToCart } = useCart()
 
@@ -36,47 +36,34 @@ const ProductCard: React.FC<{ filteredProducts: ProductType[] }> = ({
         const imageUrls = getRandomImageUrls(2, { cacheKey: product.id });
 
         return (
-          <Link key={product.id} to={`/product/${product.id}`}>
+            <Article>
             <Card className="@container group h-full overflow-hidden transition-shadow hover:shadow-lg">
-              <Container className="aspect-4/3 relative max-h-[30cqh] overflow-hidden">
-                {product.tags.includes('new') && (
+                    <Link key={ product.id } to={ `/product/${ product.id }` } className="  aspect-4/3 relative max-h-[30cqh] overflow-hidden">
                   <Badge className="absolute left-2 top-2 z-10">Neu</Badge>
-                )}
-                {product.tags.includes('sale') && (
-                  <Badge
-                    className="absolute right-2 top-2 z-10"
-                    variant="destructive"
-                  >
-                    Sale
-                  </Badge>
-                )}
+                        <Badge className="absolute right-2 top-2 z-10" variant="destructive">Sale</Badge>
+
                 {imageUrls.map((img) => (
                   <Image
                     isAbsolute={true}
                     key={img}
-                    src={img}
-                    alt={product.name}
+                        src={ img }
                     className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 ))}
-              </Container>
+                    </Link>
               <CardContent className="h-fit space-y-1 p-4">
                 <Header className="flex flex-col gap-0">
                   <Row className="align-center h-6 place-items-center">
-                    <TextParagraph
-                      sm
-                      className="text-gray-500"
-                      text={product.category}
-                    />
+                                <TextParagraph sm className="text-gray-500">{ product.category }</TextParagraph>
                   </Row>
-                  <Row className="align-center h-6 place-items-center">
+                            <Link key={ product.id } to={ `/product/${ product.id }` } className="align-left h-6 place-items-start">
                     <Title
                       level={5}
                       weight="bold"
                       className="align-center flex"
                       text={product.name}
                     />
-                  </Row>
+                            </Link>
                 </Header>
                 <Row className="align-center h-6 place-items-center gap-1">
                   <Star className="h-4 w-4 fill-yellow-400 leading-4 text-yellow-400" />
@@ -113,8 +100,7 @@ const ProductCard: React.FC<{ filteredProducts: ProductType[] }> = ({
                 </CardAction>
               </CardContent>
             </Card>
-          </Link>
-        );
+            </Article> );
       })}
     </>
   );

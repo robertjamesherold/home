@@ -44,7 +44,7 @@ const useFilter = (
     return productsData
       .filter((product) => {
         if (selectedCategories.includes('Alle')) return true;
-        return selectedCategories.includes(product.category);
+        return selectedCategories.includes(String(product.category));
       })
       .filter((product) => {
         return product.price >= priceRange[0] && product.price <= priceRange[1];
@@ -52,13 +52,16 @@ const useFilter = (
       .filter((product) => {
         if (!normalizedSearch) return true;
         const haystack =
-          `${product.name} ${product.description} ${product.category}`.toLowerCase();
+          `${product.name} ${product.description} ${String(product.category)}`.toLowerCase();
         return haystack.includes(normalizedSearch);
       })
       .sort((a, b) => {
         if (sortBy === 'price-asc') return a.price - b.price;
         if (sortBy === 'price-desc') return b.price - a.price;
-        if (sortBy === 'rating') return b.rating - a.rating;
+        if (sortBy === 'rating') {
+          const toNumber = (val: unknown): number => (typeof val === 'number' ? val : 0);
+          return toNumber(b.rating) - toNumber(a.rating);
+        }
         return 0;
       });
   }, [productsData, selectedCategories, priceRange, sortBy, normalizedSearch]);
