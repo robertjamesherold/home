@@ -9,9 +9,8 @@
     "allowSyntheticDefaultImports": true,
     "lib": ["ES2023"],
     "types": ["node", "jest", "react"],
+    "typeRoots": ["./node_modules/@types", "./src/types"],
     "skipLibCheck": true,
-    "ignoreDeprecations": "6.0",
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
       "@css/*": ["./src/css/*"],
@@ -42,6 +41,6 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "vite.config.ts"],
+  "include": ["src", "vite.config.ts", "src/**/*"],
   "exclude": ["node_modules", "dist", "test", "**/*.test.ts", "**/*.test.tsx"]
 }

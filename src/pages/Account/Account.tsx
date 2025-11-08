@@ -1,4 +1,11 @@
-import { ShieldCheck, Truck } from 'lucide-react';
+import {
+  Contact,
+  Package,
+  PersonStanding,
+  Settings,
+  ShieldCheck,
+  Truck,
+} from 'lucide-react';
 import {
   Card,
   CardContent,
@@ -8,7 +15,9 @@ import {
   Badge,
   Separator,
 } from '@ui/.';
-import { Column } from '@/layout';
+import { Column, Header, Row } from '@/layout';
+import { TextParagraph, Title } from '@/typography';
+import { Profiler } from 'react';
 
 const upcomingDeliveries = [
   {
@@ -27,14 +36,27 @@ const upcomingDeliveries = [
 
 const preferences = [
   {
-    label: 'Newsletter',
-    value: 'Wöchentlich',
+    label: 'Persönliche Daten',
   },
   {
-    label: 'Lieblingskategorie',
-    value: 'Minimal Street',
+    label: 'Sicherheit',
+  },
+  {
+    label: 'Benachrichtigungen',
   },
 ];
+
+const accountData = {
+  id: 'Name',
+  name: 'Robert James Herold',
+  letter: 'Mail',
+  email: 'i@robertjamesherold.me',
+  call: 'Telefon',
+  phone: '+49 151 61660444',
+  kontakt: 'Adresse',
+  address: 'Im Kammerfest 23',
+  postalCode: '63628 Bad Soden-Salmünster',
+};
 
 const AccountPage: React.FC = () => {
   return (
@@ -50,54 +72,115 @@ const AccountPage: React.FC = () => {
         </p>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[2fr,1fr]">
+      <div className="grid gap-6 lg:grid-cols-2">
         <Card className="bg-white shadow-sm">
-          <CardHeader className="flex flex-row items-center justify-between">
-            <div>
-              <CardTitle className="text-lg">Persönliche Daten</CardTitle>
-              <p className="text-sm text-gray-500">
-                Schnell editierbar, sicher verschlüsselt.
-              </p>
-            </div>
-            <Button variant="outline">Bearbeiten</Button>
+          <CardHeader className="mb-2 flex h-20 flex-row items-center justify-between">
+            <Header>
+              <Title
+                level={5}
+                weight="semibold"
+                className="flex flex-row items-center gap-1"
+              >
+                <Contact className="h-5 w-5 text-gray-900" />
+                Persönliche Daten
+              </Title>
+              <TextParagraph
+                sm
+                className="text-gray-400"
+                text="Ihre Profildaten."
+              />
+            </Header>
           </CardHeader>
-          <CardContent className="grid gap-6 sm:grid-cols-2">
-            <div>
-              <p className="text-xs text-gray-400">Name</p>
-              <p className="text-base font-medium text-gray-900">
-                Alex Schneider
-              </p>
-            </div>
-            <div>
-              <p className="text-xs text-gray-400">E-Mail</p>
-              <p className="text-base font-medium text-gray-900">
-                alex@example.com
-              </p>
-            </div>
-            <div>
-              <p className="text-xs text-gray-400">Telefon</p>
-              <p className="text-base font-medium text-gray-900">
-                +49 171 2345678
-              </p>
-            </div>
-            <div>
-              <p className="text-xs text-gray-400">Adresse</p>
-              <p className="text-base font-medium text-gray-900">
-                Rosenthaler Str. 75, Berlin
-              </p>
-            </div>
+          <hr className="mx-6 pb-4" />
+          <CardContent className="grid gap-6 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+            <Column>
+              <TextParagraph
+                xs
+                className="font-medium text-gray-400"
+                text={accountData.id}
+              />
+              <TextParagraph
+                className="font-medium text-gray-900"
+                text={accountData.name}
+              />
+            </Column>
+            <Column>
+              <TextParagraph
+                xs
+                className="font-medium text-gray-400"
+                text={accountData.letter}
+              />
+              <TextParagraph
+                className="font-medium text-gray-900"
+                text={accountData.email}
+              />
+            </Column>
+
+            <Column>
+              <TextParagraph
+                xs
+                className="font-medium text-gray-400"
+                text={accountData.call}
+              />
+              <TextParagraph
+                className="font-medium text-gray-900"
+                text={accountData.phone}
+              />
+            </Column>
+            <Column>
+              <TextParagraph
+                xs
+                className="font-medium text-gray-400"
+                text={accountData.kontakt}
+              />
+              <TextParagraph
+                className="font-medium text-gray-900"
+                text={accountData.address}
+              />
+              <TextParagraph
+                className="font-medium text-gray-900"
+                text={accountData.postalCode}
+              />
+            </Column>
           </CardContent>
         </Card>
 
         <Card className="bg-white shadow-sm">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg">
-              <ShieldCheck className="h-5 w-5 text-gray-900" />
-              Mitgliedschaft
-            </CardTitle>
+          <CardHeader className="mb-2 flex h-20 flex-row items-center justify-between">
+            <Header>
+              <Title
+                level={5}
+                weight="semibold"
+                className="flex flex-row items-center gap-1"
+              >
+                <ShieldCheck className="h-5 w-5 text-gray-900" />
+                Mitgliedschaft
+              </Title>
+              <TextParagraph
+                sm
+                className="text-gray-400"
+                text="Verwalten sie ihre Mitgliedschaft."
+              />
+            </Header>
           </CardHeader>
+          <hr className="mx-6 pb-4" />
+
           <CardContent className="space-y-4">
-            <div className="rounded-2xl bg-gray-50 px-4 py-3 text-sm text-gray-600">
+            <Row className="rounded-lg bg-emerald-100 px-4 py-3 text-sm text-emerald-700">
+              Du hast das Professional-Abo
+            </Row>
+            <Column className="space-y-1">
+              <TextParagraph sm className="font-bold text-gray-600">
+                Nächste monatliche Rechnung
+              </TextParagraph>
+              <Title
+                level={5}
+                weight="bold"
+                className="font-bold text-gray-600"
+                text="12,99 €"
+              />
+            </Column>
+            <div className="rounded-lg bg-gray-50 px-4 py-3 text-sm text-gray-600">
               Luxe+ garantiert kostenlosen Versand, 30 Tage Rückgabe und Early
               Access.
             </div>
@@ -111,14 +194,26 @@ const AccountPage: React.FC = () => {
         </Card>
       </div>
 
-      <div className="mt-6 grid gap-6 lg:grid-cols-[1.2fr,0.8fr]">
+      <div className="mt-6 grid gap-6 md:grid-cols-2">
         <Card className="bg-white shadow-sm">
-          <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle className="text-lg">Bestellungen</CardTitle>
-            <Button variant="outline" size="sm">
-              Verlauf ansehen
-            </Button>
+          <CardHeader className="mb-2 flex h-20 flex-row items-center justify-between">
+            <Header>
+              <Title
+                level={5}
+                weight="semibold"
+                className="flex flex-row items-center gap-1"
+              >
+                <Package className="h-5 w-5 text-gray-900" />
+                Bestellungen
+              </Title>
+              <TextParagraph
+                sm
+                className="text-gray-400"
+                text="Sendungsstatus, Rücksendungen"
+              />
+            </Header>
           </CardHeader>
+          <hr className="mx-6 pb-4" />
           <CardContent className="space-y-4">
             {upcomingDeliveries.map((delivery) => (
               <div
@@ -149,21 +244,29 @@ const AccountPage: React.FC = () => {
         </Card>
 
         <Card className="bg-white shadow-sm">
-          <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle className="text-lg">Präferenzen</CardTitle>
-            <Truck className="h-5 w-5 text-gray-900" />
+          <CardHeader className="mb-2 flex h-20 flex-row items-center justify-between">
+            <Header>
+              <Title
+                level={5}
+                weight="semibold"
+                className="flex flex-row items-center gap-1"
+              >
+                <Settings className="h-5 w-5 text-gray-900" />
+                Einstellungen
+              </Title>
+              <TextParagraph
+                sm
+                className="text-gray-400"
+                text="Ändern Sie Ihre Einstellungen"
+              />
+            </Header>
           </CardHeader>
+          <hr className="mx-6 pb-4" />
           <CardContent className="space-y-4 text-sm text-gray-600">
             {preferences.map((preference) => (
-              <div
-                key={preference.label}
-                className="flex items-center justify-between rounded-2xl border border-gray-100 px-4 py-3"
-              >
-                <span className="text-gray-400">{preference.label}</span>
-                <span className="font-medium text-gray-900">
-                  {preference.value}
-                </span>
-              </div>
+              <Card className="items-left flex flex-row justify-between rounded-lg border border-slate-400 bg-slate-400/30 px-4 py-2">
+                <span className="text-gray-700">{preference.label}</span>
+              </Card>
             ))}
             <Button variant="outline" className="w-full">
               Einstellungen anpassen

@@ -80,7 +80,7 @@ const ProductGridPage: React.FC = () => {
             </Row>
 
             <Grid className="grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
-              <ProductCard {...{ filteredProducts }} />
+              <ProductCard { ...{ filteredProducts } } />
             </Grid>
 
             <NoFilteredProducts {...{ filteredProducts }} />

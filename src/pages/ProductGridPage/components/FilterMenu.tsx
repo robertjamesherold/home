@@ -13,7 +13,6 @@ const FilterMenu: React.FC<FilterMenuType> = ({
   priceRange,
   setPriceRange,
   handleCategoryToggle,
-  filteredProducts,
 }: FilterMenuType) => {
   return (
     <AnimatePresence>
@@ -76,7 +75,7 @@ const FilterMenu: React.FC<FilterMenuType> = ({
                     Zurücksetzen
                   </Button>
                   <Button className="flex-1" onClick={closeFilterMenu}>
-                    {filteredProducts.length} Produkte anzeigen
+                    Suchen
                   </Button>
                 </div>
               </div>

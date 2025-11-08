@@ -20,7 +20,7 @@ const Image: FC<ImageProps> = ({
     <div
       className={cn(
         'overflow-hidden',
-        isAbsolute ? 'absolute inset-0' : 'relative',
+        isAbsolute ? 'relative inset-0 w-full' : 'relative',
         className
       )}
     >
@@ -30,7 +30,7 @@ const Image: FC<ImageProps> = ({
           alt={alt}
           loading="lazy"
           className={cn(
-            'relative h-full w-full object-cover transition-opacity duration-300',
+            'absolute inset-0 h-full w-full object-cover transition-opacity duration-300',
             imageClassName
           )}
         />

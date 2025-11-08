@@ -1,6 +1,6 @@
 export { Homepage } from './Homepage';
 export { ProductGridPage } from './ProductGridPage';
-export { ProductPage } from './ProductPage/';
+export { ProductPage } from './ProductPage';
 export { NavigationsBar } from './NavigationsBar/';
 export { PageFooter } from './PageFooter/';
 export { Checkout } from './Checkout/';

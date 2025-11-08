@@ -59,7 +59,8 @@ const useFilter = (
         if (sortBy === 'price-asc') return a.price - b.price;
         if (sortBy === 'price-desc') return b.price - a.price;
         if (sortBy === 'rating') {
-          const toNumber = (val: unknown): number => (typeof val === 'number' ? val : 0);
+          const toNumber = (val: unknown): number =>
+            typeof val === 'number' ? val : 0;
           return toNumber(b.rating) - toNumber(a.rating);
         }
         return 0;
