@@ -1,8 +1,7 @@
 import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { productsData } from '@/data';
-import { useCart } from '@/hooks';
+import { useCart, useProducts } from '@/hooks';
 import { Column } from '@/layout';
 import type { ProductType } from '@/types';
 import { default as detailData } from './data/detailData';
@@ -19,9 +18,14 @@ import { Section } from '@/layout'
 
 const ProductPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const { products } = useProducts();
   const product = useMemo<ProductType | undefined>(
-    () => productsData.find((item) => item.id === id),
-    [id]
+    () =>
+      products.find((item) => {
+        if (!id) return false;
+        return item.id === id || item.link === id;
+      }),
+    [products, id]
   );
 
   const { addToCart } = useCart();

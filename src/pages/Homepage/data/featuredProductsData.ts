@@ -1,12 +1,19 @@
+import type { ProductType } from '@/types';
 import type { FeaturedProductsType } from '../types/';
-import { productsData } from '@/data';
 
-const featuredProductsData: FeaturedProductsType = {
+const featuredProductsContent = {
   title: 'Neu eingetroffen',
   subtitle: 'Entdecken Sie die neuesten Ergänzungen zu unserer Kollektion',
   buttonlink: '/products',
   buttontext: 'Alle Produkte ansehen',
-  featuredProducts: productsData.slice(0, 3),
-};
+} satisfies Omit<FeaturedProductsType, 'featuredProducts'>;
 
-export default featuredProductsData;
+export const buildFeaturedProductsData = (
+  products: ProductType[],
+  content: typeof featuredProductsContent = featuredProductsContent
+): FeaturedProductsType => ({
+  ...content,
+  featuredProducts: products.slice(0, 3),
+});
+
+export default featuredProductsContent;

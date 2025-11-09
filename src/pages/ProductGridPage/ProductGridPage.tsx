@@ -1,6 +1,8 @@
+import { useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { productsData } from '@/data';
-import { categoriesData } from './data';
+import { SlidersHorizontal } from 'lucide-react';
+
+import { useProducts } from '@/hooks';
 import useFilter from './hooks/useFilter';
 import { Column, Grid, Header, Section, Row } from '@/layout';
 import {
@@ -11,13 +13,22 @@ import {
 } from './components';
 import { TextParagraph, Title } from '@/typography';
 import { Button } from '@/ui';
-import { SlidersHorizontal } from 'lucide-react';
-import { useState } from 'react';
-import { ImageCard } from './ui'
+import { ImageCard } from './ui';
 
 const ProductGridPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get('search') ?? '';
+  const { products } = useProducts();
+  const categoriesData = useMemo(() => {
+    const categorySet = new Set<string>();
+    for (const product of products) {
+      if (product.category) {
+        categorySet.add(product.category);
+      }
+    }
+
+    return ['Alle', ...Array.from(categorySet).sort((a, b) => a.localeCompare(b))];
+  }, [products]);
   const {
     sortBy,
     setSortBy,
@@ -27,7 +38,7 @@ const ProductGridPage: React.FC = () => {
     priceRange,
     setPriceRange,
     setSelectedCategories,
-  } = useFilter(productsData, { searchTerm: searchQuery });
+  } = useFilter(products, { searchTerm: searchQuery });
   const [filterMenuOpen, setFilterMenuOpen] = useState(false);
 
   const pageTitle = searchQuery ? 'Suchergebnisse' : 'Alle Produkte';
