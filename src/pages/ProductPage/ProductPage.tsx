@@ -5,6 +5,7 @@ import { productsData } from '@/data';
 import { useCart } from '@/hooks';
 import { Column } from '@/layout';
 import type { ProductType } from '@/types';
+import { default as detailData } from './data/detailData';
 
 import { useProductImages } from './hooks/useProductImages';
 import { ProductGallery } from './components/ProductGallery/ProductGallery';
@@ -12,8 +13,7 @@ import { ProductBadges } from './components/ProductGallery/ProductBadges';
 import { ProductRating } from './components/ProductInfo/ProductRating';
 import { ProductPrice } from './components/ProductInfo/ProductPrice';
 import { AddToCartSection } from './components/ProductInfo/AddToCartSection';
-import { ProductDetailsCard } from './components/ProductDetails';
-import { ShippingInfo } from './components/ProductDetails/ShippingInfo';
+import { default as DetailCard } from './components/ProductDetails/Detail'
 import { useProductQuantity } from './hooks/useProductQuantity';
 import { Section } from '@/layout'
 
@@ -87,8 +87,7 @@ const ProductPage: React.FC = () => {
         />
 
         <div className="space-y-6">
-          <ProductDetailsCard {...product.details} />
-          <ShippingInfo />
+          <DetailCard { ...{ detailData } } />
         </div>
       </Column>
     </Section>

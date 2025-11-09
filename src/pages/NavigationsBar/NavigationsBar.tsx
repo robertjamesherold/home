@@ -1,4 +1,4 @@
-import { forwardRef, type HTMLAttributes, useEffect, useState } from 'react';
+import { forwardRef, type HTMLAttributes, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { ShoppingCart, Search, Menu, User, X } from 'lucide-react';
@@ -13,16 +13,14 @@ const NavigationsBar = forwardRef<HTMLElement, NavigationsBarProps>(
     const navigate = useNavigate();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const location = useLocation();
-    const [searchValue, setSearchValue] = useState('');
-    const [isMobileSearchOpen, setMobileSearchOpen] = useState(false);
-
-    useEffect(() => {
+    const [searchValue, setSearchValue] = useState(() => {
       if (location.pathname === '/products') {
         const params = new URLSearchParams(location.search);
-        setSearchValue(params.get('search') ?? '');
+        return params.get('search') ?? '';
       }
-      setMobileSearchOpen(false);
-    }, [location]);
+      return '';
+    });
+    const [isMobileSearchOpen, setMobileSearchOpen] = useState(false);
 
     const handleSearchSubmit = (event: React.FormEvent) => {
       event.preventDefault();

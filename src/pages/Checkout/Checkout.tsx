@@ -46,7 +46,7 @@ const Checkout: React.FC = () => {
     const summaryItems = items.map((item) => ({
       id: item.product.id,
       name: item.product.name,
-      quantity: item.quantity,
+      quantity: item.quantity ?? 1,
       price: item.product.price,
     }));
 
@@ -235,19 +235,22 @@ const Checkout: React.FC = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-3">
-                    {items.map((item) => (
-                      <div
-                        key={item.product.id}
-                        className="flex justify-between text-sm"
-                      >
-                        <span className="text-gray-600">
-                          {item.product.name} × {item.quantity}
-                        </span>
-                        <span>
-                          {(item.product.price * item.quantity).toFixed(2)}€
-                        </span>
-                      </div>
-                    ))}
+                    {items.map((item) => {
+                      const qty = item.quantity ?? 1;
+                      return (
+                        <div
+                          key={item.product.id}
+                          className="flex justify-between text-sm"
+                        >
+                          <span className="text-gray-600">
+                            {item.product.name} × {qty}
+                          </span>
+                          <span>
+                            {(item.product.price * qty).toFixed(2)}€
+                          </span>
+                        </div>
+                      );
+                    })}
                   </div>
 
                   <Separator />
