@@ -27,34 +27,41 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({
     galleryImages[selectedIndex] ?? galleryImages[0] ?? fallbackHero;
 
   return (
-    <div className="@container flex flex-col gap-4 h-full">
+    <div className="@container flex h-full flex-col gap-6">
       {heroImage && (
         <Image
           src={heroImage}
           alt={productName}
-          className="rounded-lg border border-border bg-muted/40 h-[100cqh]"
+          className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-border/70 bg-muted/40 shadow-sm"
+          imageClassName="scale-100 transition-transform duration-500 ease-out hover:scale-105"
         />
       )}
+
       {galleryImages.length > 1 && (
-        <div className="grid grid-cols-4 gap-3 h-full ">
-          {galleryImages.map((image, index) => (
-            <button
-              key={`${image}-${index}`}
-              type="button"
-              onClick={() => onSelectImage(index)}
-              className={ `overflow-hidden rounded-md border aspect-square w-full max-h-[30cqh] object-cover ${
-                selectedIndex === index
-                  ? 'border-foreground'
-                  : 'border-transparent'
-              }`}
-            >
-              <Image
-                src={image}
-                alt={`${productName} ${index + 1}`}
-                className="h-full w-full overflow-hidden max-h-[30cqh] rounded-md object-cover"
-              />
-            </button>
-          ))}
+        <div className="grid grid-cols-4 gap-3 sm:grid-cols-5 lg:grid-cols-4">
+          {galleryImages.map((image, index) => {
+            const isSelected = selectedIndex === index;
+
+            return (
+              <button
+                key={`${image}-${index}`}
+                type="button"
+                onClick={() => onSelectImage(index)}
+                className={`group relative aspect-square w-full overflow-hidden rounded-2xl border transition ${
+                  isSelected
+                    ? 'border-primary shadow-sm'
+                    : 'border-border/40 hover:border-primary/60'
+                }`}
+              >
+                <Image
+                  src={image}
+                  alt={`${productName} ${index + 1}`}
+                  className="h-full w-full"
+                  imageClassName="scale-100 transition-transform duration-500 ease-out group-hover:scale-105"
+                />
+              </button>
+            );
+          })}
         </div>
       )}
     </div>
