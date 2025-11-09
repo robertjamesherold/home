@@ -69,9 +69,17 @@
 
 ---
 
+### 🛠 Backend API
+
+- Voll funktionsfähiger Express/MongoDB-Backend-Server im Ordner [`server/`](./server)
+- Checkout- und Zahlungs-Endpunkte, inkl. Stripe-Integration und Mock-Flows für PayPal/Sofort
+- Setup-Anleitung und Endpunktübersicht: [docs/backend.md](./docs/backend.md)
+
+---
+
 ### 🧱 My Values
 
-> “Code is design made executable.”  
+> “Code is design made executable.”
 > “Simplicity scales. Clarity wins.”
 
 I believe in writing code that is:
