@@ -6,6 +6,7 @@ import type {
   RatingProps,
 } from './Product.types';
 export type * from './window.d';
+export type * from './Checkout.types';
 
 export type {
   ProductType,
