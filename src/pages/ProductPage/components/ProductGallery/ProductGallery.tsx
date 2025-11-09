@@ -27,22 +27,22 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({
     galleryImages[selectedIndex] ?? galleryImages[0] ?? fallbackHero;
 
   return (
-    <div className="space-y-3">
+    <div className="@container flex flex-col gap-4 h-full">
       {heroImage && (
         <Image
           src={heroImage}
           alt={productName}
-          className="rounded-lg border border-border bg-muted/40"
+          className="rounded-lg border border-border bg-muted/40 h-[100cqh]"
         />
       )}
       {galleryImages.length > 1 && (
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-4 gap-3 h-full ">
           {galleryImages.map((image, index) => (
             <button
               key={`${image}-${index}`}
               type="button"
               onClick={() => onSelectImage(index)}
-              className={`overflow-hidden rounded-md border ${
+              className={ `overflow-hidden rounded-md border aspect-square w-full max-h-[30cqh] object-cover ${
                 selectedIndex === index
                   ? 'border-foreground'
                   : 'border-transparent'
@@ -51,7 +51,7 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({
               <Image
                 src={image}
                 alt={`${productName} ${index + 1}`}
-                className="h-full w-full overflow-hidden rounded-md"
+                className="h-full w-full overflow-hidden max-h-[30cqh] rounded-md object-cover"
               />
             </button>
           ))}

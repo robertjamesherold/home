@@ -15,13 +15,14 @@ import {
 import { CartProvider } from '@/hooks';
 import useElementSize from '@hooks/useElementSize';
 
-const Pages = () => {
+const Pages = () =>
+{
   return (
     <Routes>
       <Route path="/" element={<Homepage />} />
       <Route path="/products" element={<ProductGridPage />} />
       <Route path="/sale" element={<SalePage />} />
-      <Route path="/product/:id" element={<ProductPage />} />
+      <Route path="/product/:id" element={ <ProductPage /> } />
       <Route path="/cart" element={<Cart />} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/checkout/success" element={<CheckoutSuccess />} />

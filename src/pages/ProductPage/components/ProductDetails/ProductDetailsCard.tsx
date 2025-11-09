@@ -21,6 +21,7 @@ const ProductDetailsCard: React.FC<ProductDetailsCardType> = ( {
             <Tabs className="flex justify-between">
               <TabsList>
                 <TabsTrigger value={ tabtitle }> { tabtitle } </TabsTrigger>
+
               </TabsList>
               <TabsContent value={ tabtitle } className="flex justify-between">
                 <span>{ tabcontent.Eigenschaften }</span>

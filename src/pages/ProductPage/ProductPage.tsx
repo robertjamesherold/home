@@ -41,17 +41,15 @@ const ProductPage: React.FC = () => {
   };
 
   return (
-    <div className="container relative mx-auto grid w-full gap-8 px-4 py-8 md:grid-cols-2">
-      <div>
+    <div className="@container h-fit relative mx-auto grid w-full gap-8 px-4 py-8 md:grid-cols-2">
         <ProductGallery
           productName={product.name}
           images={productImages}
           selectedIndex={selectedImage}
           onSelectImage={setSelectedImage}
-        />
-      </div>
+      />
 
-      <Column className="gap-6">
+      <Column className="h-full">
         <ProductBadges tags={product.tags} />
 
         <h1 className="text-3xl font-semibold">{product.name}</h1>
