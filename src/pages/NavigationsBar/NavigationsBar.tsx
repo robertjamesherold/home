@@ -72,6 +72,12 @@ const NavigationsBar = forwardRef<HTMLElement, NavigationsBarProps>(
                     Produkte
                   </Link>
                   <Link
+                    to="/products/new"
+                    className="transition-opacity hover:opacity-70"
+                  >
+                    Produkt anlegen
+                  </Link>
+                  <Link
                     to="/sale"
                     className="transition-opacity hover:opacity-70"
                   >
@@ -215,6 +221,13 @@ const NavigationsBar = forwardRef<HTMLElement, NavigationsBarProps>(
                         onClick={closeMenu}
                       >
                         Produkte
+                      </Link>
+                      <Link
+                        to="/products/new"
+                        className="block py-4 text-2xl transition-opacity hover:opacity-70"
+                        onClick={closeMenu}
+                      >
+                        Produkt anlegen
                       </Link>
                       <Link
                         to="/"

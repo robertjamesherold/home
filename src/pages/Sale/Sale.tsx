@@ -1,18 +1,21 @@
+import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Flame } from 'lucide-react';
-import { productsData } from '@/data';
+
+import { useProducts } from '@/hooks';
 import { Grid, Header } from '@/layout';
 import { Title, TextParagraph } from '@/typography';
 import { Button } from '@/ui';
 
-import
-  {
-  NoFilteredProducts,
-} from '@/pages/ProductGridPage/components';
-import { ImageCard } from './ui'
+import { NoFilteredProducts } from '@/pages/ProductGridPage/components';
+import { ImageCard } from './ui';
+
 const SalePage: React.FC = () => {
-  const saleProducts = productsData.filter((product) =>
-    (product.tags ?? []).includes('sale')
+  const { products } = useProducts();
+  const saleProducts = useMemo(
+    () =>
+      products.filter((product) => (product.tags ?? []).includes('sale')),
+    [products]
   );
 
   return (

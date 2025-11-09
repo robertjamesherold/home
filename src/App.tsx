@@ -13,6 +13,7 @@ import {
   AccountPage,
   CheckoutSuccess,
   SupportPage,
+  ProductEditorPage,
 } from '@/pages';
 import { CartProvider } from '@/hooks';
 import useElementSize from '@hooks/useElementSize';
@@ -23,6 +24,7 @@ const Pages = () =>
     <Routes>
       <Route path="/" element={<Homepage />} />
       <Route path="/products" element={<ProductGridPage />} />
+      <Route path="/products/new" element={<ProductEditorPage />} />
       <Route path="/sale" element={<SalePage />} />
       <Route path="/product/:id" element={ <ProductPage /> } />
       <Route path="/cart" element={<Cart />} />

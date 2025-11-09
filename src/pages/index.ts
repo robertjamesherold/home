@@ -9,3 +9,4 @@ export { SalePage } from './Sale/';
 export { AccountPage } from './Account/';
 export { CheckoutSuccess } from './CheckoutSuccess/';
 export { SupportPage } from './Support/';
+export { ProductEditorPage } from './ProductEditor';
