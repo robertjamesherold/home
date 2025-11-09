@@ -6,8 +6,12 @@ interface ProductBadgesProps {
 }
 
 export const ProductBadges: React.FC<ProductBadgesProps> = ({ tags = [] }) => {
+  if (!tags.length) {
+    return null;
+  }
+
   return (
-    <div className="mb-2 flex items-center gap-2">
+    <div className="flex flex-wrap items-center gap-2">
       {tags.includes('new') && <Badge>Neu</Badge>}
       {tags.includes('sale') && <Badge variant="destructive">Sale</Badge>}
     </div>
