@@ -17,7 +17,6 @@ import {
 } from '@ui/.';
 import { Column, Header, Row } from '@/layout';
 import { TextParagraph, Title } from '@/typography';
-import { Profiler } from 'react';
 
 const upcomingDeliveries = [
   {
@@ -185,7 +184,7 @@ const AccountPage: React.FC = () => {
               Access.
             </div>
             <Column className="gap-4 space-y-1">
-              <Button className="w-full">Vorteile ansehen</Button>
+              <Button variant='secondary' className="w-full">Vorteile ansehen</Button>
               <Button variant="outline" className="w-full">
                 Mitgliedschaft verwalten
               </Button>

@@ -21,17 +21,16 @@ export const AddToCartSection: React.FC<AddToCartSectionProps> = ({
   inStock,
 }) => {
   return (
-    <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center">
+    <div className="my<-6 flex flex-col gap-4 sm:flex-row sm:items-center">
       <QuantitySelector
         quantity={quantity}
         onIncrement={onQuantityIncrement}
         onDecrement={onQuantityDecrement}
       />
-      <span className="text-sm text-muted-foreground sm:ml-2">{category}</span>
       <Button
         type="button"
         onClick={onAddToCart}
-        className="min-w-[200px] flex-1 whitespace-nowrap sm:w-auto"
+        className="min-w-[200px] flex-1 whitespace-nowrap sm:w-auto min-h-10"
         size="lg"
         disabled={!inStock}
       >

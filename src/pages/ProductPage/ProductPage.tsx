@@ -15,6 +15,7 @@ import { AddToCartSection } from './components/ProductInfo/AddToCartSection';
 import { ProductDetailsCard } from './components/ProductDetails';
 import { ShippingInfo } from './components/ProductDetails/ShippingInfo';
 import { useProductQuantity } from './hooks/useProductQuantity';
+import { Section } from '@/layout'
 
 const ProductPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -41,7 +42,7 @@ const ProductPage: React.FC = () => {
   };
 
   return (
-    <div className="@container relative mx-auto grid w-full max-w-6xl gap-10 px-4 py-10 md:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-16 lg:px-8 lg:py-14">
+    <Section className="mx-auto grid w-full gap-10 lg:grid-cols-2 grid-rows-[auto_auto] safe-area-padding section ">
       <ProductGallery
         productName={product.name}
         images={productImages}
@@ -49,15 +50,15 @@ const ProductPage: React.FC = () => {
         onSelectImage={setSelectedImage}
       />
 
-      <Column className="h-full space-y-8">
-        <div className="space-y-4">
+      <Column className="h-full space-y-2 ">
+
           <ProductBadges tags={product.tags} />
 
           <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
             {product.name}
           </h1>
 
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col sm:justify-between">
             <ProductRating
               score={product.rating.score}
               reviews={product.rating.reviews}
@@ -68,7 +69,7 @@ const ProductPage: React.FC = () => {
               originalPrice={product.originalPrice}
             />
           </div>
-        </div>
+
 
         {product.description ? (
           <p className="max-w-xl text-base leading-relaxed text-muted-foreground">
@@ -90,7 +91,7 @@ const ProductPage: React.FC = () => {
           <ShippingInfo />
         </div>
       </Column>
-    </div>
+    </Section>
   );
 };
 

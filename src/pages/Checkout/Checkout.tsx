@@ -68,43 +68,43 @@ const Checkout: React.FC = () => {
               {/* Shipping Information */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Lieferadresse</CardTitle>
+                <CardTitle className='mb-2'>Lieferadresse</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
-                      <Label htmlFor="firstName">Vorname</Label>
+                    <Label className='mb-2' htmlFor="firstName">Vorname</Label>
                       <Input id="firstName" required />
                     </div>
                     <div>
-                      <Label htmlFor="lastName">Nachname</Label>
+                    <Label className='mb-2' htmlFor="lastName">Nachname</Label>
                       <Input id="lastName" required />
                     </div>
                   </div>
 
                   <div>
-                    <Label htmlFor="email">E-Mail</Label>
+                  <Label className='mb-2' htmlFor="email">E-Mail</Label>
                     <Input id="email" type="email" required />
                   </div>
 
                   <div>
-                    <Label htmlFor="address">Straße und Hausnummer</Label>
+                  <Label className='mb-2' htmlFor="address">Straße und Hausnummer</Label>
                     <Input id="address" required />
                   </div>
 
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                     <div>
-                      <Label htmlFor="zip">PLZ</Label>
+                    <Label className='mb-2' htmlFor="zip">PLZ</Label>
                       <Input id="zip" required />
                     </div>
                     <div className="sm:col-span-2">
-                      <Label htmlFor="city">Stadt</Label>
+                    <Label className='mb-2' htmlFor="city">Stadt</Label>
                       <Input id="city" required />
                     </div>
                   </div>
 
                   <div>
-                    <Label htmlFor="phone">Telefon</Label>
+                  <Label className='mb-2' htmlFor="phone">Telefon</Label>
                     <Input id="phone" type="tel" />
                   </div>
                 </CardContent>
@@ -113,7 +113,7 @@ const Checkout: React.FC = () => {
               {/* Payment Method */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Zahlungsmethode</CardTitle>
+                <CardTitle className='mb-2'>Zahlungsmethode</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <RadioGroup
@@ -121,24 +121,21 @@ const Checkout: React.FC = () => {
                     onValueChange={setPaymentMethod}
                   >
                     <div className="flex items-center space-x-2 rounded-lg border p-4">
-                      <RadioGroupItem value="card" id="card" />
-                      <Label
-                        htmlFor="card"
-                        className="flex flex-1 cursor-pointer items-center gap-2"
-                      >
-                        <CreditCard className="h-5 w-5" />
-                        Kreditkarte
-                      </Label>
+                    <RadioGroupItem className='mr-2' value="card" id="card" />
+                    <Label htmlFor="card" className=' flex flex-1 cursor-pointer items-center gap-2'>
+                      <CreditCard className="h-5 w-5 ml-2 place-content-center" />
+                      Kreditkarte
+                    </Label>
                     </div>
                     <div className="flex items-center space-x-2 rounded-lg border p-4">
                       <RadioGroupItem value="paypal" id="paypal" />
-                      <Label htmlFor="paypal" className="flex-1 cursor-pointer">
+                    <Label htmlFor="paypal" className="flex-1 cursor-pointer  ml-2">
                         PayPal
                       </Label>
                     </div>
                     <div className="flex items-center space-x-2 rounded-lg border p-4">
                       <RadioGroupItem value="sofort" id="sofort" />
-                      <Label htmlFor="sofort" className="flex-1 cursor-pointer">
+                    <Label htmlFor="sofort" className="flex-1 cursor-pointer ml-2">
                         Sofortüberweisung
                       </Label>
                     </div>
@@ -147,7 +144,7 @@ const Checkout: React.FC = () => {
                   {paymentMethod === 'card' && (
                     <div className="space-y-4 pt-4">
                       <div>
-                        <Label htmlFor="cardNumber">Kartennummer</Label>
+                      <Label className='mb-2' htmlFor="cardNumber">Kartennummer</Label>
                         <Input
                           id="cardNumber"
                           placeholder="1234 5678 9012 3456"
@@ -156,11 +153,11 @@ const Checkout: React.FC = () => {
                       </div>
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <Label htmlFor="expiry">Gültig bis</Label>
+                        <Label className='mb-2' htmlFor="expiry">Gültig bis</Label>
                           <Input id="expiry" placeholder="MM/YY" required />
                         </div>
                         <div>
-                          <Label htmlFor="cvv">CVV</Label>
+                        <Label className='mb-2' htmlFor="cvv">CVV</Label>
                           <Input id="cvv" placeholder="123" required />
                         </div>
                       </div>
@@ -195,7 +192,7 @@ const Checkout: React.FC = () => {
 
                   <Separator />
 
-                  <div className="space-y-2">
+                <div className="space-y-4">
                     <div className="flex justify-between">
                       <span className="text-gray-600">Zwischensumme</span>
                       <span>{subtotal.toFixed(2)}€</span>
@@ -228,7 +225,7 @@ const Checkout: React.FC = () => {
                     Jetzt kaufen
                   </Button>
 
-                  <p className="text-center text-xs text-gray-500">
+                <p className="text-center text-xs text-gray-500 mt-2">
                     Ihre Zahlung wird sicher verschlüsselt übertragen
                   </p>
                 </CardContent>

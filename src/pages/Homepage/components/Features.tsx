@@ -6,7 +6,7 @@ const Features: React.FC<FeaturesType> = (featuresData: FeaturesType) => {
   const data = featuresData.data;
   return (
     <Section isBox className="border-b">
-      <Grid className="grid-cols-1 gap-8 md:grid-cols-3">
+      <Grid className="w-full grid-cols-1 gap-8 md:grid-cols-3">
         {data.map(({ Icon, title, text }) => (
           <Column key={title} className="items-center gap-4 text-center">
             <Container className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-100">
