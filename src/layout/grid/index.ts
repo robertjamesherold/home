@@ -1,2 +1,1 @@
-import Grid from './Grid';
-export { Grid }
+export { default as Grid } from './Grid';

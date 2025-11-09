@@ -1,17 +1,12 @@
-import { Column } from './column'
-import { Footer } from './footer'
-import { Grid } from './grid'
-import { Hr } from './divider'
-import { Main } from './main'
-import { Row } from './row'
-import { Section } from './section'
-
-export {    
-    Column,
-    Footer, 
-    Grid,
-    Hr,
-    Main,
-    Row,
-    Section
-}
+export { Column } from './column';
+export { Article } from './article';
+export { Footer } from './footer';
+export { Container } from './container';
+export { Grid } from './grid';
+export { Hr } from './divider';
+export { Main } from './main';
+export { Row } from './row';
+export { Section } from './section';
+export { Header } from './header';
+export { Nav } from './nav';
+export { Image } from './image';

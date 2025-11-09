@@ -1,7 +1,8 @@
+import path from "path"
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
+
 
 export default defineConfig({
   plugins: [
@@ -12,9 +13,12 @@ export default defineConfig({
       },
     }),
   ],
+  base: './',
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'),
+      '@': path.resolve(__dirname, './src'),
+      '@css': path.resolve(__dirname, 'src/css'),
+      '@data': path.resolve(__dirname, 'src/data'),
       '@assets': path.resolve(__dirname, 'src/assets'),
       '@badges': path.resolve(__dirname, 'src/assets/badges'),
       '@components': path.resolve(__dirname, 'src/components'),
@@ -24,13 +28,14 @@ export default defineConfig({
       '@hooks': path.resolve(__dirname, 'src/hooks'),
       '@layout': path.resolve(__dirname, 'src/layout'),
       '@pages': path.resolve(__dirname, 'src/pages'),
+      '@types': path.resolve(__dirname, 'src/types'),
       '@typography': path.resolve(__dirname, 'src/typography'),
       '@ui': path.resolve(__dirname, 'src/ui'),
-     }, 
+    },
   },
   server: {
     host: true,
     port: 5173,
     open: true,
   },
-})
+});

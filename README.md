@@ -56,7 +56,7 @@
   <br/>
 </p>
 
-#### Meta Front-End Developer</b> — issued by Meta via Coursera</sub>
+#### Meta Front-End Developer — issued by Meta via Coursera
 
 ---
 

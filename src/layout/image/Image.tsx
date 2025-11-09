@@ -1,0 +1,42 @@
+import type { FC } from 'react';
+import { cn } from '@/ui/utils';
+
+type ImageProps = {
+  src?: string;
+  alt?: string;
+  className?: string;
+  imageClassName?: string;
+  isAbsolute?: boolean;
+};
+
+const Image: FC<ImageProps> = ({
+  src,
+  alt = '',
+  className,
+  imageClassName,
+  isAbsolute = false,
+}) => {
+  return (
+    <div
+      className={cn(
+        'overflow-hidden',
+        isAbsolute ? 'relative inset-0 w-full' : 'relative',
+        className
+      )}
+    >
+      {src ? (
+        <img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          className={cn(
+            'absolute inset-0 h-full w-full object-cover transition-opacity duration-300',
+            imageClassName
+          )}
+        />
+      ) : null}
+    </div>
+  );
+};
+
+export default Image;

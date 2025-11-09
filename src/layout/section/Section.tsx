@@ -1,25 +1,30 @@
 type SectionProps = {
-    fullWidth? : boolean,
-    padding?: boolean,
-    children: React.ReactNode
-    className?: string
-    id?: string
-} & React.HTMLAttributes<HTMLElement>
+  children: React.ReactNode;
+  className?: string;
+  isBox?: boolean;
+  id?: string;
+} & React.HTMLAttributes<HTMLElement>;
 
-const Section:React.FC<SectionProps> = ({fullWidth=false, padding=false, children, className, id, ...rest}:SectionProps) => {
-    const widthClass = fullWidth ? 'w-screen' : 'w-full max-w-480';
-    const marginClass = fullWidth ? '' : 'mx-auto';
-    const paddingClass = padding ? 'p-0' : 'px-4 md:px-6 xl:px-8 py-2';
+const Section: React.FC<SectionProps> = ({
+  children,
+  className,
+  isBox,
+  id,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  isBox?: boolean;
+  id?: string;
+}) => {
+  return (
+    <section id={id} className={`relative ${className}`}>
+      {isBox ? (
+        <div className="section safe-area-padding">{children}</div>
+      ) : (
+        children
+      )}
+    </section>
+  );
+};
 
-    return (
-        <section
-            id={id}
-            className={`relative ${widthClass} ${marginClass} ${paddingClass} ${className ?? ''}`.trim()}
-            {...rest}
-        >
-            {children}
-        </section>
-    )
-}
-
-export default Section
+export default Section;

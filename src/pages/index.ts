@@ -1,2 +1,10 @@
-import Homepage from './home/Homepage';
-export { Homepage }
+export { Homepage } from './Homepage';
+export { ProductGridPage } from './ProductGridPage';
+export { ProductPage } from './ProductPage';
+export { NavigationsBar } from './NavigationsBar/';
+export { PageFooter } from './PageFooter/';
+export { Checkout } from './Checkout/';
+export { Cart } from './Cart/';
+export { SalePage } from './Sale/';
+export { AccountPage } from './Account/';
+export { CheckoutSuccess } from './CheckoutSuccess/';
