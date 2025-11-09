@@ -22,20 +22,19 @@ const shopLinks: FooterLink[] = [
 const serviceLinks: FooterLink[] = [
   { label: 'Kontakt', href: 'mailto:hello@luxe.studio' },
   { label: 'Versand & Rückgabe', href: '#' },
-  { label: 'FAQ', href: '#' },
-  { label: 'Größenguide', href: '#' },
+  { label: 'Support', href: '#' },
 ];
 
-const inspirationLinks: FooterLink[] = [
-  { label: 'Stories', href: '#' },
-  { label: 'Lookbook', href: '#' },
-  { label: 'Geschenkideen', href: '#' },
+const rightsLinks: FooterLink[] = [
+  { label: 'Datenschutz', href: '#' },
+  { label: 'AGB', href: '#' },
+  { label: 'Impressum', href: '#' },
 ];
 
 const footerNavigation = [
   { title: 'Shop', links: shopLinks },
   { title: 'Service', links: serviceLinks },
-  { title: 'Inspiration', links: inspirationLinks },
+  { title: 'Rechtliches', links: rightsLinks },
 ];
 
 const infoLinks = [

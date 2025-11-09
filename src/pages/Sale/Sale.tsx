@@ -4,10 +4,12 @@ import { productsData } from '@/data';
 import { Grid, Header } from '@/layout';
 import { Title, TextParagraph } from '@/typography';
 import { Button } from '@/ui';
-import {
-  ProductCard,
+
+import
+  {
   NoFilteredProducts,
 } from '@/pages/ProductGridPage/components';
+import { ImageCard } from './ui'
 const SalePage: React.FC = () => {
   const saleProducts = productsData.filter((product) =>
     (product.tags ?? []).includes('sale')
@@ -37,7 +39,7 @@ const SalePage: React.FC = () => {
       </Header>
 
       <Grid className="grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <ProductCard filteredProducts={saleProducts} />
+        <ImageCard filteredProducts={ saleProducts } />
       </Grid>
 
       <NoFilteredProducts filteredProducts={saleProducts} />

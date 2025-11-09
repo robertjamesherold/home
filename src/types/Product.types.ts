@@ -33,7 +33,7 @@ export type ProductType = {
 
 export type CartItemType = {
   product: ProductType;
-  quantity: number;
+  quantity?: number;
 };
 
 export type CartContextType = {

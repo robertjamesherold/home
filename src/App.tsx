@@ -1,4 +1,5 @@
 import { useMemo, useRef } from 'react';
+import ScrollToTop from '@/components/ScrollToTop'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {
   Homepage,
@@ -11,6 +12,7 @@ import {
   SalePage,
   AccountPage,
   CheckoutSuccess,
+  SupportPage,
 } from '@/pages';
 import { CartProvider } from '@/hooks';
 import useElementSize from '@hooks/useElementSize';
@@ -27,6 +29,7 @@ const Pages = () =>
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/checkout/success" element={<CheckoutSuccess />} />
       <Route path="/account" element={<AccountPage />} />
+      <Route path="/support" element={<SupportPage />} />
     </Routes>
   );
 };
@@ -44,6 +47,8 @@ const App = () => {
   return (
     <CartProvider>
       <Router>
+        <ScrollToTop />
+
         <NavigationsBar ref={navigationRef} />
         <main
           className="flex place-content-center items-center justify-center"

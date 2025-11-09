@@ -10,3 +10,4 @@ export { Section } from './section';
 export { Header } from './header';
 export { Nav } from './nav';
 export { Image } from './image';
+export { Form } from './form';

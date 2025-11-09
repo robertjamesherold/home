@@ -8,3 +8,4 @@ export { Cart } from './Cart/';
 export { SalePage } from './Sale/';
 export { AccountPage } from './Account/';
 export { CheckoutSuccess } from './CheckoutSuccess/';
+export { SupportPage } from './Support/';

@@ -4,7 +4,6 @@ import { categoriesData } from './data';
 import useFilter from './hooks/useFilter';
 import { Column, Grid, Header, Section, Row } from '@/layout';
 import {
-  ProductCard,
   SelectButton,
   NoFilteredProducts,
   DesktopFilter,
@@ -14,6 +13,7 @@ import { TextParagraph, Title } from '@/typography';
 import { Button } from '@/ui';
 import { SlidersHorizontal } from 'lucide-react';
 import { useState } from 'react';
+import { ImageCard } from './ui'
 
 const ProductGridPage: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -80,7 +80,7 @@ const ProductGridPage: React.FC = () => {
             </Row>
 
             <Grid className="grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
-              <ProductCard {...{ filteredProducts }} />
+              <ImageCard {... { filteredProducts } }/>
             </Grid>
 
             <NoFilteredProducts {...{ filteredProducts }} />

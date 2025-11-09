@@ -79,9 +79,7 @@ const NavigationsBar = forwardRef<HTMLElement, NavigationsBarProps>(
                   >
                     Sale
                   </Link>
-                  <Link to="/" className="transition-opacity hover:opacity-70">
-                    Neu
-                  </Link>
+
                   <Link
                     to="/account"
                     className="transition-opacity hover:opacity-70"
@@ -91,7 +89,7 @@ const NavigationsBar = forwardRef<HTMLElement, NavigationsBarProps>(
                 </nav>
               </div>
 
-              <div className="flex items-center gap-3 md:w-full">
+              <div className="flex items-center gap-3 md:w-full max-w-120 ml-auto">
                 <form
                   onSubmit={handleSearchSubmit}
                   className="relative hidden h-8 w-full items-center gap-2 rounded-lg border border-orange-500 pl-4 shadow-sm md:flex"
@@ -228,11 +226,18 @@ const NavigationsBar = forwardRef<HTMLElement, NavigationsBarProps>(
                         Neu
                       </Link>
                       <Link
-                        to="/"
+                        to="/sale"
                         className="block py-4 text-2xl transition-opacity hover:opacity-70"
                         onClick={closeMenu}
                       >
                         Sale
+                      </Link>
+                      <Link
+                        to="/support"
+                        className="block py-4 text-2xl transition-opacity hover:opacity-70"
+                        onClick={ closeMenu }
+                      >
+                        Support
                       </Link>
                       <div className="mt-6 border-t pt-6">
                         <Link

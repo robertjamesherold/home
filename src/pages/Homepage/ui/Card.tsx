@@ -79,7 +79,7 @@ const ImageCard: React.FC<{ product: FeaturedProductsType }> = ({
                   />
                 </Row>
 
-                <Footer className="align-center flex h-6 place-items-center gap-2">
+                <Footer className="align-center flex h-6 place-items-center gap-2 mb-4">
                   <Title
                     level={5}
                     text={`${featuredProduct.price.toFixed(2)}€`}
