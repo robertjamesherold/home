@@ -13,7 +13,7 @@ import {
   RadioGroup,
   RadioGroupItem,
 } from '@/ui';
-import { useCart, useCheckoutSubmission } from '@/hooks';
+import { useCart, useCheckoutSubmission } from '@/hooks'
 import type { CheckoutPayload } from '@/types';
 import { toast } from 'sonner';
 

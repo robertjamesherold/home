@@ -1,9 +1,10 @@
-import type { ProductType } from '@/types';
+import { productImages } from '@/assets/images'
+import type { ProductType } from '@/types'
 
 const productsData: ProductType[] = [
   {
     id: 'aurora-stehlampe',
-    name: 'Aurora Stehlampe',
+    title: 'Aurora Stehlampe',
     price: 179.99,
     originalPrice: 219.99,
     category: 'Beleuchtung',
@@ -13,6 +14,7 @@ const productsData: ProductType[] = [
     inStock: true,
     tags: ['new', 'sale'],
     link: 'aurora-stehlampe',
+    image: productImages[0],
 
     details: {
       title: 'Produktdetails',
@@ -43,7 +45,7 @@ const productsData: ProductType[] = [
   },
   {
     id: 'nordic-sofa-cloud',
-    name: 'Nordic Sofa Cloud',
+    title: 'Nordic Sofa Cloud',
     price: 1299,
     originalPrice: 1499,
     category: 'Wohnzimmer',
@@ -53,7 +55,7 @@ const productsData: ProductType[] = [
     inStock: true,
     tags: ['bestseller'],
     link: 'nordic-sofa-cloud',
-
+    image: productImages[1],
     details: {
       title: 'Produktdetails',
       tab: [
@@ -82,7 +84,7 @@ const productsData: ProductType[] = [
   },
   {
     id: 'borealis-kaffeetisch',
-    name: 'Borealis Kaffeetisch',
+    title: 'Borealis Kaffeetisch',
     price: 349,
     category: 'Möbel',
     description:
@@ -91,6 +93,7 @@ const productsData: ProductType[] = [
     inStock: true,
     tags: ['new'],
     link: 'borealis-kaffeetisch',
+    image: productImages[2],
     details: {
       title: 'Produktdetails',
       tab: [
@@ -109,7 +112,7 @@ const productsData: ProductType[] = [
   },
   {
     id: 'skandi-essstuhl',
-    name: 'Skandi Essstuhl',
+    title: 'Skandi Essstuhl',
     price: 159.99,
     category: 'Esszimmer',
     description:
@@ -118,7 +121,7 @@ const productsData: ProductType[] = [
     inStock: true,
     tags: ['sale'],
     link: 'skandi-essstuhl',
-
+    image: productImages[3],
     details: {
       title: 'Produktdetails',
       tab: [
@@ -137,7 +140,7 @@ const productsData: ProductType[] = [
   },
   {
     id: 'atlas-buecherregal',
-    name: 'Atlas Bücherregal',
+    title: 'Atlas Bücherregal',
     price: 499,
     category: 'Arbeitszimmer',
     description:
@@ -146,7 +149,7 @@ const productsData: ProductType[] = [
     inStock: false,
     tags: ['limited'],
     link: 'atlas-buecherregal',
-
+    image: productImages[4],
     details: {
       title: 'Produktdetails',
       tab: [
@@ -165,7 +168,7 @@ const productsData: ProductType[] = [
   },
   {
     id: 'velvet-loungesessel',
-    name: 'Velvet Loungesessel',
+    title: 'Velvet Loungesessel',
     price: 399,
     category: 'Wohnzimmer',
     description:
@@ -174,7 +177,7 @@ const productsData: ProductType[] = [
     inStock: true,
     tags: ['new', 'bestseller'],
     link: 'velvet-loungesessel',
-
+    image: productImages[5],
     details: {
       title: 'Produktdetails',
       tab: [
@@ -193,7 +196,7 @@ const productsData: ProductType[] = [
   },
   {
     id: 'lumen-tischleuchte',
-    name: 'Lumen Tischleuchte',
+    title: 'Lumen Tischleuchte',
     price: 89.99,
     category: 'Beleuchtung',
     description:
@@ -202,7 +205,7 @@ const productsData: ProductType[] = [
     inStock: true,
     tags: ['gift'],
     link: 'lumen-tischleuchte',
-
+    image: productImages[6],
     details: {
       title: 'Produktdetails',
       tab: [
@@ -221,7 +224,7 @@ const productsData: ProductType[] = [
   },
   {
     id: 'meridian-bettwaesche',
-    name: 'Meridian Bettwäsche',
+    title: 'Meridian Bettwäsche',
     price: 129.5,
     category: 'Schlafzimmer',
     description:
@@ -230,7 +233,7 @@ const productsData: ProductType[] = [
     inStock: true,
     tags: ['eco'],
     link: 'meridian-bettwaesche',
-
+    image: productImages[7],
     details: {
       title: 'Produktdetails',
       tab: [
@@ -247,6 +250,8 @@ const productsData: ProductType[] = [
       ],
     },
   },
-];
+]
 
-export default productsData;
+export const staticProducts = productsData
+
+export default productsData

@@ -10,9 +10,8 @@ import {
   Switch,
   Textarea,
 } from '@/ui';
-import { useProducts } from '@/hooks';
-import { slugify } from '@/lib/slugify';
-
+import { useProducts } from '@/hooks'
+import { slugify } from '@/hooks/slugify'
 const initialFormState = {
   name: '',
   category: '',

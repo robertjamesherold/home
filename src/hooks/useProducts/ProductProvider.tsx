@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { productsData as staticProducts } from '@/data'
+import { staticProducts } from '@/data'
 import type { ProductType } from '@/types'
-import { ensureUniqueSlug, slugify } from '@/lib/slugify'
+import { ensureUniqueSlug, slugify } from '@/hooks/slugify'
 
 import ProductContext, {
     type CreateProductInput,
@@ -317,5 +317,7 @@ const ProductProvider: React.FC<ProductProviderProps> = ( { children } ) =>
 
     return <ProductContext.Provider value={ value }>{ children }</ProductContext.Provider>
 }
+
+export { ProductProvider }
 
 export default ProductProvider

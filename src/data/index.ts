@@ -1,1 +1,1 @@
-export { default as productsData } from './productsData';
+export { default as productsData, staticProducts } from './productsData'
