@@ -11,7 +11,6 @@ import {
   Textarea,
 } from '@/ui';
 import { useProducts } from '@/hooks'
-import { slugify } from '@/hooks/slugify'
 const initialFormState = {
   name: '',
   category: '',
@@ -54,6 +53,25 @@ const toNumber = (value: string): number | undefined => {
   }
 
   return parsed;
+};
+
+/**
+ * Lightweight slugify helper used for product links.
+ * - removes diacritics
+ * - lowercases
+ * - replaces non-alphanumeric sequences with hyphens
+ * - trims leading/trailing hyphens
+ */
+const slugify = ( value: string ): string =>
+{
+  return value
+    .toString()
+    .normalize( 'NFKD' )
+    .replace( /[\u0300-\u036F]/g, '' ) // remove diacritics
+    .toLowerCase()
+    .trim()
+    .replace( /[^a-z0-9]+/g, '-' )
+    .replace( /^-+|-+$/g, '' )
 };
 
 const ProductEditorPage: React.FC = () => {
@@ -313,16 +331,12 @@ const ProductEditorPage: React.FC = () => {
 
                 <div className="space-y-2">
                   <Label htmlFor="tags">Tags (Komma-getrennt)</Label>
-                  <Input
-                    id="tags"
-                    value={formState.tags}
-                    onChange={(event) => handleChange('tags', event.target.value)}
-                    placeholder="new, sale"
+                  <Textarea
+                    id="images"
+                    className="min-h-24"
+                    onChange={ ( event ) => handleChange( 'images', ( event.target as HTMLTextAreaElement ).value ) }
+                    placeholder={ `https://.../bild-1.jpg\nhttps://.../bild-2.jpg` }
                   />
-                </div>
-              </div>
-
-              <div className="grid gap-6 md:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="image">Titelbild URL</Label>
                   <Input
