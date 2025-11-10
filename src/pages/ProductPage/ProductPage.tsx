@@ -1,12 +1,10 @@
-import { useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import { useMemo, useState } from 'react';
 
 import { useCart, useProducts } from '@/hooks';
-import { Column } from '@/layout';
-import type { ProductType } from '@/types';
+import type { ProductType as Product } from '@/types/Product.types'
+import { Column } from '@/layout'
 import { default as detailData } from './data/detailData';
 
-import { useProductImages } from './hooks/useProductImages';
 import { ProductGallery } from './components/ProductGallery/ProductGallery';
 import { ProductBadges } from './components/ProductGallery/ProductBadges';
 import { ProductRating } from './components/ProductInfo/ProductRating';
@@ -16,40 +14,36 @@ import { default as DetailCard } from './components/ProductDetails/Detail'
 import { useProductQuantity } from './hooks/useProductQuantity';
 import { Section } from '@/layout'
 
-const ProductPage: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
-  const { products } = useProducts();
-  const product = useMemo<ProductType | undefined>(
-    () =>
-      products.find((item) => {
-        if (!id) return false;
-        return item.id === id || item.link === id;
-      }),
-    [products, id]
-  );
+const ProductPage: React.FC = () =>
+{
+  const { products } = useProducts()
+  const product = useMemo( () =>
+    products.find( ( p: Product ) => p.id === p.id ),
+    [ products ]
+  )
 
   const { addToCart } = useCart();
   const { quantity, increment, decrement, reset } = useProductQuantity(1);
-
-  const { productImages, selectedImage, setSelectedImage } = useProductImages({
-    productId: product?.id,
-    initialImages: product?.images,
-  });
-
-  if (!product) {
-    return null;
-  }
+  const [ selectedImage, setSelectedImage ] = useState( 0 );
 
   const handleAddToCart = () => {
-    addToCart(product, quantity);
-    reset();
+    if ( product )
+    {
+      addToCart( product, quantity )
+      reset();
+    }
   };
+
+  if ( !product )
+  {
+    return <Section>Product not found.</Section>
+  }
 
   return (
     <Section className="mx-auto grid w-full gap-10 lg:grid-cols-2 grid-rows-[auto_auto] safe-area-padding section ">
       <ProductGallery
         productName={product.title}
-        images={productImages}
+        images={ product.images }
         selectedIndex={selectedImage}
         onSelectImage={setSelectedImage}
       />

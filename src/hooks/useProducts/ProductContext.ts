@@ -1,31 +1,32 @@
-import { createContext } from 'react';
+import { createContext } from 'react'
 
-import type { ProductDetailsCardType, ProductType } from '@/types';
+import type { ProductDetailsCardType, ProductType } from '@/types'
 
 export type CreateProductInput = {
-  name: string;
-  category: string;
-  price: number;
-  originalPrice?: number;
-  description?: string;
-  ratingScore?: number;
-  ratingReviews?: number;
-  inStock?: boolean;
-  tags?: string[];
-  image?: string;
-  images?: string[];
-  link?: string;
-  details?: ProductDetailsCardType;
-};
-
-export interface ProductContextValue {
-  products: ProductType[];
-  customProducts: ProductType[];
-  isReady: boolean;
-  addProduct: (input: CreateProductInput) => ProductType;
-  removeProduct: (productId: string) => void;
+    name: string
+    category: string
+    price: number
+    originalPrice?: number
+    description?: string
+    ratingScore?: number
+    ratingReviews?: number
+    inStock?: boolean
+    tags?: string[]
+    image?: string
+    images?: string[]
+    link?: string
+    details?: ProductDetailsCardType
 }
 
-const ProductContext = createContext<ProductContextValue | undefined>(undefined);
+export interface ProductContextValue
+{
+    products: ProductType[]
+    customProducts: ProductType[]
+    isReady: boolean
+    addProduct: ( input: CreateProductInput ) => ProductType
+    removeProduct: ( productId: string ) => void
+}
 
-export default ProductContext;
+const ProductContext = createContext<ProductContextValue | undefined>( undefined )
+
+export default ProductContext

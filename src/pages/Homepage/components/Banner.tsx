@@ -1,29 +1,20 @@
-import type { BannerType } from '../types/';
-import { useRandomImages } from '@/hooks';
-
-import { Section, Image, Column } from '@/layout';
-import { TextParagraph, Title } from '@/typography';
+import type { BannerType } from '../types/'
+import { Section, Image, Column } from '@layout/.'
+import { Title, TextParagraph, } from '@/typography'
 import { Link } from 'react-router-dom';
 import { Button } from '@/ui';
 
 const Banner: React.FC<BannerType> = ({
+  image,
   title,
   subtitle,
   buttonlink,
   buttontext,
-}: BannerType) => {
-  const { getRandomImageUrls } = useRandomImages();
-
+}: BannerType ) =>
+{ 
   return (
     <Section className="relative flex h-[400px] items-center justify-center bg-gray-100">
-      <Image
-        isAbsolute
-        src={
-          getRandomImageUrls(3, {
-            size: { width: 1920, height: 1080 },
-            cacheKey: 'homepage-hero',
-          })[0]
-        }
+      <Image isAbsolute src={ image }
         alt="Hero"
         className="absolute inset-0 h-full w-full object-cover"
       />
@@ -36,7 +27,7 @@ const Banner: React.FC<BannerType> = ({
             {buttontext}
           </Button>
         </Link>
-      </Column>
+      </Column>   
     </Section>
   );
 };

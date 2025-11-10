@@ -1,3 +1,6 @@
+/// <reference types="vite/client" />
+
+import './css/index.css'
 import { useMemo, useRef } from 'react';
 import ScrollToTop from '@/components/ScrollToTop'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -17,6 +20,7 @@ import {
 } from '@/pages';
 import { CartProvider } from '@/hooks';
 import useElementSize from '@hooks/useElementSize';
+
 
 const Pages = () =>
 {

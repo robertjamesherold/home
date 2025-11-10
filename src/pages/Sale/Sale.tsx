@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Flame } from 'lucide-react';
-
+import type { ProductType } from '@/types/'
 import { useProducts } from '@/hooks';
 import { Grid, Header } from '@/layout';
 import { Title, TextParagraph } from '@/typography';
@@ -14,7 +14,7 @@ const SalePage: React.FC = () => {
   const { products } = useProducts();
   const saleProducts = useMemo(
     () =>
-      products.filter((product) => (product.tags ?? []).includes('sale')),
+      products.filter( ( product: ProductType ) => ( product.tags ?? [] ).includes( 'sale' ) ),
     [products]
   );
 
@@ -41,10 +41,10 @@ const SalePage: React.FC = () => {
         </Button>
       </Header>
 
-      <Grid className="grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {saleProducts.map(product => (
-          <ImageCard key={product.id} {...product} />
-        ))}
+      <Grid className="grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-3">
+        { saleProducts.map( ( product: ProductType ) => (
+          <ImageCard key={ product.id } { ...product } />
+        ) ) }
       </Grid>
 
       <NoFilteredProducts filteredProducts={saleProducts} />

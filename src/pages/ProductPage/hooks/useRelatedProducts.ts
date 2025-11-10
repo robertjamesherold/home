@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState, useCallback } from 'react';
 
 import type { ProductType } from '@/types';
-import { useProducts, useRandomImages } from '@/hooks';
+import { useProducts } from '@/hooks';
 
 const MIN_RELATED_COUNT = 12;
 const MAX_RELATED_COUNT = 24;
@@ -67,7 +67,6 @@ export const useRelatedProducts = (
   );
   const [relatedImageUrls, setRelatedImageUrls] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { getRandomImageUrls } = useRandomImages();
 
   // Memoize the target count to prevent recalculation on every render
   const targetCount = useMemo(
@@ -111,14 +110,18 @@ export const useRelatedProducts = (
       setRelatedProductsBase(selected);
 
       // Fetch images for selected products
-      const images = getRandomImageUrls(selected.length, {
-        cacheKey: `${currentProductId}-related`,
-      });
+      const images = selected.map((p) =>
+        p.images && p.images.length
+          ? p.images[0]
+          : p.image
+            ? p.image
+            : '/placeholder-image.png'
+      );
       setRelatedImageUrls(images);
     } finally {
       setIsLoading(false);
     }
-  }, [currentProductId, currentCategory, selectProducts, getRandomImageUrls]);
+  }, [currentProductId, currentCategory, selectProducts]);
 
   // Memoize the final product instances
   const relatedProductInstances = useMemo<RelatedProduct[]>(
