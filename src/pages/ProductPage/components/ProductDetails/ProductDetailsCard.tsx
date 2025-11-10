@@ -110,4 +110,6 @@ const ProductDetailsCard: React.FC<ProductDetailsCardType> = ({
   );
 };
 
+export { ProductDetailsCard };
+
 export default ProductDetailsCard;

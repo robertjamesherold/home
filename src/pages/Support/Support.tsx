@@ -150,6 +150,7 @@ const supportFormData: FormTableType = {
     id: 'message',
     isRequired: true,
     placeholder: 'Beschreiben Sie kurz, wie wir helfen können.',
+    rows: 4,
   },
   cancel: 'Zurücksetzen',
   save: 'Nachricht senden',

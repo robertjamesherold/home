@@ -108,6 +108,21 @@ const Checkout: React.FC = () => {
           ? error.message
           : 'Bestellung konnte nicht verarbeitet werden.';
       toast.error(message);
+
+      // Wenn das Backend nicht erreichbar ist oder ein Fehler auftritt,
+      // navigieren wir trotzdem zur Ergebnis-Seite und übergeben die Fehlermeldung
+      // damit der Nutzer informiert wird. Die Bestellung bleibt im Warenkorb.
+      const fallbackOrderNumber = `LX-${ Date.now().toString().slice( -6 ) }`
+      navigate( '/checkout/success', {
+        state: {
+          error: message,
+          total,
+          shippingCost,
+          tax,
+          items: summaryItems,
+          orderNumber: fallbackOrderNumber,
+        },
+      } );
     }
   };
 

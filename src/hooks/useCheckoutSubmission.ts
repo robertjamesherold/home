@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import { apiClient } from '@/hooks/apiClient';
-import type { CheckoutPayload, CheckoutResponse } from '@/types';
+import { useState } from 'react'
+import { apiClient } from '@/hooks/apiClient'
+import type { CheckoutPayload, CheckoutResponse } from '@/types'
 
-export const useCheckoutSubmission = () => {
+export const useCheckoutSubmission = () =>
+{
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 

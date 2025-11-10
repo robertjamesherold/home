@@ -102,7 +102,36 @@ ${colorConfig
   );
 };
 
-const ChartTooltip = RechartsPrimitive.Tooltip
+const ChartTooltip = RechartsPrimitive.Tooltip;
+
+type PayloadEntry = {
+  color?: string;
+  dataKey?: string | number;
+  name?: string | number;
+  value?: number | string;
+  payload?: Record<string, unknown>;
+};
+
+type ChartTooltipContentProps = React.HTMLAttributes<HTMLDivElement> & {
+  active?: boolean;
+  payload?: PayloadEntry[];
+  label?: React.ReactNode;
+  hideLabel?: boolean;
+  hideIndicator?: boolean;
+  indicator?: 'line' | 'dot' | 'dashed';
+  nameKey?: string;
+  labelKey?: string;
+  color?: string;
+  labelClassName?: string;
+  labelFormatter?: (value: React.ReactNode, payload?: PayloadEntry[]) => React.ReactNode;
+  formatter?: (
+    value: number | string,
+    name: string,
+    item: PayloadEntry,
+    index: number
+  ) => React.ReactNode;
+};
+
 function ChartTooltipContent({
   active,
   payload,
@@ -117,15 +146,7 @@ function ChartTooltipContent({
   color,
   nameKey,
   labelKey,
-}: ( RechartsPrimitive.TooltipProps<number | string, string> &
-  React.HTMLAttributes<HTMLDivElement> ) & {
-    hideLabel?: boolean
-    hideIndicator?: boolean
-    indicator?: 'line' | 'dot' | 'dashed'
-    nameKey?: string
-    labelKey?: string
-  } )
-{
+}: ChartTooltipContentProps ) {
   const { config } = useChart();
 
   const tooltipLabel = React.useMemo(() => {
@@ -133,7 +154,8 @@ function ChartTooltipContent({
       return null;
     }
 
-    const item = payload[ 0 ]!
+    const entries = payload as PayloadEntry[]
+    const item = entries[ 0 ]!;
     const key = String(
       labelKey ??
       ( typeof item.dataKey === 'string' ? item.dataKey : item.name ?? 'value' )
@@ -163,8 +185,9 @@ function ChartTooltipContent({
     return null;
   }
 
-  const nestLabel = payload.length === 1 && indicator !== 'dot';
-  const items = payload as TooltipPayload<number | string, string>[];
+  const entries = payload as PayloadEntry[]
+  const nestLabel = entries.length === 1 && indicator !== 'dot';
+  const items = entries;
 
   return (
     <div
@@ -187,9 +210,9 @@ function ChartTooltipContent({
           );
           const itemConfig = getPayloadConfigFromPayload(config, item, key);
 
-          const payloadFill = ( item.payload as Record<string, unknown> )?.[ 'fill' ]
+          const payloadFill = ( item.payload as Record<string, unknown> )?.[ 'fill' ];
           const indicatorColor =
-            color ?? ( typeof payloadFill === 'string' ? payloadFill : item.color )
+            color ?? ( typeof payloadFill === 'string' ? payloadFill : item.color );
 
           const valueContent =
             typeof item.value === 'number'
@@ -207,7 +230,7 @@ function ChartTooltipContent({
               )}
             >
               { formatter && item?.value !== undefined && item.name != null ? (
-                ( item.value as number | string, item.name as string, item, index )
+                formatter( item.value, item.name as string, item, index )
               ) : (
                 <>
                   {itemConfig?.icon ? (

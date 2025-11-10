@@ -1,6 +1,4 @@
-import type {  ProductContextType  } from '@/types';
-
-const productPageData: ProductContextType = {
+const productPageData = {
   data: {
     products: [
           {

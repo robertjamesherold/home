@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useMemo } from 'react';
+import { useMemo, type MouseEvent } from 'react'
 import { Star } from 'lucide-react';
 
 import { useCart } from '@/hooks'
@@ -17,7 +17,12 @@ const ProductCard = ( product: ProductProps ) =>
 
   const { addToCart } = useCart()
   const filteredProducts = useMemo( () => product.product ?? [], [ product ] )
-  const handleAddToCart = ( product: Product ) => () => addToCart( product, 1 )
+  const handleAddToCart = ( product: Product ) => ( e?: MouseEvent ) =>
+  {
+    e?.stopPropagation()
+    e?.preventDefault()
+    addToCart( product, 1 )
+  }
   {
     return ( <>
       { filteredProducts.map( ( filteredProduct ) =>

@@ -11,29 +11,21 @@ import product_10 from './product_10.jpeg'
 import product_11 from './product_11.jpeg'
 import product_12 from './product_12.jpeg'
 
-export const productimages = () => {
-            1
-            ? product_1
-            : 2
-            ? product_2
-            : 3
-            ? product_3
-            : 4
-            ? product_4
-            : 5
-            ? product_5
-            : 6
-            ? product_6
-            : 7
-            ? product_7
-            : 8
-            ? product_8
-            : 9
-            ? product_9
-            : 10
-            ? product_10
-            : 11 ?
-            product_11 :
-            
-             product_12;  
-};
+const productImages = [
+    product_1,
+    product_2,
+    product_3,
+    product_4,
+    product_5,
+    product_6,
+    product_7,
+    product_8,
+    product_9,
+    product_10,
+    product_11,
+    product_12,
+] as const
+
+export { productImages }
+
+export default productImages

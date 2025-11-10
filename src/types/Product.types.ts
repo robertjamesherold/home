@@ -33,16 +33,7 @@ export type ProductType = {
 
 export type CartItemType = {
   product: ProductType;
-  quantity?: number;
-  handleDecrease: () => void;
-  handleIncrease: () => void;
-  updateQuantity: (quantity: number) => void;
-  addToCart: (product: ProductType, quantity?: number) => void;
-  onRemove: (productId: string) => void;
-  totalItems: number;
-  totalPrice: number;
-  isLoading: boolean;
-  isInitialized: boolean;
+  quantity: number;
 };
 
 export type CartContextType = {

@@ -1,16 +1,8 @@
-import {
-  Contact,
-  Package,
-  PersonStanding,
-  Settings,
-  ShieldCheck,
-  Truck,
-} from 'lucide-react';
+import { Contact, Package, Settings, ShieldCheck } from 'lucide-react';
 import {
   Card,
   CardContent,
   CardHeader,
-  CardTitle,
   Button,
   Badge,
   Separator,
