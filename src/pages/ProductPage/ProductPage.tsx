@@ -48,7 +48,7 @@ const ProductPage: React.FC = () => {
   return (
     <Section className="mx-auto grid w-full gap-10 lg:grid-cols-2 grid-rows-[auto_auto] safe-area-padding section ">
       <ProductGallery
-        productName={product.name}
+        productName={product.title}
         images={productImages}
         selectedIndex={selectedImage}
         onSelectImage={setSelectedImage}
@@ -59,7 +59,7 @@ const ProductPage: React.FC = () => {
           <ProductBadges tags={product.tags} />
 
           <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-            {product.name}
+          { product.title }
           </h1>
 
         <div className="flex flex-col sm:justify-between">

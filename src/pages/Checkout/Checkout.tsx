@@ -45,7 +45,7 @@ const Checkout: React.FC = () => {
 
     const summaryItems = items.map((item) => ({
       id: item.product.id,
-      name: item.product.name,
+      name: item.product.title,
       quantity: item.quantity ?? 1,
       price: item.product.price,
     }));
@@ -243,7 +243,7 @@ const Checkout: React.FC = () => {
                           className="flex justify-between text-sm"
                         >
                           <span className="text-gray-600">
-                            {item.product.name} × {qty}
+                            { item.product.title } × { qty }
                           </span>
                           <span>
                             {(item.product.price * qty).toFixed(2)}€

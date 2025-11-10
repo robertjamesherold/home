@@ -42,7 +42,9 @@ const SalePage: React.FC = () => {
       </Header>
 
       <Grid className="grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <ImageCard filteredProducts={ saleProducts } />
+        {saleProducts.map(product => (
+          <ImageCard key={product.id} {...product} />
+        ))}
       </Grid>
 
       <NoFilteredProducts filteredProducts={saleProducts} />

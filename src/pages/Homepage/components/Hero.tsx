@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
-import { useRandomImages } from '@/hooks';
 import { Section, Image, Container } from '@/layout';
 import { Title, TextParagraph } from '@/typography';
 import { Button } from '@/ui';
@@ -12,19 +11,14 @@ const Hero: React.FC<HeroType> = ({
   subtitle,
   buttonText,
   buttonLink,
+  heroImage,
 }: HeroType) => {
-  const { getRandomImageUrls } = useRandomImages();
 
   return (
     <Section className="relative flex h-[600px] items-center justify-center bg-gray-100">
       <Image
         isAbsolute
-        src={
-          getRandomImageUrls(1, {
-            size: { width: 1920, height: 1080 },
-            cacheKey: 'homepage-hero',
-          })[0]
-        }
+        src={ heroImage }
         alt="Hero"
         className="absolute inset-0 h-full w-full object-cover"
       />

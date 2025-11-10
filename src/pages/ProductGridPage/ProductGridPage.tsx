@@ -91,7 +91,9 @@ const ProductGridPage: React.FC = () => {
             </Row>
 
             <Grid className="grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
-              <ImageCard {... { filteredProducts } }/>
+              {filteredProducts.map(product => (
+                <ImageCard key={product.id} {...product} />
+              ))}
             </Grid>
 
             <NoFilteredProducts {...{ filteredProducts }} />

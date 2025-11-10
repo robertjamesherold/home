@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, CardHeader, CardTitle } from '@/ui/card'
 import { Column, Row } from '@/layout'
 import type { DetailDataType, DetailTypes } from '../../types';

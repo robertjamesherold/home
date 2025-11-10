@@ -288,10 +288,9 @@ const ProductEditorPage: React.FC = () => {
                 <Label htmlFor="description">Beschreibung</Label>
                 <Textarea
                   id="description"
-                  rows={5}
-                  value={formState.description}
+                  className="min-h-[120px]"
                   onChange={(event) =>
-                    handleChange('description', event.target.value)
+                    handleChange( 'description', ( event.target as HTMLTextAreaElement ).value )
                   }
                   placeholder="Beschreibe dein Produkt..."
                 />
@@ -339,9 +338,8 @@ const ProductEditorPage: React.FC = () => {
                   <Label htmlFor="images">Weitere Bilder (je Zeile)</Label>
                   <Textarea
                     id="images"
-                    rows={4}
-                    value={formState.images}
-                    onChange={(event) => handleChange('images', event.target.value)}
+                    className="min-h-[96px]"
+                    onChange={ ( event ) => handleChange( 'images', ( event.target as HTMLTextAreaElement ).value ) }
                     placeholder={`https://.../bild-1.jpg\nhttps://.../bild-2.jpg`}
                   />
                 </div>

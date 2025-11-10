@@ -37,12 +37,12 @@ export const RelatedProducts: React.FC<RelatedProductsProps> = ({
                 <Card className="overflow-hidden">
                   <Image
                     src={imageUrl}
-                    alt={String(relatedProduct.name)}
+                    alt={ String( relatedProduct.title ) }
                     className="h-40 w-full bg-muted"
                   />
                   <CardContent className="space-y-2 p-3">
                     <h3 className="text-sm font-medium leading-snug">
-                      {String(relatedProduct.name)}
+                      { String( relatedProduct.title ) }
                     </h3>
                     <div className="flex items-center gap-2 text-sm">
                       <span className="font-semibold">

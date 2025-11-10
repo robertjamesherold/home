@@ -1,6 +1,5 @@
 import React from 'react';
 import { Image } from '@/layout';
-import { useRandomImages } from '@/hooks';
 
 interface ProductGalleryProps {
   productName: string;
@@ -13,18 +12,13 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({
   productName,
   images,
   selectedIndex,
-  onSelectImage,
-}) => {
-  const { getRandomImageUrl, getRandomImageUrls } = useRandomImages();
-  const fallbackHero = getRandomImageUrl({ cacheKey: `${productName}-hero` });
-  const fallbackImages = getRandomImageUrls(4, {
-    cacheKey: `${productName}-thumbs`,
-  });
+} ) =>
+{
 
-  const galleryImages =
-    images && images.length > 0 ? images : fallbackImages;
-  const heroImage =
-    galleryImages[selectedIndex] ?? galleryImages[0] ?? fallbackHero;
+  const [ isSelected, setIsSelected ] = React.useState( 0 )
+
+  const galleryImages = images?.length ? images : []
+  const heroImage = galleryImages.at( isSelected );
 
   return (
     <div className="@container flex h-full flex-col gap-6">
@@ -46,7 +40,7 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({
               <button
                 key={`${image}-${index}`}
                 type="button"
-                onClick={() => onSelectImage(index)}
+                onClick={ () => setIsSelected( index ) }
                 className={ `group relative aspect-square  cursor-pointer w-full overflow-hidden rounded-2xl border transition hover:scale-102 ${
                   isSelected
                     ? 'border-primary shadow-sm'
@@ -54,7 +48,7 @@ export const ProductGallery: React.FC<ProductGalleryProps> = ({
                 }`}
               >
                 <Image
-                  src={image}
+                  src={ image }
                   alt={`${productName} ${index + 1}`}
                   className="h-full w-full"
                   imageClassName="scale-100 overflow-hidden transition-transform duration-500 rounded-2xl ease-out "
