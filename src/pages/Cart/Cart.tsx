@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useCart } from '@/hooks';
-import { Column, Section } from '@/layout';
+import { Column, Section, Grid } from '@/layout'
 import { Title } from '@/typography';
 
 import { CartItems, EmptyCart, OrderSummary } from './components';
@@ -36,11 +36,9 @@ const Cart: React.FC = () => {
   return (
     <Section className="container mx-auto px-4 py-8">
       <Column className="gap-8">
-        <Title level={1} weight="bold">
-          Warenkorb
-        </Title>
+        <Title level={ 1 } weight="bold" text='Warenkorb' />
 
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <Grid className="grid-cols-1 gap-8 lg:grid-cols-3">
           <CartItems
             items={items}
             onUpdateQuantity={updateQuantity}
@@ -56,7 +54,7 @@ const Cart: React.FC = () => {
             continueShoppingPath="/products"
             freeShippingThreshold={FREE_SHIPPING_THRESHOLD}
           />
-        </div>
+        </Grid>
       </Column>
     </Section>
   );

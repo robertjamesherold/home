@@ -1,40 +1,32 @@
-# Backend-Server
+# Checkout-API-Integration
 
-Der Ordner [`server/`](../server) enthält einen Express-basierten Backend-Server mit folgenden Merkmalen:
+Das Frontend benötigt kein dediziertes Backend mehr. Der Checkout-Flow nutzt jetzt standardmäßig eine lokale Mock-Antwort, sodass alle Seiten vollständig funktionieren, sobald `npm run dev` läuft.
 
-- MongoDB-Anbindung via Mongoose (optional – bei fehlender `MONGODB_URI` wird ein In-Memory-Speicher verwendet).
-- REST-Endpunkte für Bestellungen (`/api/orders`) und Zahlungsabwicklung (`/api/payments`).
-- Stripe-Integration zur Erstellung von Payment-Intents, sofern ein `STRIPE_SECRET_KEY` vorhanden ist.
-- Mock-Antworten für PayPal und Sofortüberweisung zur lokalen Entwicklung.
+## Standardbetrieb (Mock)
 
-## Installation & Start
+- `useCheckoutSubmission` simuliert eine Antwort mit Zahlungsstatus `succeeded` nach einer kurzen Verzögerung.
+- Bestellnummern und Zahlungsreferenzen werden lokal generiert und auf der Erfolgsseite angezeigt.
+- Fällt eine optionale Backend-Anfrage aus, wird automatisch auf die Mock-Antwort zurückgegriffen – der Nutzer bleibt im Flow.
 
-```bash
-cd server
-cp .env.example .env
-npm install
-npm run dev
-```
+## Echtes Backend anschließen
 
-Standardmäßig lauscht der Server auf Port `4000`. Der Vite-Client kann über die Umgebungsvariable `VITE_API_BASE_URL` (siehe [`.env.example`](../.env.example)) mit dem Backend verbunden werden.
+Wer eigene Checkout-/Payment-Logik anbinden möchte, kann weiterhin ein Backend verwenden:
 
-## REST-Endpunkte
+1. Stelle einen Endpunkt `POST /api/orders/checkout` zur Verfügung, der die unten beschriebene Struktur versteht.
+2. Hinterlege in `.env`:
+   ```bash
+   VITE_ENABLE_CHECKOUT_API=true
+   VITE_API_BASE_URL=http://localhost:4000   # oder deine Produktiv-URL
+   ```
+3. Starte die App (`npm run dev`). Sobald `VITE_API_BASE_URL` gesetzt ist, leitet der Vite-Proxy alle `/api/*`-Aufrufe an diese URL weiter.
 
-### `GET /api/health`
-Health-Check des Servers.
+Wenn `VITE_ENABLE_CHECKOUT_API` auf `true` steht und der Request fehlschlägt, fällt der Hook automatisch auf die Mock-Antwort zurück, damit das Frontend bedienbar bleibt.
 
-### `GET /api/payments/methods`
-Liste verfügbarer Zahlungsarten.
-
-### `POST /api/payments/session`
-Erstellt eine Zahlungssession (z. B. Stripe Payment Intent). Erwartet `method`, `amount` (in Cent) und optional `currency` sowie `metadata`.
-
-### `POST /api/orders/checkout`
-Nimmt Checkout-Daten entgegen, erzeugt eine Zahlungssession und speichert die Bestellung. Erwartet folgende Struktur:
+## Erwartete Request-/Response-Struktur
 
 ```json
 {
-  "customer": { "firstName": "...", "lastName": "...", "email": "..." },
+  "customer": { "firstName": "Jane", "lastName": "Doe", "email": "jane@example.com" },
   "items": [
     { "id": "p1", "name": "Produkt", "price": 19.99, "quantity": 1 }
   ],
@@ -43,4 +35,32 @@ Nimmt Checkout-Daten entgegen, erzeugt eine Zahlungssession und speichert die Be
 }
 ```
 
-Die Antwort enthält die Bestellung sowie Details zur Zahlung (z. B. Stripe `clientSecret`).
+Die Antwort sollte folgende Felder enthalten:
+
+```json
+{
+  "order": {
+    "_id": "ORDER_ID",
+    "customer": { "...": "..." },
+    "items": [],
+    "totals": { "subtotal": 0, "shipping": 0, "tax": 0, "total": 0, "currency": "eur" },
+    "payment": {
+      "method": "card",
+      "provider": "Stripe",
+      "status": "succeeded",
+      "externalReference": "PAYMENT_INTENT"
+    },
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-01T00:00:00.000Z"
+  },
+  "payment": {
+    "provider": "Stripe",
+    "status": "succeeded",
+    "clientSecret": "pi_secret_123",
+    "intentId": "pi_123",
+    "message": "Zahlung erfolgreich erstellt."
+  }
+}
+```
+
+Mit dieser Struktur bleibt der Checkout vollständig kompatibel zum bestehenden UI-Flow.

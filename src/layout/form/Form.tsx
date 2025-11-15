@@ -1,13 +1,23 @@
-import type { FC, PropsWithChildren } from 'react';
+import { forwardRef } from 'react'
 
-type FormProps = PropsWithChildren<{
-  className?: string;
-}> & React.FormHTMLAttributes<HTMLFormElement>;
+type FormProps = React.FormHTMLAttributes<HTMLFormElement>
 
-const Form: FC<FormProps> = ({ children, className = '' }) => (
-  <form className={['flex flex-col', className].filter(Boolean).join(' ')}>
-    {children}
-  </form>
-);
+const Form = forwardRef<HTMLFormElement, FormProps>( (
+  { children, className = '', ...props },
+  ref
+) =>
+{
+  return (
+    <form
+      ref={ ref }
+      { ...props }
+      className={ [ 'flex flex-col', className ].filter( Boolean ).join( ' ' ) }
+    >
+      { children }
+    </form>
+  )
+} )
+
+Form.displayName = 'Form'
 
 export default Form;

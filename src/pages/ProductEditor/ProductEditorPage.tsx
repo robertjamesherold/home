@@ -332,30 +332,39 @@ const ProductEditorPage: React.FC = () => {
                 <div className="space-y-2">
                   <Label htmlFor="tags">Tags (Komma-getrennt)</Label>
                   <Textarea
-                    id="images"
-                    className="min-h-24"
-                    onChange={ ( event ) => handleChange( 'images', ( event.target as HTMLTextAreaElement ).value ) }
-                    placeholder={ `https://.../bild-1.jpg\nhttps://.../bild-2.jpg` }
-                  />
-                <div className="space-y-2">
-                  <Label htmlFor="image">Titelbild URL</Label>
-                  <Input
-                    id="image"
-                    value={formState.image}
-                    onChange={(event) => handleChange('image', event.target.value)}
-                    placeholder="https://..."
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="images">Weitere Bilder (je Zeile)</Label>
-                  <Textarea
-                    id="images"
+                    id="tags"
+                    value={formState.tags}
                     className="min-h-[96px]"
-                    onChange={ ( event ) => handleChange( 'images', ( event.target as HTMLTextAreaElement ).value ) }
-                    placeholder={`https://.../bild-1.jpg\nhttps://.../bild-2.jpg`}
+                    onChange={(event) => handleChange('tags', event.target.value)}
+                    placeholder="minimalistisch, lounge, bestseller"
                   />
                 </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="image">Titelbild URL</Label>
+                <Input
+                  id="image"
+                  value={formState.image}
+                  onChange={(event) => handleChange('image', event.target.value)}
+                  placeholder="https://..."
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="images">Weitere Bilder (je Zeile)</Label>
+                <Textarea
+                  id="images"
+                  value={formState.images}
+                  className="min-h-[96px]"
+                  onChange={(event) =>
+                    handleChange(
+                      'images',
+                      (event.target as HTMLTextAreaElement).value
+                    )
+                  }
+                  placeholder={`https://.../bild-1.jpg\nhttps://.../bild-2.jpg`}
+                />
               </div>
 
               <Row className="items-center justify-between gap-3 rounded-lg border border-gray-200 p-4">

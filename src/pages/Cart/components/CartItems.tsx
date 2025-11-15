@@ -1,10 +1,10 @@
 import { Minus, Plus, Trash2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
-import { Column, Row } from '@/layout'
+import { Column, Row, Image } from '@/layout'
 import type { CartItemType } from '@/types'
 import { TextParagraph, Title } from '@/typography'
-import { Button, Card, CardContent } from '@/ui'
+import { Button, Card } from '@/ui'
 
 type CartItemsProps = {
     items: CartItemType[]
@@ -26,21 +26,18 @@ const CartItems = ( {
                     const safeQuantity = Math.max( 1, quantity ?? 1 )
 
                     return (
-                        <Card key={ product.id }>
-                            {/* remove horizontal padding so the image can reach the card edge */ }
-                            <CardContent className="relative flex flex-col sm:flex-row sm:items-start px-0">
-                                <div className="relative inline-flex w-full sm:w-42 h-48 sm:h-auto overflow-hidden bg-muted sm:rounded-l-xl rounded-t-xl">
+
+                        <Card key={ product.id } className='pb-0 overflow-hidden'>
+                            <Row className="relative flex flex-col sm:flex-row sm:items-start overflow-hidden px-0">
                                     { product.image ? (
-                                        <img
+                                    <Image
+                                        isAbsolute={ false }
                                             src={ product.image }
                                             alt={ product.title }
-                                            className="h-full w-full object-cover"
-                                            loading="lazy"
+                                        className="aspect-square w-full object-cover max-h-48 max-w-48"
                                         />
-                                    ) : null }
-                                </div>
+                                ) : null }
 
-                                {/* keep consistent padding for the content area */ }
                                 <Row className="flex-1 inline-flex flex-col justify-between gap-4 sm:flex-row sm:items-start p-4 sm:p-6">
                                     <Column className="flex-1 space-y-1">
                                         <Link
@@ -96,7 +93,7 @@ const CartItems = ( {
                                         </Button>
                                     </Row>
                                 </Row>
-                            </CardContent>
+                            </Row>
                         </Card>
                     )
                 } ) }

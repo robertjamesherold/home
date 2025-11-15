@@ -69,11 +69,11 @@
 
 ---
 
-### 🛠 Backend API
+### 🛠 Checkout / Backend
 
-- Voll funktionsfähiger Express/MongoDB-Backend-Server im Ordner [`server/`](./server)
-- Checkout- und Zahlungs-Endpunkte, inkl. Stripe-Integration und Mock-Flows für PayPal/Sofort
-- Setup-Anleitung und Endpunktübersicht: [docs/backend.md](./docs/backend.md)
+- Das Frontend läuft eigenständig; der Checkout nutzt standardmäßig eine integrierte Mock-API.
+- Eigene Backends lassen sich per `VITE_ENABLE_CHECKOUT_API=true` und `VITE_API_BASE_URL=<ziel>` anbinden.
+- Weitere Details & Payload-Dokumentation: [docs/backend.md](./docs/backend.md)
 
 ---
 

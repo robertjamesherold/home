@@ -15,7 +15,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@css/*": ["./src/css/*"],
-      "@data/*": ["./src/data/*"],
+      "@data/*": ["./src/hooks/data/*"],
       "@assets/*": ["./src/assets/*"],
       "@badges/*": ["./src/assets/badges/*"],
       "@icons/*": ["./src/assets/icons/*"],

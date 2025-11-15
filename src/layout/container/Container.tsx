@@ -8,7 +8,8 @@ interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Container = forwardRef<HTMLDivElement, ContainerProps>(
-  ({ children, outerClass, innerClass, className, ...rest }, ref) => {
+  ( { children, outerClass, innerClass, className, ...rest }, ref?) =>
+  {
     const hasOuterClass = outerClass !== undefined;
     const hasInnerClass = innerClass !== undefined;
 

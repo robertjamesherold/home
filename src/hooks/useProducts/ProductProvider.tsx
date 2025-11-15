@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { staticProducts } from '@/data'
+import { staticProducts } from '@/hooks/data'
 import type { ProductType } from '@/types'
 import { ensureUniqueSlug, slugify } from '@/hooks/slugify'
 

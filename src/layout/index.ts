@@ -11,3 +11,5 @@ export { Header } from './header';
 export { Nav } from './nav';
 export { Image } from './image';
 export { Form } from './form';
+export { Link } from './link';
+export { Icon } from './icon';

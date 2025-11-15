@@ -2,6 +2,19 @@ import path from "path";
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
+
+const apiTarget = process.env.VITE_API_BASE_URL;
+
+const proxyConfig = apiTarget
+    ? {
+        '/api': {
+            target: apiTarget,
+            changeOrigin: true,
+            secure: false,
+        },
+    }
+    : undefined;
+
 export default defineConfig({
     plugins: [
         tailwindcss(),
@@ -36,12 +49,6 @@ export default defineConfig({
         port: 5173,
         open: true,
         strictPort: true,
-        proxy: {
-            '/api': {
-                target: process.env.VITE_API_BASE_URL,
-                changeOrigin: true,
-                secure: false,
-            },
-        },
+        ...(proxyConfig ? { proxy: proxyConfig } : {}),
     },
 });
