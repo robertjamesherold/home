@@ -1,41 +1,13 @@
 import { forwardRef, type FormEvent, type HTMLAttributes } from 'react';
-import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Twitter } from 'lucide-react';
+import { Link } from '@layout/.'
+import { Facebook, Instagram, Twitter } from 'lucide-react'
 import { Button, Input } from '@ui/.';
 import { cn } from '@ui/utils';
-import { Column, Grid } from '@/layout';
+import { Column, Grid, Container } from '@/layout'
+import { FooterLinksData } from './data';
 
 type PageFooterProps = HTMLAttributes<HTMLElement>;
 
-type FooterLink = {
-  label: string;
-  to?: string;
-  href?: string;
-};
-
-const shopLinks: FooterLink[] = [
-  { label: 'Alle Produkte', to: '/products' },
-  { label: 'Neuheiten', to: '/products' },
-  { label: 'Sale', to: '/sale' },
-];
-
-const serviceLinks: FooterLink[] = [
-  { label: 'Kontakt', href: 'mailto:hello@luxe.studio' },
-  { label: 'Versand & Rückgabe', href: '#' },
-  { label: 'Support', href: '#' },
-];
-
-const rightsLinks: FooterLink[] = [
-  { label: 'Datenschutz', href: '#' },
-  { label: 'AGB', href: '#' },
-  { label: 'Impressum', href: '#' },
-];
-
-const footerNavigation = [
-  { title: 'Shop', links: shopLinks },
-  { title: 'Service', links: serviceLinks },
-  { title: 'Rechtliches', links: rightsLinks },
-];
 
 const infoLinks = [
   { label: 'Datenschutz', href: '#' },
@@ -65,33 +37,30 @@ const PageFooter = forwardRef<HTMLElement, PageFooterProps>(
         <div className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-1 gap-y-8 sm:grid-cols-3 sm:gap-10 lg:grid-cols-5">
             <Grid className="col-span-1 grid-cols-1 gap-y-8 sm:col-span-3 sm:grid-cols-3 lg:gap-y-2">
-              {footerNavigation.map((section) => (
-                <div key={section.title} className="space-y-3">
+              { FooterLinksData.map( ( { title, links }, sectionIndex ) => (
+                <Column key={ sectionIndex } className="space-y-3">
+
                   <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-                    {section.title}
+                    { title }
                   </p>
                   <ul className="space-y-2 text-sm text-muted-foreground">
-                    {section.links.map((link) => (
-                      <li key={link.label}>
-                        {link.to ? (
-                          <Link
-                            to={link.to}
-                            className="transition hover:text-foreground"
-                          >
-                            {link.label}
-                          </Link>
-                        ) : (
-                          <a
-                            href={link.href ?? '#'}
-                            className="transition hover:text-foreground"
-                          >
-                            {link.label}
-                          </a>
-                        )}
-                      </li>
-                    ))}
+                    { Array.isArray( links ) &&
+                      links.map( ( link: { label: string, to?: string }, index: number ) =>
+                      {
+                        const { label, to } = link
+                        return (
+                          <li key={ index }>
+                            <Link
+
+                              to={ to }
+                              className="transition hover:text-foreground"
+                              text={ label }
+                            />
+                          </li>
+                        )
+                      } ) }
                   </ul>
-                </div>
+                </Column>
               ))}
               <Column className="space-y-4 sm:col-span-3 xl:col-span-2">
                 <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
@@ -155,14 +124,14 @@ const PageFooter = forwardRef<HTMLElement, PageFooterProps>(
                   </a>
                 ))}
               </div>
-              <div className="rounded-2xl border border-border/60 bg-background/70 p-4 text-sm text-muted-foreground shadow-sm">
+              <Container className="rounded-2xl border border-border/60 bg-background/70 p-4 text-sm text-muted-foreground shadow-sm">
                 <p className="font-semibold text-foreground">
                   Studio & Versand
                 </p>
                 <p>Rosenthaler Straße 72</p>
                 <p>10119 Berlin</p>
                 <p className="mt-2">Mo–Fr · 10:00 – 18:00 Uhr</p>
-              </div>
+              </Container>
             </div>
           </div>
           <div className="mt-10 flex flex-col gap-4 border-t border-border/60 pt-6 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">

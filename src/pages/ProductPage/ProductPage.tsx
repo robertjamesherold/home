@@ -13,6 +13,7 @@ import { AddToCartSection } from './components/ProductInfo/AddToCartSection';
 import { default as DetailCard } from './components/ProductDetails/Detail'
 import { useProductQuantity } from './hooks/useProductQuantity';
 import { Section } from '@/layout'
+import { TextParagraph, Title } from '@typography/.'
 
 const ProductPage: React.FC = () =>
 {
@@ -52,11 +53,10 @@ const ProductPage: React.FC = () =>
 
           <ProductBadges tags={product.tags} />
 
-          <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-          { product.title }
-          </h1>
+        <Title level={ 1 } className="text-6xl tracking-tight" text={ product.title } />
 
-        <div className="flex flex-col sm:justify-between">
+
+        <Column className="flex flex-col sm:justify-between">
             <ProductRating
               score={product.rating.score}
               reviews={product.rating.reviews}
@@ -66,14 +66,10 @@ const ProductPage: React.FC = () =>
               price={product.price}
               originalPrice={product.originalPrice}
             />
-          </div>
+        </Column>
 
 
-        {product.description ? (
-          <p className="max-w-xl text-base leading-relaxed text-muted-foreground">
-            {product.description}
-          </p>
-        ) : null}
+        { product.description ? ( <TextParagraph className="max-w-xl text-base leading-relaxed text-muted-foreground" text={ product.description } /> ) : null }
 
         <AddToCartSection
           quantity={quantity}

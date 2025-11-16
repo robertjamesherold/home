@@ -1,10 +1,9 @@
-import { Minus, Plus, Trash2 } from 'lucide-react'
-import { Link } from 'react-router-dom'
-
-import { Column, Row, Image } from '@/layout'
+import { Trash2 } from 'lucide-react'
+import { Column, Row, Image, Link } from '@/layout'
 import type { CartItemType } from '@/types'
 import { TextParagraph, Title } from '@/typography'
 import { Button, Card } from '@/ui'
+import { QuantityButton } from '../ui'
 
 type CartItemsProps = {
     items: CartItemType[]
@@ -38,61 +37,17 @@ const CartItems = ( {
                                         />
                                 ) : null }
 
-                                <Row className="flex-1 inline-flex flex-col justify-between gap-4 sm:flex-row sm:items-start p-4 sm:p-6">
+                                <Column className="flex-1 inline-flex justify-between gap-4 sm:flex-row sm:items-start p-4 sm:p-6">
                                     <Column className="flex-1 space-y-1">
-                                        <Link
-                                            to={ `/product/${ product.link ?? product.id }` }
-                                            className="hover:underline"
-                                        >
-                                            <Title level={ 4 } weight="semibold">
-                                                { product.title }
-                                            </Title>
-                                        </Link>
-                                        <TextParagraph className="text-sm text-gray-600">
-                                            { product.category }
-                                        </TextParagraph>
-                                        <Title level={ 5 } className="text-lg">
-                                            { product.price.toFixed( 2 ) }€
-                                        </Title>
+                                        <Link to={ `/product/${ product.link ?? product.id }` } className="text-xl font-semibold hover:underline" text={ product.title } />
+                                        <TextParagraph sm className=" text-gray-600" text={ product.category } />
+                                        <Title level={ 5 } className="text-lg" text={ `${ product.price.toFixed( 2 ) } €` } />                          
                                     </Column>
-
                                     <Row className="items-center gap-4">
-                                        <div className="flex items-center rounded-md border">
-                                            <Button
-                                                variant="ghost"
-                                                size="icon"
-                                                aria-label="Menge verringern"
-                                                onClick={ () =>
-                                                    onUpdateQuantity( product.id, Math.max( 1, safeQuantity - 1 ) )
-                                                }
-                                            >
-                                                <Minus className="h-4 w-4" />
-                                            </Button>
-                                            <span className="px-4 text-sm font-medium">
-                                                { safeQuantity }
-                                            </span>
-                                            <Button
-                                                variant="ghost"
-                                                size="icon"
-                                                aria-label="Menge erhöhen"
-                                                onClick={ () =>
-                                                    onUpdateQuantity( product.id, safeQuantity + 1 )
-                                                }
-                                            >
-                                                <Plus className="h-4 w-4" />
-                                            </Button>
-                                        </div>
-
-                                        <Button
-                                            variant="ghost"
-                                            size="icon"
-                                            aria-label="Artikel entfernen"
-                                            onClick={ () => onRemove( product.id ) }
-                                        >
-                                            <Trash2 className="h-5 w-5 text-destructive" />
-                                        </Button>
+                                        <QuantityButton onMinus={ () => onUpdateQuantity( product.id, Math.max( 1, safeQuantity - 1 ) ) } onPlus={ () => onUpdateQuantity( product.id, safeQuantity + 1 ) } Value={ safeQuantity.toString() } />
+                                        <Button variant="ghost" size="icon" aria-label="Artikel entfernen" onClick={ () => onRemove( product.id ) } Icon={ Trash2 } iconSize={ 5 } className='text-destructive-500 hover:bg-destructive-100' />
                                     </Row>
-                                </Row>
+                                </Column>
                             </Row>
                         </Card>
                     )

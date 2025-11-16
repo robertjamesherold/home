@@ -13,7 +13,7 @@ const productsData: ProductType[] = [
     rating: { score: 4.7, reviews: 124 },
     inStock: true,
     tags: ['new', 'sale'],
-    link: '/aurora-stehlampe',
+    link: 'aurora-stehlampe',
     image: productImages[0],
 
     details: {
@@ -54,7 +54,7 @@ const productsData: ProductType[] = [
     rating: { score: 4.8, reviews: 312 },
     inStock: true,
     tags: ['bestseller'],
-    link: '/nordic-sofa-cloud',
+    link: 'nordic-sofa-cloud',
     image: productImages[1],
     details: {
       title: 'Produktdetails',
