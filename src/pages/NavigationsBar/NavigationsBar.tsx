@@ -1,11 +1,12 @@
-import { forwardRef } from 'react'
 import { useNavigationBar } from './hooks'
+import { Nav } from '@/layout'
 import { MainMenu, MobileMenu } from './components'
 import { NavigationsLinksData } from './data'
+import { forwardRef } from 'react'
 
 
-const NavigationsBar = forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>( ( _, ref ) =>
-{
+const NavigationsBar = forwardRef<HTMLElement>( ( props, ref ) =>
+{ 
   const { totalItems,
     searchValue,
     isMobileSearchOpen,
@@ -19,16 +20,15 @@ const NavigationsBar = forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>
 
 
     return (
-      <>
-        <MainMenu
-          ref={ ref }
+      <Nav ref={ ref } { ...props }>
+        <MainMenu   
           data={ NavigationsLinksData }
           isMobileSearchOpen={ isMobileSearchOpen }
           onSubmit={ handleSearchSubmit }
           onChange={ ( event ) => setSearchValue( event.target.value ) }
           searchValue={ searchValue }
           showMenu={ toggleMenu }
-          closeMenu={ closeMenu }
+          closeMenu={ handleSearchIconClick }
           showMobileSearch={ handleSearchIconClick }
           totalItems={ totalItems }
         />
@@ -39,8 +39,9 @@ const NavigationsBar = forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>
           closeMenu={ closeMenu }
           totalItems={ totalItems }
         />
-      </>
+      </Nav>
   )
-} );
+}
+);
 
 export default NavigationsBar;

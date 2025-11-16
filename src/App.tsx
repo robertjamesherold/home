@@ -3,7 +3,7 @@
 import './css/index.css'
 import { useMemo, useRef } from 'react';
 import ScrollToTop from '@/components/ScrollToTop'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import {
   Homepage,
   ProductGridPage,
@@ -24,8 +24,11 @@ import useElementSize from '@hooks/useElementSize';
 
 const Pages = () =>
 {
+  const location = useLocation();
+
   return (
-    <Routes>
+
+    <Routes location={ location }>
       <Route path="/" element={<Homepage />} />
       <Route path="/products" element={<ProductGridPage />} />
       <Route path="/products/new" element={<ProductEditorPage />} />
@@ -37,6 +40,7 @@ const Pages = () =>
       <Route path="/account" element={<AccountPage />} />
       <Route path="/support" element={<SupportPage />} />
     </Routes>
+
   );
 };
 

@@ -1,38 +1,37 @@
-import { useCart } from '@/hooks';
+import type { FC } from 'react'
+import { Link } from 'react-router-dom'
+import { Star } from 'lucide-react'
+
+import { useCart } from '@/hooks'
 import type { ProductType } from '@/types'
-import { Image, Row, Header, Footer } from '@/layout';
-import { TextParagraph, Title } from '@/typography';
-import { Button, Card, CardAction, CardContent } from '@/ui';
-import { Star } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Image, Row, Header, Footer } from '@/layout'
+import { TextParagraph, Title } from '@/typography'
+import { Button, Card, CardAction, CardContent } from '@/ui'
+import { Skeleton } from '@/ui/skeleton'
 
-
-
-const ImageCard: React.FC<ProductType> = ( product ) =>
+const ImageCard: FC<ProductType> = ( product ) =>
 {
   const { addToCart } = useCart()
   const handleAddToCart = () => addToCart( product, 1 )
-  const filteredProducts = product
-            
-
 
   return (
-    <Link key={ filteredProducts.id } to={ `/product/${ filteredProducts.id }` }>
+    <Link to={ `/product/${ product.id }` }>
       <Card className="overflow-hidden transition-shadow hover:shadow-lg">
- 
         <Image
           isAbsolute={ false }
-          src={ filteredProducts.image }
-          alt={ filteredProducts.title }
-          className="aspect-5/3 h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+          src={ product.image }
+          alt={ product.title }
+          className="relative aspect-5/3 h-full w-full"
+          imageClassName="transition-transform duration-300 hover:scale-105"
         />
+
         <CardContent className="h-fit space-y-1 p-4">
           <Header className="flex flex-col gap-0">
             <Row className="align-center h-6 place-items-center">
               <TextParagraph
                 sm
                 className="text-gray-500"
-                text={ filteredProducts.category }
+                text={ product.category }
               />
             </Row>
             <Row className="align-center h-6 place-items-center">
@@ -40,7 +39,7 @@ const ImageCard: React.FC<ProductType> = ( product ) =>
                 level={ 5 }
                 weight="bold"
                 className="align-center flex"
-                text={ filteredProducts.title }
+                text={ product.title }
               />
             </Row>
           </Header>
@@ -49,21 +48,21 @@ const ImageCard: React.FC<ProductType> = ( product ) =>
             <TextParagraph
               sm
               className="leading-4 text-slate-900"
-              text={ filteredProducts.rating.score.toFixed( 1 ) }
+              text={ product.rating.score.toFixed( 1 ) }
             />
             <TextParagraph
               sm
               className="leading-4 text-gray-500"
-              text={ `(${ filteredProducts.rating.reviews })` }
+              text={ `(${ product.rating.reviews })` }
             />
           </Row>
-          <Footer className="align-center flex h-6 place-items-center gap-2 mb-4">
-            <Title level={ 5 } text={ `${ filteredProducts.price.toFixed( 2 ) }€` } />
-            { filteredProducts.originalPrice && (
+          <Footer className="align-center mb-4 flex h-6 place-items-center gap-2">
+            <Title level={ 5 } text={ `${ product.price.toFixed( 2 ) }€` } />
+            { product.originalPrice && (
               <Title
                 level={ 6 }
                 className="text-gray-500 line-through"
-                text={ `${ filteredProducts.originalPrice.toFixed( 2 ) }€` }
+                text={ `${ product.originalPrice.toFixed( 2 ) }€` }
               />
             ) }
           </Footer>
@@ -71,7 +70,7 @@ const ImageCard: React.FC<ProductType> = ( product ) =>
             <Button
               variant="destructive"
               className="w-full"
-              onClick={ () => handleAddToCart() }
+              onClick={ handleAddToCart }
             >
               In den Warenkorb
             </Button>
@@ -82,4 +81,31 @@ const ImageCard: React.FC<ProductType> = ( product ) =>
   )
 }
 
+const ProductCardSkeleton: FC = () => (
+  <Card className="overflow-hidden">
+    <div className="relative aspect-5/3 w-full">
+      <Skeleton className="absolute inset-0 h-full w-full" />
+    </div>
+    <CardContent className="space-y-3 p-4">
+      <div className="flex flex-col gap-2">
+        <Skeleton className="h-4 w-24" />
+        <Skeleton className="h-5 w-3/4" />
+      </div>
+      <div className="flex items-center gap-2">
+        <Skeleton className="h-4 w-4 rounded-full" />
+        <Skeleton className="h-4 w-10" />
+        <Skeleton className="h-4 w-16" />
+      </div>
+      <div className="flex items-center gap-3">
+        <Skeleton className="h-5 w-20" />
+        <Skeleton className="h-4 w-14" />
+      </div>
+      <CardAction>
+        <Skeleton className="h-10 w-full" />
+      </CardAction>
+    </CardContent>
+  </Card>
+)
+
+export { ProductCardSkeleton }
 export default ImageCard

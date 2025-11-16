@@ -42,6 +42,7 @@ export default defineConfig({
       '@types': path.resolve(__dirname, 'src/types'),
       '@typography': path.resolve(__dirname, 'src/typography'),
       '@ui': path.resolve(__dirname, 'src/ui'),
+      '@utils': path.resolve(__dirname, 'src/utils'),
     },
   },
   server: {
@@ -50,4 +51,4 @@ export default defineConfig({
     open: true,
     ...(proxyConfig ? { proxy: proxyConfig } : {}),
   },
-})
+});

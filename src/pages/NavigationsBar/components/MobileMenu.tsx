@@ -22,7 +22,7 @@ const MobileMenu:React.FC<MobileMenuProps> = ({ data, mobileMenuOpen, closeMenu,
                       animate={ { opacity: 1 } }
                       exit={ { opacity: 0 } }
                       transition={ { duration: 0.3 } }
-                      className="fixed inset-0 z-60 bg-black/50 md:hidden"
+                      className="fixed inset-0 z-60 md:hidden"
                       onClick={ closeMenu }
                   />
 
@@ -35,13 +35,13 @@ const MobileMenu:React.FC<MobileMenuProps> = ({ data, mobileMenuOpen, closeMenu,
                   >
                       <Column className=" h-full ">
                           {/* Header */ }
-                          <Header className="flex items-center justify-between border-b p-4">
+                          <Header className="flex items-center justify-between border-b w-full safe-area-padding py-4">
                               <LogoButton onClick={ closeMenu } />
                               <MobileCloseButton closeMenu={ closeMenu } />
                           </Header>
 
                           {/* Navigation */ }
-                          <Nav className="flex-1 p-6">
+                          <Nav className="flex-1 w-full py-6 safe-area-padding">
                               <Column className="space-y-1">
                                   {data.map(({ href, text }) => (
                                       <Link key={href} to={href} className="block py-4 text-2xl transition-opacity hover:opacity-70" onClick={ closeMenu } text={text} />

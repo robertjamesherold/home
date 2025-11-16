@@ -304,6 +304,31 @@ const ProductProvider: React.FC<ProductProviderProps> = ( { children } ) =>
         )
     }, [] )
 
+    const findProductByIdentifier = useCallback(
+        ( identifier: string ): ProductType | undefined =>
+        {
+            const trimmed = identifier.trim()
+            if ( !trimmed )
+            {
+                return undefined
+            }
+
+            const normalized = slugify( trimmed )
+
+            return products.find( ( product ) =>
+            {
+                const link = product.link ?? product.id
+                return (
+                    product.id === trimmed ||
+                    link === trimmed ||
+                    slugify( product.id ) === normalized ||
+                    slugify( link ) === normalized
+                )
+            } )
+        },
+        [ products ]
+    )
+
     const value = useMemo<ProductContextValue>(
         () => ( {
             products,
@@ -311,8 +336,16 @@ const ProductProvider: React.FC<ProductProviderProps> = ( { children } ) =>
             isReady,
             addProduct,
             removeProduct,
+            findProductByIdentifier,
         } ),
-        [ products, customProducts, isReady, addProduct, removeProduct ]
+        [
+            products,
+            customProducts,
+            isReady,
+            addProduct,
+            removeProduct,
+            findProductByIdentifier,
+        ]
     )
 
     return <ProductContext.Provider value={ value }>{ children }</ProductContext.Provider>

@@ -1,8 +1,12 @@
-import type { FooterLinkGroupType } from '../types';
+type FooterLinkGroupType = {
+  title: string;
+  links: {
+    label: string;
+    to?: string;
+  }[];
+};
 
-
-
-export const FooterLinksData: FooterLinkGroupType[] = [
+const FooterLinksData: FooterLinkGroupType[] = [
   {
     title: 'Shop',
     links: [
@@ -22,10 +26,11 @@ export const FooterLinksData: FooterLinkGroupType[] = [
   {
     title: 'Rechtliches',
     links: [
-      { label: 'Datenschutz', to: '#' },
-      { label: 'AGB', to: '#' },
-      { label: 'Impressum', to: '#' },
+      { label: 'Datenschutz', to: '/datenschutz' },
+      { label: 'AGB', to: '/agb' },
+      { label: 'Impressum', to: '/impressum' },
     ],
   },
 ];
 
+export default FooterLinksData;

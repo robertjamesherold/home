@@ -1,19 +1,8 @@
 import { useState } from 'react'
-import { apiClient } from '@/hooks/apiClient'
 import type { CheckoutPayload, CheckoutResponse } from '@/types'
 
 const MOCK_PROVIDER = 'LocalMockCheckout'
 const MOCK_LATENCY_MS = 500
-
-const isCheckoutApiEnabled = (): boolean =>
-{
-  if ( typeof import.meta === 'undefined' )
-  {
-    return false
-  }
-
-  return import.meta.env?.VITE_ENABLE_CHECKOUT_API === 'true'
-}
 
 const wait = ( duration: number ): Promise<void> =>
   new Promise( ( resolve ) => setTimeout( resolve, duration ) )
@@ -68,30 +57,11 @@ export const useCheckoutSubmission = () =>
     setIsSubmitting( true )
     setError( null )
 
-    const useRealApi = isCheckoutApiEnabled()
-
     try
     {
-      if ( useRealApi )
-      {
-        return await apiClient.post<CheckoutResponse>(
-          '/api/orders/checkout',
-          payload
-        )
-      }
-
       return await createMockCheckoutResponse( payload )
     } catch ( err )
     {
-      if ( useRealApi )
-      {
-        console.warn(
-          'Checkout-API nicht erreichbar, verwende lokale Mock-Antwort.',
-          err
-        )
-        return await createMockCheckoutResponse( payload )
-      }
-
       const message =
         err instanceof Error ? err.message : 'Unbekannter Fehler'
       setError( message )

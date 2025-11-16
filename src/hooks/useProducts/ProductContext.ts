@@ -25,6 +25,7 @@ export interface ProductContextValue
     isReady: boolean
     addProduct: ( input: CreateProductInput ) => ProductType
     removeProduct: ( productId: string ) => void
+    findProductByIdentifier: ( identifier: string ) => ProductType | undefined
 }
 
 const ProductContext = createContext<ProductContextValue | undefined>( undefined )

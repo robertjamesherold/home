@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import { useCart, useProducts } from '@/hooks';
-import type { ProductType as Product } from '@/types/Product.types'
 import { Column } from '@/layout'
 import { default as detailData } from './data/detailData';
 
@@ -17,10 +17,11 @@ import { TextParagraph, Title } from '@typography/.'
 
 const ProductPage: React.FC = () =>
 {
-  const { products } = useProducts()
-  const product = useMemo( () =>
-    products.find( ( p: Product ) => p.id === p.id ),
-    [ products ]
+  const { id } = useParams<{ id: string }>()
+  const { findProductByIdentifier, isReady } = useProducts()
+  const product = useMemo(
+    () => ( id ? findProductByIdentifier( id ) : undefined ),
+    [ id, findProductByIdentifier ]
   )
 
   const { addToCart } = useCart();
@@ -37,7 +38,12 @@ const ProductPage: React.FC = () =>
 
   if ( !product )
   {
-    return <Section>Product not found.</Section>
+    if ( !isReady )
+    {
+      return <Section>Produkt wird geladen ...</Section>
+    }
+
+    return <Section>Produkt nicht gefunden.</Section>
   }
 
   return (

@@ -27,7 +27,8 @@
       "@components/*": ["./src/components/*"],
       "@images/*": ["./src/assets/images/*"],
       "@hooks/*": ["./src/hooks/*"],
-      "@ui/*": ["./src/ui/*"]
+      "@ui/*": ["./src/ui/*"],
+      "@utils/*": ["./src/utils/*"]
     },
     "allowImportingTsExtensions": false,
     "verbatimModuleSyntax": true,

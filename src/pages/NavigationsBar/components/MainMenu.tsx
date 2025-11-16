@@ -35,8 +35,8 @@ const MainMenu = forwardRef<HTMLElement, MainMenuProps>( ( {
 }, ref ) =>
 {
     return (
-        <Header ref={ ref } className='sticky top-0 z-50 w-full border-b border-gray-100 bg-white/90 backdrop-blur'>
-            <Container className="container mx-auto w-full px-4">
+        <Header ref={ ref } className='sticky  top-0 z-50 w-full  border-b border-gray-300 bg-white/90 backdrop-blur'>
+            <Container className="container mx-auto w-full px-4 ">
                 <Row className="h-16 w-full items-center justify-between md:gap-8">
                     <Row className="items-center gap-8">
                         <LogoButton />
