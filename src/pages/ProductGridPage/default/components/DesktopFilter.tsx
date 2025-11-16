@@ -1,6 +1,15 @@
-import type { FilterContentType } from '../types';
 import FilterContent from './FilterContent';
 import { Container } from '@layout/.'
+
+type FilterContentType = {
+  categoriesData: string[]
+  selectedCategories: string[]
+  handleCategoryToggle: ( category: string ) => void
+  priceRange: number[]
+  setPriceRange: ( value: number[] ) => void
+};
+
+
 
 const DesktopFilter: React.FC<FilterContentType> = ({
   categoriesData,

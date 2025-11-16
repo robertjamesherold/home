@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { Column, Grid, Row } from '@/layout'
 import { Button, Skeleton } from '@ui/.';
 import { SlidersHorizontal } from 'lucide-react';
-import { SkeletonSelectButton, SkeletonNoFilteredProducts, SkeletonImageCard } from '.' 
+import { SkeletonSelectButton, SkeletonNoFilteredProducts, SkeletonImageCard } from '../ui'
 import type { ProductType as Product } from '@/types';
 
 
@@ -10,13 +10,11 @@ type ProductGridProps = {
     filteredProducts: Array<Product>
     sortBy: string;
     setSortBy: (value: string) => void;
-    toggleFilterMenu: () => void;
 }
 
 
 const SkeletonProductGrid: React.FC<ProductGridProps> = ({
     filteredProducts,
-    toggleFilterMenu
 }) =>
 {
 
@@ -36,8 +34,7 @@ const SkeletonProductGrid: React.FC<ProductGridProps> = ({
                 <Skeleton className='h-fit w-fit rounded'>
                 <Button
                     variant="default"
-                    className="gap-2 lg:hidden"
-                    onClick={ toggleFilterMenu }
+                    className="gap-2 lg:hidden opacity-0"
                     Icon={ SlidersHorizontal }
                     text='Filter'
                     />

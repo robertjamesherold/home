@@ -1,6 +1,1 @@
-export { default as SkeletonSelectButton } from './SelectButton'
-export { default as SkeletonNoFilteredProducts } from './NoFilteredProducts'
-export { default as SkeletonImageCard } from './Card'
-export { default as SkeletonProductGrid } from './ProductGrid'
-export { default as SkeletonFilterContent } from './FilterContent'
-export { default as SkeletonDesktopFilter } from './DesktopFilter'
+export { default as SkeletonProductGridPage } from './SkeletonProductGridPage';

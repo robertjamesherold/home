@@ -22,6 +22,7 @@ import {
   CardTitle,
 } from '@/ui';
 import { TextParagraph, Title } from '@/typography';
+import { Main } from '@/layout'
 
 type Highlight = {
   title: string;
@@ -158,7 +159,8 @@ const supportFormData: FormTableType = {
 
 const SupportPage: React.FC = () => {
   return (
-    <section className="w-full bg-gray-50">
+    <Main className='bg-linear-to-t from-blue-50 to-gray-300/40'>
+      <section className="w-full" >
       <div className="container mx-auto space-y-12 px-4 py-12">
         <div className="mx-auto max-w-3xl space-y-4 text-center">
           <p className="text-xs uppercase tracking-[0.3em] text-gray-500">
@@ -177,7 +179,7 @@ const SupportPage: React.FC = () => {
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {supportHighlights.map(({ icon: Icon, title, description, meta }) => (
-            <Card key={title} className="border-0 shadow-sm">
+            <Card key={ title } className="border bg-white shadow-sm">
               <CardHeader className="space-y-3">
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-50 text-orange-600">
                   <Icon className="h-5 w-5" />
@@ -197,14 +199,10 @@ const SupportPage: React.FC = () => {
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <Card className="border-0 shadow-sm">
-            <CardHeader className="space-y-3">
-              <CardTitle className="text-gray-900">
-                Kontaktwege & Studio
-              </CardTitle>
-              <CardDescription className="text-gray-600">
-                Wählen Sie den Kanal, der am besten zu Ihrer Situation passt.
-              </CardDescription>
+            <Card className="border bg-white shadow-sm">
+              <CardHeader className="space-y-0 mb-3">
+                <Title h4 text='Kontaktwege & Studio' />
+                <TextParagraph sm text="Wählen Sie den Kanal, der am besten zu Ihrer Situation passt." />
             </CardHeader>
             <CardContent className="space-y-6">
               {supportChannels.map(
@@ -262,35 +260,31 @@ const SupportPage: React.FC = () => {
             </CardContent>
           </Card>
 
-          <Card className="border-0 shadow-sm">
+            <Card className="border bg-white shadow-sm">
             <CardContent className="p-6">
               <FormTable {...supportFormData} />
             </CardContent>
           </Card>
         </div>
 
-        <Card className="border-0 shadow-sm">
-          <CardHeader className="space-y-2">
-            <CardTitle className="text-gray-900">
-              Häufige Fragen zum Support
-            </CardTitle>
-            <CardDescription className="text-gray-600">
-              Transparente Antworten auf Anliegen, die uns täglich erreichen.
-            </CardDescription>
+          <Card className="border bg-white shadow-sm">
+            <CardHeader className="space-y-0 mb-3">
+              <Title h4 text='Häufige Fragen zum Support' />
+              <TextParagraph sm text="Transparente Antworten auf Anliegen, die uns täglich erreichen." />
           </CardHeader>
-          <CardContent>
+            <CardContent className="overflow-visible">
             <Accordion
               type="single"
               collapsible
-              className="space-y-3 rounded-2xl"
+                className="space-y-3 rounded-2xl overflow-visible"
             >
               {faqItems.map(({ value, question, answer }) => (
                 <AccordionItem
                   key={value}
                   value={value}
-                  className="overflow-hidden rounded-2xl border border-gray-100 bg-white px-4"
+                  className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-200/50 px-4"
                 >
-                  <AccordionTrigger className="text-left text-base font-semibold text-gray-900">
+                  <AccordionTrigger className="text-left text-base font-semibold text-gray-900 overflow-visible">
                     {question}
                   </AccordionTrigger>
                   <AccordionContent className="pb-4 text-gray-600">
@@ -303,6 +297,7 @@ const SupportPage: React.FC = () => {
         </Card>
       </div>
     </section>
+    </Main >
   );
 };
 

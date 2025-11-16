@@ -22,7 +22,7 @@ const SkeletonImageCard: React.FC = () => (
         <Skeleton className="h-5 w-20 rounded" />
         <Skeleton className="h-4 w-14 rounded" />
       </Row>
-      <CardAction className='w-4/6'>
+      <CardAction className='w-full sm:w-4/6'>
         <Skeleton className="h-10 w-full rounded-xl" />
       </CardAction>
     </CardContent>

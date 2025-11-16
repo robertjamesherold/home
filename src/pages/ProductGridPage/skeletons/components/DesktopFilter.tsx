@@ -1,6 +1,14 @@
-import type { FilterContentType } from '../types';
 import SkeletonFilterContent from './FilterContent'
 import { Container } from '@layout/.'
+
+type FilterContentType = {
+  categoriesData: string[]
+  selectedCategories: string[]
+  handleCategoryToggle: ( category: string ) => void
+  priceRange: number[]
+  setPriceRange: ( value: number[] ) => void
+};
+
 
 const SkeletonDesktopFilter: React.FC<FilterContentType> = ( {
   categoriesData,

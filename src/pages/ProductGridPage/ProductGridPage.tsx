@@ -1,103 +1,17 @@
-import { useMemo, useState } from 'react'
-import { useSearchParams } from 'react-router-dom';
-
-import { useProducts, useSkeletonLoader } from '@/hooks';
-import useFilter from './hooks/useFilter';
-import { Header, Section, Row, Main } from '@/layout'
-import
-  {
-  DesktopFilter,
-  FilterMenu,
-  ProductGrid,
-} from './components';
-import { TextParagraph, Title } from '@/typography';
-import SkeletonProductGridPage from './SkeletonProductGridPage';
+import { SkeletonProductGridPage, DefaultProductGridPage, useProductGridPage } from './'
 
 
-const ProductGridPage: React.FC = () => {
-  const [searchParams] = useSearchParams();
-  const searchQuery = searchParams.get('search') ?? '';
-  const { products, isReady } = useProducts();
-  const { showSkeleton } = useSkeletonLoader({ isLoading: !isReady });
-  const categoriesData = useMemo(() => {
-    const categorySet = new Set<string>();
-    for (const product of products) {
-      if (product.category) {
-        categorySet.add(product.category);
-      }
-    }
-
-    return ['Alle', ...Array.from(categorySet).sort((a, b) => a.localeCompare(b))];
-  }, [products]);
-  const {
-    sortBy,
-    setSortBy,
-    filteredProducts,
-    selectedCategories,
-    handleCategoryToggle,
-    priceRange,
-    setPriceRange,
-    setSelectedCategories,
-  } = useFilter(products, { searchTerm: searchQuery });
-  const [filterMenuOpen, setFilterMenuOpen] = useState(false);
-
-  const pageTitle = searchQuery ? 'Suchergebnisse' : 'Alle Produkte';
-  const subtitle = searchQuery
-    ? `${filteredProducts.length} Treffer für „${searchQuery}“`
-    : `${filteredProducts.length} Produkte gefunden`;
-
-  const toggleFilterMenu = () => {
-    setFilterMenuOpen(!filterMenuOpen);
-  };
-
-  const closeFilterMenu = () => {
-    setFilterMenuOpen(false);
-  };
+const ProductGridPage = () =>
+{
+  const { showSkeleton } = useProductGridPage();
 
   if (showSkeleton) {
     return <SkeletonProductGridPage />;
   }
 
   return (
-    <Main className='flex items-start'>
-      <Section className="container mx-auto px-4 py-8">
-        <Header className="mb-8 space-y-2">
-          <Title level={ 1 } weight="bold" className='mt-0' text={ pageTitle } />
-          <TextParagraph className="text-gray-600" text={ subtitle } />
-        </Header>
-
-        <Row className="flex gap-8">
-          {/* Desktop Filters */}
-          <DesktopFilter
-            categoriesData={categoriesData}
-            selectedCategories={selectedCategories}
-            handleCategoryToggle={handleCategoryToggle}
-            priceRange={priceRange}
-            setPriceRange={setPriceRange}
-          />
-          {/* Product Grid */ }
-          <ProductGrid
-            filteredProducts={ filteredProducts }
-            sortBy={ sortBy }
-            setSortBy={ setSortBy }
-            toggleFilterMenu={ toggleFilterMenu }
-          />
-        </Row>
-      </Section>
-
-      <FilterMenu
-        filterMenuOpen={filterMenuOpen}
-        closeFilterMenu={closeFilterMenu}
-        categoriesData={categoriesData}
-        selectedCategories={selectedCategories}
-        setSelectedCategories={setSelectedCategories}
-        handleCategoryToggle={handleCategoryToggle}
-        priceRange={priceRange}
-        setPriceRange={setPriceRange}
-        filteredProducts={filteredProducts}
-      />
-    </Main>
+    <DefaultProductGridPage />
   );
-};
+}
 
 export default ProductGridPage

@@ -68,10 +68,10 @@ const ImageCard: React.FC<ProductType> = ( product ) =>
               />
             ) }
           </Footer>
-          <CardAction>
+          <CardAction className='w-full flex justify-end'>
             <Button
               variant="destructive"
-              className="w-full"
+              className="w-full sm:w-4/6"
               onClick={ handleAddToCart }
             >
               In den Warenkorb
