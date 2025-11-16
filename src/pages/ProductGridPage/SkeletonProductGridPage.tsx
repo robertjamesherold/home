@@ -1,24 +1,21 @@
 import { useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom';
 
-import { useProducts, useSkeletonLoader } from '@/hooks';
+import { useProducts, } from '@/hooks';
 import useFilter from './hooks/useFilter';
-import { Header, Section, Row, Main } from '@/layout'
-import
-  {
-  DesktopFilter,
+import {  Header, Section, Row, Main } from '@/layout'
+import {
   FilterMenu,
-  ProductGrid,
 } from './components';
 import { TextParagraph, Title } from '@/typography';
-import SkeletonProductGridPage from './SkeletonProductGridPage';
+import { Skeleton } from '@/ui'
+import {SkeletonDesktopFilter, SkeletonProductGrid} from './skeletons';
 
 
-const ProductGridPage: React.FC = () => {
+const SkeletonProductGridPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get('search') ?? '';
-  const { products, isReady } = useProducts();
-  const { showSkeleton } = useSkeletonLoader({ isLoading: !isReady });
+  const { products } = useProducts();
   const categoriesData = useMemo(() => {
     const categorySet = new Set<string>();
     for (const product of products) {
@@ -54,21 +51,18 @@ const ProductGridPage: React.FC = () => {
     setFilterMenuOpen(false);
   };
 
-  if (showSkeleton) {
-    return <SkeletonProductGridPage />;
-  }
 
   return (
     <Main className='flex items-start'>
       <Section className="container mx-auto px-4 py-8">
         <Header className="mb-8 space-y-2">
-          <Title level={ 1 } weight="bold" className='mt-0' text={ pageTitle } />
-          <TextParagraph className="text-gray-600" text={ subtitle } />
+          <Skeleton className='h-fit w-fit rounded'><Title level={ 1 } weight="bold" className='mt-0 opacity-0' text={ pageTitle } /></Skeleton>
+          <Skeleton className='h-fit w-fit rounded'><TextParagraph className="text-gray-600 opacity-0" text={ subtitle } /></Skeleton>
         </Header>
 
         <Row className="flex gap-8">
           {/* Desktop Filters */}
-          <DesktopFilter
+          <SkeletonDesktopFilter
             categoriesData={categoriesData}
             selectedCategories={selectedCategories}
             handleCategoryToggle={handleCategoryToggle}
@@ -76,7 +70,7 @@ const ProductGridPage: React.FC = () => {
             setPriceRange={setPriceRange}
           />
           {/* Product Grid */ }
-          <ProductGrid
+          <SkeletonProductGrid
             filteredProducts={ filteredProducts }
             sortBy={ sortBy }
             setSortBy={ setSortBy }
@@ -98,6 +92,6 @@ const ProductGridPage: React.FC = () => {
       />
     </Main>
   );
-};
+}
 
-export default ProductGridPage
+export default SkeletonProductGridPage;

@@ -1,19 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 
 type UseSkeletonLoaderOptions = {
-  /**
-   * Indicates whether the data required for the view is still loading.
-   */
   isLoading: boolean;
-  /**
-   * Delay (in ms) before the skeleton becomes visible. Useful to avoid
-   * flashing the skeleton for very fast requests.
-   */
   delay?: number;
-  /**
-   * Minimum amount of time (in ms) the skeleton should stay visible once it
-   * has been rendered. Prevents abrupt transitions.
-   */
   minDuration?: number;
 };
 
@@ -31,8 +20,17 @@ const useSkeletonLoader = ({
   minDuration = DEFAULT_MIN_DURATION,
 }: UseSkeletonLoaderOptions): UseSkeletonLoaderReturn => {
   const [showSkeleton, setShowSkeleton] = useState(isLoading);
-  const skeletonShownAt = useRef<number | null>(isLoading ? Date.now() : null);
+  const skeletonShownAt = useRef<number | null>(null);
   const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    // Initialize skeletonShownAt on mount if loading initially to avoid calling Date.now() during render
+    if (isLoading) {
+      skeletonShownAt.current = Date.now();
+    }
+    // run only once on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const isClient = typeof window !== 'undefined';

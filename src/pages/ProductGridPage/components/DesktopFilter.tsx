@@ -1,5 +1,6 @@
 import type { FilterContentType } from '../types';
 import FilterContent from './FilterContent';
+import { Container } from '@layout/.'
 
 const DesktopFilter: React.FC<FilterContentType> = ({
   categoriesData,
@@ -10,7 +11,7 @@ const DesktopFilter: React.FC<FilterContentType> = ({
 }: FilterContentType) => {
   return (
     <aside className="hidden w-64 shrink-0 lg:block">
-      <div className="sticky top-24">
+      <Container className="sticky top-24">
         <FilterContent
           categoriesData={categoriesData}
           selectedCategories={selectedCategories}
@@ -18,9 +19,11 @@ const DesktopFilter: React.FC<FilterContentType> = ({
           priceRange={priceRange}
           setPriceRange={setPriceRange}
         />
-      </div>
+      </Container>
     </aside>
   );
 };
 
 export default DesktopFilter;
+
+

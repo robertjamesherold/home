@@ -12,7 +12,6 @@ import {
   Cart,
   Checkout,
   PageFooter,
-  SalePage,
   AccountPage,
   CheckoutSuccess,
   SupportPage,
@@ -31,8 +30,7 @@ const Pages = () =>
     <Routes location={ location }>
       <Route path="/" element={<Homepage />} />
       <Route path="/products" element={<ProductGridPage />} />
-      <Route path="/products/new" element={<ProductEditorPage />} />
-      <Route path="/sale" element={<SalePage />} />
+      <Route path="/products/new" element={ <ProductEditorPage /> } />
       <Route path="/product/:id" element={ <ProductPage /> } />
       <Route path="/cart" element={<Cart />} />
       <Route path="/checkout" element={<Checkout />} />

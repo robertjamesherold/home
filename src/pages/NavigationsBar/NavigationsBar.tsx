@@ -20,7 +20,7 @@ const NavigationsBar = forwardRef<HTMLElement>( ( props, ref ) =>
 
 
     return (
-      <Nav ref={ ref } { ...props }>
+      <Nav className='sticky top-0 z-50' ref={ ref } { ...props }>
         <MainMenu   
           data={ NavigationsLinksData }
           isMobileSearchOpen={ isMobileSearchOpen }

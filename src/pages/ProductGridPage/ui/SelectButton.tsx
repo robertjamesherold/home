@@ -5,6 +5,7 @@ import {
   SelectValue,
   SelectItem,
 } from '@/ui';
+import { Container } from '@/layout';
 
 type SelectType = {
   value: string;
@@ -13,9 +14,9 @@ type SelectType = {
 
 const SelectButton: React.FC<SelectType> = ({ value, onChange }) => {
   return (
-    <div className="flex w-full justify-end">
+    <Container className="flex w-full justify-end">
       <Select value={value} onValueChange={onChange}>
-        <SelectTrigger className="max-w-50 rounded-md border bg-white px-4 py-2">
+        <SelectTrigger className="max-w-50 rounded-md border bg-white px-4 py-2 ">
           <SelectValue />
         </SelectTrigger>
         <SelectContent className="w-fit bg-white">
@@ -25,7 +26,7 @@ const SelectButton: React.FC<SelectType> = ({ value, onChange }) => {
           <SelectItem value="rating">Bewertung</SelectItem>
         </SelectContent>
       </Select>
-    </div>
+    </Container>
   );
 };
 

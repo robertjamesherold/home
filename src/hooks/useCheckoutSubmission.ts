@@ -2,20 +2,17 @@ import { useState } from 'react'
 import type { CheckoutPayload, CheckoutResponse } from '@/types'
 
 const MOCK_PROVIDER = 'LocalMockCheckout'
-const MOCK_LATENCY_MS = 500
+const MOCK_DELAY_MS = 300
 
 const wait = ( duration: number ): Promise<void> =>
   new Promise( ( resolve ) => setTimeout( resolve, duration ) )
 
-const createMockCheckoutResponse = async (
+const buildMockCheckoutResponse = (
   payload: CheckoutPayload
-): Promise<CheckoutResponse> =>
+): CheckoutResponse =>
 {
-  await wait( MOCK_LATENCY_MS )
-
   const now = new Date().toISOString()
-  const randomSuffix = Math.random().toString( 36 ).slice( 2, 8 ).toUpperCase()
-  const orderId = `MOCK-${ Date.now().toString().slice( -4 ) }${ randomSuffix }`
+  const orderId = `MOCK-${ Date.now() }`
   const currency = payload.totals.currency ?? 'eur'
 
   return {
@@ -23,10 +20,7 @@ const createMockCheckoutResponse = async (
       _id: orderId,
       customer: payload.customer,
       items: payload.items,
-      totals: {
-        ...payload.totals,
-        currency,
-      },
+      totals: { ...payload.totals, currency },
       payment: {
         method: payload.paymentMethod,
         provider: MOCK_PROVIDER,
@@ -59,13 +53,16 @@ export const useCheckoutSubmission = () =>
 
     try
     {
-      return await createMockCheckoutResponse( payload )
-    } catch ( err )
+      await wait( MOCK_DELAY_MS )
+      return buildMockCheckoutResponse( payload )
+    } catch ( unknownError )
     {
       const message =
-        err instanceof Error ? err.message : 'Unbekannter Fehler'
+        unknownError instanceof Error
+          ? unknownError.message
+          : 'Unbekannter Fehler'
       setError( message )
-      throw err instanceof Error ? err : new Error( message )
+      throw new Error( message )
     } finally
     {
       setIsSubmitting( false )

@@ -1,4 +1,3 @@
-import type { FC } from 'react'
 import { Link } from 'react-router-dom'
 import { Star } from 'lucide-react'
 
@@ -7,16 +6,16 @@ import type { ProductType } from '@/types'
 import { Image, Row, Header, Footer } from '@/layout'
 import { TextParagraph, Title } from '@/typography'
 import { Button, Card, CardAction, CardContent } from '@/ui'
-import { Skeleton } from '@/ui/skeleton'
 
-const ImageCard: FC<ProductType> = ( product ) =>
+const ImageCard: React.FC<ProductType> = ( product ) =>
 {
   const { addToCart } = useCart()
   const handleAddToCart = () => addToCart( product, 1 )
 
   return (
-    <Link to={ `/product/${ product.id }` }>
-      <Card className="overflow-hidden transition-shadow hover:shadow-lg">
+    <Card className="overflow-hidden transition-shadow hover:shadow-lg">
+      <Link to={ `/product/${ product.id }` }>
+
         <Image
           isAbsolute={ false }
           src={ product.image }
@@ -24,7 +23,7 @@ const ImageCard: FC<ProductType> = ( product ) =>
           className="relative aspect-5/3 h-full w-full"
           imageClassName="transition-transform duration-300 hover:scale-105"
         />
-
+      </Link>
         <CardContent className="h-fit space-y-1 p-4">
           <Header className="flex flex-col gap-0">
             <Row className="align-center h-6 place-items-center">
@@ -35,12 +34,15 @@ const ImageCard: FC<ProductType> = ( product ) =>
               />
             </Row>
             <Row className="align-center h-6 place-items-center">
+            <Link to={ `/product/${ product.id }` }>
+
               <Title
                 level={ 5 }
                 weight="bold"
-                className="align-center flex"
+                className="align-center flex hover:underline"
                 text={ product.title }
               />
+            </Link>
             </Row>
           </Header>
           <Row className="align-center h-6 place-items-center gap-1">
@@ -76,36 +78,8 @@ const ImageCard: FC<ProductType> = ( product ) =>
             </Button>
           </CardAction>
         </CardContent>
-      </Card>
-    </Link>
+    </Card>
   )
 }
 
-const ProductCardSkeleton: FC = () => (
-  <Card className="overflow-hidden">
-    <div className="relative aspect-5/3 w-full">
-      <Skeleton className="absolute inset-0 h-full w-full" />
-    </div>
-    <CardContent className="space-y-3 p-4">
-      <div className="flex flex-col gap-2">
-        <Skeleton className="h-4 w-24" />
-        <Skeleton className="h-5 w-3/4" />
-      </div>
-      <div className="flex items-center gap-2">
-        <Skeleton className="h-4 w-4 rounded-full" />
-        <Skeleton className="h-4 w-10" />
-        <Skeleton className="h-4 w-16" />
-      </div>
-      <div className="flex items-center gap-3">
-        <Skeleton className="h-5 w-20" />
-        <Skeleton className="h-4 w-14" />
-      </div>
-      <CardAction>
-        <Skeleton className="h-10 w-full" />
-      </CardAction>
-    </CardContent>
-  </Card>
-)
-
-export { ProductCardSkeleton }
 export default ImageCard
