@@ -2,7 +2,7 @@ import { useMemo, useState, type FC } from 'react'
 import { useSearchParams } from 'react-router-dom';
 import { SlidersHorizontal } from 'lucide-react';
 
-import { useProducts } from '@/hooks';
+import { useProducts, useSkeletonLoader } from '@/hooks';
 import useFilter from './hooks/useFilter';
 import { Column, Grid, Header, Section, Row } from '@/layout';
 import {
@@ -20,7 +20,8 @@ import { ImageCard, ProductCardSkeleton } from './ui'
 const ProductGridPage: React.FC = () => {
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get('search') ?? '';
-  const { products } = useProducts();
+  const { products, isReady } = useProducts();
+  const { showSkeleton } = useSkeletonLoader({ isLoading: !isReady });
   const categoriesData = useMemo(() => {
     const categorySet = new Set<string>();
     for (const product of products) {
@@ -59,6 +60,10 @@ const ProductGridPage: React.FC = () => {
   const closeFilterMenu = () => {
     setFilterMenuOpen(false);
   };
+
+  if (showSkeleton) {
+    return <ProductGridSkeleton />;
+  }
 
   return (
     <>
