@@ -1,1 +1,1 @@
-export { SupportPage } from './Support';
+export { default as SupportPage } from './Support';

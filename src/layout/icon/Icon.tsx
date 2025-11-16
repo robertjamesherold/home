@@ -1,5 +1,6 @@
 type IconProps = {
-    Icon: React.ElementType;
+    Icon?: React.ElementType;
+    icon? : React.ElementType;  
     size?: number;
     className?: string;
 };
