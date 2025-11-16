@@ -1,38 +1,39 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, Badge } from "@/ui";
-import { Container, Grid, Icon } from "@/layout";
+import { Card, CardContent, CardHeader, Badge } from "@/ui"
+import { Grid, Iconpatch } from "@/layout"
+import type { LucideIcon } from 'lucide-react'
+import { TextParagraph, Title } from '@/typography'
 
 type SupportHighlightsProps = {
-data: {
-  title: string;
-  description: string;
-  meta: string;
-  icon: LucideIcon;
-}[];
+  data: {
+    title: string
+    description: string
+    meta: string
+    badge: string
+    icon: LucideIcon
+  }[]
 }
 
-const SupportHighlihght = ( {data}: SupportHighlightsProps)    => {
-    return (
-            <Grid className="w-full gap-3 lg:gap-6 md:grid-cols-1 lg:grid-cols-3">
-              {data.map(({  title, description, meta, icon }) => (
-              <Card key={ title } className="border bg-white shadow-sm">
-                <CardHeader className="space-y-3 mb-5">
-                  <Container className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-50 text-orange-600">
-                    <Icon Icon={icon} size={20}/>
-                  </Container>
-                  <CardTitle className="text-xl text-gray-900">{title}</CardTitle>
-                  <CardDescription className="text-gray-600">
-                    {description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Badge variant="secondary" className="bg-gray-100 text-gray-700">
-                    {meta}
-                  </Badge>
-                </CardContent>
-              </Card>
-            ))}
-            </Grid>
-       )
-    }
+const SupportHighlihght = ( { data }: SupportHighlightsProps ) =>
+{
+  return (
+    <Grid className="w-full gap-3 lg:gap-6 sm:grid-cols-1 md:grid-cols-3 items-stretch">
+      { data.map( ( { title, description, meta, icon, badge } ) => (
+        <Card key={ title } className="border bg-white shadow-sm h-full flex flex-col">
+          <CardHeader className="space-y-0 mb-3 flex flex-col flex-1">
+            <Iconpatch icon={ icon } size={ 6 } rounded="xl" className={ badge } />
+            <Title h4 className="text-slate-900 " text={ title } />
+            <TextParagraph sm className="text-gray-600 h-full grow" text={ description } />
+          </CardHeader>
 
-    export default SupportHighlihght;
+          <CardContent>
+            <Badge className={ `text-gray-700 ${ badge }` } >
+              { meta }
+            </Badge>
+          </CardContent>
+        </Card>
+      ) ) }
+    </Grid>
+  )
+}
+
+export default SupportHighlihght

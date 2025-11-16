@@ -10,7 +10,7 @@ type FAQItemProps = {
   data: FAQItem[];
 };
 
-const FAQItems: FAQItemProps[] = {
+const FAQItems: FAQItemProps = {
   title: 'Häufig gestellte Fragen',
   description:
     'Transparente Antworten auf Anliegen, die uns täglich erreichen.',
