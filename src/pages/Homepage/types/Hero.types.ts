@@ -3,4 +3,5 @@ export type HeroType = {
   subtitle: string;
   buttonText: string;
   buttonLink: string;
+  heroImage: string;
 };

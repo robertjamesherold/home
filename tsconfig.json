@@ -1,5 +1,4 @@
-{
-  "compilerOptions": {
+{ "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
     "target": "ES2020",
     "allowJs": false,
@@ -11,12 +10,12 @@
     "allowSyntheticDefaultImports": true,
     "lib": ["ES2023", "DOM", "DOM.Iterable"],
     "types": ["node", "jest", "react"],
-    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "typeRoots": ["./node_modules/@types", "../node_modules/@types", "./src/types"],
     "skipLibCheck": true,
     "paths": {
       "@/*": ["./src/*"],
       "@css/*": ["./src/css/*"],
-      "@data/*": ["./src/data/*"],
+      "@data/*": ["./src/hooks/data/*"],
       "@assets/*": ["./src/assets/*"],
       "@badges/*": ["./src/assets/badges/*"],
       "@icons/*": ["./src/assets/icons/*"],
@@ -28,12 +27,13 @@
       "@components/*": ["./src/components/*"],
       "@images/*": ["./src/assets/images/*"],
       "@hooks/*": ["./src/hooks/*"],
-      "@ui/*": ["./src/ui/*"]
+      "@ui/*": ["./src/ui/*"],
+      "@utils/*": ["./src/utils/*"]
     },
     "allowImportingTsExtensions": false,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
-    "noEmit": false,
+    "noEmit": true,
     "resolveJsonModule": true,
     "isolatedModules": false,
     "strict": true,

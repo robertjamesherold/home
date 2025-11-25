@@ -1,5 +1,6 @@
-import type { FC } from 'react';
+import { type FC, useEffect, useState } from 'react';
 import { cn } from '@/ui/utils';
+import { Skeleton } from '@/ui/skeleton';
 
 type ImageProps = {
   src?: string;
@@ -16,23 +17,35 @@ const Image: FC<ImageProps> = ({
   imageClassName,
   isAbsolute = false,
 }) => {
+  const [isLoading, setIsLoading] = useState(Boolean(src));
+
+  useEffect(() => {
+    setIsLoading(Boolean(src));
+  }, [src]);
+
   return (
     <div
       className={cn(
-        'overflow-hidden',
-        isAbsolute ? 'relative inset-0 w-full' : 'relative',
+        'relative overflow-hidden',
+        isAbsolute ? 'absolute inset-0 w-full' : 'relative',
         className
       )}
     >
+      {src && isLoading ? (
+        <Skeleton className="absolute inset-0 h-full w-full animate-pulse" aria-hidden />
+      ) : null}
       {src ? (
         <img
           src={src}
           alt={alt}
           loading="lazy"
           className={cn(
-            'absolute inset-0 h-full w-full object-cover transition-opacity duration-300',
+            'inset-0 h-full w-full object-cover transition-opacity duration-300',
+            isLoading ? 'opacity-0' : 'opacity-100',
             imageClassName
           )}
+          onLoad={() => setIsLoading(false)}
+          onError={() => setIsLoading(false)}
         />
       ) : null}
     </div>

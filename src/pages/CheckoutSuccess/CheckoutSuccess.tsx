@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+// no local React hooks needed
 import { CheckCircle2, ArrowRight } from 'lucide-react';
 import {
   Button,
@@ -19,10 +20,11 @@ type CheckoutState = {
 
 const CheckoutSuccess: React.FC = () => {
   const location = useLocation();
-  const state = (location.state as CheckoutState) ?? {};
+  const state = ( location.state as CheckoutState & { error?: string } ) ?? {};
 
-  const orderNumber =
-    state.orderNumber ?? `LX-${Math.floor(Math.random() * 9_999)}`;
+  const errorMessage = state.error
+
+  const orderNumber = state.orderNumber ?? 'LX-??????';
   const total = state.total ?? 0;
   const shippingCost = state.shippingCost ?? 0;
   const tax = state.tax ?? 0;
@@ -31,14 +33,21 @@ const CheckoutSuccess: React.FC = () => {
   return (
     <section className="container mx-auto px-4 py-10">
       <div className="flex flex-col items-center text-center">
-        <CheckCircle2 className="mb-4 h-14 w-14 text-gray-900" />
+        { errorMessage ? (
+          <CheckCircle2 className="mb-4 h-14 w-14 text-red-600" />
+        ) : (
+            <CheckCircle2 className="mb-4 h-14 w-14 text-gray-900" />
+        ) }
         <p className="text-xs uppercase tracking-[0.4em] text-gray-400">
           Erfolg
         </p>
-        <h1 className="text-3xl font-semibold text-gray-900">Vielen Dank!</h1>
+        <h1 className="text-3xl font-semibold text-gray-900">
+          { errorMessage ? 'Problem bei der Bestellung' : 'Vielen Dank!' }
+        </h1>
         <p className="mt-2 max-w-xl text-gray-500">
-          Ihre Bestellung ist bestätigt. Wir benachrichtigen Sie, sobald das
-          Paket unser minimalistisches Lager verlässt.
+          { errorMessage
+            ? 'Beim Verarbeiten Ihrer Bestellung ist ein Problem aufgetreten. Bitte prüfen Sie die Hinweise unten oder versuchen Sie es später erneut.'
+            : 'Ihre Bestellung ist bestätigt. Wir benachrichtigen Sie, sobald das Paket unser minimalistisches Lager verlässt.' }
         </p>
       </div>
 
@@ -52,6 +61,11 @@ const CheckoutSuccess: React.FC = () => {
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4 text-sm text-gray-600">
+          { errorMessage && (
+            <div className="rounded-md border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+              <strong>Fehler:</strong> { errorMessage }
+            </div>
+          ) }
           <div className="space-y-3">
             {items.length === 0 && (
               <p className="text-gray-500">Keine Positionen verfügbar.</p>
@@ -97,13 +111,13 @@ const CheckoutSuccess: React.FC = () => {
       </Card>
 
       <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-        <Button asChild size="lg">
+        <Button size="lg">
           <Link to="/products" className="flex items-center gap-2">
             Weiter shoppen
             <ArrowRight className="h-4 w-4" />
           </Link>
         </Button>
-        <Button asChild variant="outline" size="lg">
+        <Button variant="destructive" size="lg">
           <Link to="/account">Bestellung einsehen</Link>
         </Button>
       </div>

@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useState, useCallback } from 'react';
-import { productsData } from '@/data';
-import { useRandomImages } from '@/hooks';
+
+import type { ProductType } from '@/types';
+import { useProducts } from '@/hooks';
 
 const MIN_RELATED_COUNT = 12;
 const MAX_RELATED_COUNT = 24;
 
 interface RelatedProduct {
-  product: (typeof productsData)[number];
+  product: ProductType;
   duplicateIndex: number;
 }
 
@@ -20,14 +21,14 @@ interface UseRelatedProductsReturn {
  * Selects random products from a pool with bias towards same category
  */
 const selectRandomProducts = (
-  others: typeof productsData,
+  others: ProductType[],
   categoryFilter: string,
   count: number
-): typeof productsData => {
+): ProductType[] => {
   const sameCategory = others.filter((p) => p.category === categoryFilter);
   const differentCategory = others.filter((p) => p.category !== categoryFilter);
 
-  const picks: typeof others = [];
+  const picks: ProductType[] = [];
 
   for (let i = 0; i < count; i++) {
     // Determine which pool to pick from (70% same category preference)
@@ -60,12 +61,12 @@ export const useRelatedProducts = (
   currentProductId?: string,
   currentCategory?: string
 ): UseRelatedProductsReturn => {
-  const [relatedProductsBase, setRelatedProductsBase] = useState<
-    typeof productsData
-  >([]);
+  const { products } = useProducts();
+  const [relatedProductsBase, setRelatedProductsBase] = useState<ProductType[]>(
+    []
+  );
   const [relatedImageUrls, setRelatedImageUrls] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { getRandomImageUrls } = useRandomImages();
 
   // Memoize the target count to prevent recalculation on every render
   const targetCount = useMemo(
@@ -77,14 +78,14 @@ export const useRelatedProducts = (
 
   // Memoize product selection logic
   const selectProducts = useCallback(
-    (productId: string, category: string): typeof productsData => {
-      const others = productsData.filter((p) => p.id !== productId);
+    (productId: string, category: string): ProductType[] => {
+      const others = products.filter((p) => p.id !== productId);
 
       if (!others.length) return [];
 
       return selectRandomProducts(others, category, targetCount);
     },
-    [targetCount]
+    [products, targetCount]
   );
 
   useEffect(() => {
@@ -109,14 +110,18 @@ export const useRelatedProducts = (
       setRelatedProductsBase(selected);
 
       // Fetch images for selected products
-      const images = getRandomImageUrls(selected.length, {
-        cacheKey: `${currentProductId}-related`,
-      });
+      const images = selected.map((p) =>
+        p.images && p.images.length
+          ? p.images[0]
+          : p.image
+            ? p.image
+            : '/placeholder-image.png'
+      );
       setRelatedImageUrls(images);
     } finally {
       setIsLoading(false);
     }
-  }, [currentProductId, currentCategory, selectProducts, getRandomImageUrls]);
+  }, [currentProductId, currentCategory, selectProducts]);
 
   // Memoize the final product instances
   const relatedProductInstances = useMemo<RelatedProduct[]>(

@@ -58,13 +58,9 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
         )}
 
         <Column className="gap-3">
-          <Button onClick={onCheckout} size="lg" className="w-full">
-            Zur Kasse
-          </Button>
+          <Button onClick={onCheckout} size="lg" className="w-full" text="Zur Kasse" />
           <Link to={continueShoppingPath} className="w-full">
-            <Button variant="outline" className="w-full">
-              Weiter einkaufen
-            </Button>
+            <Button variant="outline" className="w-full" text=" Weiter einkaufen" />
           </Link>
         </Column>
       </CardContent>

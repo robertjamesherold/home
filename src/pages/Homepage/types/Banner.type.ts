@@ -3,4 +3,5 @@ export type BannerType = {
   subtitle: string;
   buttonlink: string;
   buttontext: string;
+  image: string;
 };

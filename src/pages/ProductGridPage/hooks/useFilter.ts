@@ -51,7 +51,7 @@ const useFilter = (
       })
       .filter((product) => {
         if (!normalizedSearch) return true;
-        const haystack = `${product.name} ${product.description ?? ''} ${product.category}`.toLowerCase();
+        const haystack = `${product.title} ${product.description ?? ''} ${product.category}`.toLowerCase();
         return haystack.includes(normalizedSearch);
       })
       .sort((a, b) => {

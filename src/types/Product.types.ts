@@ -16,7 +16,7 @@ export type RatingProps = {
 
 export type ProductType = {
   id: string;
-  name: string;
+  title: string;
   price: number;
   originalPrice?: number;
   description?: string;

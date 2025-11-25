@@ -1,5 +1,9 @@
+/// <reference types="vite/client" />
+
+import './css/index.css'
 import { useMemo, useRef } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ScrollToTop from '@/components/ScrollToTop'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import {
   Homepage,
   ProductGridPage,
@@ -8,26 +12,33 @@ import {
   Cart,
   Checkout,
   PageFooter,
-  SalePage,
   AccountPage,
   CheckoutSuccess,
+  SupportPage,
+  ProductEditorPage,
 } from '@/pages';
 import { CartProvider } from '@/hooks';
 import useElementSize from '@hooks/useElementSize';
 
+
 const Pages = () =>
 {
+  const location = useLocation();
+
   return (
-    <Routes>
+
+    <Routes location={ location }>
       <Route path="/" element={<Homepage />} />
       <Route path="/products" element={<ProductGridPage />} />
-      <Route path="/sale" element={<SalePage />} />
+      <Route path="/products/new" element={ <ProductEditorPage /> } />
       <Route path="/product/:id" element={ <ProductPage /> } />
       <Route path="/cart" element={<Cart />} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/checkout/success" element={<CheckoutSuccess />} />
       <Route path="/account" element={<AccountPage />} />
+      <Route path="/support" element={<SupportPage />} />
     </Routes>
+
   );
 };
 
@@ -44,6 +55,8 @@ const App = () => {
   return (
     <CartProvider>
       <Router>
+        <ScrollToTop />
+
         <NavigationsBar ref={navigationRef} />
         <main
           className="flex place-content-center items-center justify-center"

@@ -1,63 +1,68 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { productsData } from '@/data';
-import { useCart } from '@/hooks';
-import { Column } from '@/layout';
-import type { ProductType } from '@/types';
+import { useCart, useProducts } from '@/hooks';
+import { Column } from '@/layout'
+import { default as detailData } from './data/detailData';
 
-import { useProductImages } from './hooks/useProductImages';
 import { ProductGallery } from './components/ProductGallery/ProductGallery';
 import { ProductBadges } from './components/ProductGallery/ProductBadges';
 import { ProductRating } from './components/ProductInfo/ProductRating';
 import { ProductPrice } from './components/ProductInfo/ProductPrice';
 import { AddToCartSection } from './components/ProductInfo/AddToCartSection';
-import { ProductDetailsCard } from './components/ProductDetails';
-import { ShippingInfo } from './components/ProductDetails/ShippingInfo';
+import { default as DetailCard } from './components/ProductDetails/Detail'
 import { useProductQuantity } from './hooks/useProductQuantity';
+import { Section } from '@/layout'
+import { TextParagraph, Title } from '@typography/.'
 
-const ProductPage: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
-  const product = useMemo<ProductType | undefined>(
-    () => productsData.find((item) => item.id === id),
-    [id]
-  );
+const ProductPage: React.FC = () =>
+{
+  const { id } = useParams<{ id: string }>()
+  const { findProductByIdentifier, isReady } = useProducts()
+  const product = useMemo(
+    () => ( id ? findProductByIdentifier( id ) : undefined ),
+    [ id, findProductByIdentifier ]
+  )
 
   const { addToCart } = useCart();
   const { quantity, increment, decrement, reset } = useProductQuantity(1);
-
-  const { productImages, selectedImage, setSelectedImage } = useProductImages({
-    productId: product?.id,
-    initialImages: product?.images,
-  });
-
-  if (!product) {
-    return null;
-  }
+  const [ selectedImage, setSelectedImage ] = useState( 0 );
 
   const handleAddToCart = () => {
-    addToCart(product, quantity);
-    reset();
+    if ( product )
+    {
+      addToCart( product, quantity )
+      reset();
+    }
   };
 
+  if ( !product )
+  {
+    if ( !isReady )
+    {
+      return <Section>Produkt wird geladen ...</Section>
+    }
+
+    return <Section>Produkt nicht gefunden.</Section>
+  }
+
   return (
-    <div className="@container relative mx-auto grid w-full max-w-6xl gap-10 px-4 py-10 md:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-16 lg:px-8 lg:py-14">
+    <Section className="mx-auto grid w-full gap-10 lg:grid-cols-2 grid-rows-[auto_auto] safe-area-padding section ">
       <ProductGallery
-        productName={product.name}
-        images={productImages}
+        productName={product.title}
+        images={ product.images ?? ( product.image ? [ product.image ] : undefined ) }
         selectedIndex={selectedImage}
         onSelectImage={setSelectedImage}
       />
 
-      <Column className="h-full space-y-8">
-        <div className="space-y-4">
+      <Column className="h-full space-y-2 ">
+
           <ProductBadges tags={product.tags} />
 
-          <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-            {product.name}
-          </h1>
+        <Title level={ 1 } className="text-6xl tracking-tight" text={ product.title } />
 
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+
+        <Column className="flex flex-col sm:justify-between">
             <ProductRating
               score={product.rating.score}
               reviews={product.rating.reviews}
@@ -67,14 +72,10 @@ const ProductPage: React.FC = () => {
               price={product.price}
               originalPrice={product.originalPrice}
             />
-          </div>
-        </div>
+        </Column>
 
-        {product.description ? (
-          <p className="max-w-xl text-base leading-relaxed text-muted-foreground">
-            {product.description}
-          </p>
-        ) : null}
+
+        { product.description ? ( <TextParagraph className="max-w-xl text-base leading-relaxed text-muted-foreground" text={ product.description } /> ) : null }
 
         <AddToCartSection
           quantity={quantity}
@@ -86,11 +87,10 @@ const ProductPage: React.FC = () => {
         />
 
         <div className="space-y-6">
-          <ProductDetailsCard {...product.details} />
-          <ShippingInfo />
+          <DetailCard { ...{ detailData } } />
         </div>
       </Column>
-    </div>
+    </Section>
   );
 };
 
