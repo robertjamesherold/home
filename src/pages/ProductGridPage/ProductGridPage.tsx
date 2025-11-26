@@ -1,7 +1,7 @@
 import { SkeletonProductGridPage, DefaultProductGridPage, useProductGridPage } from './'
 
 
-const ProductGridPage = () =>
+const ProductGridPage: React.FC = () =>
 {
   const { showSkeleton } = useProductGridPage();
 

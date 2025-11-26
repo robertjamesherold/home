@@ -20,7 +20,7 @@ export {
 export { Alert, AlertTitle, AlertDescription } from './alert';
 export { AspectRatio } from './aspect-ratio';
 export { Avatar, AvatarImage, AvatarFallback } from './avatar';
-export { Badge, badgeVariants } from './badge';
+export { Badge } from './badge';
 export {
   Breadcrumb,
   BreadcrumbList,

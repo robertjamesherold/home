@@ -1,6 +1,12 @@
 import { productImages } from '@/assets/images'
 import type { ProductType } from '@/types'
 
+// Generate placeholder Pokemon images array
+const pokemons: string[] = Array.from({ length: 151 }, (_, i) => 
+  `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i + 1}.png`
+)
+
+
 const productsData: ProductType[] = [
   {
     id: 'aurora-stehlampe',
@@ -8,14 +14,13 @@ const productsData: ProductType[] = [
     price: 179.99,
     originalPrice: 219.99,
     category: 'Beleuchtung',
-    description:
-      'Elegante Stehlampe mit drehbarem Kopf und dimmbarer LED-Technologie für warmes Ambiente.',
+    description: 'Elegante Stehlampe mit drehbarem Kopf und dimmbarer LED-Technologie für warmes Ambiente.',
     rating: { score: 4.7, reviews: 124 },
     inStock: true,
     tags: ['new', 'sale'],
     link: 'aurora-stehlampe',
     image: productImages[0],
-
+    images: pokemons.slice(0,3),
     details: {
       title: 'Produktdetails',
       tab: [

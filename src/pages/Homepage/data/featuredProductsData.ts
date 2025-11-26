@@ -5,15 +5,12 @@ const featuredProductsContent = {
   title: 'Neu eingetroffen',
   subtitle: 'Entdecken Sie die neuesten Ergänzungen zu unserer Kollektion',
   buttonlink: '/products',
-  buttontext: 'Alle Produkte ansehen',
-} satisfies Omit<FeaturedProductsType, 'featuredProducts'>;
+  buttontext: 'Alle Produkte ansehen'
+  } satisfies Omit<FeaturedProductsType, 'featuredProducts'>;
 
-export const buildFeaturedProductsData = (
-  products: ProductType[],
-  content: typeof featuredProductsContent = featuredProductsContent
-): FeaturedProductsType => ({
-  ...content,
-  featuredProducts: products.slice(0, 3),
+export const buildFeaturedProductsData = (products: ProductType[], content: Omit<FeaturedProductsType, 'featuredProducts'>): FeaturedProductsType => ({
+    ...content,
+  featuredProducts: products.slice(2, 5),
 });
 
 export default featuredProductsContent;

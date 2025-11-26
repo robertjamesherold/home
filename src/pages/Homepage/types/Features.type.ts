@@ -1,6 +1,6 @@
 type FeaturesType = {
   data: {
-    Icon: React.ElementType;
+    icon: React.FC<React.SVGProps<SVGSVGElement>>;
     title: string;
     text: string;
   }[];
