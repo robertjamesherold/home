@@ -24,7 +24,7 @@ const SkeletonProductGridPage: React.FC = () => {
 
   return (
     <Main className='flex items-start'>
-      <Section className="container mx-auto px-4 py-8">
+      <Section className="mx-auto safe-area-padding py-8">
         <Header className="mb-8 space-y-2">
           <Skeleton className='h-fit w-fit rounded'><Title level={ 1 } weight="bold" className='mt-0 opacity-0' text={ pageTitle } /></Skeleton>
           <Skeleton className='h-fit w-fit rounded'><TextParagraph className="text-gray-600 opacity-0" text={ subtitle } /></Skeleton>

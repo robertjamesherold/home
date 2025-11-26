@@ -19,7 +19,7 @@ const CartButton: React.FC<CartButtonProps> = ({ totalItems, closeMenu }) =>
           <Icon Icon={ShoppingCart} size={6} />
           Warenkorb
           { totalItems > 0 && (
-              <Badge className="relative">{ totalItems }</Badge>
+              <Badge variant="secondary" className="relative">{ totalItems }</Badge>
           ) }
       </Link>
   )

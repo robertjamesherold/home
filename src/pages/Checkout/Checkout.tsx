@@ -16,6 +16,7 @@ import {
 import { useCart, useCheckoutSubmission } from '@/hooks'
 import type { CheckoutPayload } from '@/types';
 import { toast } from 'sonner';
+import { Section } from '@/layout';
 
 const Checkout: React.FC = () =>
 {
@@ -100,7 +101,7 @@ const Checkout: React.FC = () =>
   {
 
     return (
-      <div className="container mx-auto px-4 py-8">
+      <Section className=" mx-auto safe-area-padding py-8">
         <h1 className="mb-8">Kasse</h1>
 
         <form onSubmit={ handleSubmit }>
@@ -285,7 +286,7 @@ const Checkout: React.FC = () =>
             </div>
           </div>
         </form>
-      </div>
+      </Section>
     )
   }
 }

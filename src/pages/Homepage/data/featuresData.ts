@@ -4,19 +4,19 @@ import type { FeaturesType } from '@/pages/Homepage/types';
 const featuresData: FeaturesType = {
   data: [
     {
-      Icon: Truck,
+      icon: Truck,
       title: 'Kostenloser Versand',
-      text: 'Ab 50€ Bestellwert versandkostenfrei',
+      text: 'Ab 50€ Bestellwert',
     },
     {
-      Icon: RefreshCw,
+      icon: RefreshCw,
       title: '30 Tage Rückgabe',
-      text: 'Kostenlose Rücksendung innerhalb von 30 Tagen',
+      text: 'Kostenlose Rücksendung',
     },
     {
-      Icon: Shield,
+      icon: Shield,
       title: 'Sichere Zahlung',
-      text: 'SSL-verschlüsselt und sicher',
+      text: 'SSL-verschlüsselt',
     },
   ],
 };

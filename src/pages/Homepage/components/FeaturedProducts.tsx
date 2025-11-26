@@ -8,8 +8,8 @@ import { default as ImageCard } from '../ui/Card'
 const FeaturedProducts: React.FC<FeaturedProductsType> = ( { title, subtitle, buttonlink, buttontext, featuredProducts }: FeaturedProductsType ) =>
 {
   return (
-    <Section className="py-16">
-      <Container className="container mx-auto px-4">
+    <Section className="py-16 safe-area-padding">
+      <Container className="mx-auto px-4">
         <Header className="mb-12 text-center">
           <Title
             level={2}
@@ -23,7 +23,7 @@ const FeaturedProducts: React.FC<FeaturedProductsType> = ( { title, subtitle, bu
           />
         </Header>
 
-        <Grid className="grid-cols-1 gap-6 sm:grid-cols-1 lg:grid-cols-3">
+        <Grid className="grid-cols-1 gap-6 md:grid-cols-3">
           { featuredProducts.map( product => (
             <ImageCard key={ product.id } { ...product } />
           ) ) } 

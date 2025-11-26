@@ -15,9 +15,8 @@ import {
   AccountPage,
   CheckoutSuccess,
   SupportPage,
-  ProductEditorPage,
 } from '@/pages';
-import { CartProvider } from '@/hooks';
+import { CartProvider, ProductProvider } from '@/hooks';
 import useElementSize from '@hooks/useElementSize';
 
 
@@ -29,8 +28,7 @@ const Pages = () =>
 
     <Routes location={ location }>
       <Route path="/" element={<Homepage />} />
-      <Route path="/products" element={<ProductGridPage />} />
-      <Route path="/products/new" element={ <ProductEditorPage /> } />
+      <Route path="/products" element={ <ProductGridPage /> } />
       <Route path="/product/:id" element={ <ProductPage /> } />
       <Route path="/cart" element={<Cart />} />
       <Route path="/checkout" element={<Checkout />} />
@@ -53,20 +51,22 @@ const App = () => {
   }, [navigationSize.height, footerSize.height]);
 
   return (
-    <CartProvider>
-      <Router>
-        <ScrollToTop />
+    <ProductProvider>
+      <CartProvider>
+        <Router>
+          <ScrollToTop />
 
-        <NavigationsBar ref={navigationRef} />
-        <main
-          className="flex place-content-center items-center justify-center"
-          style={{ minHeight: contentMinHeight }}
-        >
-          <Pages />
-        </main>
-        <PageFooter ref={footerRef} />
-      </Router>
-    </CartProvider>
+          <NavigationsBar ref={navigationRef} />
+          <main
+            className="flex place-content-center items-center justify-center"
+            style={{ minHeight: contentMinHeight }}
+          >
+            <Pages />
+          </main>
+          <PageFooter ref={footerRef} />
+        </Router>
+      </CartProvider>
+    </ProductProvider>
   );
 };
 

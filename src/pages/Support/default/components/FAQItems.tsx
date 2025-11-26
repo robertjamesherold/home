@@ -31,9 +31,9 @@ const FAQItems:React.FC<FAQItemsProps> = ({title, description, data}: FAQItemsPr
                       <AccordionItem
                         key={value}
                         value={value}
-                        className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-200/50 px-4 "
+                        className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-200/50 px-4 ring-0 focus:ring-0"
                       >
-                        <AccordionTrigger className="text-left text-base font-semibold text-gray-900 overflow-visible cursor-pointer hover:no-underline pb-4">
+                        <AccordionTrigger className="text-left text-base font-semibold text-gray-900 overflow-visible focus-within:ring-0 cursor-pointer hover:no-underline pb-4">
                           {question}
                         </AccordionTrigger>
                         <AccordionContent className="pb-4 text-sm text-gray-600">

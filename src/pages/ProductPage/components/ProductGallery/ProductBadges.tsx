@@ -12,7 +12,7 @@ export const ProductBadges: React.FC<ProductBadgesProps> = ({ tags = [] }) => {
 
   return (
     <div className="flex flex-wrap items-center gap-2">
-      {tags.includes('new') && <Badge>Neu</Badge>}
+      {tags.includes('new') && <Badge variant="secondary">Neu</Badge>}
       {tags.includes('sale') && <Badge variant="destructive">Sale</Badge>}
     </div>
   );

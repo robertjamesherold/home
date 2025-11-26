@@ -13,9 +13,9 @@ const SupportPage: React.FC = () =>
 {
   return (
     <Main className='bg-linear-to-t from-blue-50 to-gray-300/40'>
-      <Section className="w-full mb-6">
+      <Section isBox className="w-full mb-6">
         <SupportHero data={ SupportHeroData } />
-        <Container className="container mx-auto px-4 space-y-6">
+        <Container className="container mx-auto space-y-6">
           <SupportHighlihght data={ SupportHighlightsData } />
           <Grid className="gap-6 xl:grid-cols-2">
             <SupportChannels data={ SupportChannelsData } />

@@ -51,7 +51,7 @@ const accountData = {
 
 const AccountPage: React.FC = () => {
   return (
-    <section className="container mx-auto px-4 py-10">
+    <section className="mx-auto safe-area-padding py-10">
       <div className="mb-10 flex flex-col gap-2">
         <p className="text-xs uppercase tracking-[0.3em] text-gray-400">
           Konto

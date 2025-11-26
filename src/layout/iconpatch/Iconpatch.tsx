@@ -1,12 +1,6 @@
 import { Icon } from '@/layout';
-import { cva } from 'class-variance-authority';
-import { clsx, type ClassValue } from 'clsx'
-import { twMerge } from 'tailwind-merge'
-
-function cn ( ...inputs: ClassValue[] )
-{
-    return twMerge( clsx( inputs ) )
-}
+import useVariants from '@/theme/variants.theme'
+import { cn } from '@/ui/utils'
 
 
 type IconpatchProps = {
@@ -17,53 +11,33 @@ type IconpatchProps = {
     variant?: 'default' | 'secondary' | 'destructive' | 'outline' | 'danger' | 'success' | 'info' | 'service' | 'enhancement' | 'complete' | 'assistance' | null | undefined;  
 }
 
-const patchvariants = cva(
-  'flex items-center justify-center shrink-0',
-  {
-    variants: {
-      variant: {
-            default:
-              'border-transparent bg-yellow-400 text-white ',
-            secondary:
-              'border-transparent bg-gray-200 text-gray-900 ',
-            destructive:
-                'border-transparent bg-red-600 text-white ',
-            complete:
-                'border-transparent bg-lime-200 text-lime-700 ',
-            assistance:
-                'border-transparent bg-teal-200 text-teal-700 ',
-            outline:
-              'bg-gray-100 text-gray-900 border border-gray-300 ',
-            danger:
-              'border-transparent bg-blue-200 text-destructive',
-            success:
-              'border-transparent bg-green-200 text-green-700 ',
-            info:
-              'border-transparent bg-blue-200 text-blue-700 ', 
-            service:
-              'border-transparent bg-purple-200 text-purple-700 ', 
-            enhancement:
-              'border-transparent bg-indigo-200 text-indigo-700 ',   
-
-      },
-    },
-    defaultVariants: {
-      variant: 'default',
-    },
-  }
-);          
 
 
-const Iconpatch: React.FC<IconpatchProps> = ( { icon, size  , className, rounded, variant } ) =>
+const Iconpatch: React.FC<IconpatchProps> = ( { icon, size, className, rounded, variant } ) =>
 {
     const patchSize = ( size * 2 )
+    const { variants } = useVariants()
+    const variantValue = variant === 'default' ? variants[0].default : variant === 'secondary' ? variants[0].secondary : variant === 'destructive' ? variants[0].destructive : variant === 'outline' ? variants[0].outline : variant === 'danger' ? variants[0].danger : variant === 'success' ? variants[0].success : variant === 'info' ? variants[0].info : variant === 'service' ? variants[0].service : variant === 'enhancement' ? variants[0].enhancement : variant === 'complete' ? variants[0].complete : variant === 'assistance' ? variants[0].assistance : variants[0].default
 
-    
+    const base = 'flex items-center justify-center shadow-md h-fit p-2 aspect-square border'
+    const patchvariants = ( cn(
+        base,
+        variantValue
+    ) )
+
+
+    const sizeClass = `size-${ patchSize }`
+    const roundedClass = `rounded-${ rounded }`
+
+
     return (
-        <div className={ cn( patchvariants( { variant } ), className, `size-${ patchSize }`, `rounded-${ rounded }` ) }>
-            <Icon Icon={ icon } size={ size } />
+        <div className={ `${ patchvariants } ${ className } ${ sizeClass } ${ roundedClass } inline-flex items-center justify-center h-fit aspect-square` }>
+            <Icon Icon={ icon } size={ size } className={variantValue} />
         </div>
     )
 }
 
 export default Iconpatch    
+
+
+
