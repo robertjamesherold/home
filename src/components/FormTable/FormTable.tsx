@@ -23,14 +23,14 @@ const FormTable = ( { title, subtitle, inputs, textArea, cancel, save }: FormTab
             <Input id={ id } name={ label } required={ isRequired } placeholder={ placeholder } />
           </Column>
         ) }
-        <Column className="space-y-2 col-span-2 row-span-10">
+        <Column className="space-y-2 col-span-1 md:col-span-2 row-span-10">
           <Label className='mb-2' htmlFor={ textArea.htmlFor }>{ textArea.label }</Label>
-          <Textarea id={ textArea.id } placeholder={ textArea.placeholder } className="h-full" />
+          <Textarea id={ textArea.id } placeholder={ textArea.placeholder } className=" h-full w-full" />
         </Column>
       </Grid>
-      <Footer className="flex items-center justify-end gap-3">
-        <Button variant="outline">{ cancel }</Button>
-        <Button>{ save }</Button>
+      <Footer className="flex flex-col sm:flex-row items-center justify-end gap-3">
+        <Button variant="outline" className='w-full sm:w-fit'>{ cancel }</Button>
+        <Button className='w-full sm:w-fit'>{ save }</Button>
       </Footer>
     </Form>
   );

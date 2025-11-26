@@ -1,5 +1,5 @@
 import { forwardRef } from 'react'
-import { Container, Header, Row, Link, Nav } from '@layout/.'
+import { Section, Container, Header, Row, Link, Nav } from '@layout/.'
 import { DesktopAccountButton, DesktopCartButton, DesktopSearchButton, DesktopSearchForm, DesktopMenuButton, MobileSearchForm, LogoButton } from '../ui'
 import type { NavigationsLinksData } from '../data'
 
@@ -36,7 +36,8 @@ const MainMenu = forwardRef<HTMLElement, MainMenuProps>( ( {
 {
     return (
         <Header ref={ ref } className='sticky  top-0 z-50 w-full  border-b border-gray-300 bg-white/90 backdrop-blur'>
-            <Container className="container mx-auto w-full px-4 ">
+            <Section className='safe-area-padding'>
+            <Container className="mx-auto w-full ">
                 <Row className="h-16 w-full items-center justify-between md:gap-8">
                     <Row className="items-center gap-8">
                         <LogoButton />
@@ -59,6 +60,7 @@ const MainMenu = forwardRef<HTMLElement, MainMenuProps>( ( {
                     </Row>
                 </Row>
             </Container>
+            </Section>
             <MobileSearchForm
                 isMobileSearchOpen={ isMobileSearchOpen }
                 searchValue={ searchValue }
@@ -66,6 +68,7 @@ const MainMenu = forwardRef<HTMLElement, MainMenuProps>( ( {
                 onClick={ closeMenu }
                 onSubmit={ onSubmit }
             />
+            
         </Header >
     );
 } )

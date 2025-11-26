@@ -1,33 +1,39 @@
 import { createContext } from 'react'
+import type { ProductType } from '@/types'
 
-import type { ProductDetailsCardType, ProductType } from '@/types'
-
-export type CreateProductInput = {
-    name: string
-    category: string
+/**
+ * Input-Typ für das Erstellen eines neuen Produkts
+ * (ohne id, da diese automatisch generiert wird)
+ */
+export interface CreateProductInput {
+    title: string
     price: number
-    originalPrice?: number
     description?: string
-    ratingScore?: number
-    ratingReviews?: number
-    inStock?: boolean
-    tags?: string[]
+    category: string
     image?: string
     images?: string[]
-    link?: string
-    details?: ProductDetailsCardType
+    tags?: string[]
+    inStock?: boolean
 }
 
-export interface ProductContextValue
-{
+/**
+ * Context-Wert für den ProductProvider
+ * Enthält alle Produkte und Funktionen zur Verwaltung
+ */
+export interface ProductContextValue {
+    // Zustand
     products: ProductType[]
-    customProducts: ProductType[]
     isReady: boolean
-    addProduct: ( input: CreateProductInput ) => ProductType
-    removeProduct: ( productId: string ) => void
-    findProductByIdentifier: ( identifier: string ) => ProductType | undefined
+
+    // Suche
+    findProductByIdentifier: (identifier: string) => ProductType | undefined
+
+    // CRUD-Operationen (aktuell lokal, später mit Backend)
+    addProduct: (input: CreateProductInput) => ProductType
+    updateProduct: (id: string, updates: Partial<ProductType>) => ProductType | null
+    deleteProduct: (id: string) => boolean
 }
 
-const ProductContext = createContext<ProductContextValue | undefined>( undefined )
+const ProductContext = createContext<ProductContextValue | undefined>(undefined)
 
 export default ProductContext

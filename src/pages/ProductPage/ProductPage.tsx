@@ -47,7 +47,7 @@ const ProductPage: React.FC = () =>
   }
 
   return (
-    <Section className="mx-auto grid w-full gap-10 lg:grid-cols-2 grid-rows-[auto_auto] safe-area-padding section ">
+    <Section className="mx-auto grid w-full gap-10 lg:grid-cols-2 grid-rows-[auto_auto] safe-area-padding section md:mt-2 lg:mt-4 xl:mt-6 ">
       <ProductGallery
         productName={product.title}
         images={ product.images ?? ( product.image ? [ product.image ] : undefined ) }

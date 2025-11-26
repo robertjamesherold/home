@@ -9,6 +9,7 @@ import {
   CardTitle,
   Separator,
 } from '@ui/.';
+import { Section } from '@/layout'
 
 type CheckoutState = {
   orderNumber?: string;
@@ -31,8 +32,8 @@ const CheckoutSuccess: React.FC = () => {
   const items = state.items ?? [];
 
   return (
-    <section className="container mx-auto px-4 py-10">
-      <div className="flex flex-col items-center text-center">
+    <Section className="safe-area-padding mx-auto  py-10">
+      <div className="flex w-full flex-col items-center text-center">
         { errorMessage ? (
           <CheckCircle2 className="mb-4 h-14 w-14 text-red-600" />
         ) : (
@@ -51,7 +52,7 @@ const CheckoutSuccess: React.FC = () => {
         </p>
       </div>
 
-      <Card className="mx-auto mt-8 max-w-3xl border border-gray-100 bg-white shadow-sm">
+      <Card className="mx-auto max-w-6xl mt-8 border border-gray-100 bg-white shadow-sm">
         <CardHeader>
           <CardTitle className="flex flex-wrap items-center justify-between text-base text-gray-900 sm:text-lg">
             <span>Bestellung {orderNumber}</span>
@@ -121,7 +122,7 @@ const CheckoutSuccess: React.FC = () => {
           <Link to="/account">Bestellung einsehen</Link>
         </Button>
       </div>
-    </section>
+    </Section>
   );
 };
 

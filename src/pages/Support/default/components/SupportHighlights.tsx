@@ -20,13 +20,13 @@ const SupportHighlihght = ( { data }: SupportHighlightsProps ) =>
       { data.map( ( { title, description, meta, icon, badge } ) => (
         <Card key={ title } className="border bg-white shadow-sm h-full flex flex-col">
           <CardHeader className="space-y-0 mb-3 flex flex-col flex-1">
-            <Iconpatch icon={ icon } size={ 6 } rounded="xl" className={ badge } />
+            <Iconpatch icon={ icon } size={ 6 } rounded="xl" variant='secondary' />
             <Title h4 className="text-slate-900 " text={ title } />
-            <TextParagraph sm className="text-gray-600 h-full grow" text={ description } />
+            <TextParagraph sm className="text-gray-00 h-full grow" text={ description } />
           </CardHeader>
 
           <CardContent>
-            <Badge className={ `text-gray-700 ${ badge }` } >
+            <Badge className={ `text-gray-200 ${ badge }` } >
               { meta }
             </Badge>
           </CardContent>

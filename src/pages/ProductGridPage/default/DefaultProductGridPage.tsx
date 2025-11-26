@@ -35,7 +35,7 @@ const DefaultProductGridPage: React.FC = () => {
 
   return (
     <Main className='flex items-start'>
-      <Section className="container mx-auto px-4 py-8">
+      <Section className="mx-auto safe-area-padding py-8">
         <Header className="mb-8 space-y-2">
           <Title level={ 1 } weight="bold" className='mt-0' text={ pageTitle } />
           <TextParagraph className="text-gray-600" text={ subtitle } />

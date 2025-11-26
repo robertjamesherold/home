@@ -13,7 +13,7 @@ const CartButton: React.FC<CartButtonProps> = ({ totalItems }) =>
             <Button variant="ghost" size="icon" className="relative">
                 <ShoppingCart className="h-5 w-5" />
                 { totalItems > 0 && (
-                    <Badge className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full p-0">
+                    <Badge variant="secondary" className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full p-0">
                         { totalItems }
                     </Badge>
                 ) }
