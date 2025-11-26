@@ -56,7 +56,7 @@
   <br/>
 </p>
 
-#### Meta Front-End Developer</b> — issued by Meta via Coursera</sub>
+#### Meta Front-End Developer — issued by Meta via Coursera
 
 ---
 
@@ -69,9 +69,17 @@
 
 ---
 
+### 🛠 Checkout / Backend
+
+- Das Frontend läuft eigenständig; der Checkout nutzt standardmäßig eine integrierte Mock-API.
+- Eigene Backends lassen sich per `VITE_ENABLE_CHECKOUT_API=true` und `VITE_API_BASE_URL=<ziel>` anbinden.
+- Weitere Details & Payload-Dokumentation: [docs/backend.md](./docs/backend.md)
+
+---
+
 ### 🧱 My Values
 
-> “Code is design made executable.”  
+> “Code is design made executable.”
 > “Simplicity scales. Clarity wins.”
 
 I believe in writing code that is:

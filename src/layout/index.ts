@@ -1,8 +1,16 @@
 export { Column } from './column';
+export { Article } from './article';
 export { Footer } from './footer';
+export { Container } from './container';
 export { Grid } from './grid';
 export { Hr } from './divider';
 export { Main } from './main';
 export { Row } from './row';
 export { Section } from './section';
-export { Nav, Navigation } from './nav';
+export { Header } from './header';
+export { Nav } from './nav';
+export { Image } from './image';
+export { Form } from './form';
+export { Link } from './link';
+export { Icon } from './icon';
+export { Iconpatch } from './iconpatch';

@@ -1,5 +1,11 @@
-import Homepage from './home/Homepage';
-import { ProductDetailsPage } from '@pages/shopify/ProductDetailsPage';
-import { ProductGridPage } from '@pages/shopify/ProductGridPage';
-import { SeasonSelection } from '@pages/video/SeasonSelection';
-export { Homepage, ProductGridPage, SeasonSelection, ProductDetailsPage };
+export { Homepage } from './Homepage';
+export { ProductGridPage } from './ProductGridPage';
+export { ProductPage } from './ProductPage';
+export { NavigationsBar } from './NavigationsBar/';
+export { PageFooter } from './PageFooter/';
+export { Checkout } from './Checkout/';
+export { Cart } from './Cart/';
+export { AccountPage } from './Account/';
+export { CheckoutSuccess } from './CheckoutSuccess/';
+export { SupportPage } from './Support/';
+export { ProductEditorPage } from './ProductEditor';

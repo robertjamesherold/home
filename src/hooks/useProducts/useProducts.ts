@@ -1,44 +1,13 @@
-// useProducts.ts
-import useProductsData from './useProductsData';
-import useFilterSort from './useFilterSort';
-import useCart from './useCart';
-import useUI from './useUI';
+import { useContext } from 'react';
 
-const useProducts = () => {
-  const { products, loading } = useProductsData();
-  const {
-    searchTerm,
-    setSearchTerm,
-    selectedCategory,
-    setSelectedCategory,
-    sortBy,
-    setSortBy,
-    filteredProducts,
-    categories,
-  } = useFilterSort({ products });
+import ProductContext from './ProductContext';
 
-  const { cart, addToCart, removeFromCart, getTotalPrice, totalItems } = useCart();
-  const { showCart, setShowCart } = useUI(false);
+export const useProducts = () => {
+  const context = useContext(ProductContext);
 
-  return [
-    loading,
-    products,
-    filteredProducts,
-    searchTerm,
-    setSearchTerm,
-    selectedCategory,
-    setSelectedCategory,
-    cart,
-    addToCart,
-    removeFromCart,
-    getTotalPrice,
-    showCart,
-    setShowCart,
-    sortBy,
-    setSortBy,
-    categories,
-    totalItems,
-  ] as const;
+  if (!context) {
+    throw new Error('useProducts must be used within a ProductProvider');
+  }
+
+  return context;
 };
-
-export default useProducts;

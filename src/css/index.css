@@ -1,0 +1,72 @@
+
+@import 'tailwindcss';
+@import './theme.css';
+@import './typography.css';
+
+@layer base {
+  :root {
+    --background: 48 29% 97%;
+    --foreground: 217 22% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 217 22% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 217 22% 12%;
+    --primary: 18 94% 56%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 217 22% 12%;
+    --muted: 48 20% 92%;
+    --muted-foreground: 217 10% 40%;
+    --accent: 18 96% 90%;
+    --accent-foreground: 22 95% 32%;
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 42 15% 85%;
+    --input: 42 15% 85%;
+    --ring: 18 94% 56%;
+    --radius: 1.25rem;
+  }
+}
+
+@layer components {
+.safe-area-padding {
+    @apply mx-auto max-w-[1600px] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12;
+  }
+
+  .safe-area-padding-small {
+    @apply px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12;
+  }
+
+  .section {
+    @apply mx-auto w-full py-12 sm:py-20 md:py-24 lg:py-32;
+  }
+  
+  .btn-primary {
+    @apply inline-block cursor-pointer rounded-full px-5 py-2 text-center text-sm font-semibold no-underline shadow-sm transition duration-200 ease-in-out hover:shadow-md active:shadow-sm;
+  }
+
+  .btn-secondary {
+    @apply inline-block cursor-pointer rounded-full px-5 py-2 text-center text-sm font-semibold no-underline shadow-sm transition duration-200 ease-in-out hover:shadow-md active:shadow-sm;
+  }
+
+  .navlink {
+    @apply inline-block cursor-pointer rounded-full px-3 py-1.5 text-center text-sm font-medium text-gray-600 no-underline transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-900;
+  }
+
+  .navbutton {
+    @apply flex cursor-pointer justify-center gap-2 rounded-full border border-white/20 bg-gray-900/80 px-6 py-2 align-baseline text-sm font-semibold text-white transition hover:border-white/60;
+  }
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-skeleton-shimmer {
+  animation: skeleton-shimmer 1.8s ease-in-out infinite;
+}

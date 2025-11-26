@@ -1,7 +1,19 @@
+import path from "path"
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
+
+const apiTarget = process.env.VITE_API_BASE_URL
+
+const proxyConfig = apiTarget
+  ? {
+      '/api': {
+        target: apiTarget,
+        changeOrigin: true,
+        secure: false,
+      },
+    }
+  : undefined
 
 export default defineConfig({
   plugins: [
@@ -15,7 +27,9 @@ export default defineConfig({
   base: './',
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'),
+      '@': path.resolve(__dirname, './src'),
+      '@css': path.resolve(__dirname, 'src/css'),
+      '@data': path.resolve(__dirname, 'src/data'),
       '@assets': path.resolve(__dirname, 'src/assets'),
       '@badges': path.resolve(__dirname, 'src/assets/badges'),
       '@components': path.resolve(__dirname, 'src/components'),
@@ -28,11 +42,13 @@ export default defineConfig({
       '@types': path.resolve(__dirname, 'src/types'),
       '@typography': path.resolve(__dirname, 'src/typography'),
       '@ui': path.resolve(__dirname, 'src/ui'),
+      '@utils': path.resolve(__dirname, 'src/utils'),
     },
   },
   server: {
     host: true,
     port: 5173,
     open: true,
+    ...(proxyConfig ? { proxy: proxyConfig } : {}),
   },
 });
