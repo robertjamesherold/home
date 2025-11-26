@@ -1,14 +1,6 @@
 import { productImages } from '@/assets/images'
 import type { ProductType } from '@/types'
 
-// Hilfsfunktion zum Generieren von Pokémon-Bild-URLs
-const getPokemonImages = (start: number, count: number = 5): string[] => {
-  return Array.from(
-    { length: count },
-    (_, i) => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${start + i}.png`
-  )
-}
-
 const productsData: ProductType[] = [
   {
     id: 'aurora-stehlampe',
@@ -16,13 +8,14 @@ const productsData: ProductType[] = [
     price: 179.99,
     originalPrice: 219.99,
     category: 'Beleuchtung',
-    description: 'Elegante Stehlampe mit drehbarem Kopf und dimmbarer LED-Technologie für warmes Ambiente.',
+    description:
+      'Elegante Stehlampe mit drehbarem Kopf und dimmbarer LED-Technologie für warmes Ambiente.',
     rating: { score: 4.7, reviews: 124 },
     inStock: true,
     tags: ['new', 'sale'],
     link: 'aurora-stehlampe',
     image: productImages[0],
-    images: getPokemonImages(1, 5),
+
     details: {
       title: 'Produktdetails',
       tab: [
@@ -63,7 +56,6 @@ const productsData: ProductType[] = [
     tags: ['bestseller'],
     link: 'nordic-sofa-cloud',
     image: productImages[1],
-    images: getPokemonImages(6, 5),
     details: {
       title: 'Produktdetails',
       tab: [
@@ -102,7 +94,6 @@ const productsData: ProductType[] = [
     tags: ['new'],
     link: 'borealis-kaffeetisch',
     image: productImages[2],
-    images: getPokemonImages(11, 5),
     details: {
       title: 'Produktdetails',
       tab: [
@@ -131,7 +122,6 @@ const productsData: ProductType[] = [
     tags: ['sale'],
     link: 'skandi-essstuhl',
     image: productImages[3],
-    images: getPokemonImages(16, 5),
     details: {
       title: 'Produktdetails',
       tab: [
@@ -160,7 +150,6 @@ const productsData: ProductType[] = [
     tags: ['limited'],
     link: 'atlas-buecherregal',
     image: productImages[4],
-    images: getPokemonImages(21, 5),
     details: {
       title: 'Produktdetails',
       tab: [
@@ -189,7 +178,6 @@ const productsData: ProductType[] = [
     tags: ['new', 'bestseller'],
     link: 'velvet-loungesessel',
     image: productImages[5],
-    images: getPokemonImages(26, 5),
     details: {
       title: 'Produktdetails',
       tab: [
@@ -218,7 +206,6 @@ const productsData: ProductType[] = [
     tags: ['gift'],
     link: 'lumen-tischleuchte',
     image: productImages[6],
-    images: getPokemonImages(31, 5),
     details: {
       title: 'Produktdetails',
       tab: [
@@ -247,7 +234,6 @@ const productsData: ProductType[] = [
     tags: ['eco'],
     link: 'meridian-bettwaesche',
     image: productImages[7],
-    images: getPokemonImages(36, 5),
     details: {
       title: 'Produktdetails',
       tab: [

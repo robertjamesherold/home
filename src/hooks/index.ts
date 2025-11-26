@@ -1,5 +1,6 @@
 export { CartProvider, useCart } from './useProductContext'
 export { ProductProvider, useProducts } from './useProducts'
+export { useProductsWithPokemon } from './useProductsWithPokemon'
 export { useCheckoutSubmission } from './useCheckoutSubmission'
 export { useBreakpoint } from './useBreakpoint'
 export { useElementSize } from './useElementSize'

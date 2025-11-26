@@ -19,7 +19,7 @@ const generateProductId = (): string => {
  * ProductProvider verwaltet alle Produktdaten der Anwendung.
  *
  * Hauptaufgaben:
- * 1. Lädt initiale Produkte aus productsData.ts
+ * 1. Lädt initiale Produkte aus productsData.ts (mit Pokémon-Bildern)
  * 2. Bietet CRUD-Operationen (Create, Read, Update, Delete)
  * 3. Stellt Suchfunktionen bereit (nach ID, Link, Slug)
  *
@@ -27,19 +27,12 @@ const generateProductId = (): string => {
  * Später: Backend-Integration für Persistenz
  */
 const ProductProvider: React.FC<ProductProviderProps> = ({ children }) => {
-    // Initialisiere mit statischen Produktdaten
+    // Initialisiere mit statischen Produktdaten (inkl. Pokémon-Bilder)
     const [products, setProducts] = useState<ProductType[]>(productsData)
 
     // isReady = true wenn Produkte verfügbar sind
     const isReady = products.length > 0
 
-    /**
-     * Sucht ein Produkt anhand verschiedener Identifikatoren:
-     * - Exakte ID
-     * - Exakter Link
-     * - Slugified ID
-     * - Slugified Link
-     */
     const findProductByIdentifier = useCallback(
         (identifier: string): ProductType | undefined => {
             const trimmed = identifier.trim()
